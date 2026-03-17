@@ -102,7 +102,6 @@ Notificaciones (Email / WhatsApp - futuro)
 * Auditoría de la web actual
 * Definición de estructura del sitio
 * Definición del flujo de postulación
-* Creación y configuración del repositorio Git
 * Setup del entorno de desarrollo
 
 ---
