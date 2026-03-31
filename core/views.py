@@ -1,3 +1,4 @@
+<<<<<<< HEAD
 from django.views.generic import TemplateView
 
 
@@ -15,3 +16,8 @@ class AboutView(TemplateView):
 
 class ContactView(TemplateView):
     template_name = "core/contact.html"
+=======
+from django.shortcuts import render
+
+# Create your views here.
+>>>>>>> 2c7037a (Configuración inicial Django y MySQL)

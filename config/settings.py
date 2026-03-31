@@ -10,6 +10,7 @@ For the full list of settings and their values, see
 https://docs.djangoproject.com/en/6.0/ref/settings/
 """
 
+<<<<<<< HEAD
 import os
 from pathlib import Path
 
@@ -21,6 +22,13 @@ BASE_DIR = Path(__file__).resolve().parent.parent
 # Load environment variables from .env (if present).
 load_dotenv(BASE_DIR / '.env')
 
+=======
+from pathlib import Path
+
+# Build paths inside the project like this: BASE_DIR / 'subdir'.
+BASE_DIR = Path(__file__).resolve().parent.parent
+
+>>>>>>> 2c7037a (Configuración inicial Django y MySQL)
 
 # Quick-start development settings - unsuitable for production
 # See https://docs.djangoproject.com/en/6.0/howto/deployment/checklist/
@@ -38,8 +46,11 @@ ALLOWED_HOSTS = []
 
 INSTALLED_APPS = [
     'django.contrib.admin',
+<<<<<<< HEAD
     'core',
     'jobs',
+=======
+>>>>>>> 2c7037a (Configuración inicial Django y MySQL)
     'django.contrib.auth',
     'django.contrib.contenttypes',
     'django.contrib.sessions',
@@ -62,7 +73,11 @@ ROOT_URLCONF = 'config.urls'
 TEMPLATES = [
     {
         'BACKEND': 'django.template.backends.django.DjangoTemplates',
+<<<<<<< HEAD
         'DIRS': [BASE_DIR / 'templates'],
+=======
+        'DIRS': [],
+>>>>>>> 2c7037a (Configuración inicial Django y MySQL)
         'APP_DIRS': True,
         'OPTIONS': {
             'context_processors': [
@@ -80,6 +95,7 @@ WSGI_APPLICATION = 'config.wsgi.application'
 # Database
 # https://docs.djangoproject.com/en/6.0/ref/settings/#databases
 
+<<<<<<< HEAD
 USE_MYSQL = os.getenv('USE_MYSQL', 'False').lower() == 'true'
 
 if USE_MYSQL:
@@ -100,6 +116,18 @@ else:
             'NAME': BASE_DIR / 'db.sqlite3',
         }
     }
+=======
+DATABASES = {
+    'default': {
+        'ENGINE': 'django.db.backends.mysql',
+        'NAME': 'trustmarket_db',
+        'USER': 'trustmarket_user',
+        'PASSWORD': 'Trustmarket202',
+        'HOST': 'localhost',
+        'PORT': '3306',
+    }
+}
+>>>>>>> 2c7037a (Configuración inicial Django y MySQL)
 
 
 # Password validation
@@ -137,7 +165,10 @@ USE_TZ = True
 # https://docs.djangoproject.com/en/6.0/howto/static-files/
 
 STATIC_URL = 'static/'
+<<<<<<< HEAD
 STATICFILES_DIRS = [BASE_DIR / 'static']
 
 EMAIL_BACKEND = 'django.core.mail.backends.console.EmailBackend'
 DEFAULT_FROM_EMAIL = 'no-reply@trustmarket.cl'
+=======
+>>>>>>> 2c7037a (Configuración inicial Django y MySQL)

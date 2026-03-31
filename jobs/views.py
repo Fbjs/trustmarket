@@ -1,3 +1,4 @@
+<<<<<<< HEAD
 from django.contrib import messages
 from django.core.mail import send_mail
 from django.shortcuts import redirect, render
@@ -58,3 +59,8 @@ def enviar_postulacion(request):
             comentarios=request.POST.get('comentarios')
         )
         return render(request, 'exito.html')
+=======
+from django.shortcuts import render
+
+# Create your views here.
+>>>>>>> 2c7037a (Configuración inicial Django y MySQL)

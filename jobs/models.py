@@ -1,5 +1,6 @@
 from django.db import models
 
+<<<<<<< HEAD
 
 class Application(models.Model):
     EXPERIENCE_CHOICES = [
@@ -43,3 +44,6 @@ class postulaciones(models.Model):
     class Meta:
         managed = False  # NO toca la estructura de la tabla manual
         db_table = 'postulaciones' # Nombre exacto en MySQL
+=======
+# Create your models here.
+>>>>>>> 2c7037a (Configuración inicial Django y MySQL)
