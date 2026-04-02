@@ -261,40 +261,56 @@
                     <p style="color:rgba(255,255,255,0.6);font-size:1.05rem;">Revisa tus datos y envía tu postulación
                     </p>
                 </div>
-                <form action="{% url 'jobs:apply' %}" method="post" id="fullscreenForm">
+                <form action="{% url 'jobs:apply' %}" method="post" id="fullscreenForm" enctype="multipart/form-data">
                     {% csrf_token %}
                     <div style="display:grid;grid-template-columns:1fr 1fr;gap:20px;margin-bottom:28px;">
                         <div style="display:flex;flex-direction:column;">
                             <label
-                                style="font-size:0.85rem;font-weight:600;margin-bottom:8px;color:rgba(255,255,255,0.85);">👤
+                                style="font-size:0.85rem;font-weight:600;margin-bottom:8px;color:rgba(255,255,255,0.85);"><img src="{% static 'img/nombre.png' %}" alt="Icono nombre" style="width:20px;height:20px;display:inline-block;vertical-align:text-bottom;margin-right:4px;">
                                 Nombre Completo <span style="color:#ff6b6b;">*</span></label>
                             <input type="text" name="full_name" id="fs_full_name" placeholder="Tu nombre..." required
                                 style="width:100%;padding:14px 16px;border:1.5px solid rgba(255,255,255,0.15);border-radius:10px;background:rgba(255,255,255,0.06);color:#fff;font-size:0.95rem;outline:none;font-family:Inter,sans-serif;">
                         </div>
                         <div style="display:flex;flex-direction:column;">
                             <label
-                                style="font-size:0.85rem;font-weight:600;margin-bottom:8px;color:rgba(255,255,255,0.85);">📱
+                                style="font-size:0.85rem;font-weight:600;margin-bottom:8px;color:rgba(255,255,255,0.85);"><img src="{% static 'img/telefono.png' %}" alt="Icono teléfono" style="width:20px;height:20px;display:inline-block;vertical-align:text-bottom;margin-right:4px;">
                                 Teléfono <span style="color:#ff6b6b;">*</span></label>
                             <input type="tel" name="phone" id="fs_phone" placeholder="+56 9..." required
                                 style="width:100%;padding:14px 16px;border:1.5px solid rgba(255,255,255,0.15);border-radius:10px;background:rgba(255,255,255,0.06);color:#fff;font-size:0.95rem;outline:none;font-family:Inter,sans-serif;">
                         </div>
                         <div style="display:flex;flex-direction:column;">
                             <label
-                                style="font-size:0.85rem;font-weight:600;margin-bottom:8px;color:rgba(255,255,255,0.85);">✉️
+                                style="font-size:0.85rem;font-weight:600;margin-bottom:8px;color:rgba(255,255,255,0.85);"><img src="{% static 'img/email.png' %}" alt="Icono email" style="width:20px;height:20px;display:inline-block;vertical-align:text-bottom;margin-right:4px;">
                                 Email <span style="color:#ff6b6b;">*</span></label>
                             <input type="email" name="email" id="fs_email" placeholder="tu@email.com" required
                                 style="width:100%;padding:14px 16px;border:1.5px solid rgba(255,255,255,0.15);border-radius:10px;background:rgba(255,255,255,0.06);color:#fff;font-size:0.95rem;outline:none;font-family:Inter,sans-serif;">
                         </div>
                         <div style="display:flex;flex-direction:column;">
                             <label
-                                style="font-size:0.85rem;font-weight:600;margin-bottom:8px;color:rgba(255,255,255,0.85);">🔢
+                                style="font-size:0.85rem;font-weight:600;margin-bottom:8px;color:rgba(255,255,255,0.85);"><img
+                                    src="{% static 'img/edad.png' %}" alt="Icono edad"
+                                    style="width:20px;height:20px;display:inline-block;vertical-align:text-bottom;margin-right:4px;">
                                 Edad <span style="color:#ff6b6b;">*</span></label>
                             <input type="number" name="age" id="fs_age" placeholder="25" required
                                 style="width:100%;padding:14px 16px;border:1.5px solid rgba(255,255,255,0.15);border-radius:10px;background:rgba(255,255,255,0.06);color:#fff;font-size:0.95rem;outline:none;font-family:Inter,sans-serif;">
                         </div>
                         <div style="display:flex;flex-direction:column;">
                             <label
-                                style="font-size:0.85rem;font-weight:600;margin-bottom:8px;color:rgba(255,255,255,0.85);">💼
+                                style="font-size:0.85rem;font-weight:600;margin-bottom:8px;color:rgba(255,255,255,0.85);"><img
+                                    src="{% static 'img/maletin.png' %}" alt="Icono puesto"
+                                    style="width:20px;height:20px;display:inline-block;vertical-align:text-bottom;margin-right:4px;">
+                                Puesto al que postula <span style="color:#ff6b6b;">*</span></label>
+                            <select name="job_position" id="fs_job_position" required
+                                style="width:100%;padding:14px 16px;border:1.5px solid rgba(255,255,255,0.15);border-radius:10px;background:rgba(255,255,255,0.06);color:#fff;font-size:0.95rem;outline:none;font-family:Inter,sans-serif;">
+                                <option value="" style="color:#333;">Selecciona un puesto...</option>
+                                <option value="vendedor" style="color:#333;">Vendedor</option>
+                                <option value="atencion_cliente" style="color:#333;">Atención al cliente</option>
+                                <option value="cobranzas" style="color:#333;">Cobranzas</option>
+                            </select>
+                        </div>
+                        <div style="display:flex;flex-direction:column;">
+                            <label
+                                style="font-size:0.85rem;font-weight:600;margin-bottom:8px;color:rgba(255,255,255,0.85);"><img src="{% static 'img/maletin.png' %}" alt="Icono experiencia" style="width:20px;height:20px;display:inline-block;vertical-align:text-bottom;margin-right:4px;">
                                 Experiencia <span style="color:#ff6b6b;">*</span></label>
                             <select name="sales_experience" id="fs_experience" required
                                 style="width:100%;padding:14px 16px;border:1.5px solid rgba(255,255,255,0.15);border-radius:10px;background:rgba(255,255,255,0.06);color:#fff;font-size:0.95rem;outline:none;font-family:Inter,sans-serif;">
@@ -307,7 +323,7 @@
                         </div>
                         <div style="display:flex;flex-direction:column;">
                             <label
-                                style="font-size:0.85rem;font-weight:600;margin-bottom:8px;color:rgba(255,255,255,0.85);">🗓️
+                                style="font-size:0.85rem;font-weight:600;margin-bottom:8px;color:rgba(255,255,255,0.85);"><img src="{% static 'img/calendario.png' %}" alt="Icono calendario" style="width:20px;height:20px;display:inline-block;vertical-align:text-bottom;margin-right:4px;">
                                 Disponibilidad <span style="color:#ff6b6b;">*</span></label>
                             <div style="display:flex;flex-wrap:wrap;gap:10px;">
                                 <label
@@ -329,10 +345,21 @@
                             </div>
                         </div>
                         <div style="display:flex;flex-direction:column;grid-column:1/-1;">
+                            <label style="font-size:0.85rem;font-weight:600;margin-bottom:8px;color:rgba(255,255,255,0.85);">📎 Adjuntar CV (PDF)</label>
+                            <div style="position:relative;width:100%;">
+                                <input type="file" name="cv" id="fs_cv" accept=".pdf" style="opacity:0;position:absolute;inset:0;width:100%;height:100%;cursor:pointer;z-index:10;">
+                                <div style="display:flex;align-items:center;justify-content:center;gap:12px;width:100%;background:rgba(255,255,255,0.06);border:2px dashed rgba(255,255,255,0.2);border-radius:10px;padding:32px 20px;transition:all 0.3s;" id="fs_cv_container">
+                                    <span class="material-symbols-outlined" style="color:#00adef;font-size:32px;">cloud_upload</span>
+                                    <span id="fs_file_name" style="color:rgba(255,255,255,0.7);font-size:0.95rem;font-family:Inter,sans-serif;">Haz clic para subir o arrastra tu archivo PDF</span>
+                                </div>
+                            </div>
+                        </div>
+                        <div style="display:flex;flex-direction:column;grid-column:1/-1;">
                             <label
                                 style="font-size:0.85rem;font-weight:600;margin-bottom:8px;color:rgba(255,255,255,0.85);">💬
                                 Comentarios adicionales</label>
-                            <textarea name="additional_comments" id="fs_comments" placeholder="Dinos algo más sobre ti..."
+                            <textarea name="additional_comments" id="fs_comments"
+                                placeholder="Dinos algo más sobre ti..."
                                 style="width:100%;padding:14px 16px;border:1.5px solid rgba(255,255,255,0.15);border-radius:10px;background:rgba(255,255,255,0.06);color:#fff;font-size:0.95rem;outline:none;font-family:Inter,sans-serif;height:100px;resize:none;"></textarea>
                         </div>
                     </div>
@@ -379,16 +406,25 @@
 
         // Fullscreen modal: open from panel with pre-filled data
         function openFullscreenFromPanel() {
+            var sideForm = document.getElementById('sideForm');
+            if (sideForm && !sideForm.checkValidity()) {
+                sideForm.reportValidity();
+                return;
+            }
+
             // Copy values from side panel to fullscreen form
-            document.getElementById('fs_full_name').value = document.getElementById('panel_full_name').value;
-            document.getElementById('fs_phone').value = document.getElementById('panel_phone').value;
-            document.getElementById('fs_email').value = document.getElementById('panel_email').value;
+            document.getElementById('fs_full_name').value = document.getElementById('panel_full_name').value || '';
+            document.getElementById('fs_phone').value = document.getElementById('panel_phone').value || '';
+            document.getElementById('fs_email').value = document.getElementById('panel_email').value || '';
 
             var ageInput = document.querySelector('#sideForm [name="age"]');
-            if (ageInput) document.getElementById('fs_age').value = ageInput.value;
+            if (ageInput && document.getElementById('fs_age')) document.getElementById('fs_age').value = ageInput.value;
+
+            var jobSelect = document.querySelector('#sideForm [name="job_position"]');
+            if (jobSelect && document.getElementById('fs_job_position')) document.getElementById('fs_job_position').value = jobSelect.value;
 
             var expSelect = document.querySelector('#sideForm [name="sales_experience"]');
-            if (expSelect) document.getElementById('fs_experience').value = expSelect.value;
+            if (expSelect && document.getElementById('fs_experience')) document.getElementById('fs_experience').value = expSelect.value;
 
             // Copy checkboxes
             var panelChecks = document.querySelectorAll('#sideForm [name="availability_options"]');
@@ -400,9 +436,11 @@
             // Close side panel, open fullscreen
             togglePanel();
             var modal = document.getElementById('fullscreenModal');
-            modal.style.opacity = '1';
-            modal.style.visibility = 'visible';
-            document.body.style.overflow = 'hidden';
+            if (modal) {
+                modal.style.opacity = '1';
+                modal.style.visibility = 'visible';
+                document.body.style.overflow = 'hidden';
+            }
         }
 
         function closeFullscreenForm() {
@@ -414,6 +452,28 @@
 
         document.addEventListener('keydown', function (e) {
             if (e.key === 'Escape') closeFullscreenForm();
+        });
+
+        // File input styling update
+        document.addEventListener('DOMContentLoaded', function () {
+            const fsCv = document.getElementById('fs_cv');
+            if (fsCv) {
+                fsCv.addEventListener('change', function(e) {
+                    const fileNameElem = document.getElementById('fs_file_name');
+                    const cvContainer = document.getElementById('fs_cv_container');
+                    if (e.target.files.length > 0) {
+                        fileNameElem.innerText = e.target.files[0].name;
+                        fileNameElem.style.color = '#fff';
+                        cvContainer.style.borderColor = '#00adef';
+                        cvContainer.style.background = 'rgba(0,173,239,0.1)';
+                    } else {
+                        fileNameElem.innerText = 'Haz clic para subir o arrastra tu archivo PDF';
+                        fileNameElem.style.color = 'rgba(255,255,255,0.7)';
+                        cvContainer.style.borderColor = 'rgba(255,255,255,0.2)';
+                        cvContainer.style.background = 'rgba(255,255,255,0.06)';
+                    }
+                });
+            }
         });
 
         // Handle fullscreen form submission via AJAX

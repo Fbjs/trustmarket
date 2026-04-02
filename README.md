@@ -107,8 +107,10 @@ DB_PORT=3306
 ## Módulo de Postulación
 
 - URL dedicada: `/trabaja-con-nosotros/`
+- **Integración de WhatsApp**: Notificación automática al postulante vía API oficial de Meta (a través de `call.neighbour.cl`).
 - Stepper visual: "Tus Datos" → "Experiencia" → "Disponibilidad".
 - Validaciones de campos obligatorios y edad mínima.
 - Guardado en base de datos (`Application`).
-- Notificación automática por correo (backend consola en desarrollo).
+- **Doble guardado manual**: Guarda simultáneamente en tabla `postulaciones` externa (si se usa MySQL, se *debe* tener la columna `puesto` creada de forma manual usando `ALTER TABLE postulaciones ADD COLUMN puesto VARCHAR(100) NULL;`).
+- Notificación automática por correo (backend consola en desarrollo) con recepción de datos del puesto al que postula.
 - Gestión de postulantes en Django Admin.

@@ -8,10 +8,19 @@ class Application(models.Model):
         ("1_3", "1-3 años"),
         ("mas_3", "+3 años"),
     ]
+    
+    POSITION_CHOICES = [
+        ("vendedor", "Vendedor"),
+        ("atencion_cliente", "Atención al cliente"),
+        ("cobranzas", "Cobranzas"),
+    ]
 
     full_name = models.CharField("Nombre completo", max_length=160)
     phone = models.CharField("Teléfono / WhatsApp", max_length=30)
     email = models.EmailField("Correo electrónico")
+    job_position = models.CharField(
+        "Puesto al que postula", max_length=50, choices=POSITION_CHOICES, default='vendedor'
+    )
     age = models.PositiveSmallIntegerField("Edad")
     sales_experience = models.CharField(
         "Experiencia en ventas", max_length=20, choices=EXPERIENCE_CHOICES
@@ -36,6 +45,7 @@ class postulaciones(models.Model):
     telefono = models.CharField(max_length=50)
     email = models.EmailField(max_length=255)
     edad = models.IntegerField()
+    puesto = models.CharField(max_length=100, blank=True, null=True)
     experiencia_ventas = models.CharField(max_length=100)
     disponibilidad = models.TextField() # Aquí guardaremos los checkboxes como texto
     comentarios = models.TextField(blank=True, null=True)

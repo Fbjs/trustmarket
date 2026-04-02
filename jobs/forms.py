@@ -24,6 +24,7 @@ class ApplicationForm(forms.ModelForm):
             "phone",
             "email",
             "age",
+            "job_position",
             "sales_experience",
             "additional_comments",
         ]

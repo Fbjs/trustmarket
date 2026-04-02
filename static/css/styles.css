@@ -91,6 +91,45 @@
   color: #3e4850;
 }
 
+.carousel-container {
+  width: 100%;
+  overflow: hidden;
+  padding: 20px 0;
+}
+
+.carousel-track {
+  display: flex;
+  width: max-content;
+  animation: scroll-carrusel 20s linear infinite;
+}
+
+.carousel-track:hover {
+  animation-play-state: paused;
+}
+
+.photo-item {
+  flex: 0 0 auto;
+  margin: 0 10px;
+}
+
+.photo-item img {
+  height: 100px;
+  width: auto;
+  object-fit: contain;
+  border-radius: 8px;
+  display: block;
+}
+
+@keyframes scroll-carrusel {
+  0% {
+    transform: translateX(0);
+  }
+  100% {
+    transform: translateX(-50%);
+  }
+}
+
+
 .side-panel .form-group {
   margin-bottom: 18px;
 }
@@ -287,6 +326,7 @@ html {
   0% {
     transform: translateX(-50%);
   }
+
   100% {
     transform: translateX(0);
   }
