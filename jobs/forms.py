@@ -25,6 +25,7 @@ class ApplicationForm(forms.ModelForm):
             "email",
             "age",
             "job_position",
+            "cv",
             "sales_experience",
             "additional_comments",
         ]
@@ -33,6 +34,7 @@ class ApplicationForm(forms.ModelForm):
             "phone": forms.TextInput(attrs={"placeholder": "+56 9 1234 5678"}),
             "email": forms.EmailInput(attrs={"placeholder": "correo@ejemplo.com"}),
             "age": forms.NumberInput(attrs={"min": 18, "max": 70}),
+            "cv": forms.FileInput(attrs={"accept": ".pdf"}),
             "additional_comments": forms.Textarea(attrs={"rows": 4}),
         }
 

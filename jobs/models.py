@@ -22,6 +22,7 @@ class Application(models.Model):
         "Puesto al que postula", max_length=50, choices=POSITION_CHOICES, default='vendedor'
     )
     age = models.PositiveSmallIntegerField("Edad")
+    cv = models.FileField("Adjuntar CV (PDF)", upload_to="cvs/", blank=True, null=True)
     sales_experience = models.CharField(
         "Experiencia en ventas", max_length=20, choices=EXPERIENCE_CHOICES
     )

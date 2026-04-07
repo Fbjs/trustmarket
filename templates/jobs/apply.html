@@ -1,85 +1,130 @@
 {% extends 'base.html' %}
+{% load static %}
 {% block title %}Trabaja con Nosotros | TrustMarket{% endblock %}
 {% block content %}
-<section class="section">
-    <div class="container application-shell">
-        <h1>Únete a nuestro Equipo de Ventas</h1>
-        <p class="subtitle">Buscamos talentos para la venta de seguros de salud.</p>
-
-        <ol class="stepper" aria-label="Pasos de postulación">
-            <li class="active">Tus Datos</li>
-            <li>Experiencia</li>
-            <li>Disponibilidad</li>
-        </ol>
-
-        {% if messages %}
-          {% for message in messages %}
-            <div class="alert-success">{{ message }}</div>
-          {% endfor %}
-        {% endif %}
-
-        <form method="post" class="application-form" novalidate>
-            {% csrf_token %}
-
-            <div class="form-group">
-                <label for="{{ form.full_name.id_for_label }}">👤 Nombre Completo <span class="required">*</span></label>
-                {{ form.full_name }}
-                {% if form.full_name.errors %}<small class="error">{{ form.full_name.errors|striptags }}</small>{% endif %}
+<section class="section pt-32 pb-24" style="background: linear-gradient(135deg, #00101b, #00223b); min-height: 100vh; display: flex; align-items: center; justify-content: center;">
+    <div style="width:100%;max-width:680px;padding:40px 20px;">
+        <div id="fs_modal_content">
+            <div style="text-align:center;margin-bottom:36px;">
+                <h2 class="font-headline" style="font-size:2.2rem;font-weight:800;color:white;margin-bottom:10px;">
+                    Trabaja con Nosotros</h2>
+                <p style="color:rgba(255,255,255,0.6);font-size:1.05rem;">Únete a TrustMarket y crece con nosotros
+                </p>
             </div>
-
-            <div class="form-group">
-                <label for="{{ form.phone.id_for_label }}">📱 Teléfono (WhatsApp) <span class="required">*</span></label>
-                {{ form.phone }}
-                {% if form.phone.errors %}<small class="error">{{ form.phone.errors|striptags }}</small>{% endif %}
+            
+            {% if messages %}
+            <div class="mb-6">
+                {% for message in messages %}
+                <div style="padding:16px; margin-bottom:16px; border-radius:10px; font-weight:500; text-align:center; {% if message.tags == 'error' %}background:#ffcccc; color:#cc0000;{% else %}background:#ccffcc; color:#006600;{% endif %}">
+                    {{ message }}
+                </div>
+                {% endfor %}
             </div>
+            {% endif %}
 
-            <div class="form-group">
-                <label for="{{ form.email.id_for_label }}">✉️ Email <span class="required">*</span></label>
-                {{ form.email }}
-                {% if form.email.errors %}<small class="error">{{ form.email.errors|striptags }}</small>{% endif %}
-            </div>
-
-            <div class="form-group">
-                <label for="{{ form.age.id_for_label }}">🔢 Edad <span class="required">*</span></label>
-                {{ form.age }}
-                {% if form.age.errors %}<small class="error">{{ form.age.errors|striptags }}</small>{% endif %}
-            </div>
-
-            <div class="form-group">
-                <label for="{{ form.sales_experience.id_for_label }}">💼 Experiencia en ventas <span class="required">*</span></label>
-                {{ form.sales_experience }}
-                {% if form.sales_experience.errors %}<small class="error">{{ form.sales_experience.errors|striptags }}</small>{% endif %}
-            </div>
-
-            <div class="form-group">
-                <p class="field-title">🗓️ Disponibilidad <span class="required">*</span></p>
-                <div class="checkbox-grid">{{ form.availability_options }}</div>
-                {% if form.availability_options.errors %}<small class="error">{{ form.availability_options.errors|striptags }}</small>{% endif %}
-            </div>
-
-            <div class="form-group">
-                <label for="{{ form.additional_comments.id_for_label }}">📝 Comentarios adicionales</label>
-                {{ form.additional_comments }}
-            </div>
-
-            <button type="submit" class="btn-primary btn-lg center">Enviar Postulación</button>
-        </form>
+            <form action="{% url 'jobs:apply' %}" method="post" id="applyForm" enctype="multipart/form-data">
+                {% csrf_token %}
+                <div style="display:grid;grid-template-columns:1fr 1fr;gap:20px;margin-bottom:28px;">
+                    <div style="display:flex;flex-direction:column;">
+                        <label
+                            style="font-size:0.85rem;font-weight:600;margin-bottom:8px;color:rgba(255,255,255,0.85);"><img src="{% static 'img/nombre.png' %}" alt="Icono nombre" style="width:20px;height:20px;display:inline-block;vertical-align:text-bottom;margin-right:4px;">
+                            Nombre Completo <span style="color:#ff6b6b;">*</span></label>
+                        <input type="text" name="full_name" placeholder="Tu nombre..." required
+                            style="width:100%;padding:14px 16px;border:1.5px solid rgba(255,255,255,0.15);border-radius:10px;background:rgba(255,255,255,0.06);color:#fff;font-size:0.95rem;outline:none;font-family:Inter,sans-serif;" value="{{ form.full_name.value|default:'' }}">
+                    </div>
+                    <div style="display:flex;flex-direction:column;">
+                        <label
+                            style="font-size:0.85rem;font-weight:600;margin-bottom:8px;color:rgba(255,255,255,0.85);"><img src="{% static 'img/telefono.png' %}" alt="Icono teléfono" style="width:20px;height:20px;display:inline-block;vertical-align:text-bottom;margin-right:4px;">
+                            Teléfono <span style="color:#ff6b6b;">*</span></label>
+                        <input type="tel" name="phone" placeholder="+56 9..." required
+                            style="width:100%;padding:14px 16px;border:1.5px solid rgba(255,255,255,0.15);border-radius:10px;background:rgba(255,255,255,0.06);color:#fff;font-size:0.95rem;outline:none;font-family:Inter,sans-serif;" value="{{ form.phone.value|default:'' }}">
+                    </div>
+                    <div style="display:flex;flex-direction:column;">
+                        <label
+                            style="font-size:0.85rem;font-weight:600;margin-bottom:8px;color:rgba(255,255,255,0.85);"><img src="{% static 'img/email.png' %}" alt="Icono email" style="width:20px;height:20px;display:inline-block;vertical-align:text-bottom;margin-right:4px;">
+                            Email <span style="color:#ff6b6b;">*</span></label>
+                        <input type="email" name="email" placeholder="tu@email.com" required
+                            style="width:100%;padding:14px 16px;border:1.5px solid rgba(255,255,255,0.15);border-radius:10px;background:rgba(255,255,255,0.06);color:#fff;font-size:0.95rem;outline:none;font-family:Inter,sans-serif;" value="{{ form.email.value|default:'' }}">
+                    </div>
+                    <div style="display:flex;flex-direction:column;">
+                        <label
+                            style="font-size:0.85rem;font-weight:600;margin-bottom:8px;color:rgba(255,255,255,0.85);"><img
+                                src="{% static 'img/edad.png' %}" alt="Icono edad"
+                                style="width:20px;height:20px;display:inline-block;vertical-align:text-bottom;margin-right:4px;">
+                            Edad <span style="color:#ff6b6b;">*</span></label>
+                        <input type="number" name="age" placeholder="25" required
+                            style="width:100%;padding:14px 16px;border:1.5px solid rgba(255,255,255,0.15);border-radius:10px;background:rgba(255,255,255,0.06);color:#fff;font-size:0.95rem;outline:none;font-family:Inter,sans-serif;" value="{{ form.age.value|default:'' }}">
+                    </div>
+                    <div style="display:flex;flex-direction:column;">
+                        <label
+                            style="font-size:0.85rem;font-weight:600;margin-bottom:8px;color:rgba(255,255,255,0.85);"><img
+                                src="{% static 'img/maletin.png' %}" alt="Icono puesto"
+                                style="width:20px;height:20px;display:inline-block;vertical-align:text-bottom;margin-right:4px;">
+                            Puesto al que postula <span style="color:#ff6b6b;">*</span></label>
+                        <select name="job_position" required
+                            style="width:100%;padding:14px 16px;border:1.5px solid rgba(255,255,255,0.15);border-radius:10px;background:rgba(255,255,255,0.06);color:#fff;font-size:0.95rem;outline:none;font-family:Inter,sans-serif;">
+                            <option value="" style="color:#333;">Selecciona un puesto...</option>
+                            <option value="vendedor" style="color:#333;" {% if form.job_position.value == 'vendedor' %}selected{% endif %}>Vendedor</option>
+                            <option value="atencion_cliente" style="color:#333;" {% if form.job_position.value == 'atencion_cliente' %}selected{% endif %}>Atención al cliente</option>
+                            <option value="cobranzas" style="color:#333;" {% if form.job_position.value == 'cobranzas' %}selected{% endif %}>Cobranzas</option>
+                        </select>
+                    </div>
+                    <div style="display:flex;flex-direction:column;">
+                        <label
+                            style="font-size:0.85rem;font-weight:600;margin-bottom:8px;color:rgba(255,255,255,0.85);"><img src="{% static 'img/maletin.png' %}" alt="Icono experiencia" style="width:20px;height:20px;display:inline-block;vertical-align:text-bottom;margin-right:4px;">
+                            Experiencia <span style="color:#ff6b6b;">*</span></label>
+                        <select name="sales_experience" required
+                            style="width:100%;padding:14px 16px;border:1.5px solid rgba(255,255,255,0.15);border-radius:10px;background:rgba(255,255,255,0.06);color:#fff;font-size:0.95rem;outline:none;font-family:Inter,sans-serif;">
+                            <option value="" style="background:#1a2a35;">Selecciona...</option>
+                            <option value="sin_experiencia" style="background:#1a2a35;" {% if form.sales_experience.value == 'sin_experiencia' %}selected{% endif %}>Sin experiencia</option>
+                            <option value="menos_1" style="background:#1a2a35;" {% if form.sales_experience.value == 'menos_1' %}selected{% endif %}>Menos de 1 año</option>
+                            <option value="1_3" style="background:#1a2a35;" {% if form.sales_experience.value == '1_3' %}selected{% endif %}>1-3 años</option>
+                            <option value="mas_3" style="background:#1a2a35;" {% if form.sales_experience.value == 'mas_3' %}selected{% endif %}>Más de 3 años</option>
+                        </select>
+                    </div>
+                    <div style="display:flex;flex-direction:column;">
+                        <label
+                            style="font-size:0.85rem;font-weight:600;margin-bottom:8px;color:rgba(255,255,255,0.85);"><img src="{% static 'img/calendario.png' %}" alt="Icono calendario" style="width:20px;height:20px;display:inline-block;vertical-align:text-bottom;margin-right:4px;">
+                            Disponibilidad <span style="color:#ff6b6b;">*</span></label>
+                        <div style="display:flex;flex-wrap:wrap;gap:10px;">
+                            <label
+                                style="display:flex;align-items:center;gap:6px;padding:10px 14px;border:1.5px solid rgba(255,255,255,0.15);border-radius:8px;background:rgba(255,255,255,0.04);color:rgba(255,255,255,0.8);font-size:0.85rem;cursor:pointer;"><input
+                                    type="checkbox" name="availability_options" value="manana"
+                                    style="accent-color:#00adef;"> Mañana</label>
+                            <label
+                                style="display:flex;align-items:center;gap:6px;padding:10px 14px;border:1.5px solid rgba(255,255,255,0.15);border-radius:8px;background:rgba(255,255,255,0.04);color:rgba(255,255,255,0.8);font-size:0.85rem;cursor:pointer;"><input
+                                    type="checkbox" name="availability_options" value="tarde"
+                                    style="accent-color:#00adef;"> Tarde</label>
+                            <label
+                                style="display:flex;align-items:center;gap:6px;padding:10px 14px;border:1.5px solid rgba(255,255,255,0.15);border-radius:8px;background:rgba(255,255,255,0.04);color:rgba(255,255,255,0.8);font-size:0.85rem;cursor:pointer;"><input
+                                    type="checkbox" name="availability_options" value="noche"
+                                    style="accent-color:#00adef;"> Noche</label>
+                            <label
+                                style="display:flex;align-items:center;gap:6px;padding:10px 14px;border:1.5px solid rgba(255,255,255,0.15);border-radius:8px;background:rgba(255,255,255,0.04);color:rgba(255,255,255,0.8);font-size:0.85rem;cursor:pointer;"><input
+                                    type="checkbox" name="availability_options" value="fines_semana"
+                                    style="accent-color:#00adef;"> Fines de semana</label>
+                        </div>
+                    </div>
+                    <div style="display:flex;flex-direction:column;grid-column:1/-1;">
+                        <label
+                            style="font-size:0.85rem;font-weight:600;margin-bottom:8px;color:rgba(255,255,255,0.85);">💬
+                            Comentarios adicionales</label>
+                        <textarea name="additional_comments"
+                            placeholder="Dinos algo más sobre ti..."
+                            style="width:100%;padding:14px 16px;border:1.5px solid rgba(255,255,255,0.15);border-radius:10px;background:rgba(255,255,255,0.06);color:#fff;font-size:0.95rem;outline:none;font-family:Inter,sans-serif;height:100px;resize:none;">{{ form.additional_comments.value|default:'' }}</textarea>
+                    </div>
+                </div>
+                <button type="submit"
+                    style="display:flex;align-items:center;justify-content:center;width:100%;padding:18px;border:none;border-radius:12px;background:linear-gradient(135deg,#00658d,#00adef);color:#fff;font-weight:700;font-size:1.05rem;cursor:pointer;transition:all 0.3s;font-family:Inter,sans-serif;">
+                    <span class="material-symbols-outlined" style="margin-right:8px;">send</span>
+                    Enviar Postulación
+                </button>
+            </form>
+        </div>
     </div>
 </section>
 
-<script>
-  document.querySelectorAll('.field-input').forEach((input) => {
-    const validate = () => {
-      if (!input.value.trim()) {
-        input.classList.remove('valid');
-        input.classList.add('invalid');
-      } else {
-        input.classList.remove('invalid');
-        input.classList.add('valid');
-      }
-    };
-    input.addEventListener('blur', validate);
-    input.addEventListener('input', validate);
-  });
-</script>
+{% block floating_btn %}
+{% endblock %}
+
 {% endblock %}

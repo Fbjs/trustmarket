@@ -10,7 +10,7 @@ from .forms import ApplicationForm
 
 def apply_view(request):
     if request.method == "POST":
-        form = ApplicationForm(request.POST)
+        form = ApplicationForm(request.POST, request.FILES)
         if form.is_valid():
             application = form.save()
             
@@ -36,17 +36,17 @@ def apply_view(request):
                 request,
                 "¡Gracias por postular! Tu información fue recibida correctamente.",
             )
-            return redirect("core:home")
+            return redirect("jobs:apply")
         else:
-            # Si el formulario no es válido, redirigir a home con mensaje de error
+            # Si el formulario no es válido, pasarlo al template
             messages.error(
                 request,
                 "Hubo un error en tu postulación. Por favor revisa los datos e intenta de nuevo.",
             )
-            return redirect("core:home")
-    
-    # GET requests a /jobs/ redirigen al home
-    return redirect("core:home")
+    else:
+        form = ApplicationForm()
+        
+    return render(request, "jobs/apply.html", {"form": form})
 
 
 def _notify_team(application):
