@@ -8,14 +8,41 @@ class HomeView(FormView):
     form_class = StitchApplicationForm
     success_url = reverse_lazy("core:home")
 
+    def get_form_kwargs(self):
+        kwargs = super().get_form_kwargs()
+        # Pasar los archivos subidos al formulario
+        if self.request.method in ("POST", "PUT"):
+            kwargs["files"] = self.request.FILES
+        return kwargs
+
     def form_valid(self, form):
         form.save()
         messages.success(self.request, "¡Gracias por postular! Tu información fue recibida correctamente.")
         return super().form_valid(form)
 
     def form_invalid(self, form):
-        messages.error(self.request, "Hubo un error en tu postulación. Verifica que el CV sea PDF e intenta de nuevo.")
+        # Mostrar errores específicos del formulario
+        error_details = "; ".join(
+            f"{field}: {', '.join(errs)}"
+            for field, errs in form.errors.items()
+            if field != "__all__"
+        )
+        mensaje = "Hubo un error en tu postulación."
+        if error_details:
+            mensaje += f" Revisa: {error_details}"
+        else:
+            mensaje += " Verifica que el CV sea un archivo PDF válido e intenta de nuevo."
+        messages.error(self.request, mensaje)
         return super().form_invalid(form)
+
+class ServicesView(TemplateView):
+    template_name = "core/services.html"
+
+class AboutView(TemplateView):
+    template_name = "core/about.html"
+
+class ContactView(TemplateView):
+    template_name = "core/contact.html"
 
 class ServicesView(TemplateView):
     template_name = "core/services.html"

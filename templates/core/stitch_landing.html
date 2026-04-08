@@ -1,437 +1,610 @@
 <!DOCTYPE html>
-
-<html class="scroll-smooth" lang="es"><head>
+<html class="scroll-smooth" lang="es">
+<head>
 <meta charset="utf-8"/>
 <meta content="width=device-width, initial-scale=1.0" name="viewport"/>
 <title>TrustMarket | Architected Trust</title>
+{% load static %}
 <script src="https://cdn.tailwindcss.com?plugins=forms,container-queries"></script>
-<link href="https://fonts.googleapis.com/css2?family=Manrope:wght@400;700;800&amp;family=Inter:wght@300;400;500;600&amp;display=swap" rel="stylesheet"/>
-<link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&amp;display=swap" rel="stylesheet"/>
-<link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&amp;display=swap" rel="stylesheet"/>
+<link href="https://fonts.googleapis.com/css2?family=Syne:wght@400;600;700;800&family=DM+Sans:wght@300;400;500;600&display=swap" rel="stylesheet"/>
+<link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&display=swap" rel="stylesheet"/>
 <script id="tailwind-config">
-      tailwind.config = {
-        darkMode: "class",
-        theme: {
-          extend: {
-            colors: {
-              "on-primary-fixed": "#001e2e",
-              "tertiary": "#8a5100",
-              "secondary-fixed-dim": "#c1c7cd",
-              "on-surface-variant": "#3e4850",
-              "on-tertiary-container": "#553000",
-              "primary": "#00658d",
-              "inverse-primary": "#83cfff",
-              "tertiary-fixed": "#ffdcbe",
-              "surface-tint": "#00658d",
-              "on-tertiary-fixed": "#2c1600",
-              "on-primary": "#ffffff",
-              "on-primary-fixed-variant": "#004c6c",
-              "on-surface": "#161c21",
-              "on-error": "#ffffff",
-              "surface-bright": "#f6faff",
-              "on-tertiary-fixed-variant": "#693c00",
-              "on-primary-container": "#003d57",
-              "secondary-fixed": "#dee3e9",
-              "error": "#ba1a1a",
-              "primary-container": "#00adef",
-              "outline": "#6e7881",
-              "on-secondary-fixed-variant": "#41474d",
-              "primary-fixed-dim": "#83cfff",
-              "background": "#f6faff",
-              "error-container": "#ffdad6",
-              "surface-variant": "#dee3e9",
-              "on-secondary-container": "#5d6369",
-              "surface": "#f6faff",
-              "secondary-container": "#dbe0e6",
-              "surface-container-lowest": "#ffffff",
-              "surface-container": "#e9eef5",
-              "outline-variant": "#bdc8d1",
-              "tertiary-container": "#e78d18",
-              "on-secondary-fixed": "#161c21",
-              "surface-container-highest": "#dee3e9",
-              "surface-container-high": "#e3e9ef",
-              "inverse-surface": "#2b3136",
-              "secondary": "#595f64",
-              "surface-container-low": "#eff4fa",
-              "on-background": "#161c21",
-              "tertiary-fixed-dim": "#ffb86f",
-              "primary-fixed": "#c6e7ff",
-              "on-tertiary": "#ffffff",
-              "on-error-container": "#93000a",
-              "surface-dim": "#d5dbe1",
-              "inverse-on-surface": "#ecf1f8",
-              "on-secondary": "#ffffff"
-            },
-            fontFamily: {
-              "headline": ["Manrope", "sans-serif"],
-              "body": ["Inter", "sans-serif"],
-              "label": ["Inter", "sans-serif"]
-            },
-            borderRadius: {"DEFAULT": "0.125rem", "lg": "0.25rem", "xl": "0.5rem", "full": "0.75rem"},
-          },
+  tailwind.config = {
+    theme: {
+      extend: {
+        colors: {
+          "primary": "#00658d",
+          "primary-container": "#00adef",
+          "on-primary-container": "#001e2e",
+          "on-primary": "#ffffff",
+          "surface": "#f6faff",
+          "surface-container": "#e9eef5",
+          "surface-container-low": "#eff4fa",
+          "surface-container-lowest": "#ffffff",
+          "surface-container-high": "#e3e9ef",
+          "on-surface": "#161c21",
+          "on-surface-variant": "#3e4850",
+          "outline-variant": "#bdc8d1",
         },
-      }
-    </script>
+        fontFamily: {
+          "headline": ["Syne", "sans-serif"],
+          "body": ["DM Sans", "sans-serif"],
+        },
+      },
+    },
+  }
+</script>
 <style>
-        .material-symbols-outlined {
-            font-variation-settings: 'FILL' 0, 'wght' 400, 'GRAD' 0, 'opsz' 24;
-        }
-        .glass-nav {
-            backdrop-filter: blur(12px);
-            -webkit-backdrop-filter: blur(12px);
-        }
-        .hero-gradient {
-            background: linear-gradient(135deg, #00658d 0%, #00adef 100%);
-        }
-    </style>
+  .material-symbols-outlined { font-variation-settings: 'FILL' 0, 'wght' 400, 'GRAD' 0, 'opsz' 24; }
+  .hero-bg { background: linear-gradient(135deg, #001e2e 0%, #00334d 50%, #004c6c 100%); }
+  .blob { position:absolute; border-radius:50%; filter:blur(80px); opacity:0.25; animation:blobMove 8s ease-in-out infinite alternate; }
+  @keyframes blobMove { 0%{transform:translate(0,0) scale(1)} 100%{transform:translate(40px,-30px) scale(1.1)} }
+  .nav-link { position:relative; }
+  .nav-link::after { content:''; position:absolute; bottom:-4px; left:0; width:0; height:2px; background:#00adef; transition:width 0.3s ease; }
+  .nav-link:hover::after, .nav-link.active::after { width:100%; }
+  .card-lift { transition:transform 0.35s cubic-bezier(.22,.68,0,1.2), box-shadow 0.35s ease; }
+  .card-lift:hover { transform:translateY(-6px); box-shadow:0 24px 48px -12px rgba(0,101,141,0.18); }
+  .fade-up { opacity:0; transform:translateY(32px); transition:opacity 0.7s ease, transform 0.7s ease; }
+  .fade-up.visible { opacity:1; transform:translateY(0); }
+  @keyframes pulse-ring { 0%{box-shadow:0 0 0 0 rgba(0,173,239,0.4)} 70%{box-shadow:0 0 0 12px rgba(0,173,239,0)} 100%{box-shadow:0 0 0 0 rgba(0,173,239,0)} }
+  .pulse-badge { animation:pulse-ring 2.5s ease-out infinite; }
+  #hiring-banner { transform:translateY(120px); transition:transform 0.5s cubic-bezier(.22,.68,0,1.2); }
+  #hiring-banner.show { transform:translateY(0); }
+  .step-line { position:absolute; top:28px; left:calc(50% + 28px); width:calc(100% - 56px); height:2px; background:linear-gradient(90deg,#00adef,#00658d); opacity:0.3; }
+  .gradient-text { background:linear-gradient(135deg,#00adef,#83cfff); -webkit-background-clip:text; -webkit-text-fill-color:transparent; background-clip:text; }
+  .btn-sheen { position:relative; overflow:hidden; }
+  .btn-sheen::after { content:''; position:absolute; top:0; left:-100%; width:60%; height:100%; background:linear-gradient(90deg,transparent,rgba(255,255,255,0.2),transparent); transition:left 0.5s ease; }
+  .btn-sheen:hover::after { left:150%; }
+  .whatsapp-btn { background:linear-gradient(135deg,#25D366,#128C7E); transition:all 0.3s ease; }
+  .whatsapp-btn:hover { transform:scale(1.02); box-shadow:0 12px 32px rgba(37,211,102,0.35); }
+  .stars { color:#f59e0b; }
+  #mobile-menu { max-height:0; overflow:hidden; transition:max-height 0.4s ease; }
+  #mobile-menu.open { max-height:400px; }
+</style>
 </head>
-<body class="bg-background text-on-background font-body antialiased">
-<!-- TopNavBar -->
-<nav class="fixed top-0 w-full z-50 bg-[#3E4449]/70 backdrop-blur-xl shadow-xl shadow-black/5">
-<div class="flex justify-between items-center max-w-7xl mx-auto px-8 h-20">
-<div class="text-2xl font-black tracking-tighter text-white">TrustMarket</div>
-<div class="hidden md:flex items-center space-x-8">
-<a class="text-[#00ADEF] font-bold border-b-2 border-[#00ADEF] pb-1 font-inter text-sm transition-all duration-300" href="#inicio">Inicio</a>
-<a class="text-gray-300 hover:text-white transition-colors font-inter text-sm" href="#servicios">Servicios</a>
-<a class="text-gray-300 hover:text-white transition-colors font-inter text-sm" href="#trabaja-con-nosotros">Trabaja con Nosotros</a>
-<a class="text-gray-300 hover:text-white transition-colors font-inter text-sm" href="#contacto">Contacto</a>
+<body class="bg-surface text-on-surface font-body antialiased">
+
+<!-- FLOATING HIRING BANNER -->
+<div id="hiring-banner" class="fixed bottom-6 left-1/2 -translate-x-1/2 z-50 pointer-events-none whitespace-nowrap">
+  <div class="pointer-events-auto bg-[#001e2e] text-white px-6 py-3 rounded-full shadow-2xl flex items-center gap-3 border border-white/10">
+    <span class="w-2.5 h-2.5 rounded-full bg-green-400 pulse-badge inline-block shrink-0"></span>
+    <span class="font-headline font-bold text-sm">¡Estamos contratando ahora!</span>
+    <a href="#trabaja-con-nosotros" class="bg-primary-container text-on-primary-container text-xs font-bold px-4 py-1.5 rounded-full hover:opacity-90 transition-opacity ml-1">Ver vacantes</a>
+  </div>
 </div>
-<button class="bg-primary-container text-on-primary-container px-6 py-2.5 rounded-lg font-bold text-sm hover:scale-95 transition-all duration-200 ease-in-out">
-                Contactar
-            </button>
-</div>
+
+<!-- NAVBAR -->
+<nav class="fixed top-0 w-full z-50 bg-[#0d1b2a]/85 backdrop-blur-xl border-b border-white/5">
+  <div class="flex justify-between items-center max-w-7xl mx-auto px-6 lg:px-8 py-4">
+    <img 
+  src="{% static 'img/logo.png' %}" 
+  alt="Logo TrustMarket" 
+  class="h-10 w-auto cursor-pointer"
+  onclick="location.reload()"
+>
+    <div class="hidden md:flex items-center gap-8">
+      <a class="nav-link active text-white/90 hover:text-white font-body text-sm font-medium transition-colors" href="#inicio">Inicio</a>
+      <a class="nav-link text-white/60 hover:text-white font-body text-sm font-medium transition-colors" href="#servicios">Servicios</a>
+      <a class="nav-link text-white/60 hover:text-white font-body text-sm font-medium transition-colors" href="#como-funciona">¿Cómo funciona?</a>
+      <a class="nav-link text-white/60 hover:text-white font-body text-sm font-medium transition-colors" href="#trabaja-con-nosotros">Únete</a>
+      <a class="nav-link text-white/60 hover:text-white font-body text-sm font-medium transition-colors" href="#contacto">Contacto</a>
+    </div>
+    <!-- BOTÓN CONTACTAR ARREGLADO -->
+    <a href="#contacto" class="hidden md:block btn-sheen bg-primary-container text-on-primary-container px-5 py-2.5 rounded-lg font-headline font-bold text-sm hover:opacity-90 transition-all">Contactar</a>
+    <button id="menu-toggle" class="md:hidden text-white p-2" onclick="document.getElementById('mobile-menu').classList.toggle('open')">
+      <span class="material-symbols-outlined">menu</span>
+    </button>
+  </div>
+  <div id="mobile-menu" class="md:hidden bg-[#0d1b2a] border-t border-white/5">
+    <div class="flex flex-col px-6 py-4 gap-3">
+      <a class="text-white/80 hover:text-white text-sm font-medium py-2" href="#inicio">Inicio</a>
+      <a class="text-white/60 hover:text-white text-sm font-medium py-2" href="#servicios">Servicios</a>
+      <a class="text-white/60 hover:text-white text-sm font-medium py-2" href="#como-funciona">¿Cómo funciona?</a>
+      <a class="text-white/60 hover:text-white text-sm font-medium py-2" href="#trabaja-con-nosotros">Únete</a>
+      <a class="text-white/60 hover:text-white text-sm font-medium py-2" href="#contacto">Contacto</a>
+      <a href="#contacto" class="btn-sheen bg-primary-container text-on-primary-container px-5 py-2.5 rounded-lg font-bold text-sm text-center mt-1">Contactar</a>
+    </div>
+  </div>
 </nav>
+
 <main>
-<!-- Hero Section -->
-<section class="relative min-h-screen flex items-center pt-20 overflow-hidden" id="inicio">
-<div class="absolute inset-0 z-0">
-<img class="w-full h-full object-cover brightness-[0.35]" data-alt="Modern high-tech call center with professional diverse team working in a bright airy open space with soft blue lighting accents" src="https://lh3.googleusercontent.com/aida-public/AB6AXuCmtBs2cLNGAvELTwSwbfTdPOupIyLxQEMSxnHLF--Df--wPMK2jCNmhXmgLASqYGG75r7tWcfxT1D-QxelCGoBucmDovohzZZa6zLt1aoPt0urJr57yJNOCUPJaBZfAewKar7dKZXnTwL-3sCHzkwaNAYJlrPtr8IWNMKdcGkIbeY3f64pT8b2vL-wXbGifyC2N-u4wE7MC3wajGl0lsMQgLA9DGTbhM7ByZx7PjNKk_xKpTLUGgGeTgxy4W2RiRjudCKHmceA4VyM"/>
-</div>
-<div class="relative z-10 max-w-7xl mx-auto px-8 w-full">
-<div class="max-w-3xl">
-<span class="inline-block px-4 py-1.5 rounded-full bg-primary-container/20 text-primary-container font-label text-xs font-bold uppercase tracking-widest mb-6">
-                        Líderes en Soporte Comercial
-                    </span>
-<h1 class="font-headline text-5xl md:text-7xl font-extrabold text-white tracking-tight leading-[1.1] mb-8">
-                        Conectamos personas con <span class="text-primary-container">oportunidades reales</span>
-</h1>
-<p class="font-body text-lg md:text-xl text-gray-300 mb-12 leading-relaxed max-w-2xl">
-                        Forma parte del equipo líder en ventas de seguros y soporte comercial. Tu crecimiento profesional comienza aquí con confianza y resultados tangibles.
-                    </p>
-<div class="flex flex-col sm:flex-row gap-6">
-<button class="hero-gradient text-white px-10 py-4 rounded-lg font-bold text-lg hover:shadow-2xl hover:shadow-primary/40 transition-all duration-300">
-                            Postula ahora
-                        </button>
-<button class="border border-white/20 text-white px-10 py-4 rounded-lg font-bold text-lg hover:bg-white/10 transition-all duration-300 backdrop-blur-sm">
-                            Conoce más
-                        </button>
-</div>
-</div>
-</div>
-<div class="absolute bottom-12 right-8 hidden xl:block">
-<div class="bg-white/5 backdrop-blur-md border border-white/10 p-6 rounded-xl max-w-xs">
-<div class="flex items-center gap-4 mb-3">
-<span class="material-symbols-outlined text-primary-container text-3xl">verified</span>
-<div class="text-white font-bold text-lg">+15 Años de Confianza</div>
-</div>
-<p class="text-gray-400 text-sm">Arquitectura de confianza en cada interacción comercial y reclutamiento.</p>
-</div>
-</div>
+
+<!-- HERO -->
+<section class="relative min-h-screen flex items-center pt-20 overflow-hidden hero-bg" id="inicio">
+  <div class="absolute inset-0 z-0">
+    <img class="w-full h-full object-cover opacity-15 mix-blend-luminosity" src="{% static 'img/group-business-talking-meeting.jpg' %}" alt="Equipo TrustMarket" onerror="this.style.display='none'"/>
+  </div>
+  <div class="blob w-96 h-96 bg-[#00adef] top-20 -left-20 z-0"></div>
+  <div class="blob w-72 h-72 bg-[#00658d] bottom-20 right-10 z-0" style="animation-delay:2s;animation-duration:10s;"></div>
+  <div class="absolute inset-0 z-0 opacity-[0.04]" style="background-image:linear-gradient(rgba(255,255,255,0.5) 1px,transparent 1px),linear-gradient(90deg,rgba(255,255,255,0.5) 1px,transparent 1px);background-size:60px 60px;"></div>
+
+  <div class="relative z-10 max-w-7xl mx-auto px-6 lg:px-8 w-full py-20">
+    <div class="max-w-3xl">
+      <div class="inline-flex items-center gap-2 px-4 py-1.5 rounded-full bg-white/10 border border-white/20 text-primary-container font-body text-xs font-bold uppercase tracking-widest mb-8">
+        <span class="w-2 h-2 rounded-full bg-green-400 pulse-badge"></span>
+        Líderes en Soporte Comercial · Chile
+      </div>
+      <h1 class="font-headline text-5xl md:text-7xl font-extrabold text-white tracking-tight leading-[1.05] mb-8">
+        Conectamos personas con<span class="gradient-text block mt-1">oportunidades reales</span>
+      </h1>
+      <p class="font-body text-lg md:text-xl text-white/70 mb-12 leading-relaxed max-w-2xl">
+        Forma parte del equipo líder en ventas de seguros y soporte comercial. Tu crecimiento profesional comienza aquí, con confianza y resultados tangibles.
+      </p>
+      <div class="flex flex-col sm:flex-row gap-4">
+        <!-- BOTÓN POSTULA AHORA ARREGLADO -->
+        <a href="#trabaja-con-nosotros" class="btn-sheen inline-flex items-center justify-center gap-2 bg-primary-container text-on-primary-container px-10 py-4 rounded-xl font-headline font-bold text-lg hover:shadow-2xl hover:shadow-primary-container/40 transition-all duration-300">
+          <span class="material-symbols-outlined text-xl" style="font-variation-settings:'FILL' 1;">rocket_launch</span>
+          Postula ahora
+        </a>
+        <!-- BOTÓN CONOCE MÁS ARREGLADO -->
+        <a href="#servicios" class="inline-flex items-center justify-center gap-2 border border-white/20 text-white px-10 py-4 rounded-xl font-headline font-bold text-lg hover:bg-white/10 transition-all duration-300 backdrop-blur-sm">
+          Conoce más
+          <span class="material-symbols-outlined text-xl">arrow_downward</span>
+        </a>
+      </div>
+    </div>
+    <div class="absolute bottom-12 right-8 hidden xl:flex gap-4">
+      <div class="bg-white/5 backdrop-blur-md border border-white/10 p-5 rounded-2xl text-center min-w-[110px]">
+        <div class="font-headline text-3xl font-extrabold text-primary-container counter" data-target="200">0</div>
+        <div class="text-white/60 text-xs mt-1">Colaboradores</div>
+      </div>
+      <div class="bg-white/5 backdrop-blur-md border border-white/10 p-5 rounded-2xl text-center min-w-[110px]">
+        <div class="font-headline text-3xl font-extrabold text-primary-container counter" data-target="15">0</div>
+        <div class="text-white/60 text-xs mt-1">Años de exp.</div>
+      </div>
+      <div class="bg-white/5 backdrop-blur-md border border-white/10 p-5 rounded-2xl text-center min-w-[110px]">
+        <div class="font-headline text-3xl font-extrabold text-primary-container">98%</div>
+        <div class="text-white/60 text-xs mt-1">Satisfacción</div>
+      </div>
+    </div>
+  </div>
+  <div class="absolute bottom-8 left-1/2 -translate-x-1/2 z-10 animate-bounce">
+    <span class="material-symbols-outlined text-white/40 text-3xl">keyboard_arrow_down</span>
+  </div>
 </section>
-<!-- Services Section -->
+
+<!-- STATS BAR -->
+<section class="bg-[#001e2e] py-10 border-y border-white/5">
+  <div class="max-w-7xl mx-auto px-6 lg:px-8">
+    <div class="grid grid-cols-2 md:grid-cols-4 gap-8 text-center">
+      <div class="fade-up"><div class="font-headline text-4xl font-extrabold text-primary-container counter" data-target="200">0</div><div class="text-white/50 text-sm mt-1">Colaboradores activos</div></div>
+      <div class="fade-up" style="transition-delay:0.1s"><div class="font-headline text-4xl font-extrabold text-primary-container counter" data-target="15">0</div><div class="text-white/50 text-sm mt-1">Años de experiencia</div></div>
+      <div class="fade-up" style="transition-delay:0.2s"><div class="font-headline text-4xl font-extrabold text-primary-container">98%</div><div class="text-white/50 text-sm mt-1">Satisfacción del equipo</div></div>
+      <div class="fade-up" style="transition-delay:0.3s"><div class="font-headline text-4xl font-extrabold text-primary-container counter" data-target="5000">0</div><div class="text-white/50 text-sm mt-1">Clientes atendidos</div></div>
+    </div>
+  </div>
+</section>
+
+<!-- SERVICES -->
 <section class="py-24 bg-surface-container-low" id="servicios">
-<div class="max-w-7xl mx-auto px-8">
-<div class="text-center mb-20">
-<span class="font-label text-primary font-bold text-xs uppercase tracking-widest block mb-4">Lo que hacemos</span>
-<h2 class="font-headline text-4xl md:text-5xl font-bold text-on-surface tracking-tight">Nuestros Servicios Especializados</h2>
-</div>
-<!-- Bento Grid Layout -->
-<div class="grid grid-cols-1 md:grid-cols-3 gap-8">
-<div class="md:col-span-2 bg-surface-container-lowest p-10 rounded-xl shadow-sm hover:shadow-xl transition-all duration-500 group">
-<div class="flex flex-col md:flex-row gap-8 items-start">
-<div class="bg-primary/5 p-4 rounded-xl text-primary group-hover:bg-primary group-hover:text-white transition-all duration-300">
-<span class="material-symbols-outlined text-4xl" data-icon="health_and_safety">health_and_safety</span>
-</div>
-<div>
-<h3 class="font-headline text-2xl font-bold mb-4">Venta de seguros de salud</h3>
-<p class="text-on-surface-variant leading-relaxed">Expertos en la colocación de pólizas de salud con un enfoque consultivo que prioriza el bienestar del cliente y la rentabilidad del socio.</p>
-</div>
-</div>
-</div>
-<div class="bg-surface-container-lowest p-10 rounded-xl shadow-sm hover:shadow-xl transition-all duration-500 group">
-<div class="bg-primary/5 p-4 rounded-xl text-primary group-hover:bg-primary group-hover:text-white transition-all duration-300 w-fit mb-6">
-<span class="material-symbols-outlined text-4xl" data-icon="support_agent">support_agent</span>
-</div>
-<h3 class="font-headline text-2xl font-bold mb-4">Atención al cliente</h3>
-<p class="text-on-surface-variant">Resolución de dudas y soporte multicanal con los más altos estándares de calidad NPS.</p>
-</div>
-<div class="bg-surface-container-lowest p-10 rounded-xl shadow-sm hover:shadow-xl transition-all duration-500 group">
-<div class="bg-primary/5 p-4 rounded-xl text-primary group-hover:bg-primary group-hover:text-white transition-all duration-300 w-fit mb-6">
-<span class="material-symbols-outlined text-4xl" data-icon="query_stats">query_stats</span>
-</div>
-<h3 class="font-headline text-2xl font-bold mb-4">Soporte comercial</h3>
-<p class="text-on-surface-variant">Inteligencia de ventas y gestión de leads para maximizar el embudo de conversión de tu empresa.</p>
-</div>
-<div class="md:col-span-2 bg-surface-container-lowest p-10 rounded-xl shadow-sm hover:shadow-xl transition-all duration-500 group overflow-hidden relative">
-<div class="relative z-10">
-<h3 class="font-headline text-2xl font-bold mb-4">Outsourcing call center</h3>
-<p class="text-on-surface-variant max-w-md">Infraestructura tecnológica y humana de primer nivel. Delegue su operación de contacto en expertos que cuidan su marca como propia.</p>
-</div>
-<span class="material-symbols-outlined absolute -right-4 -bottom-4 text-[12rem] text-primary/5 -rotate-12" data-icon="hub">hub</span>
-</div>
-</div>
-</div>
+  <div class="max-w-7xl mx-auto px-6 lg:px-8">
+    <div class="text-center mb-20 fade-up">
+      <span class="font-body text-primary font-bold text-xs uppercase tracking-widest block mb-4">Lo que hacemos</span>
+      <h2 class="font-headline text-4xl md:text-5xl font-bold text-on-surface tracking-tight">Nuestros Servicios<br/>Especializados</h2>
+    </div>
+    <div class="grid grid-cols-1 md:grid-cols-3 gap-6">
+      <div class="md:col-span-2 card-lift bg-white p-10 rounded-2xl shadow-sm border border-outline-variant/20 group fade-up">
+        <div class="flex flex-col md:flex-row gap-8 items-start">
+          <div class="shrink-0 bg-primary/5 p-5 rounded-2xl text-primary group-hover:bg-primary group-hover:text-white transition-all duration-300">
+            <span class="material-symbols-outlined text-4xl" style="font-variation-settings:'FILL' 1;">health_and_safety</span>
+          </div>
+          <div>
+            <h3 class="font-headline text-2xl font-bold mb-3">Venta de seguros de salud</h3>
+            <p class="text-on-surface-variant leading-relaxed">Expertos en la colocación de pólizas de salud con un enfoque consultivo que prioriza el bienestar del cliente y la rentabilidad del socio.</p>
+          </div>
+        </div>
+      </div>
+      <div class="card-lift bg-white p-10 rounded-2xl shadow-sm border border-outline-variant/20 group fade-up" style="transition-delay:0.1s">
+        <div class="bg-primary/5 p-4 rounded-xl text-primary group-hover:bg-primary group-hover:text-white transition-all duration-300 w-fit mb-6">
+          <span class="material-symbols-outlined text-4xl" style="font-variation-settings:'FILL' 1;">support_agent</span>
+        </div>
+        <h3 class="font-headline text-2xl font-bold mb-3">Atención al cliente</h3>
+        <p class="text-on-surface-variant">Resolución de dudas y soporte multicanal con los más altos estándares de calidad NPS.</p>
+      </div>
+      <div class="card-lift bg-white p-10 rounded-2xl shadow-sm border border-outline-variant/20 group fade-up" style="transition-delay:0.15s">
+        <div class="bg-primary/5 p-4 rounded-xl text-primary group-hover:bg-primary group-hover:text-white transition-all duration-300 w-fit mb-6">
+          <span class="material-symbols-outlined text-4xl" style="font-variation-settings:'FILL' 1;">query_stats</span>
+        </div>
+        <h3 class="font-headline text-2xl font-bold mb-3">Soporte comercial</h3>
+        <p class="text-on-surface-variant">Inteligencia de ventas y gestión de leads para maximizar el embudo de conversión.</p>
+      </div>
+      <div class="md:col-span-2 card-lift bg-gradient-to-br from-primary to-[#004c6c] p-10 rounded-2xl shadow-sm overflow-hidden relative fade-up" style="transition-delay:0.2s">
+        <div class="relative z-10">
+          <h3 class="font-headline text-2xl font-bold text-white mb-3">Outsourcing call center</h3>
+          <p class="text-white/70 max-w-md">Infraestructura tecnológica y humana de primer nivel. Delegue su operación de contacto en expertos que cuidan su marca como propia.</p>
+        </div>
+        <span class="material-symbols-outlined absolute -right-4 -bottom-4 text-[11rem] text-white/5 -rotate-12">hub</span>
+      </div>
+    </div>
+  </div>
 </section>
-<!-- Why TrustMarket -->
-<section class="py-24 bg-surface-container-lowest">
-<div class="max-w-7xl mx-auto px-8">
-<div class="flex flex-col md:flex-row items-center gap-16">
-<div class="w-full md:w-1/2">
-<img class="rounded-xl shadow-2xl" data-alt="Professional office meeting with diverse executives discussing metrics around a modern digital screen showing charts" src="https://lh3.googleusercontent.com/aida-public/AB6AXuDn0xZsrYHIeaWefK81AGgZFU-K-uIaVUpw3d8P2aVxZXRjT0r_dmC2fuKHRfjsPjb5QVCV_iXCpNl7CmK7itd54TJM7z8fb6w9irG6pBy6LdbZnmCfqn-ln6XD_8A4R25Vz9TlAGUeN22fsMYO7Ol5aiVMyWdjH9X7dR5S_Ll8xMKDRbloBXNHvpSuZXegWe_9tGIYVeu2Z9MfXMt9fUnIFQJbdVkHPriZmbBweLNYLbDgUrSrdNi4abVh2W6EWOANEu9JHffxwZ7H"/>
-</div>
-<div class="w-full md:w-1/2">
-<span class="font-label text-primary font-bold text-xs uppercase tracking-widest block mb-4">Valores</span>
-<h2 class="font-headline text-4xl md:text-5xl font-extrabold text-on-surface mb-12 tracking-tight">Por qué confiar en <span class="text-primary">nosotros</span></h2>
-<div class="grid gap-8">
-<!-- Item 1: Featured -->
-<div class="group relative p-8 rounded-2xl bg-white border border-outline-variant/30 shadow-sm hover:shadow-xl transition-all duration-500">
-<div class="absolute top-0 right-0 p-6 opacity-5 group-hover:opacity-10 transition-opacity">
-<span class="text-6-xl font-black font-headline">01</span>
-</div>
-<div class="flex items-start gap-6 relative z-10">
-<div class="shrink-0 w-14 h-14 flex items-center justify-center rounded-xl bg-primary/5 text-primary border border-primary/10 group-hover:bg-primary group-hover:text-white transition-all duration-300">
-<span class="material-symbols-outlined text-3xl">history_edu</span>
-</div>
-<div>
-<h4 class="font-headline font-extrabold text-xl mb-3 text-on-surface">Experiencia</h4>
-<p class="text-on-surface-variant leading-relaxed text-sm md:text-base">Décadas acumuladas liderando campañas exitosas en el sector asegurador, garantizando solidez en cada proceso.</p>
-</div>
-</div>
-</div>
-<!-- Item 2 & 3: Secondary Grid -->
-<div class="grid md:grid-cols-2 gap-6">
-<div class="group p-6 rounded-2xl border border-outline-variant/20 hover:border-primary/30 transition-all">
-<div class="w-10 h-10 flex items-center justify-center rounded-lg bg-primary/5 text-primary mb-5 group-hover:scale-110 transition-transform">
-<span class="material-symbols-outlined">shield_with_heart</span>
-</div>
-<h4 class="font-headline font-bold text-lg mb-2 text-on-surface">Confianza</h4>
-<p class="text-on-surface-variant text-sm leading-relaxed">Procesos transparentes y auditorías constantes para la seguridad absoluta de los datos.</p>
-</div>
-<div class="group p-6 rounded-2xl border border-outline-variant/20 hover:border-primary/30 transition-all">
-<div class="w-10 h-10 flex items-center justify-center rounded-lg bg-primary/5 text-primary mb-5 group-hover:scale-110 transition-transform">
-<span class="material-symbols-outlined">insights</span>
-</div>
-<h4 class="font-headline font-bold text-lg mb-2 text-on-surface">Resultados medibles</h4>
-<p class="text-on-surface-variant text-sm leading-relaxed">KPIs en tiempo real que demuestran el retorno de inversión y la eficiencia de su marca.</p>
-</div>
-</div>
-</div>
-</div>
-</div>
-</div>
+
+<!-- HOW IT WORKS -->
+<section class="py-24 bg-white" id="como-funciona">
+  <div class="max-w-7xl mx-auto px-6 lg:px-8">
+    <div class="text-center mb-20 fade-up">
+      <span class="font-body text-primary font-bold text-xs uppercase tracking-widest block mb-4">El proceso</span>
+      <h2 class="font-headline text-4xl md:text-5xl font-bold text-on-surface tracking-tight">¿Cómo es unirse<br/>al equipo?</h2>
+      <p class="text-on-surface-variant mt-4 max-w-xl mx-auto">En solo 4 pasos sencillos puedes estar trabajando con nosotros. Sin complicaciones.</p>
+    </div>
+    <div class="grid grid-cols-1 md:grid-cols-4 gap-8">
+      <div class="relative text-center fade-up">
+        <div class="hidden md:block step-line"></div>
+        <div class="w-14 h-14 bg-primary text-white rounded-2xl flex items-center justify-center font-headline font-extrabold text-xl mx-auto mb-5 shadow-lg shadow-primary/30">1</div>
+        <span class="material-symbols-outlined text-primary text-4xl mb-3 block" style="font-variation-settings:'FILL' 1;">edit_document</span>
+        <h4 class="font-headline font-bold text-lg mb-2">Postulas online</h4>
+        <p class="text-on-surface-variant text-sm leading-relaxed">Llenas el formulario con tus datos y adjuntas tu CV en PDF.</p>
+      </div>
+      <div class="relative text-center fade-up" style="transition-delay:0.1s">
+        <div class="hidden md:block step-line"></div>
+        <div class="w-14 h-14 bg-primary/80 text-white rounded-2xl flex items-center justify-center font-headline font-extrabold text-xl mx-auto mb-5 shadow-lg shadow-primary/20">2</div>
+        <span class="material-symbols-outlined text-primary text-4xl mb-3 block" style="font-variation-settings:'FILL' 1;">phone_in_talk</span>
+        <h4 class="font-headline font-bold text-lg mb-2">Te contactamos</h4>
+        <p class="text-on-surface-variant text-sm leading-relaxed">Nuestro equipo te llama en menos de 48 horas.</p>
+      </div>
+      <div class="relative text-center fade-up" style="transition-delay:0.2s">
+        <div class="hidden md:block step-line"></div>
+        <div class="w-14 h-14 bg-primary/60 text-white rounded-2xl flex items-center justify-center font-headline font-extrabold text-xl mx-auto mb-5 shadow-lg shadow-primary/15">3</div>
+        <span class="material-symbols-outlined text-primary text-4xl mb-3 block" style="font-variation-settings:'FILL' 1;">groups</span>
+        <h4 class="font-headline font-bold text-lg mb-2">Entrevista breve</h4>
+        <p class="text-on-surface-variant text-sm leading-relaxed">Una conversación relajada para conocerte mejor. Sin presiones.</p>
+      </div>
+      <div class="relative text-center fade-up" style="transition-delay:0.3s">
+        <div class="w-14 h-14 bg-primary/40 text-white rounded-2xl flex items-center justify-center font-headline font-extrabold text-xl mx-auto mb-5 shadow-lg shadow-primary/10">4</div>
+        <span class="material-symbols-outlined text-primary text-4xl mb-3 block" style="font-variation-settings:'FILL' 1;">celebration</span>
+        <h4 class="font-headline font-bold text-lg mb-2">¡Empiezas!</h4>
+        <p class="text-on-surface-variant text-sm leading-relaxed">Capacitación pagada desde el primer día. Bienvenido al equipo.</p>
+      </div>
+    </div>
+    <div class="text-center mt-14 fade-up">
+      <a href="#trabaja-con-nosotros" class="btn-sheen inline-flex items-center gap-2 bg-primary text-white px-10 py-4 rounded-xl font-headline font-bold text-lg hover:shadow-xl hover:shadow-primary/30 transition-all duration-300">
+        Quiero postular <span class="material-symbols-outlined">arrow_forward</span>
+      </a>
+    </div>
+  </div>
 </section>
-<!-- Trabaja Con Nosotros (Conversion Section) -->
+
+<!-- WHY TRUSTMARKET -->
+<section class="py-24 bg-surface-container-low">
+  <div class="max-w-7xl mx-auto px-6 lg:px-8">
+    <div class="flex flex-col md:flex-row items-center gap-16">
+      <div class="w-full md:w-1/2 fade-up">
+        <div class="relative rounded-2xl overflow-hidden shadow-2xl">
+          <img class="w-full object-cover" src="{% static 'img/foto2.png' %}" alt="Equipo TrustMarket" onerror="this.src='https://images.unsplash.com/photo-1556761175-4b46a572b786?w=800'"/>
+          <div class="absolute bottom-6 left-6 bg-white/90 backdrop-blur-sm px-4 py-3 rounded-xl shadow-lg">
+            <div class="flex items-center gap-2">
+              <span class="material-symbols-outlined text-yellow-500 text-xl" style="font-variation-settings:'FILL' 1;">star</span>
+              <div>
+                <div class="font-headline font-bold text-on-surface text-sm">Mejor ambiente laboral</div>
+                <div class="text-on-surface-variant text-xs">Certificado 2024</div>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+      <div class="w-full md:w-1/2 fade-up" style="transition-delay:0.15s">
+        <span class="font-body text-primary font-bold text-xs uppercase tracking-widest block mb-4">Valores</span>
+        <h2 class="font-headline text-4xl md:text-5xl font-extrabold text-on-surface mb-10 tracking-tight">Por qué confiar en <span class="text-primary">nosotros</span></h2>
+        <div class="grid gap-5">
+          <div class="group p-7 rounded-2xl bg-white border border-outline-variant/30 shadow-sm card-lift">
+            <div class="flex items-start gap-5">
+              <div class="shrink-0 w-12 h-12 flex items-center justify-center rounded-xl bg-primary/5 text-primary group-hover:bg-primary group-hover:text-white transition-all duration-300">
+                <span class="material-symbols-outlined text-2xl" style="font-variation-settings:'FILL' 1;">history_edu</span>
+              </div>
+              <div>
+                <h4 class="font-headline font-extrabold text-lg mb-1">Experiencia real</h4>
+                <p class="text-on-surface-variant text-sm leading-relaxed">Décadas liderando campañas en el sector asegurador, con solidez en cada proceso.</p>
+              </div>
+            </div>
+          </div>
+          <div class="grid md:grid-cols-2 gap-5">
+            <div class="group p-6 rounded-2xl border border-outline-variant/20 bg-white hover:border-primary/30 transition-all card-lift">
+              <div class="w-10 h-10 flex items-center justify-center rounded-lg bg-primary/5 text-primary mb-4 group-hover:scale-110 transition-transform">
+                <span class="material-symbols-outlined" style="font-variation-settings:'FILL' 1;">shield_with_heart</span>
+              </div>
+              <h4 class="font-headline font-bold text-base mb-2">Confianza</h4>
+              <p class="text-on-surface-variant text-sm">Procesos transparentes y seguridad absoluta de datos.</p>
+            </div>
+            <div class="group p-6 rounded-2xl border border-outline-variant/20 bg-white hover:border-primary/30 transition-all card-lift">
+              <div class="w-10 h-10 flex items-center justify-center rounded-lg bg-primary/5 text-primary mb-4 group-hover:scale-110 transition-transform">
+                <span class="material-symbols-outlined" style="font-variation-settings:'FILL' 1;">insights</span>
+              </div>
+              <h4 class="font-headline font-bold text-base mb-2">Resultados medibles</h4>
+              <p class="text-on-surface-variant text-sm">KPIs en tiempo real que demuestran el retorno real.</p>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- TRABAJA CON NOSOTROS -->
 <section class="py-24 bg-surface-container" id="trabaja-con-nosotros">
-<div class="max-w-7xl mx-auto px-8">
-<div class="bg-surface-container-lowest rounded-xl shadow-2xl overflow-hidden flex flex-col lg:flex-row">
-<!-- Text Content -->
-<div class="lg:w-5/12 p-12 lg:p-16 bg-primary text-white flex flex-col justify-center">
-<h2 class="font-headline text-4xl font-bold mb-6">Únete a nuestro equipo</h2>
-<p class="text-white/80 text-lg mb-8 leading-relaxed">
-                            No solo ofrecemos un empleo, sino una carrera. En TrustMarket valoramos tu talento con las mejores comisiones del mercado, un ambiente laboral excepcional y planes de crecimiento real.
-                        </p>
-<div class="space-y-4">
-<div class="flex items-center gap-3">
-<span class="material-symbols-outlined text-primary-container" data-icon="check_circle" style="font-variation-settings: 'FILL' 1;">check_circle</span>
-<span>Bonos por cumplimiento</span>
-</div>
-<div class="flex items-center gap-3">
-<span class="material-symbols-outlined text-primary-container" data-icon="check_circle" style="font-variation-settings: 'FILL' 1;">check_circle</span>
-<span>Capacitación continua</span>
-</div>
-<div class="flex items-center gap-3">
-<span class="material-symbols-outlined text-primary-container" data-icon="check_circle" style="font-variation-settings: 'FILL' 1;">check_circle</span>
-<span>Crecimiento interno rápido</span>
-</div>
-</div>
-</div>
-<!-- Recruitment Form -->
-<div class="lg:w-7/12 p-12 lg:p-16">
-<form method="post" action="{% url 'core:home' %}#trabaja-con-nosotros" enctype="multipart/form-data" class="space-y-6">
-{% csrf_token %}
+  <div class="max-w-7xl mx-auto px-6 lg:px-8">
+    <div class="text-center mb-16 fade-up">
+      <span class="font-body text-primary font-bold text-xs uppercase tracking-widest block mb-4">Únete al equipo</span>
+      <h2 class="font-headline text-4xl md:text-5xl font-bold text-on-surface tracking-tight">¿Listo para crecer<br/>con nosotros?</h2>
+    </div>
+    <div class="bg-white rounded-3xl shadow-2xl overflow-hidden flex flex-col lg:flex-row fade-up">
+      <div class="lg:w-5/12 p-12 lg:p-16 bg-gradient-to-br from-primary to-[#003d57] text-white flex flex-col justify-between relative overflow-hidden">
+        <div class="absolute top-0 right-0 w-64 h-64 rounded-full bg-white/5 -translate-y-1/2 translate-x-1/2"></div>
+        <div class="absolute bottom-0 left-0 w-48 h-48 rounded-full bg-white/5 translate-y-1/2 -translate-x-1/2"></div>
+        <div class="relative z-10">
+          <h3 class="font-headline text-3xl font-bold mb-4">Más que un empleo,<br/>una carrera</h3>
+          <p class="text-white/75 text-base mb-10 leading-relaxed">Valoramos tu talento con las mejores comisiones del mercado, un ambiente excepcional y planes de crecimiento real.</p>
+          <div class="space-y-5">
+            <div class="flex items-center gap-4">
+              <div class="w-10 h-10 rounded-xl bg-white/10 flex items-center justify-center shrink-0">
+                <span class="material-symbols-outlined text-primary-container text-xl" style="font-variation-settings:'FILL' 1;">payments</span>
+              </div>
+              <div><div class="font-bold text-sm">Bonos por cumplimiento</div><div class="text-white/60 text-xs">Las mejores comisiones del mercado</div></div>
+            </div>
+            <div class="flex items-center gap-4">
+              <div class="w-10 h-10 rounded-xl bg-white/10 flex items-center justify-center shrink-0">
+                <span class="material-symbols-outlined text-primary-container text-xl" style="font-variation-settings:'FILL' 1;">school</span>
+              </div>
+              <div><div class="font-bold text-sm">Capacitación continua pagada</div><div class="text-white/60 text-xs">Desde el primer día, sin costo</div></div>
+            </div>
+            <div class="flex items-center gap-4">
+              <div class="w-10 h-10 rounded-xl bg-white/10 flex items-center justify-center shrink-0">
+                <span class="material-symbols-outlined text-primary-container text-xl" style="font-variation-settings:'FILL' 1;">trending_up</span>
+              </div>
+              <div><div class="font-bold text-sm">Crecimiento interno rápido</div><div class="text-white/60 text-xs">Muchos líderes empezaron aquí</div></div>
+            </div>
+            <div class="flex items-center gap-4">
+              <div class="w-10 h-10 rounded-xl bg-white/10 flex items-center justify-center shrink-0">
+                <span class="material-symbols-outlined text-primary-container text-xl" style="font-variation-settings:'FILL' 1;">schedule</span>
+              </div>
+              <div><div class="font-bold text-sm">Horarios flexibles</div><div class="text-white/60 text-xs">Distintos turnos disponibles</div></div>
+            </div>
+          </div>
+        </div>
+        <div class="relative z-10 mt-10 pt-8 border-t border-white/10">
+          <div class="flex items-center gap-3">
+            <span class="w-2.5 h-2.5 rounded-full bg-green-400 pulse-badge"></span>
+            <span class="text-white/70 text-sm">Respondemos en menos de <strong class="text-white">48 horas</strong></span>
+          </div>
+        </div>
+      </div>
+      <div class="lg:w-7/12 p-12 lg:p-16">
+        <h3 class="font-headline text-2xl font-bold text-on-surface mb-1">Completa tu postulación</h3>
+        <p class="text-on-surface-variant text-sm mb-8">Todos los campos son obligatorios.</p>
+        <form method="post" action="{% url 'core:home' %}#trabaja-con-nosotros" enctype="multipart/form-data" class="space-y-5">
+          {% csrf_token %}
+          {% if messages %}
+          <div class="mb-2">
+            {% for message in messages %}
+            <div class="p-4 text-sm {% if message.tags == 'error' %}text-red-800 bg-red-50 border border-red-200{% else %}text-green-800 bg-green-50 border border-green-200{% endif %} rounded-xl font-medium flex items-center gap-2">
+              <span class="material-symbols-outlined text-lg" style="font-variation-settings:'FILL' 1;">{% if message.tags == 'error' %}error{% else %}check_circle{% endif %}</span>
+              {{ message }}
+            </div>
+            {% endfor %}
+          </div>
+          {% endif %}
+          <div class="grid grid-cols-1 md:grid-cols-2 gap-5">
+            <div>
+              <label class="block text-xs font-bold mb-1.5 text-on-surface uppercase tracking-wide">Nombre completo *</label>
+              {{ form.full_name }}
+              {% if form.full_name.errors %}<p class="text-red-500 text-xs mt-1">{{ form.full_name.errors.0 }}</p>{% endif %}
+            </div>
+            <div>
+              <label class="block text-xs font-bold mb-1.5 text-on-surface uppercase tracking-wide">Correo electrónico *</label>
+              {{ form.email }}
+              {% if form.email.errors %}<p class="text-red-500 text-xs mt-1">{{ form.email.errors.0 }}</p>{% endif %}
+            </div>
+            <div>
+              <label class="block text-xs font-bold mb-1.5 text-on-surface uppercase tracking-wide">Teléfono *</label>
+              {{ form.phone }}
+              {% if form.phone.errors %}<p class="text-red-500 text-xs mt-1">{{ form.phone.errors.0 }}</p>{% endif %}
+            </div>
+            <div>
+              <label class="block text-xs font-bold mb-1.5 text-on-surface uppercase tracking-wide">Experiencia (años) *</label>
+              {{ form.experience }}
+              {% if form.experience.errors %}<p class="text-red-500 text-xs mt-1">{{ form.experience.errors.0 }}</p>{% endif %}
+            </div>
+          </div>
+          <div>
+            <label class="block text-xs font-bold mb-1.5 text-on-surface uppercase tracking-wide">Adjuntar CV (PDF) *</label>
+            <div class="relative w-full">
+              {{ form.cv }}
+              {% if form.cv.errors %}<p class="text-red-500 text-xs mt-1">{{ form.cv.errors.0 }}</p>{% endif %}
+              <label class="flex items-center justify-center gap-3 w-full bg-surface-container border-2 border-dashed border-outline-variant rounded-xl p-8 cursor-pointer hover:border-primary-container hover:bg-primary-container/5 transition-all" for="cv-upload">
+                <span class="material-symbols-outlined text-primary text-3xl" style="font-variation-settings:'FILL' 1;">cloud_upload</span>
+                <div>
+                  <span id="file-name-display" class="text-on-surface-variant font-medium text-sm block">Haz clic para subir o arrastra tu archivo PDF</span>
+                  <span class="text-on-surface-variant/60 text-xs">Solo archivos PDF · Máx. 5MB</span>
+                </div>
+              </label>
+            </div>
+          </div>
+          <button class="w-full btn-sheen bg-primary-container text-on-primary-container font-headline font-bold py-5 rounded-xl text-lg hover:shadow-xl hover:shadow-primary-container/30 transition-all duration-300 flex items-center justify-center gap-2" type="submit">
+            <span class="material-symbols-outlined" style="font-variation-settings:'FILL' 1;">send</span>
+            Enviar postulación
+          </button>
+          <p class="text-center text-on-surface-variant text-xs">Al enviar, aceptas que TrustMarket almacene tu información para el proceso de reclutamiento.</p>
+        </form>
+      </div>
+    </div>
+  </div>
+</section>
 
-{% if messages %}
-    <div class="mb-6">
-    {% for message in messages %}
-    <div class="p-4 mb-4 text-sm {% if message.tags == 'error' %}text-red-800 bg-red-100{% else %}text-green-800 bg-green-100{% endif %} rounded-lg font-medium">
-      {{ message }}
+<!-- TESTIMONIALS -->
+<section class="py-24 bg-white overflow-hidden">
+  <div class="max-w-7xl mx-auto px-6 lg:px-8">
+    <div class="text-center mb-16 fade-up">
+      <span class="font-body text-primary font-bold text-xs uppercase tracking-widest block mb-4">Nuestra Gente</span>
+      <h2 class="font-headline text-4xl font-bold text-on-surface tracking-tight">Voces de TrustMarket</h2>
     </div>
-    {% endfor %}
+    <div class="grid grid-cols-1 md:grid-cols-3 gap-8">
+      <div class="card-lift bg-surface-container-low p-8 rounded-2xl border border-outline-variant/10 fade-up">
+        <div class="stars mb-4 text-lg">★★★★★</div>
+        <p class="text-on-surface-variant italic leading-relaxed mb-6 text-sm">"Empecé sin experiencia y hoy lidero un equipo de 10 personas. La capacitación en TrustMarket es de otro nivel."</p>
+        <div class="flex items-center gap-3">
+          <div class="w-12 h-12 rounded-full bg-gradient-to-br from-primary to-primary-container flex items-center justify-center text-white font-headline font-bold text-lg shrink-0">V</div>
+          <div><h4 class="font-bold text-sm">Valeria Rojas</h4><p class="text-primary text-xs">Agente Senior de Ventas</p></div>
+        </div>
+      </div>
+      <div class="card-lift bg-surface-container-low p-8 rounded-2xl border border-outline-variant/10 fade-up" style="transition-delay:0.1s">
+        <div class="stars mb-4 text-lg">★★★★★</div>
+        <p class="text-on-surface-variant italic leading-relaxed mb-6 text-sm">"Lo que más valoro es la transparencia. Las comisiones son claras y siempre se pagan a tiempo. Hay confianza real."</p>
+        <div class="flex items-center gap-3">
+          <div class="w-12 h-12 rounded-full bg-gradient-to-br from-[#004c6c] to-primary flex items-center justify-center text-white font-headline font-bold text-lg shrink-0">M</div>
+          <div><h4 class="font-bold text-sm">Mateo Silva</h4><p class="text-primary text-xs">Soporte Técnico</p></div>
+        </div>
+      </div>
+      <div class="card-lift bg-surface-container-low p-8 rounded-2xl border border-outline-variant/10 fade-up" style="transition-delay:0.2s">
+        <div class="stars mb-4 text-lg">★★★★★</div>
+        <p class="text-on-surface-variant italic leading-relaxed mb-6 text-sm">"El ambiente laboral es increíble. No somos solo números, somos arquitectos de la confianza de nuestros clientes."</p>
+        <div class="flex items-center gap-3">
+          <div class="w-12 h-12 rounded-full bg-gradient-to-br from-[#003d57] to-primary flex items-center justify-center text-white font-headline font-bold text-lg shrink-0">E</div>
+          <div><h4 class="font-bold text-sm">Elena Castillo</h4><p class="text-primary text-xs">Supervisora Comercial</p></div>
+        </div>
+      </div>
     </div>
-{% endif %}
+  </div>
+</section>
 
-<div class="grid grid-cols-1 md:grid-cols-2 gap-6">
-    <div>
-        <label class="block text-sm font-bold mb-2 text-on-surface">Nombre completo</label>
-        {{ form.full_name }}
-        {% if form.full_name.errors %}<p class="text-red-500 text-xs mt-1">{{ form.full_name.errors.0 }}</p>{% endif %}
+<!-- CONTACT -->
+<section class="py-24 bg-surface-container-low" id="contacto">
+  <div class="max-w-7xl mx-auto px-6 lg:px-8">
+    <div class="grid grid-cols-1 md:grid-cols-2 gap-16 items-center">
+      <div class="fade-up">
+        <span class="font-body text-primary font-bold text-xs uppercase tracking-widest block mb-4">Contacto</span>
+        <h2 class="font-headline text-5xl font-extrabold mb-6 tracking-tight">Hablemos de<br/>tu futuro</h2>
+        <p class="text-on-surface-variant text-lg mb-10">Ya sea que busques una oportunidad laboral o un aliado comercial, estamos listos para escucharte.</p>
+        <div class="space-y-4">
+          <a class="flex items-center gap-5 group p-4 rounded-2xl hover:bg-primary/5 transition-all" href="mailto:reclutamiento@trustmarket.cl">
+            <div class="w-14 h-14 flex items-center justify-center rounded-2xl bg-primary/5 text-primary group-hover:bg-primary group-hover:text-white transition-all shrink-0">
+              <span class="material-symbols-outlined text-2xl" style="font-variation-settings:'FILL' 1;">mail</span>
+            </div>
+            <div>
+              <div class="text-xs text-on-surface-variant uppercase tracking-widest font-bold mb-0.5">Correo</div>
+              <span class="text-base font-medium text-on-surface">reclutamiento@trustmarket.cl</span>
+            </div>
+          </a>
+          <!-- BOTÓN WHATSAPP ARREGLADO: reemplaza 56900000000 con el número real -->
+          <a class="whatsapp-btn flex items-center gap-5 p-4 rounded-2xl text-white" href="https://wa.me/56900000000?text=Hola%20TrustMarket%2C%20me%20interesa%20postular" target="_blank" rel="noopener">
+            <div class="w-14 h-14 flex items-center justify-center rounded-2xl bg-white/20 shrink-0">
+              <svg class="w-7 h-7 fill-white" viewBox="0 0 24 24"><path d="M17.472 14.382c-.297-.149-1.758-.867-2.03-.967-.273-.099-.471-.148-.67.15-.197.297-.767.966-.94 1.164-.173.199-.347.223-.644.075-.297-.15-1.255-.463-2.39-1.475-.883-.788-1.48-1.761-1.653-2.059-.173-.297-.018-.458.13-.606.134-.133.298-.347.446-.52.149-.174.198-.298.298-.497.099-.198.05-.371-.025-.52-.075-.149-.669-1.612-.916-2.207-.242-.579-.487-.5-.669-.51-.173-.008-.371-.01-.57-.01-.198 0-.52.074-.792.372-.272.297-1.04 1.016-1.04 2.479 0 1.462 1.065 2.875 1.213 3.074.149.198 2.096 3.2 5.077 4.487.709.306 1.262.489 1.694.625.712.227 1.36.195 1.871.118.571-.085 1.758-.719 2.006-1.413.248-.694.248-1.289.173-1.413-.074-.124-.272-.198-.57-.347m-5.421 7.403h-.004a9.87 9.87 0 01-5.031-1.378l-.361-.214-3.741.982.998-3.648-.235-.374a9.86 9.86 0 01-1.51-5.26c.001-5.45 4.436-9.884 9.888-9.884 2.64 0 5.122 1.03 6.988 2.898a9.825 9.825 0 012.893 6.994c-.003 5.45-4.437 9.884-9.885 9.884m8.413-18.297A11.815 11.815 0 0012.05 0C5.495 0 .16 5.335.157 11.892c0 2.096.547 4.142 1.588 5.945L.057 24l6.305-1.654a11.882 11.882 0 005.683 1.448h.005c6.554 0 11.89-5.335 11.893-11.893a11.821 11.821 0 00-3.48-8.413z"/></svg>
+            </div>
+            <div>
+              <div class="text-xs text-white/70 uppercase tracking-widest font-bold mb-0.5">WhatsApp Directo</div>
+              <span class="text-base font-medium">Escríbenos ahora</span>
+            </div>
+          </a>
+        </div>
+      </div>
+      <div class="fade-up" style="transition-delay:0.15s">
+        <div class="bg-gradient-to-br from-[#001e2e] to-[#004c6c] rounded-3xl p-10 text-white text-center relative overflow-hidden">
+          <div class="absolute top-0 right-0 w-48 h-48 rounded-full bg-white/5 -translate-y-1/2 translate-x-1/2"></div>
+          <div class="absolute bottom-0 left-0 w-36 h-36 rounded-full bg-white/5 translate-y-1/2 -translate-x-1/2"></div>
+          <div class="relative z-10">
+            <span class="material-symbols-outlined text-primary-container text-5xl mb-4 block" style="font-variation-settings:'FILL' 1;">rocket_launch</span>
+            <h3 class="font-headline text-3xl font-bold mb-4">¿Listo para empezar?</h3>
+            <p class="text-white/70 mb-8 leading-relaxed">No esperes más. El mejor momento para dar el siguiente paso en tu carrera es ahora.</p>
+            <a href="#trabaja-con-nosotros" class="btn-sheen inline-flex items-center gap-2 bg-primary-container text-on-primary-container px-8 py-4 rounded-xl font-headline font-bold text-lg hover:shadow-xl transition-all duration-300 w-full justify-center">
+              Postula ahora <span class="material-symbols-outlined">arrow_forward</span>
+            </a>
+          </div>
+        </div>
+      </div>
     </div>
-    <div>
-        <label class="block text-sm font-bold mb-2 text-on-surface">Correo electrónico</label>
-        {{ form.email }}
-        {% if form.email.errors %}<p class="text-red-500 text-xs mt-1">{{ form.email.errors.0 }}</p>{% endif %}
-    </div>
-    <div>
-        <label class="block text-sm font-bold mb-2 text-on-surface">Teléfono</label>
-        {{ form.phone }}
-        {% if form.phone.errors %}<p class="text-red-500 text-xs mt-1">{{ form.phone.errors.0 }}</p>{% endif %}
-    </div>
-    <div>
-        <label class="block text-sm font-bold mb-2 text-on-surface">Experiencia (Años)</label>
-        {{ form.experience }}
-        {% if form.experience.errors %}<p class="text-red-500 text-xs mt-1">{{ form.experience.errors.0 }}</p>{% endif %}
-    </div>
-</div>
+  </div>
+</section>
 
-<div>
-    <label class="block text-sm font-bold mb-2 text-on-surface">Adjuntar CV (PDF)</label>
-    <div class="relative w-full">
-        {{ form.cv }}
-        {% if form.cv.errors %}<p class="text-red-500 text-xs mt-1">{{ form.cv.errors.0 }}</p>{% endif %}
-        <label class="flex items-center justify-center gap-3 w-full bg-surface-container-high border-2 border-dashed border-outline-variant rounded-lg p-8 cursor-pointer hover:border-primary-container hover:bg-primary-container/5 transition-all" for="cv-upload">
-            <span class="material-symbols-outlined text-primary" data-icon="cloud_upload">cloud_upload</span>
-            <span id="file-name-display" class="text-on-surface-variant font-medium">Haz clic para subir o arrastra tu archivo PDF</span>
-        </label>
-    </div>
-</div>
+</main>
 
-<button class="w-full bg-primary-container text-on-primary-container font-bold py-5 rounded-lg text-lg hover:shadow-xl hover:shadow-primary-container/30 transition-all duration-300" type="submit">
-    Enviar postulación
-</button>
+<!-- FOOTER -->
+<footer class="bg-[#0d1b2a] py-16 text-white border-t border-white/5">
+  <div class="max-w-7xl mx-auto px-6 lg:px-8">
+    <div class="grid grid-cols-1 md:grid-cols-4 gap-12 mb-12">
+      <div class="col-span-1">
+        <div class="font-headline text-2xl font-extrabold tracking-tight mb-4">Trust<span class="text-primary-container">Market</span></div>
+        <p class="text-gray-500 text-sm leading-relaxed">Transformando la industria del call center a través de la arquitectura de confianza y la excelencia operativa.</p>
+      </div>
+      <div>
+        <h5 class="text-xs uppercase tracking-widest text-primary-container font-bold mb-6">Empresa</h5>
+        <ul class="space-y-4">
+          <li><a class="text-gray-500 hover:text-primary-container text-sm transition-colors" href="#inicio">Inicio</a></li>
+          <li><a class="text-gray-500 hover:text-primary-container text-sm transition-colors" href="#servicios">Servicios</a></li>
+          <li><a class="text-gray-500 hover:text-primary-container text-sm transition-colors" href="#como-funciona">¿Cómo funciona?</a></li>
+          <li><a class="text-gray-500 hover:text-primary-container text-sm transition-colors" href="#trabaja-con-nosotros">Trabaja con nosotros</a></li>
+        </ul>
+      </div>
+      <div>
+        <h5 class="text-xs uppercase tracking-widest text-primary-container font-bold mb-6">Legal</h5>
+        <ul class="space-y-4">
+          <li><a class="text-gray-500 hover:text-primary-container text-sm transition-colors" href="#">Privacidad</a></li>
+          <li><a class="text-gray-500 hover:text-primary-container text-sm transition-colors" href="#">Términos</a></li>
+          <li><a class="text-gray-500 hover:text-primary-container text-sm transition-colors" href="#">Soporte</a></li>
+        </ul>
+      </div>
+      <div>
+        <h5 class="text-xs uppercase tracking-widest text-primary-container font-bold mb-6">Redes</h5>
+        <div class="flex gap-3 mb-6">
+          <a class="w-10 h-10 flex items-center justify-center rounded-xl bg-white/5 hover:bg-primary-container transition-all text-gray-400 hover:text-white" href="#" aria-label="LinkedIn">
+            <svg class="w-4 h-4 fill-current" viewBox="0 0 24 24"><path d="M20.447 20.452h-3.554v-5.569c0-1.328-.027-3.037-1.852-3.037-1.853 0-2.136 1.445-2.136 2.939v5.667H9.351V9h3.414v1.561h.046c.477-.9 1.637-1.85 3.37-1.85 3.601 0 4.267 2.37 4.267 5.455v6.286zM5.337 7.433a2.062 2.062 0 01-2.063-2.065 2.064 2.064 0 112.063 2.065zm1.782 13.019H3.555V9h3.564v11.452zM22.225 0H1.771C.792 0 0 .774 0 1.729v20.542C0 23.227.792 24 1.771 24h20.451C23.2 24 24 23.227 24 22.271V1.729C24 .774 23.2 0 22.222 0h.003z"/></svg>
+          </a>
+          <a class="w-10 h-10 flex items-center justify-center rounded-xl bg-white/5 hover:bg-primary-container transition-all text-gray-400 hover:text-white" href="#" aria-label="Instagram">
+            <svg class="w-4 h-4 fill-current" viewBox="0 0 24 24"><path d="M12 2.163c3.204 0 3.584.012 4.85.07 3.252.148 4.771 1.691 4.919 4.919.058 1.265.069 1.645.069 4.849 0 3.205-.012 3.584-.069 4.849-.149 3.225-1.664 4.771-4.919 4.919-1.266.058-1.644.07-4.85.07-3.204 0-3.584-.012-4.849-.07-3.26-.149-4.771-1.699-4.919-4.92-.058-1.265-.07-1.644-.07-4.849 0-3.204.013-3.583.07-4.849.149-3.227 1.664-4.771 4.919-4.919 1.266-.057 1.645-.069 4.849-.069zM12 0C8.741 0 8.333.014 7.053.072 2.695.272.273 2.69.073 7.052.014 8.333 0 8.741 0 12c0 3.259.014 3.668.072 4.948.2 4.358 2.618 6.78 6.98 6.98C8.333 23.986 8.741 24 12 24c3.259 0 3.668-.014 4.948-.072 4.354-.2 6.782-2.618 6.979-6.98.059-1.28.073-1.689.073-4.948 0-3.259-.014-3.667-.072-4.947-.196-4.354-2.617-6.78-6.979-6.98C15.668.014 15.259 0 12 0zm0 5.838a6.162 6.162 0 100 12.324 6.162 6.162 0 000-12.324zM12 16a4 4 0 110-8 4 4 0 010 8zm6.406-11.845a1.44 1.44 0 100 2.881 1.44 1.44 0 000-2.881z"/></svg>
+          </a>
+        </div>
+        <div class="text-xs text-gray-500 uppercase tracking-widest mb-2">Respuesta rápida</div>
+        <a href="https://wa.me/56900000000" target="_blank" class="inline-flex items-center gap-2 text-[#25D366] text-sm font-medium hover:underline">
+          <span class="w-2 h-2 rounded-full bg-[#25D366] pulse-badge"></span>
+          WhatsApp activo
+        </a>
+      </div>
+    </div>
+    <div class="pt-8 border-t border-white/5 flex flex-col md:flex-row justify-between items-center gap-4">
+      <p class="text-gray-600 text-xs uppercase tracking-widest">© 2025 TrustMarket. Architected Trust.</p>
+      <p class="text-gray-700 text-xs">Hecho con ❤️ en Chile</p>
+    </div>
+  </div>
+</footer>
 
 <script>
 document.getElementById('cv-upload').addEventListener('change', function(e) {
-    if (e.target.files.length > 0) {
-        document.getElementById('file-name-display').innerText = e.target.files[0].name;
-    } else {
-        document.getElementById('file-name-display').innerText = 'Haz clic para subir o arrastra tu archivo PDF';
-    }
+  const display = document.getElementById('file-name-display');
+  display.innerText = e.target.files.length > 0 ? '✓ ' + e.target.files[0].name : 'Haz clic para subir o arrastra tu archivo PDF';
 });
+
+function animateCounter(el) {
+  const target = parseInt(el.dataset.target);
+  const step = target / (1800 / 16);
+  let current = 0;
+  const timer = setInterval(() => {
+    current += step;
+    if (current >= target) { current = target; clearInterval(timer); }
+    el.textContent = Math.floor(current).toLocaleString('es-CL') + (target >= 100 ? '+' : '');
+  }, 16);
+}
+
+const observer = new IntersectionObserver((entries) => {
+  entries.forEach(entry => {
+    if (entry.isIntersecting) {
+      entry.target.classList.add('visible');
+      if (entry.target.classList.contains('counter')) { animateCounter(entry.target); observer.unobserve(entry.target); }
+    }
+  });
+}, { threshold: 0.15 });
+document.querySelectorAll('.fade-up, .counter').forEach(el => observer.observe(el));
+
+window.addEventListener('scroll', () => {
+  document.getElementById('hiring-banner').classList.toggle('show', window.scrollY > 300);
+}, { passive: true });
+
+const sections = document.querySelectorAll('section[id]');
+const navLinks = document.querySelectorAll('.nav-link');
+window.addEventListener('scroll', () => {
+  let current = '';
+  sections.forEach(s => { if (window.scrollY >= s.offsetTop - 100) current = s.getAttribute('id'); });
+  navLinks.forEach(l => { l.classList.remove('active'); if (l.getAttribute('href') === '#' + current) l.classList.add('active'); });
+}, { passive: true });
+
+document.querySelectorAll('#mobile-menu a').forEach(l => l.addEventListener('click', () => document.getElementById('mobile-menu').classList.remove('open')));
 </script>
-</form>
-</div>
-</div>
-</div>
-</section>
-<!-- Testimonials -->
-<section class="py-24 bg-surface-container-low overflow-hidden">
-<div class="max-w-7xl mx-auto px-8">
-<div class="text-center mb-20">
-<span class="font-label text-primary font-bold text-xs uppercase tracking-widest block mb-4">Nuestra Gente</span>
-<h2 class="font-headline text-4xl font-bold text-on-surface tracking-tight">Voces de TrustMarket</h2>
-</div>
-<div class="grid grid-cols-1 md:grid-cols-3 gap-8">
-<div class="bg-surface-container-lowest p-8 rounded-xl shadow-sm border border-outline-variant/10">
-<div class="flex items-center gap-4 mb-6">
-<img class="w-16 h-16 rounded-full object-cover" data-alt="Close-up portrait of a smiling professional woman in a modern office setting" src="https://lh3.googleusercontent.com/aida-public/AB6AXuC8pRpWpfnHCL2janq63jyx-MleotpIUSts17PZSTIYk9PI2_VGQRj9UcVBV2lKfbHeDZY0B1jw7udOC10Wmfw_k06nRW3esF6TKH5xfE7N8mbHG4UlPl82cxbsh9W96G3r2B1rMabcl9X57wX8kZAk7jHi-8oncv_by8lRuiWlrWYhMYpMdPW_Ylsu1IZJm39LFRSexgoldxSBOTEHF2ycWCTJ9uPXvoTQWdk7ES9OUNPVHikxr1-8i4K-CYrEQTNXB_X7H5a59ijJ"/>
-<div>
-<h4 class="font-bold">Valeria Rojas</h4>
-<p class="text-primary text-sm">Agente Senior de Ventas</p>
-</div>
-</div>
-<p class="text-on-surface-variant italic leading-relaxed">"Empecé sin experiencia y hoy lidero un equipo de 10 personas. La capacitación en TrustMarket es de otro nivel."</p>
-</div>
-<div class="bg-surface-container-lowest p-8 rounded-xl shadow-sm border border-outline-variant/10">
-<div class="flex items-center gap-4 mb-6">
-<img class="w-16 h-16 rounded-full object-cover" data-alt="Portrait of a professional young man wearing headphones and smiling in an office environment" src="https://lh3.googleusercontent.com/aida-public/AB6AXuBSUoO1MfS7Uct7bPUtQPTBoAsIt528Bah8QxZBOJi2eiHUIDz5SV3OwtqOyR0fiL-kh5aDHMywrWuMAWUy-0TUCoySdmKA9TEAn-gCu5XLKbruI6_BG5GRkvMuvBghurvKhw7-tkm4KExcPYCWjQjoLcZnJz0LsznJa-w0oB6dH7Tasi_XiOgwyMT1HuDD4ye4k15FPwK6QrGG0hYMqILtJ4gaqK_iSPfaoaxVPbqhrau_51tQ0AIM6VEjdZk11P-NZEwflol1iQX8"/>
-<div>
-<h4 class="font-bold">Mateo Silva</h4>
-<p class="text-primary text-sm">Soporte Técnico</p>
-</div>
-</div>
-<p class="text-on-surface-variant italic leading-relaxed">"Lo que más valoro es la transparencia. Aquí las comisiones son claras y siempre se pagan a tiempo. Hay confianza real."</p>
-</div>
-<div class="bg-surface-container-lowest p-8 rounded-xl shadow-sm border border-outline-variant/10">
-<div class="flex items-center gap-4 mb-6">
-<img class="w-16 h-16 rounded-full object-cover" data-alt="Confident business woman smiling at camera with a modern office background" src="https://lh3.googleusercontent.com/aida-public/AB6AXuCmL87fJt5-KaTDz_f0Fj1pRm8Vj_z75T9Bc3cutb_gW4cqtZdK99WNNDad1JJX9gbQ6VNyh6PZmsB8W3gCjVOqynKr4M0ix8vv_Pkt31j0_GF_TnPKtRI-y5fUILQHGRNC1kss2C3XhukyP25hv2JqSFtfWcJaRLN-rVVoSE691CYCnD4IkM3UFFmDzMh3XXs-YpeSsO0xi5wvsIEXgOgRE7uPkkx9_aw4HtDdshLApi2cmPGtu59cgGN4UezrncbHBQEnPUzoUkM3"/>
-<div>
-<h4 class="font-bold">Elena Castillo</h4>
-<p class="text-primary text-sm">Supervisora Comercial</p>
-</div>
-</div>
-<p class="text-on-surface-variant italic leading-relaxed">"El ambiente laboral es increíble. No somos solo números, somos arquitectos de la confianza de nuestros clientes."</p>
-</div>
-</div>
-</div>
-</section>
-<!-- Contact Section -->
-<section class="py-24 bg-surface-container-lowest" id="contacto">
-<div class="max-w-7xl mx-auto px-8">
-<div class="grid grid-cols-1 md:grid-cols-2 gap-16">
-<div>
-<h2 class="font-headline text-5xl font-extrabold mb-8 tracking-tighter">Hablemos de tu futuro</h2>
-<p class="text-on-surface-variant text-lg mb-12">Ya sea que busques una oportunidad laboral o un aliado comercial, estamos listos para escucharte.</p>
-<div class="space-y-8">
-<a class="flex items-center gap-6 group" href="mailto:hola@trustmarket.com">
-<div class="w-14 h-14 flex items-center justify-center rounded-xl bg-primary/5 text-primary group-hover:bg-primary group-hover:text-white transition-all">
-<span class="material-symbols-outlined" data-icon="mail">mail</span>
-</div>
-<span class="text-xl font-medium">hola@trustmarket.com</span>
-</a>
-<a class="flex items-center gap-6 group" href="#">
-<div class="w-14 h-14 flex items-center justify-center rounded-xl bg-[#25D366]/10 text-[#25D366] group-hover:bg-[#25D366] group-hover:text-white transition-all">
-<span class="material-symbols-outlined" data-icon="chat">chat</span>
-</div>
-<span class="text-xl font-medium">WhatsApp Directo</span>
-</a>
-</div>
-</div>
-<div class="h-[400px] rounded-2xl overflow-hidden shadow-xl border border-outline-variant/20">
-<img class="w-full h-full object-cover" data-alt="Modern geometric architectural detail of a glass building reflecting a blue sky" src="https://lh3.googleusercontent.com/aida-public/AB6AXuAgTR2YZT0muoL82kmItb8Gq71C-8DxsYLtkIf6aqwapzrMmpZlFfuqWdhxEJqnAnUvX2PjVZRpD8wqzYd310uj6G4_Pb0g8KfFGMwRyMCUYZVs74WRHCxps9pcxGFiFngcK45qI57rjXTWDhx70dDWw6GZ1Y-XliKp2ts70avokyIsu_peP7GYcllBkV_rIqQ-m1T6U6_QGzLFWqCo-XRK75NV11lS4GS6TZXSSlIckdqdyLfKQ6AIA_0xk7rqvj9WMfNL415ALYzC"/>
-</div>
-</div>
-</div>
-</section>
-</main>
-<!-- Footer -->
-<footer class="bg-[#121416] py-16 text-white border-t border-white/5">
-<div class="max-w-7xl mx-auto px-8">
-<div class="grid grid-cols-1 md:grid-cols-4 gap-12 mb-12">
-<div class="col-span-1 md:col-span-1">
-<div class="text-2xl font-black tracking-tighter mb-6">TrustMarket</div>
-<p class="text-gray-500 text-sm leading-relaxed">Transformando la industria del call center a través de la arquitectura de confianza y la excelencia operativa.</p>
-</div>
-<div>
-<h5 class="font-inter text-xs uppercase tracking-widest text-primary-container font-bold mb-6">Empresa</h5>
-<ul class="space-y-4">
-<li><a class="text-gray-500 hover:text-primary-container text-sm transition-colors uppercase tracking-widest" href="#">Inicio</a></li>
-<li><a class="text-gray-500 hover:text-primary-container text-sm transition-colors uppercase tracking-widest" href="#">Servicios</a></li>
-<li><a class="text-gray-500 hover:text-primary-container text-sm transition-colors uppercase tracking-widest" href="#">Trabaja con nosotros</a></li>
-</ul>
-</div>
-<div>
-<h5 class="font-inter text-xs uppercase tracking-widest text-primary-container font-bold mb-6">Legal</h5>
-<ul class="space-y-4">
-<li><a class="text-gray-500 hover:text-primary-container text-sm transition-colors uppercase tracking-widest" href="#">Privacidad</a></li>
-<li><a class="text-gray-500 hover:text-primary-container text-sm transition-colors uppercase tracking-widest" href="#">Términos</a></li>
-<li><a class="text-gray-500 hover:text-primary-container text-sm transition-colors uppercase tracking-widest" href="#">Soporte</a></li>
-</ul>
-</div>
-<div>
-<h5 class="font-inter text-xs uppercase tracking-widest text-primary-container font-bold mb-6">Redes</h5>
-<div class="flex gap-4">
-<a class="w-10 h-10 flex items-center justify-center rounded-lg bg-white/5 hover:bg-primary-container transition-all" href="#">
-<span class="material-symbols-outlined text-sm">link</span>
-</a>
-<a class="w-10 h-10 flex items-center justify-center rounded-lg bg-white/5 hover:bg-primary-container transition-all" href="#">
-<span class="material-symbols-outlined text-sm">photo_camera</span>
-</a>
-</div>
-</div>
-</div>
-<div class="pt-8 border-t border-white/5 text-center md:text-left">
-<p class="text-gray-500 text-xs uppercase tracking-widest">© 2024 TrustMarket. Architected Trust.</p>
-</div>
-</div>
-</footer>
-</body></html>
+
+</body>
+</html>

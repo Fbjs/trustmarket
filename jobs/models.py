@@ -62,8 +62,8 @@ class StitchApplication(models.Model):
 
     class Meta:
         ordering = ["-created_at"]
-        verbose_name = "Postulación (Stitch)"
-        verbose_name_plural = "Postulaciones (Stitch)"
+        verbose_name = "Postulación"
+        verbose_name_plural = "Postulaciones"
 
     def __str__(self) -> str:
         return f"{self.full_name} - {self.created_at:%d/%m/%Y}"
