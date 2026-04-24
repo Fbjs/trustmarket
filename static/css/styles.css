@@ -91,73 +91,86 @@
   color: #3e4850;
 }
 
-.side-panel .form-group {
-  margin-bottom: 18px;
+/* --- Global Form Groups (used in side panel and standalone pages) --- */
+.form-group {
+  margin-bottom: 20px;
 }
 
-.side-panel .form-group label {
+.form-group label {
   display: block;
   font-size: 0.85rem;
-  font-weight: 600;
-  margin-bottom: 6px;
+  font-weight: 700;
+  margin-bottom: 8px;
   color: #161c21;
+  text-transform: uppercase;
+  letter-spacing: 0.05em;
 }
 
-.side-panel .form-group .required {
+.form-group .required {
   color: #ba1a1a;
 }
 
-/* Checkbox grid in panel */
-.checkbox-grid-panel {
-  display: flex;
-  flex-direction: column;
-  gap: 12px;
-}
-
-.checkbox-grid-panel label {
-  display: flex;
-  flex-direction: row-reverse;
-  justify-content: flex-end;
-  align-items: center;
+.form-group input[type="text"],
+.form-group input[type="tel"],
+.form-group input[type="email"],
+.form-group input[type="number"],
+.form-group select,
+.form-group textarea {
   width: 100%;
-  cursor: pointer;
-  font-weight: 500;
-  font-size: 0.9rem;
-}
-
-.checkbox-grid-panel input[type="checkbox"] {
-  width: 18px;
-  height: 18px;
-  margin-right: 12px;
-  margin-top: 2px;
-  margin-left: 0;
-  flex-shrink: 0;
-  accent-color: #00adef;
-}
-
-/* Panel inputs */
-.side-panel input[type="text"],
-.side-panel input[type="tel"],
-.side-panel input[type="email"],
-.side-panel input[type="number"],
-.side-panel select,
-.side-panel textarea {
-  width: 100%;
-  padding: 10px;
-  border: 1px solid #ccc;
-  border-radius: 6px;
+  padding: 12px 14px;
+  border: 1.5px solid #bdc8d1;
+  border-radius: 10px;
   display: block;
   font-size: 0.95rem;
   outline: none;
-  transition: border-color 0.2s, box-shadow 0.2s;
+  transition: all 0.3s;
+  background: #fdfdfe;
 }
 
-.side-panel input:focus,
-.side-panel select:focus,
-.side-panel textarea:focus {
+.form-group input:focus,
+.form-group select:focus,
+.form-group textarea:focus {
   border-color: #00adef;
-  box-shadow: 0 0 0 3px rgba(0, 173, 239, 0.12);
+  box-shadow: 0 0 0 4px rgba(0, 173, 239, 0.1);
+  background: #fff;
 }
+
+/* Checkbox grids */
+.checkbox-grid, .checkbox-grid-panel {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 12px;
+}
+
+.checkbox-grid label, .checkbox-grid-panel label {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  padding: 10px 16px;
+  border: 1.5px solid #bdc8d1;
+  border-radius: 12px;
+  background: white;
+  color: #3e4850;
+  font-size: 0.9rem;
+  font-weight: 600;
+  cursor: pointer;
+  transition: all 0.3s;
+  text-transform: none;
+  letter-spacing: normal;
+  margin-bottom: 0;
+}
+
+.checkbox-grid label:hover, .checkbox-grid-panel label:hover {
+  border-color: #00adef;
+  background: rgba(0, 173, 239, 0.05);
+}
+
+.checkbox-grid input[type="checkbox"], .checkbox-grid-panel input[type="checkbox"] {
+  width: 18px;
+  height: 18px;
+  accent-color: #00adef;
+}
+
 
 /* Panel overlay */
 .panel-overlay {

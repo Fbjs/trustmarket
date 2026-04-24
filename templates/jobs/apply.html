@@ -1,71 +1,144 @@
 {% extends 'base.html' %}
 {% block title %}Trabaja con Nosotros | TrustMarket{% endblock %}
 {% block content %}
-<section class="section">
-    <div class="container application-shell">
-        <h1>Únete a nuestro Equipo de Ventas</h1>
-        <p class="subtitle">Buscamos talentos para la venta de seguros de salud.</p>
+<section class="min-h-screen py-32 bg-[#050A10] relative overflow-hidden">
+    <!-- Background Glows -->
+    <div class="absolute top-0 right-0 w-[40rem] h-[40rem] bg-primary/10 rounded-full blur-[120px] opacity-40 pointer-events-none"></div>
+    <div class="absolute bottom-0 left-0 w-[40rem] h-[40rem] bg-primary/10 rounded-full blur-[120px] opacity-40 pointer-events-none"></div>
 
-        <ol class="stepper" aria-label="Pasos de postulación">
-            <li class="active">Tus Datos</li>
-            <li>Experiencia</li>
-            <li>Disponibilidad</li>
-        </ol>
+    <div class="max-w-4xl mx-auto px-8 relative z-10">
+        <div class="text-center mb-16">
+            <span class="font-label text-primary-container font-bold text-xs uppercase tracking-widest block mb-4">Reclutamiento</span>
+            <h1 class="font-headline text-4xl md:text-6xl font-black text-white mb-6 tracking-tight">Únete a nuestro Equipo</h1>
+            <p class="text-gray-400 text-lg max-w-2xl mx-auto">Buscamos talentos comprometidos para transformar la industria del soporte comercial.</p>
+        </div>
 
         {% if messages %}
-          {% for message in messages %}
-            <div class="alert-success">{{ message }}</div>
-          {% endfor %}
+            {% for message in messages %}
+                <div class="mb-8 p-5 rounded-2xl {% if message.tags == 'error' %}bg-red-500/10 border-red-500/20 text-red-200{% else %}bg-green-500/10 border-green-500/20 text-green-200{% endif %} border backdrop-blur-xl flex items-center gap-3">
+                    <span class="material-symbols-outlined">{% if message.tags == 'error' %}error{% else %}check_circle{% endif %}</span>
+                    <span class="font-medium">{{ message }}</span>
+                </div>
+            {% endfor %}
         {% endif %}
 
-        <form method="post" class="application-form" novalidate>
-            {% csrf_token %}
+        <div class="bg-[#0A1118]/80 backdrop-blur-3xl border border-white/10 p-10 md:p-14 rounded-3xl shadow-2xl">
+            <form method="post" enctype="multipart/form-data" class="space-y-10" id="applyForm">
+                {% csrf_token %}
+                
+                <div class="grid grid-cols-1 md:grid-cols-2 gap-x-10 gap-y-8">
+                    <!-- Name -->
+                    <div class="space-y-3">
+                        <label class="block text-xs font-bold text-white/70 uppercase tracking-widest">👤 Nombre Completo</label>
+                        {{ form.full_name }}
+                        {% if form.full_name.errors %}<p class="text-red-400 text-xs mt-1">{{ form.full_name.errors.0 }}</p>{% endif %}
+                    </div>
 
-            <div class="form-group">
-                <label for="{{ form.full_name.id_for_label }}">👤 Nombre Completo <span class="required">*</span></label>
-                {{ form.full_name }}
-                {% if form.full_name.errors %}<small class="error">{{ form.full_name.errors|striptags }}</small>{% endif %}
-            </div>
+                    <!-- Phone -->
+                    <div class="space-y-3">
+                        <label class="block text-xs font-bold text-white/70 uppercase tracking-widest">📱 WhatsApp</label>
+                        {{ form.phone }}
+                        {% if form.phone.errors %}<p class="text-red-400 text-xs mt-1">{{ form.phone.errors.0 }}</p>{% endif %}
+                    </div>
 
-            <div class="form-group">
-                <label for="{{ form.phone.id_for_label }}">📱 Teléfono (WhatsApp) <span class="required">*</span></label>
-                {{ form.phone }}
-                {% if form.phone.errors %}<small class="error">{{ form.phone.errors|striptags }}</small>{% endif %}
-            </div>
+                    <!-- Email -->
+                    <div class="space-y-3">
+                        <label class="block text-xs font-bold text-white/70 uppercase tracking-widest">✉️ Email</label>
+                        {{ form.email }}
+                        {% if form.email.errors %}<p class="text-red-400 text-xs mt-1">{{ form.email.errors.0 }}</p>{% endif %}
+                    </div>
 
-            <div class="form-group">
-                <label for="{{ form.email.id_for_label }}">✉️ Email <span class="required">*</span></label>
-                {{ form.email }}
-                {% if form.email.errors %}<small class="error">{{ form.email.errors|striptags }}</small>{% endif %}
-            </div>
+                    <!-- Age -->
+                    <div class="space-y-3">
+                        <label class="block text-xs font-bold text-white/70 uppercase tracking-widest">🔢 Edad</label>
+                        {{ form.age }}
+                        {% if form.age.errors %}<p class="text-red-400 text-xs mt-1">{{ form.age.errors.0 }}</p>{% endif %}
+                    </div>
 
-            <div class="form-group">
-                <label for="{{ form.age.id_for_label }}">🔢 Edad <span class="required">*</span></label>
-                {{ form.age }}
-                {% if form.age.errors %}<small class="error">{{ form.age.errors|striptags }}</small>{% endif %}
-            </div>
+                    <!-- Position -->
+                    <div class="space-y-3">
+                        <label class="block text-xs font-bold text-white/70 uppercase tracking-widest">💼 Puesto</label>
+                        {{ form.position }}
+                        {% if form.position.errors %}<p class="text-red-400 text-xs mt-1">{{ form.position.errors.0 }}</p>{% endif %}
+                    </div>
 
-            <div class="form-group">
-                <label for="{{ form.sales_experience.id_for_label }}">💼 Experiencia en ventas <span class="required">*</span></label>
-                {{ form.sales_experience }}
-                {% if form.sales_experience.errors %}<small class="error">{{ form.sales_experience.errors|striptags }}</small>{% endif %}
-            </div>
+                    <!-- Experience -->
+                    <div class="space-y-3">
+                        <label class="block text-xs font-bold text-white/70 uppercase tracking-widest">🏗️ Experiencia</label>
+                        {{ form.sales_experience }}
+                        {% if form.sales_experience.errors %}<p class="text-red-400 text-xs mt-1">{{ form.sales_experience.errors.0 }}</p>{% endif %}
+                    </div>
+                </div>
 
-            <div class="form-group">
-                <p class="field-title">🗓️ Disponibilidad <span class="required">*</span></p>
-                <div class="checkbox-grid">{{ form.availability_options }}</div>
-                {% if form.availability_options.errors %}<small class="error">{{ form.availability_options.errors|striptags }}</small>{% endif %}
-            </div>
+                <!-- Availability -->
+                <div class="space-y-5 pt-4">
+                    <label class="block text-xs font-bold text-white/70 uppercase tracking-widest">📅 Disponibilidad Horaria</label>
+                    <div class="flex flex-wrap gap-4">
+                        {% for choice in form.availability_options %}
+                            <label class="flex items-center gap-3 px-5 py-3 rounded-xl border border-white/10 bg-white/5 cursor-pointer hover:border-primary/50 hover:bg-primary/5 transition-all group">
+                                <input type="checkbox" name="availability_options" value="{{ choice.data.value }}" class="w-5 h-5 accent-primary-container rounded border-white/20 bg-transparent" {% if choice.data.selected %}checked{% endif %}>
+                                <span class="text-white/80 group-hover:text-white transition-colors">{{ choice.choice_label }}</span>
+                            </label>
+                        {% endfor %}
+                    </div>
+                </div>
 
-            <div class="form-group">
-                <label for="{{ form.additional_comments.id_for_label }}">📝 Comentarios adicionales</label>
-                {{ form.additional_comments }}
-            </div>
+                <!-- CV Upload -->
+                <div class="space-y-5 pt-4">
+                    <label class="block text-xs font-bold text-white/70 uppercase tracking-widest">📎 Curriculum Vitae (PDF)</label>
+                    <div class="relative group">
+                        <label for="{{ form.cv.id_for_label }}" class="flex flex-col items-center justify-center gap-4 p-12 border-2 border-dashed border-white/20 rounded-2xl bg-white/5 cursor-pointer group-hover:border-primary-container group-hover:bg-primary-container/5 transition-all">
+                            <span class="material-symbols-outlined text-4xl text-primary-container group-hover:animate-bounce">cloud_upload</span>
+                            <div class="text-center">
+                                <p class="text-white font-bold text-lg mb-1" id="fileNamePlaceholder">Pincha aquí para subir archivo</p>
+                                <p class="text-gray-500 text-sm">Máxima resolución permitida en formato PDF</p>
+                            </div>
+                            <input type="file" name="cv" id="{{ form.cv.id_for_label }}" accept=".pdf" class="hidden" onchange="document.getElementById('fileNamePlaceholder').innerText = this.files[0].name; document.getElementById('fileNamePlaceholder').classList.add('text-primary-container')">
+                        </label>
+                    </div>
+                    {% if form.cv.errors %}<p class="text-red-400 text-xs mt-1">{{ form.cv.errors.0 }}</p>{% endif %}
+                </div>
 
-            <button type="submit" class="btn-primary btn-lg center">Enviar Postulación</button>
-        </form>
+                <!-- Comments -->
+                <div class="space-y-3 pt-4">
+                    <label class="block text-xs font-bold text-white/70 uppercase tracking-widest">💬 Comentarios Adicionales</label>
+                    {{ form.additional_comments }}
+                </div>
+
+                <div class="pt-10">
+                    <button type="submit" class="w-full py-5 rounded-2xl bg-gradient-to-r from-primary to-primary-container text-white font-bold text-xl shadow-[0_10px_35px_rgba(0,173,239,0.3)] hover:shadow-[0_15px_45px_rgba(0,173,239,0.5)] hover:-translate-y-1 transition-all duration-300 flex items-center justify-center gap-3">
+                        <span class="material-symbols-outlined">send</span>
+                        ENVIAR MI POSTULACIÓN
+                    </button>
+                </div>
+            </form>
+        </div>
     </div>
 </section>
+
+<style>
+    /* Inline overrides for Django form widgets in dark mode */
+    #applyForm input[type="text"], 
+    #applyForm input[type="tel"], 
+    #applyForm input[type="email"], 
+    #applyForm input[type="number"], 
+    #applyForm select, 
+    #applyForm textarea {
+        background: rgba(255, 255, 255, 0.05) !important;
+        border: 1px solid rgba(255, 255, 255, 0.1) !important;
+        color: white !important;
+        border-radius: 12px !important;
+        padding: 14px 18px !important;
+    }
+    #applyForm input:focus, #applyForm select:focus, #applyForm textarea:focus {
+        border-color: #00adef !important;
+        background: rgba(255, 255, 255, 0.08) !important;
+        box-shadow: 0 0 15px rgba(0, 173, 239, 0.2) !important;
+    }
+    #applyForm select option {
+        background: #0A1118;
+    }
+</style>
 
 <script>
   document.querySelectorAll('.field-input').forEach((input) => {
