@@ -158,6 +158,16 @@
   text-transform: none;
   letter-spacing: normal;
   margin-bottom: 0;
+  white-space: nowrap;
+}
+
+@media (max-width: 480px) {
+  .checkbox-grid label, .checkbox-grid-panel label {
+    padding: 8px 12px;
+    font-size: 0.85rem;
+    flex: 1 1 calc(50% - 12px);
+    justify-content: center;
+  }
 }
 
 .checkbox-grid label:hover, .checkbox-grid-panel label:hover {
@@ -320,5 +330,19 @@ html {
   .side-panel {
     width: 100%;
     right: -100%;
+  }
+  
+  .side-panel-header {
+    padding: 20px 20px 10px;
+  }
+  
+  .side-panel-body {
+    padding: 15px 20px;
+  }
+
+  .logo-card {
+    width: 240px;
+    height: 120px;
+    padding: 20px;
   }
 }

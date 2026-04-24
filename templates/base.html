@@ -103,8 +103,8 @@
 <body class="bg-background text-on-background font-body antialiased">
 
     <!-- TopNavBar -->
-    <nav class="fixed top-0 w-full z-50 bg-[#3E4449]/70 backdrop-blur-xl shadow-xl shadow-black/5">
-        <div class="flex justify-between items-center max-w-7xl mx-auto px-8 h-20">
+    <nav class="fixed top-0 w-full z-50 bg-[#3E4449]/80 backdrop-blur-xl shadow-xl shadow-black/5">
+        <div class="flex justify-between items-center max-w-7xl mx-auto px-4 sm:px-6 md:px-8 h-16 md:h-20">
             <a href="{% url 'core:home' %}" class="flex items-center gap-3">
                 <img src="{% static 'img/logo.png' %}" alt="TrustMarket Logo" style="height: 42px; width: auto;"
                     fetchpriority="high" loading="eager">
@@ -126,18 +126,19 @@
                 Contactar
             </a>
         </div>
-        <!-- Mobile Menu -->
-        <div id="mobileMenu" class="md:hidden hidden bg-[#3E4449]/95 backdrop-blur-xl px-8 pb-6 space-y-4">
-            <a class="block text-[#00ADEF] font-bold text-sm py-2" href="#inicio" onclick="closeMobileMenu()">Inicio</a>
-            <a class="block text-gray-300 hover:text-white text-sm py-2" href="#servicios"
+        <!-- Mobile Menu -->        <div id="mobileMenu" class="md:hidden hidden bg-[#3E4449]/95 backdrop-blur-xl px-6 pb-8 space-y-2 border-t border-white/5 shadow-2xl">
+            <a class="block text-[#00ADEF] font-bold text-base py-4 border-b border-white/5" href="#inicio" onclick="closeMobileMenu()">Inicio</a>
+            <a class="block text-gray-300 hover:text-white text-base py-4 border-b border-white/5" href="#servicios"
                 onclick="closeMobileMenu()">Servicios</a>
-
-            <a class="block text-gray-300 hover:text-white text-sm py-2" href="#contacto"
+            <a class="block text-gray-300 hover:text-white text-base py-4 border-b border-white/5" href="#contacto"
                 onclick="closeMobileMenu()">Contacto</a>
-            <a href="#contacto"
-                class="inline-block bg-primary-container text-on-primary-container px-6 py-2.5 rounded-lg font-bold text-sm"
-                onclick="closeMobileMenu()">Contactar</a>
+            <div class="pt-4">
+                <a href="#contacto"
+                    class="block w-full bg-primary-container text-on-primary-container px-6 py-4 rounded-xl font-bold text-base text-center shadow-lg"
+                    onclick="closeMobileMenu()">Contactar</a>
+            </div>
         </div>
+
     </nav>
 
     <main>
@@ -145,8 +146,8 @@
     </main>
 
     <!-- Footer -->
-    <footer class="bg-[#121416] py-16 text-white border-t border-white/5">
-        <div class="max-w-7xl mx-auto px-8">
+    <footer class="bg-[#121416] py-12 md:py-16 text-white border-t border-white/5">
+        <div class="max-w-7xl mx-auto px-6 md:px-8">
             <div class="grid grid-cols-1 md:grid-cols-4 gap-12 mb-12">
                 <div class="col-span-1 md:col-span-1">
                     <div class="flex items-center gap-3 mb-6">
