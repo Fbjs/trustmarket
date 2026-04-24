@@ -9,14 +9,25 @@ class Application(models.Model):
         ("mas_3", "+3 años"),
     ]
 
+    POSITION_CHOICES = [
+        ("ejecutivo_ventas", "Ejecutivo de Ventas Seguros"),
+        ("atencion_cliente", "Atención al Cliente"),
+        ("soporte_comercial", "Soporte Comercial"),
+        ("supervisor", "Supervisor de Ventas"),
+    ]
+
     full_name = models.CharField("Nombre completo", max_length=160)
     phone = models.CharField("Teléfono / WhatsApp", max_length=30)
     email = models.EmailField("Correo electrónico")
     age = models.PositiveSmallIntegerField("Edad")
-    sales_experience = models.CharField(
-        "Experiencia en ventas", max_length=20, choices=EXPERIENCE_CHOICES
+    position = models.CharField(
+        "Puesto al que postula", max_length=50, choices=POSITION_CHOICES, default="ejecutivo_ventas"
     )
-    availability = models.TextField("Disponibilidad")
+    sales_experience = models.CharField(
+        "Experiencia en ventas", max_length=20, choices=EXPERIENCE_CHOICES, default="sin_experiencia"
+    )
+    availability = models.TextField("Disponibilidad", blank=True)
+    cv = models.FileField("Adjuntar CV (PDF)", upload_to="cvs/", null=True, blank=True)
     additional_comments = models.TextField("Comentarios adicionales", blank=True)
     created_at = models.DateTimeField("Fecha de postulación", auto_now_add=True)
 
@@ -36,8 +47,10 @@ class postulaciones(models.Model):
     telefono = models.CharField(max_length=50)
     email = models.EmailField(max_length=255)
     edad = models.IntegerField()
+    puesto = models.CharField(max_length=100, blank=True, null=True)
     experiencia_ventas = models.CharField(max_length=100)
     disponibilidad = models.TextField() # Aquí guardaremos los checkboxes como texto
+    cv_url = models.CharField(max_length=500, blank=True, null=True)
     comentarios = models.TextField(blank=True, null=True)
 
     class Meta:
@@ -45,19 +58,19 @@ class postulaciones(models.Model):
         db_table = 'postulaciones' # Nombre exacto en MySQL
 
 class StitchApplication(models.Model):
-    EXPERIENCE_CHOICES = [
-        ("sin_experiencia", "Sin experiencia"),
-        ("1_2", "1-2 años"),
-        ("mas_3", "3+ años"),
-    ]
-
     full_name = models.CharField("Nombre completo", max_length=160)
     email = models.EmailField("Correo electrónico")
     phone = models.CharField("Teléfono", max_length=30)
-    experience = models.CharField(
-        "Experiencia (Años)", max_length=20, choices=EXPERIENCE_CHOICES
+    age = models.PositiveSmallIntegerField("Edad", default=18)
+    position = models.CharField(
+        "Puesto", max_length=50, choices=Application.POSITION_CHOICES, default="ejecutivo_ventas"
     )
+    sales_experience = models.CharField(
+        "Experiencia", max_length=20, choices=Application.EXPERIENCE_CHOICES, default="sin_experiencia"
+    )
+    availability = models.TextField("Disponibilidad", blank=True)
     cv = models.FileField("Adjuntar CV (PDF)", upload_to="cvs/")
+    additional_comments = models.TextField("Comentarios adicionales", blank=True)
     created_at = models.DateTimeField("Fecha de postulación", auto_now_add=True)
 
     class Meta:

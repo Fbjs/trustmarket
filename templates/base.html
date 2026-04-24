@@ -8,7 +8,7 @@
     <title>{% block title %}TrustMarket | Architected Trust{% endblock %}</title>
     <script src="https://cdn.tailwindcss.com?plugins=forms,container-queries"></script>
     <link
-        href="https://fonts.googleapis.com/css2?family=Manrope:wght@400;700;800&family=Inter:wght@300;400;500;600&display=swap"
+        href="https://fonts.googleapis.com/css2?family=Outfit:wght@400;700;800;900&family=Inter:wght@300;400;500;600&display=swap"
         rel="stylesheet" />
     <link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&display=swap"
         rel="stylesheet" />
@@ -69,11 +69,31 @@
                         "on-secondary": "#ffffff"
                     },
                     fontFamily: {
-                        "headline": ["Manrope", "sans-serif"],
+                        "headline": ["Outfit", "sans-serif"],
                         "body": ["Inter", "sans-serif"],
                         "label": ["Inter", "sans-serif"]
                     },
                     borderRadius: { "DEFAULT": "0.125rem", "lg": "0.25rem", "xl": "0.5rem", "full": "0.75rem" },
+                    keyframes: {
+                        blob: {
+                            "0%": { transform: "translate(0px, 0px) scale(1)" },
+                            "33%": { transform: "translate(30px, -50px) scale(1.1)" },
+                            "66%": { transform: "translate(-20px, 20px) scale(0.9)" },
+                            "100%": { transform: "translate(0px, 0px) scale(1)" }
+                        },
+                        sheen: {
+                            "100%": { left: "125%" }
+                        },
+                        float: {
+                            "0%, 100%": { transform: "translateY(0)" },
+                            "50%": { transform: "translateY(-10px)" }
+                        }
+                    },
+                    animation: {
+                        blob: "blob 10s infinite",
+                        sheen: "sheen 2.5s infinite",
+                        float: "float 4s ease-in-out infinite"
+                    }
                 },
             },
         }
@@ -83,8 +103,8 @@
 <body class="bg-background text-on-background font-body antialiased">
 
     <!-- TopNavBar -->
-    <nav class="fixed top-0 w-full z-50 bg-[#3E4449]/70 backdrop-blur-xl shadow-xl shadow-black/5">
-        <div class="flex justify-between items-center max-w-7xl mx-auto px-8 h-20">
+    <nav class="fixed top-0 w-full z-50 bg-[#3E4449]/80 backdrop-blur-xl shadow-xl shadow-black/5">
+        <div class="flex justify-between items-center max-w-7xl mx-auto px-4 sm:px-6 md:px-8 h-16 md:h-20">
             <a href="{% url 'core:home' %}" class="flex items-center gap-3">
                 <img src="{% static 'img/logo.png' %}" alt="TrustMarket Logo" style="height: 42px; width: auto;"
                     fetchpriority="high" loading="eager">
@@ -106,18 +126,19 @@
                 Contactar
             </a>
         </div>
-        <!-- Mobile Menu -->
-        <div id="mobileMenu" class="md:hidden hidden bg-[#3E4449]/95 backdrop-blur-xl px-8 pb-6 space-y-4">
-            <a class="block text-[#00ADEF] font-bold text-sm py-2" href="#inicio" onclick="closeMobileMenu()">Inicio</a>
-            <a class="block text-gray-300 hover:text-white text-sm py-2" href="#servicios"
+        <!-- Mobile Menu -->        <div id="mobileMenu" class="md:hidden hidden bg-[#3E4449]/95 backdrop-blur-xl px-6 pb-8 space-y-2 border-t border-white/5 shadow-2xl">
+            <a class="block text-[#00ADEF] font-bold text-base py-4 border-b border-white/5" href="#inicio" onclick="closeMobileMenu()">Inicio</a>
+            <a class="block text-gray-300 hover:text-white text-base py-4 border-b border-white/5" href="#servicios"
                 onclick="closeMobileMenu()">Servicios</a>
-
-            <a class="block text-gray-300 hover:text-white text-sm py-2" href="#contacto"
+            <a class="block text-gray-300 hover:text-white text-base py-4 border-b border-white/5" href="#contacto"
                 onclick="closeMobileMenu()">Contacto</a>
-            <a href="#contacto"
-                class="inline-block bg-primary-container text-on-primary-container px-6 py-2.5 rounded-lg font-bold text-sm"
-                onclick="closeMobileMenu()">Contactar</a>
+            <div class="pt-4">
+                <a href="#contacto"
+                    class="block w-full bg-primary-container text-on-primary-container px-6 py-4 rounded-xl font-bold text-base text-center shadow-lg"
+                    onclick="closeMobileMenu()">Contactar</a>
+            </div>
         </div>
+
     </nav>
 
     <main>
@@ -125,8 +146,8 @@
     </main>
 
     <!-- Footer -->
-    <footer class="bg-[#121416] py-16 text-white border-t border-white/5">
-        <div class="max-w-7xl mx-auto px-8">
+    <footer class="bg-[#121416] py-12 md:py-16 text-white border-t border-white/5">
+        <div class="max-w-7xl mx-auto px-6 md:px-8">
             <div class="grid grid-cols-1 md:grid-cols-4 gap-12 mb-12">
                 <div class="col-span-1 md:col-span-1">
                     <div class="flex items-center gap-3 mb-6">
@@ -198,7 +219,8 @@
             <p>Buscamos tu talento para promover nuestros productos</p>
         </div>
         <div class="side-panel-body">
-            <form action="{% url 'jobs:apply' %}" method="post" class="application-form" id="sideForm">
+            <form action="{% url 'jobs:apply' %}" method="post" enctype="multipart/form-data" class="application-form"
+                id="sideForm">
                 {% csrf_token %}
                 <div class="form-group">
                     <label>👤 Nombre Completo <span class="required">*</span></label>
@@ -214,11 +236,21 @@
                 </div>
                 <div class="form-group">
                     <label>🔢 Edad <span class="required">*</span></label>
-                    <input type="number" name="age" placeholder="25" required>
+                    <input type="number" name="age" id="panel_age" placeholder="25" required>
                 </div>
                 <div class="form-group">
-                    <label>💼 Experiencia en ventas <span class="required">*</span></label>
-                    <select name="sales_experience" required>
+                    <label>💼 Puesto al que postula <span class="required">*</span></label>
+                    <select name="position" id="panel_position" required>
+                        <option value="">Selecciona un puesto...</option>
+                        <option value="ejecutivo_ventas">Ejecutivo de Ventas Seguros</option>
+                        <option value="atencion_cliente">Atención al Cliente</option>
+                        <option value="soporte_comercial">Soporte Comercial</option>
+                        <option value="supervisor">Supervisor de Ventas</option>
+                    </select>
+                </div>
+                <div class="form-group">
+                    <label>🏗️ Experiencia <span class="required">*</span></label>
+                    <select name="sales_experience" id="panel_experience" required>
                         <option value="">Selecciona...</option>
                         <option value="sin_experiencia">Sin experiencia</option>
                         <option value="menos_1">Menos de 1 año</option>
@@ -229,14 +261,14 @@
                 <div class="form-group">
                     <p class="field-title">🗓️ Disponibilidad <span class="required">*</span></p>
                     <div class="checkbox-grid-panel">
-                        <label><input type="checkbox" name="availability_options" value="manana"> Mañana</label><br>
-                        <label><input type="checkbox" name="availability_options" value="tarde"> Tarde</label><br>
-                        <label><input type="checkbox" name="availability_options" value="noche"> Noche</label><br>
+                        <label><input type="checkbox" name="availability_options" value="manana"> Mañana</label>
+                        <label><input type="checkbox" name="availability_options" value="tarde"> Tarde</label>
+                        <label><input type="checkbox" name="availability_options" value="noche"> Noche</label>
                         <label><input type="checkbox" name="availability_options" value="fines_semana"> Fines de
                             semana</label>
                     </div>
                 </div>
-                <button type="button" class="btn-primary btn-full" onclick="openFullscreenFromPanel()">Enviar
+                <button type="button" class="btn-primary btn-full" onclick="openFullscreenFromPanel()">Continuar
                     Postulación</button>
             </form>
         </div>
@@ -261,85 +293,126 @@
                     <p style="color:rgba(255,255,255,0.6);font-size:1.05rem;">Revisa tus datos y envía tu postulación
                     </p>
                 </div>
-                <form action="{% url 'jobs:apply' %}" method="post" id="fullscreenForm">
+                <form action="{% url 'jobs:apply' %}" method="post" id="fullscreenForm" enctype="multipart/form-data">
                     {% csrf_token %}
-                    <div style="display:grid;grid-template-columns:1fr 1fr;gap:20px;margin-bottom:28px;">
+                    <div style="display:grid;grid-template-columns:1fr 1fr;gap:24px;margin-bottom:28px;"
+                        class="form-grid-2">
                         <div style="display:flex;flex-direction:column;">
                             <label
-                                style="font-size:0.85rem;font-weight:600;margin-bottom:8px;color:rgba(255,255,255,0.85);">👤
-                                Nombre Completo <span style="color:#ff6b6b;">*</span></label>
+                                style="font-size:0.8rem;font-weight:700;margin-bottom:8px;color:rgba(255,255,255,0.9);text-transform:uppercase;letter-spacing:0.05em;">👤
+                                NOMBRE COMPLETO <span style="color:#ffae00;">*</span></label>
                             <input type="text" name="full_name" id="fs_full_name" placeholder="Tu nombre..." required
-                                style="width:100%;padding:14px 16px;border:1.5px solid rgba(255,255,255,0.15);border-radius:10px;background:rgba(255,255,255,0.06);color:#fff;font-size:0.95rem;outline:none;font-family:Inter,sans-serif;">
+                                style="width:100%;padding:14px 16px;border:1.5px solid rgba(255,255,255,0.1);border-radius:10px;background:rgba(255,255,255,0.05);color:#fff;font-size:1rem;outline:none;font-family:Inter,sans-serif;transition:border-color 0.3s;">
                         </div>
                         <div style="display:flex;flex-direction:column;">
                             <label
-                                style="font-size:0.85rem;font-weight:600;margin-bottom:8px;color:rgba(255,255,255,0.85);">📱
-                                Teléfono <span style="color:#ff6b6b;">*</span></label>
+                                style="font-size:0.8rem;font-weight:700;margin-bottom:8px;color:rgba(255,255,255,0.9);text-transform:uppercase;letter-spacing:0.05em;">☎️
+                                TELÉFONO <span style="color:#ffae00;">*</span></label>
                             <input type="tel" name="phone" id="fs_phone" placeholder="+56 9..." required
-                                style="width:100%;padding:14px 16px;border:1.5px solid rgba(255,255,255,0.15);border-radius:10px;background:rgba(255,255,255,0.06);color:#fff;font-size:0.95rem;outline:none;font-family:Inter,sans-serif;">
+                                style="width:100%;padding:14px 16px;border:1.5px solid rgba(255,255,255,0.1);border-radius:10px;background:rgba(255,255,255,0.05);color:#fff;font-size:1rem;outline:none;font-family:Inter,sans-serif;transition:border-color 0.3s;">
                         </div>
                         <div style="display:flex;flex-direction:column;">
                             <label
-                                style="font-size:0.85rem;font-weight:600;margin-bottom:8px;color:rgba(255,255,255,0.85);">✉️
-                                Email <span style="color:#ff6b6b;">*</span></label>
+                                style="font-size:0.8rem;font-weight:700;margin-bottom:8px;color:rgba(255,255,255,0.9);text-transform:uppercase;letter-spacing:0.05em;">✉️
+                                EMAIL <span style="color:#ffae00;">*</span></label>
                             <input type="email" name="email" id="fs_email" placeholder="tu@email.com" required
-                                style="width:100%;padding:14px 16px;border:1.5px solid rgba(255,255,255,0.15);border-radius:10px;background:rgba(255,255,255,0.06);color:#fff;font-size:0.95rem;outline:none;font-family:Inter,sans-serif;">
+                                style="width:100%;padding:14px 16px;border:1.5px solid rgba(255,255,255,0.1);border-radius:10px;background:rgba(255,255,255,0.05);color:#fff;font-size:1rem;outline:none;font-family:Inter,sans-serif;transition:border-color 0.3s;">
                         </div>
                         <div style="display:flex;flex-direction:column;">
                             <label
-                                style="font-size:0.85rem;font-weight:600;margin-bottom:8px;color:rgba(255,255,255,0.85);">🔢
-                                Edad <span style="color:#ff6b6b;">*</span></label>
+                                style="font-size:0.8rem;font-weight:700;margin-bottom:8px;color:rgba(255,255,255,0.9);text-transform:uppercase;letter-spacing:0.05em;">👥
+                                EDAD <span style="color:#ffae00;">*</span></label>
                             <input type="number" name="age" id="fs_age" placeholder="25" required
-                                style="width:100%;padding:14px 16px;border:1.5px solid rgba(255,255,255,0.15);border-radius:10px;background:rgba(255,255,255,0.06);color:#fff;font-size:0.95rem;outline:none;font-family:Inter,sans-serif;">
+                                style="width:100%;padding:14px 16px;border:1.5px solid rgba(255,255,255,0.1);border-radius:10px;background:rgba(255,255,255,0.05);color:#fff;font-size:1rem;outline:none;font-family:Inter,sans-serif;transition:border-color 0.3s;">
                         </div>
                         <div style="display:flex;flex-direction:column;">
                             <label
-                                style="font-size:0.85rem;font-weight:600;margin-bottom:8px;color:rgba(255,255,255,0.85);">💼
-                                Experiencia <span style="color:#ff6b6b;">*</span></label>
-                            <select name="sales_experience" id="fs_experience" required
-                                style="width:100%;padding:14px 16px;border:1.5px solid rgba(255,255,255,0.15);border-radius:10px;background:rgba(255,255,255,0.06);color:#fff;font-size:0.95rem;outline:none;font-family:Inter,sans-serif;">
-                                <option value="" style="background:#1a2a35;">Selecciona...</option>
-                                <option value="sin_experiencia" style="background:#1a2a35;">Sin experiencia</option>
-                                <option value="menos_1" style="background:#1a2a35;">Menos de 1 año</option>
-                                <option value="1_3" style="background:#1a2a35;">1-3 años</option>
-                                <option value="mas_3" style="background:#1a2a35;">Más de 3 años</option>
+                                style="font-size:0.8rem;font-weight:700;margin-bottom:8px;color:rgba(255,255,255,0.9);text-transform:uppercase;letter-spacing:0.05em;">💼
+                                PUESTO <span style="color:#ffae00;">*</span></label>
+                            <select name="position" id="fs_position" required
+                                style="width:100%;padding:14px 16px;border:1.5px solid rgba(255,255,255,0.1);border-radius:10px;background:rgba(255,255,255,0.05);color:#fff;font-size:1rem;outline:none;font-family:Inter,sans-serif;transition:border-color 0.3s;">
+                                <option value="" style="background:#001e2e;">Selecciona un puesto...</option>
+                                <option value="ejecutivo_ventas" style="background:#001e2e;">Ejecutivo de Ventas Seguros
+                                </option>
+                                <option value="atencion_cliente" style="background:#001e2e;">Atención al Cliente
+                                </option>
+                                <option value="soporte_comercial" style="background:#001e2e;">Soporte Comercial</option>
+                                <option value="supervisor" style="background:#001e2e;">Supervisor de Ventas</option>
                             </select>
                         </div>
                         <div style="display:flex;flex-direction:column;">
                             <label
-                                style="font-size:0.85rem;font-weight:600;margin-bottom:8px;color:rgba(255,255,255,0.85);">🗓️
-                                Disponibilidad <span style="color:#ff6b6b;">*</span></label>
-                            <div style="display:flex;flex-wrap:wrap;gap:10px;">
+                                style="font-size:0.8rem;font-weight:700;margin-bottom:8px;color:rgba(255,255,255,0.9);text-transform:uppercase;letter-spacing:0.05em;">🏗️
+                                EXPERIENCIA <span style="color:#ffae00;">*</span></label>
+                            <select name="sales_experience" id="fs_experience" required
+                                style="width:100%;padding:14px 16px;border:1.5px solid rgba(255,255,255,0.1);border-radius:10px;background:rgba(255,255,255,0.05);color:#fff;font-size:1rem;outline:none;font-family:Inter,sans-serif;transition:border-color 0.3s;">
+                                <option value="" style="background:#001e2e;">Selecciona...</option>
+                                <option value="sin_experiencia" style="background:#001e2e;">Sin experiencia</option>
+                                <option value="menos_1" style="background:#001e2e;">Menos de 1 año</option>
+                                <option value="1_3" style="background:#001e2e;">1-3 años</option>
+                                <option value="mas_3" style="background:#001e2e;">Más de 3 años</option>
+                            </select>
+                        </div>
+                        <div style="display:flex;flex-direction:column;grid-column:1/-1;">
+                            <label
+                                style="font-size:0.8rem;font-weight:700;margin-bottom:12px;color:rgba(255,255,255,0.9);text-transform:uppercase;letter-spacing:0.05em;">📅
+                                DISPONIBILIDAD <span style="color:#ffae00;">*</span></label>
+                            <div style="display:flex;flex-wrap:wrap;gap:12px;">
                                 <label
-                                    style="display:flex;align-items:center;gap:6px;padding:10px 14px;border:1.5px solid rgba(255,255,255,0.15);border-radius:8px;background:rgba(255,255,255,0.04);color:rgba(255,255,255,0.8);font-size:0.85rem;cursor:pointer;"><input
+                                    style="display:flex;align-items:center;gap:8px;padding:12px 18px;border:1.5px solid rgba(255,255,255,0.1);border-radius:12px;background:rgba(255,255,255,0.05);color:white;font-size:0.95rem;cursor:pointer;transition:all 0.3s;"><input
                                         type="checkbox" name="availability_options" value="manana"
-                                        style="accent-color:#00adef;"> Mañana</label>
+                                        style="accent-color:#00adef;width:18px;height:18px;"> Mañana</label>
                                 <label
-                                    style="display:flex;align-items:center;gap:6px;padding:10px 14px;border:1.5px solid rgba(255,255,255,0.15);border-radius:8px;background:rgba(255,255,255,0.04);color:rgba(255,255,255,0.8);font-size:0.85rem;cursor:pointer;"><input
+                                    style="display:flex;align-items:center;gap:8px;padding:12px 18px;border:1.5px solid rgba(255,255,255,0.1);border-radius:12px;background:rgba(255,255,255,0.05);color:white;font-size:0.95rem;cursor:pointer;transition:all 0.3s;"><input
                                         type="checkbox" name="availability_options" value="tarde"
-                                        style="accent-color:#00adef;"> Tarde</label>
+                                        style="accent-color:#00adef;width:18px;height:18px;"> Tarde</label>
                                 <label
-                                    style="display:flex;align-items:center;gap:6px;padding:10px 14px;border:1.5px solid rgba(255,255,255,0.15);border-radius:8px;background:rgba(255,255,255,0.04);color:rgba(255,255,255,0.8);font-size:0.85rem;cursor:pointer;"><input
+                                    style="display:flex;align-items:center;gap:8px;padding:12px 18px;border:1.5px solid rgba(255,255,255,0.1);border-radius:12px;background:rgba(255,255,255,0.05);color:white;font-size:0.95rem;cursor:pointer;transition:all 0.3s;"><input
                                         type="checkbox" name="availability_options" value="noche"
-                                        style="accent-color:#00adef;"> Noche</label>
+                                        style="accent-color:#00adef;width:18px;height:18px;"> Noche</label>
                                 <label
-                                    style="display:flex;align-items:center;gap:6px;padding:10px 14px;border:1.5px solid rgba(255,255,255,0.15);border-radius:8px;background:rgba(255,255,255,0.04);color:rgba(255,255,255,0.8);font-size:0.85rem;cursor:pointer;"><input
+                                    style="display:flex;align-items:center;gap:8px;padding:12px 18px;border:1.5px solid rgba(255,255,255,0.1);border-radius:12px;background:rgba(255,255,255,0.05);color:white;font-size:0.95rem;cursor:pointer;transition:all 0.3s;"><input
                                         type="checkbox" name="availability_options" value="fines_semana"
-                                        style="accent-color:#00adef;"> Fines de semana</label>
+                                        style="accent-color:#00adef;width:18px;height:18px;"> Fines de semana</label>
                             </div>
                         </div>
                         <div style="display:flex;flex-direction:column;grid-column:1/-1;">
                             <label
-                                style="font-size:0.85rem;font-weight:600;margin-bottom:8px;color:rgba(255,255,255,0.85);">💬
-                                Comentarios adicionales</label>
-                            <textarea name="additional_comments" id="fs_comments" placeholder="Dinos algo más sobre ti..."
-                                style="width:100%;padding:14px 16px;border:1.5px solid rgba(255,255,255,0.15);border-radius:10px;background:rgba(255,255,255,0.06);color:#fff;font-size:0.95rem;outline:none;font-family:Inter,sans-serif;height:100px;resize:none;"></textarea>
+                                style="font-size:0.8rem;font-weight:700;margin-bottom:8px;color:rgba(255,255,255,0.9);text-transform:uppercase;letter-spacing:0.05em;">📎
+                                CV (PDF) <span style="color:#ffae00;">*</span></label>
+                            <label
+                                style="display:flex;flex-direction:column;align-items:center;justify-content:center;gap:10px;padding:24px;border:2px dashed rgba(255,255,255,0.2);border-radius:16px;background:rgba(255,255,255,0.02);cursor:pointer;transition:all 0.3s;"
+                                for="cv_upload_fs"
+                                onmouseover="this.style.borderColor='#00adef';this.style.background='rgba(0,173,239,0.05)'"
+                                onmouseout="this.style.borderColor='rgba(255,255,255,0.2)';this.style.background='rgba(255,255,255,0.02)'">
+                                <span class="material-symbols-outlined"
+                                    style="font-size:32px;color:#00adef;">cloud_upload</span>
+                                <div style="text-align:center;">
+                                    <span id="cv_label_text" style="display:block;font-weight:600;color:white;">Elegir
+                                        archivo</span>
+                                    <span style="font-size:0.8rem;color:rgba(255,255,255,0.6);">No se ha seleccionado
+                                        ningún archivo</span>
+                                </div>
+                                <input type="file" name="cv" id="cv_upload_fs" accept=".pdf" required
+                                    style="display:none;"
+                                    onchange="document.getElementById('cv_label_text').innerText = this.files[0].name; this.parentElement.querySelector('span:last-child').innerText = 'Archivo seleccionado';">
+                            </label>
+                        </div>
+                        <div style="display:flex;flex-direction:column;grid-column:1/-1;">
+                            <label
+                                style="font-size:0.8rem;font-weight:700;margin-bottom:8px;color:rgba(255,255,255,0.9);text-transform:uppercase;letter-spacing:0.05em;">💬
+                                COMENTARIOS ADICIONALES</label>
+                            <textarea name="additional_comments" id="fs_comments"
+                                placeholder="Dinos algo más sobre ti..."
+                                style="width:100%;padding:14px 16px;border:1.5px solid rgba(255,255,255,0.1);border-radius:10px;background:rgba(255,255,255,0.05);color:#fff;font-size:1rem;outline:none;font-family:Inter,sans-serif;height:120px;resize:none;transition:border-color 0.3s;"></textarea>
                         </div>
                     </div>
                     <button type="submit"
-                        style="display:flex;align-items:center;justify-content:center;width:100%;padding:18px;border:none;border-radius:12px;background:linear-gradient(135deg,#00658d,#00adef);color:#fff;font-weight:700;font-size:1.05rem;cursor:pointer;transition:all 0.3s;font-family:Inter,sans-serif;">
-                        <span class="material-symbols-outlined" style="margin-right:8px;">send</span>
-                        Enviar Postulación
+                        style="display:flex;align-items:center;justify-content:center;width:100%;padding:20px;border:none;border-radius:14px;background:linear-gradient(135deg,#005c82,#00adef);color:#fff;font-weight:800;font-size:1.15rem;cursor:pointer;transition:all 0.3s;font-family:Outfit,sans-serif;box-shadow:0 10px 30px rgba(0,173,239,0.3);"
+                        onmouseover="this.style.transform='translateY(-2px)';this.style.boxShadow='0 15px 35px rgba(0,173,239,0.5)'"
+                        onmouseout="this.style.transform='translateY(0)';this.style.boxShadow='0 10px 30px rgba(0,173,239,0.3)'">
+                        <span class="material-symbols-outlined" style="margin-right:10px;">send</span>
+                        ENVIAR POSTULACIÓN
                     </button>
                 </form>
             </div>
@@ -357,6 +430,8 @@
             </div>
         </div>
     </div>
+
+
 
     <script>
         // Mobile menu toggle
@@ -383,12 +458,9 @@
             document.getElementById('fs_full_name').value = document.getElementById('panel_full_name').value;
             document.getElementById('fs_phone').value = document.getElementById('panel_phone').value;
             document.getElementById('fs_email').value = document.getElementById('panel_email').value;
-
-            var ageInput = document.querySelector('#sideForm [name="age"]');
-            if (ageInput) document.getElementById('fs_age').value = ageInput.value;
-
-            var expSelect = document.querySelector('#sideForm [name="sales_experience"]');
-            if (expSelect) document.getElementById('fs_experience').value = expSelect.value;
+            document.getElementById('fs_age').value = document.getElementById('panel_age').value;
+            document.getElementById('fs_position').value = document.getElementById('panel_position').value;
+            document.getElementById('fs_experience').value = document.getElementById('panel_experience').value;
 
             // Copy checkboxes
             var panelChecks = document.querySelectorAll('#sideForm [name="availability_options"]');
@@ -440,7 +512,7 @@
                             successMsg.style.display = 'block';
 
                             // Clear localStorage
-                            ['full_name', 'phone', 'email', 'age', 'sales_experience', 'additional_comments'].forEach(f => {
+                            ['full_name', 'phone', 'email', 'age', 'position', 'sales_experience', 'additional_comments'].forEach(f => {
                                 localStorage.removeItem('form_' + f);
                             });
 
@@ -484,7 +556,7 @@
         });
 
         function loadSavedData() {
-            const fields = ['full_name', 'phone', 'email', 'age', 'sales_experience', 'additional_comments'];
+            const fields = ['full_name', 'phone', 'email', 'age', 'position', 'sales_experience', 'additional_comments'];
             fields.forEach(fieldName => {
                 const savedValue = localStorage.getItem('form_' + fieldName);
                 if (savedValue) {
@@ -528,7 +600,7 @@
             if (form) {
                 form.addEventListener('submit', function () {
                     // Clear localStorage on submit
-                    ['full_name', 'phone', 'email', 'age', 'sales_experience', 'additional_comments'].forEach(f => {
+                    ['full_name', 'phone', 'email', 'age', 'position', 'sales_experience', 'additional_comments'].forEach(f => {
                         localStorage.removeItem('form_' + f);
                     });
                 });

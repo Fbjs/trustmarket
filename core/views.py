@@ -2,6 +2,8 @@ from django.views.generic import TemplateView, FormView
 from django.urls import reverse_lazy
 from django.contrib import messages
 from jobs.forms import StitchApplicationForm
+from jobs.models import postulaciones
+from jobs.views import notify_recruitment_team
 
 class HomeView(FormView):
     template_name = "core/stitch_landing.html"
@@ -16,7 +18,27 @@ class HomeView(FormView):
         return kwargs
 
     def form_valid(self, form):
-        form.save()
+        application = form.save()
+        
+        # Guardamos en la tabla manual 'postulaciones'
+        try:
+            postulaciones.objects.create(
+                nombre_completo=application.full_name,
+                telefono=application.phone,
+                email=application.email,
+                edad=application.age,
+                puesto=application.get_position_display(),
+                experiencia_ventas=application.get_sales_experience_display(),
+                disponibilidad=application.availability,
+                cv_url=application.cv.url if application.cv else "",
+                # StitchApplication no tiene comentarios adicionales?
+                # Ah, sí los agregué al modelo y form.
+                comentarios=application.additional_comments if hasattr(application, 'additional_comments') else ""
+            )
+        except Exception as e:
+            print(f"Error guardando StitchApplication en tabla manual: {e}")
+
+        notify_recruitment_team(application)
         messages.success(self.request, "¡Gracias por postular! Tu información fue recibida correctamente.")
         return super().form_valid(form)
 
@@ -43,12 +65,4 @@ class AboutView(TemplateView):
 
 class ContactView(TemplateView):
     template_name = "core/contact.html"
-
-class ServicesView(TemplateView):
-    template_name = "core/services.html"
-
-class AboutView(TemplateView):
-    template_name = "core/about.html"
-
-class ContactView(TemplateView):
-    template_name = "core/contact.html"
+

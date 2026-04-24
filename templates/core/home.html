@@ -6,10 +6,18 @@
 {% block content %}
 <!-- Hero Section -->
 <section class="relative min-h-screen flex items-center pt-20 overflow-hidden" id="inicio">
-    <div class="absolute inset-0 z-0">
-        <img class="w-full h-full object-cover brightness-[0.35]"
+    <div class="absolute inset-0 z-0 overflow-hidden">
+        <img class="w-full h-full object-cover brightness-[0.30]"
             alt="Modern high-tech call center with professional diverse team"
             src="https://lh3.googleusercontent.com/aida-public/AB6AXuCmtBs2cLNGAvELTwSwbfTdPOupIyLxQEMSxnHLF--Df--wPMK2jCNmhXmgLASqYGG75r7tWcfxT1D-QxelCGoBucmDovohzZZa6zLt1aoPt0urJr57yJNOCUPJaBZfAewKar7dKZXnTwL-3sCHzkwaNAYJlrPtr8IWNMKdcGkIbeY3f64pT8b2vL-wXbGifyC2N-u4wE7MC3wajGl0lsMQgLA9DGTbhM7ByZx7PjNKk_xKpTLUGgGeTgxy4W2RiRjudCKHmceA4VyM" />
+        <!-- Glowing Animated Blobs -->
+        <div
+            class="absolute top-1/4 left-1/4 w-96 h-96 bg-primary-container/40 rounded-full mix-blend-screen blur-[100px] opacity-70 animate-blob">
+        </div>
+        <div class="absolute top-1/3 right-1/4 w-96 h-96 bg-[#83cfff]/30 rounded-full mix-blend-screen blur-[80px] opacity-50 animate-blob"
+            style="animation-delay: 2s;"></div>
+        <div class="absolute bottom-1/4 left-1/2 w-[30rem] h-[30rem] bg-primary/30 rounded-full mix-blend-screen blur-[120px] opacity-60 animate-blob"
+            style="animation-delay: 4s;"></div>
     </div>
     <div class="relative z-10 max-w-7xl mx-auto px-8 w-full">
         <div class="max-w-3xl reveal">
@@ -17,137 +25,296 @@
                 class="inline-block px-4 py-1.5 rounded-full bg-primary-container/20 text-primary-container font-label text-xs font-bold uppercase tracking-widest mb-6">
                 Líderes en Soporte Comercial
             </span>
-            <h1 class="font-headline text-5xl md:text-7xl font-extrabold text-white tracking-tight leading-[1.1] mb-8">
-                Conectamos personas con <span class="text-primary-container">oportunidades reales</span>
+            <h1
+                class="font-headline text-6xl md:text-8xl font-black text-transparent bg-clip-text bg-gradient-to-b from-white to-gray-400 leading-[1.05] mb-8 tracking-tighter drop-shadow-[0_0_30px_rgba(255,255,255,0.3)]">
+                Conectamos Personas con <br class="hidden lg:block" />
+                <span
+                    class="text-transparent bg-clip-text bg-gradient-to-r from-primary-container to-[#00ffcc] drop-shadow-[0_0_40px_rgba(0,173,239,0.5)]">
+                    Oportunidades Reales
+                </span>
             </h1>
             <p class="font-body text-lg md:text-xl text-gray-300 mb-12 leading-relaxed max-w-2xl">
                 Forma parte del equipo líder en ventas de seguros y soporte comercial. Tu crecimiento profesional
                 comienza aquí con confianza y resultados tangibles.
             </p>
             <div class="flex flex-col sm:flex-row gap-6">
+                <!-- Premium Glowing Button -->
                 <button type="button" onclick="togglePanel()"
-                    class="border border-white/20 text-white px-10 py-4 rounded-lg font-bold text-lg hover:shadow-2xl hover:shadow-primary/40 transition-all duration-300 text-center">
-                    Postula ahora
+                    class="group relative overflow-hidden bg-primary-container text-on-primary-container px-10 py-4 rounded-lg font-bold text-lg shadow-[0_0_40px_-5px_rgba(0,173,239,0.5)] hover:shadow-[0_0_60px_-5px_rgba(0,173,239,0.8)] transition-all duration-500 text-center hover:-translate-y-1">
+                    <div
+                        class="absolute inset-0 -translate-x-full bg-gradient-to-r from-transparent via-white/50 to-transparent group-hover:animate-sheen">
+                    </div>
+                    <span class="relative z-10 flex items-center justify-center gap-2">Postula ahora <span
+                            class="material-symbols-outlined transition-transform duration-300 group-hover:translate-x-1">arrow_forward</span></span>
                 </button>
                 <a href="#servicios"
-                    class="border border-white/20 text-white px-10 py-4 rounded-lg font-bold text-lg hover:bg-white/10 transition-all duration-300 backdrop-blur-sm text-center">
+                    class="group border border-white/20 text-white px-10 py-4 rounded-lg font-bold text-lg hover:bg-white/10 hover:border-white/40 transition-all duration-300 backdrop-blur-md text-center hover:-translate-y-1">
                     Conoce más
                 </a>
             </div>
         </div>
     </div>
-    <div class="absolute bottom-12 right-8 hidden xl:block reveal">
-        <div class="bg-white/5 backdrop-blur-md border border-white/10 p-6 rounded-xl max-w-xs">
+    <div class="absolute bottom-12 right-8 hidden xl:block reveal animate-float">
+        <div
+            class="bg-white/10 backdrop-blur-xl border border-white/20 shadow-2xl p-6 rounded-2xl max-w-xs group cursor-default hover:bg-white/20 transition-all duration-500">
             <div class="flex items-center gap-4 mb-3">
-                <span class="material-symbols-outlined text-primary-container text-3xl">verified</span>
-                <div class="text-white font-bold text-lg">+15 Años de Confianza</div>
+                <span
+                    class="material-symbols-outlined text-primary-container text-3xl drop-shadow-[0_0_15px_rgba(0,173,239,0.6)]">verified</span>
+                <div class="text-white font-bold text-lg drop-shadow-md">+15 Años de Confianza</div>
             </div>
-            <p class="text-gray-400 text-sm">Arquitectura de confianza en cada interacción comercial y reclutamiento.
+            <p class="text-gray-300 text-sm">Arquitectura de confianza en cada interacción comercial y reclutamiento.
             </p>
         </div>
     </div>
 </section>
 
 <!-- Services Section -->
-<section class="py-24 bg-surface-container-low" id="servicios">
-    <div class="max-w-7xl mx-auto px-8">
+<section class="py-24 relative overflow-hidden bg-[#050A10]" id="servicios">
+    <!-- Dynamic Glowing Mesh Background -->
+    <div class="absolute inset-0 bg-[#050A10] z-0"></div>
+    <div
+        class="absolute top-0 right-0 w-[40rem] h-[40rem] bg-blue-100/60 rounded-full mix-blend-multiply filter blur-[100px] opacity-70 animate-blob z-0">
+    </div>
+    <div class="absolute bottom-0 left-0 w-[40rem] h-[40rem] bg-cyan-100/60 rounded-full mix-blend-multiply filter blur-[100px] opacity-70 animate-blob z-0"
+        style="animation-delay: 3s;"></div>
+
+    <div class="max-w-7xl mx-auto px-8 relative z-10">
         <div class="text-center mb-20 reveal">
-            <span class="font-label text-primary font-bold text-xs uppercase tracking-widest block mb-4">Lo que
+            <span class="font-label text-primary-container font-bold text-xs uppercase tracking-widest block mb-4">Lo
+                que
                 hacemos</span>
-            <h2 class="font-headline text-4xl md:text-5xl font-bold text-on-surface tracking-tight">Nuestros Servicios
+            <h2 class="font-headline text-4xl md:text-5xl font-bold text-white tracking-tight">Nuestros Servicios
                 Especializados</h2>
         </div>
-        <!-- Bento Grid Layout -->
+        <!-- Bento Grid Layout with Dark Glassmorphism -->
         <div class="grid grid-cols-1 md:grid-cols-3 gap-8">
             <div
-                class="md:col-span-2 bg-surface-container-lowest p-10 rounded-xl shadow-sm hover:shadow-xl transition-all duration-500 group reveal">
-                <div class="flex flex-col md:flex-row gap-8 items-start">
+                class="md:col-span-2 bg-[#0A1118]/80 backdrop-blur-3xl border border-white/10 p-10 rounded-3xl shadow-[0_8px_30px_rgb(0,0,0,0.5)] hover:shadow-[0_0_40px_rgba(0,173,239,0.2)] hover:border-primary/50 transition-all duration-500 group reveal hover:-translate-y-2 relative overflow-hidden">
+                <div
+                    class="absolute inset-0 bg-gradient-to-br from-white/5 to-transparent opacity-0 group-hover:opacity-100 transition-opacity duration-700 pointer-events-none">
+                </div>
+                <div class="flex flex-col md:flex-row gap-8 items-start relative z-10">
                     <div
-                        class="bg-primary/5 p-4 rounded-xl text-primary group-hover:bg-primary group-hover:text-white transition-all duration-300">
-                        <span class="material-symbols-outlined text-4xl">health_and_safety</span>
+                        class="bg-primary/20 p-4 rounded-2xl text-primary-container group-hover:bg-primary-container group-hover:text-[#0A1118] transition-all duration-500 shadow-[0_0_15px_rgba(0,173,239,0.2)] group-hover:shadow-[0_0_30px_rgba(0,173,239,0.6)]">
+                        <span
+                            class="material-symbols-outlined text-4xl group-hover:animate-bounce">health_and_safety</span>
                     </div>
                     <div>
-                        <h3 class="font-headline text-2xl font-bold mb-4">Venta de seguros de salud</h3>
-                        <p class="text-on-surface-variant leading-relaxed">Expertos en la colocación de pólizas de salud
+                        <h3
+                            class="font-headline text-2xl font-extrabold mb-4 text-white group-hover:text-primary-container transition-colors">
+                            Venta de Seguros de Salud</h3>
+                        <p class="text-gray-400 leading-relaxed text-lg">Expertos en la colocación de pólizas de salud
                             con un enfoque consultivo que prioriza el bienestar del cliente y la rentabilidad del socio.
                         </p>
                     </div>
                 </div>
             </div>
+
             <div
-                class="bg-surface-container-lowest p-10 rounded-xl shadow-sm hover:shadow-xl transition-all duration-500 group reveal">
+                class="bg-[#0A1118]/80 backdrop-blur-3xl border border-white/10 p-10 rounded-3xl shadow-[0_8px_30px_rgb(0,0,0,0.5)] hover:shadow-[0_0_40px_rgba(0,173,239,0.2)] hover:border-primary/50 transition-all duration-500 group reveal hover:-translate-y-2 relative overflow-hidden">
                 <div
-                    class="bg-primary/5 p-4 rounded-xl text-primary group-hover:bg-primary group-hover:text-white transition-all duration-300 w-fit mb-6">
-                    <span class="material-symbols-outlined text-4xl">support_agent</span>
+                    class="absolute inset-0 bg-gradient-to-b from-white/5 to-transparent opacity-0 group-hover:opacity-100 transition-opacity duration-700 pointer-events-none">
                 </div>
-                <h3 class="font-headline text-2xl font-bold mb-4">Atención al cliente</h3>
-                <p class="text-on-surface-variant">Resolución de dudas y soporte multicanal con los más altos estándares
-                    de calidad NPS.</p>
-            </div>
-            <div
-                class="bg-surface-container-lowest p-10 rounded-xl shadow-sm hover:shadow-xl transition-all duration-500 group reveal">
                 <div
-                    class="bg-primary/5 p-4 rounded-xl text-primary group-hover:bg-primary group-hover:text-white transition-all duration-300 w-fit mb-6">
-                    <span class="material-symbols-outlined text-4xl">query_stats</span>
+                    class="bg-primary/20 p-4 rounded-2xl text-primary-container group-hover:bg-primary-container group-hover:text-[#0A1118] transition-all duration-500 w-fit mb-6 shadow-[0_0_15px_rgba(0,173,239,0.2)] group-hover:shadow-[0_0_30px_rgba(0,173,239,0.6)] relative z-10">
+                    <span
+                        class="material-symbols-outlined text-4xl group-hover:scale-110 transition-transform">support_agent</span>
                 </div>
-                <h3 class="font-headline text-2xl font-bold mb-4">Soporte comercial</h3>
-                <p class="text-on-surface-variant">Inteligencia de ventas y gestión de leads para maximizar el embudo de
-                    conversión de tu empresa.</p>
+                <h3
+                    class="font-headline text-2xl font-extrabold mb-4 text-white group-hover:text-primary-container transition-colors relative z-10">
+                    Atención al Cliente</h3>
+                <p class="text-gray-400 text-lg relative z-10">Resolución de dudas y soporte multicanal con los más
+                    altos estándares de calidad NPS.</p>
             </div>
+
             <div
-                class="md:col-span-2 bg-surface-container-lowest p-10 rounded-xl shadow-sm hover:shadow-xl transition-all duration-500 group overflow-hidden relative reveal">
+                class="bg-[#0A1118]/80 backdrop-blur-3xl border border-white/10 p-10 rounded-3xl shadow-[0_8px_30px_rgb(0,0,0,0.5)] hover:shadow-[0_0_40px_rgba(0,173,239,0.2)] hover:border-primary/50 transition-all duration-500 group reveal hover:-translate-y-2 relative overflow-hidden">
+                <div
+                    class="absolute inset-0 bg-gradient-to-bl from-white/5 to-transparent opacity-0 group-hover:opacity-100 transition-opacity duration-700 pointer-events-none">
+                </div>
+                <div
+                    class="bg-primary/20 p-4 rounded-2xl text-primary-container group-hover:bg-primary-container group-hover:text-[#0A1118] transition-all duration-500 w-fit mb-6 shadow-[0_0_15px_rgba(0,173,239,0.2)] group-hover:shadow-[0_0_30px_rgba(0,173,239,0.6)] relative z-10">
+                    <span
+                        class="material-symbols-outlined text-4xl group-hover:rotate-12 transition-transform">query_stats</span>
+                </div>
+                <h3
+                    class="font-headline text-2xl font-extrabold mb-4 text-white group-hover:text-primary-container transition-colors relative z-10">
+                    Soporte Comercial</h3>
+                <p class="text-gray-400 text-lg relative z-10">Inteligencia de ventas y gestión de leads para maximizar
+                    el embudo de conversión de tu empresa.</p>
+            </div>
+
+            <div
+                class="md:col-span-2 bg-gradient-to-br from-[#001e2e] to-primary p-10 rounded-3xl shadow-xl transition-all duration-500 group overflow-hidden relative reveal hover:shadow-2xl hover:shadow-primary/40 hover:-translate-y-2">
                 <div class="relative z-10">
-                    <h3 class="font-headline text-2xl font-bold mb-4">Outsourcing call center</h3>
-                    <p class="text-on-surface-variant max-w-md">Infraestructura tecnológica y humana de primer nivel.
+                    <h3 class="font-headline text-2xl font-extrabold mb-4 text-white">Outsourcing Call Center</h3>
+                    <p class="text-white/80 text-lg max-w-lg">Infraestructura tecnológica y humana de primer nivel.
                         Delegue su operación de contacto en expertos que cuidan su marca como propia.</p>
                 </div>
+                <div
+                    class="absolute inset-0 bg-[url('https://www.transparenttextures.com/patterns/cubes.png')] opacity-10">
+                </div>
                 <span
-                    class="material-symbols-outlined absolute -right-4 -bottom-4 text-[12rem] text-primary/5 -rotate-12">hub</span>
+                    class="material-symbols-outlined absolute -right-4 -bottom-4 text-[12rem] text-white/5 -rotate-12 group-hover:rotate-0 group-hover:scale-110 transition-all duration-700">hub</span>
             </div>
         </div>
     </div>
 </section>
 
 <!-- Why TrustMarket -->
-<section class="py-24 bg-surface-container-lowest">
+<section class="py-24 bg-[#03070C]">
     <div class="max-w-7xl mx-auto px-8">
         <div class="flex flex-col md:flex-row items-center gap-16">
-            <div class="w-full md:w-1/2 reveal">
-                <img class="rounded-xl shadow-2xl" alt="Professional office meeting with diverse executives"
-                    src="{% static 'img/group-business-talking-meeting.jpg' %}" />
+            <div class="w-full md:w-1/2 reveal h-[400px] md:h-[600px] relative overflow-hidden rounded-2xl"
+                style="-webkit-mask-image: linear-gradient(to bottom, transparent, black 10%, black 90%, transparent); mask-image: linear-gradient(to bottom, transparent, black 10%, black 90%, transparent);">
+                <style>
+                    @keyframes marqueeVertical {
+                        0% {
+                            transform: translateY(0);
+                        }
+
+                        100% {
+                            transform: translateY(-50%);
+                        }
+                    }
+
+                    .animate-marquee-vertical {
+                        animation: marqueeVertical 25s linear infinite;
+                    }
+
+                    .animate-marquee-vertical:hover {
+                        animation-play-state: paused;
+                    }
+                </style>
+                <div class="w-full flex flex-col gap-8 animate-marquee-vertical pt-4">
+                    <!-- Grupo 1 -->
+                    <div
+                        class="bg-[#050A10]/60 backdrop-blur-3xl rounded-xl border border-white/10 shadow-[0_8px_30px_rgb(0,0,0,0.5)] p-10 flex cursor-pointer hover:border-primary/50 transition-all items-center justify-center shrink-0">
+                        <img src="{% static 'img/foto1.png' %}" alt="BancoEstado" title="BancoEstado"
+                            class="h-[100px] object-contain drop-shadow-lg" />
+                    </div>
+                    <div
+                        class="bg-[#050A10]/60 backdrop-blur-3xl rounded-xl border border-white/10 shadow-[0_8px_30px_rgb(0,0,0,0.5)] p-10 flex cursor-pointer hover:border-primary/50 transition-all items-center justify-center shrink-0">
+                        <img src="{% static 'img/foto2.png' %}" alt="Banco de Chile" title="Banco de Chile"
+                            class="h-[100px] object-contain drop-shadow-lg" />
+                    </div>
+                    <div
+                        class="bg-[#050A10]/60 backdrop-blur-3xl rounded-xl border border-white/10 shadow-[0_8px_30px_rgb(0,0,0,0.5)] p-10 flex cursor-pointer hover:border-primary/50 transition-all items-center justify-center shrink-0">
+                        <img src="{% static 'img/foto3.png' %}" alt="RedSalud" title="RedSalud"
+                            class="h-[100px] object-contain drop-shadow-lg" />
+                    </div>
+                    <div
+                        class="bg-[#050A10]/60 backdrop-blur-3xl rounded-xl border border-white/10 shadow-[0_8px_30px_rgb(0,0,0,0.5)] p-10 flex cursor-pointer hover:border-primary/50 transition-all items-center justify-center shrink-0">
+                        <img src="{% static 'img/foto5.png' %}" alt="Socio" title="Socio"
+                            class="h-[100px] object-contain drop-shadow-lg" />
+                    </div>
+                    <div
+                        class="bg-[#050A10]/60 backdrop-blur-3xl rounded-xl border border-white/10 shadow-[0_8px_30px_rgb(0,0,0,0.5)] p-10 flex cursor-pointer hover:border-primary/50 transition-all items-center justify-center shrink-0">
+                        <img src="{% static 'img/foto6.png' %}" alt="Socio" title="Socio"
+                            class="h-[100px] object-contain drop-shadow-lg" />
+                    </div>
+                    <div
+                        class="bg-[#050A10]/60 backdrop-blur-3xl rounded-xl border border-white/10 shadow-[0_8px_30px_rgb(0,0,0,0.5)] p-10 flex cursor-pointer hover:border-primary/50 transition-all items-center justify-center shrink-0">
+                        <img src="{% static 'img/foto7.png' %}" alt="Socio" title="Socio"
+                            class="h-[100px] object-contain drop-shadow-lg" />
+                    </div>
+                    <div
+                        class="bg-[#050A10]/60 backdrop-blur-3xl rounded-xl border border-white/10 shadow-[0_8px_30px_rgb(0,0,0,0.5)] p-10 flex cursor-pointer hover:border-primary/50 transition-all items-center justify-center shrink-0">
+                        <img src="{% static 'img/foto8.png' %}" alt="Socio" title="Socio"
+                            class="h-[100px] object-contain drop-shadow-lg" />
+                    </div>
+                    <div
+                        class="bg-[#050A10]/60 backdrop-blur-3xl rounded-xl border border-white/10 shadow-[0_8px_30px_rgb(0,0,0,0.5)] p-10 flex cursor-pointer hover:border-primary/50 transition-all items-center justify-center shrink-0">
+                        <img src="{% static 'img/foto9.png' %}" alt="Socio" title="Socio"
+                            class="h-[100px] object-contain drop-shadow-lg" />
+                    </div>
+                    <!-- Grupo 2 (Duplicado loop) -->
+                    <div
+                        class="bg-[#050A10]/60 backdrop-blur-3xl rounded-xl border border-white/10 shadow-[0_8px_30px_rgb(0,0,0,0.5)] p-10 flex cursor-pointer hover:border-primary/50 transition-all items-center justify-center shrink-0">
+                        <img src="{% static 'img/foto1.png' %}" alt="BancoEstado" title="BancoEstado"
+                            class="h-[100px] object-contain drop-shadow-lg" />
+                    </div>
+                    <div
+                        class="bg-[#050A10]/60 backdrop-blur-3xl rounded-xl border border-white/10 shadow-[0_8px_30px_rgb(0,0,0,0.5)] p-10 flex cursor-pointer hover:border-primary/50 transition-all items-center justify-center shrink-0">
+                        <img src="{% static 'img/foto2.png' %}" alt="Banco de Chile" title="Banco de Chile"
+                            class="h-[100px] object-contain drop-shadow-lg" />
+                    </div>
+                    <div
+                        class="bg-[#050A10]/60 backdrop-blur-3xl rounded-xl border border-white/10 shadow-[0_8px_30px_rgb(0,0,0,0.5)] p-10 flex cursor-pointer hover:border-primary/50 transition-all items-center justify-center shrink-0">
+                        <img src="{% static 'img/foto3.png' %}" alt="RedSalud" title="RedSalud"
+                            class="h-[100px] object-contain drop-shadow-lg" />
+                    </div>
+                    <div
+                        class="bg-[#050A10]/60 backdrop-blur-3xl rounded-xl border border-white/10 shadow-[0_8px_30px_rgb(0,0,0,0.5)] p-10 flex cursor-pointer hover:border-primary/50 transition-all items-center justify-center shrink-0">
+                        <img src="{% static 'img/foto5.png' %}" alt="Socio" title="Socio"
+                            class="h-[100px] object-contain drop-shadow-lg" />
+                    </div>
+                    <div
+                        class="bg-[#050A10]/60 backdrop-blur-3xl rounded-xl border border-white/10 shadow-[0_8px_30px_rgb(0,0,0,0.5)] p-10 flex cursor-pointer hover:border-primary/50 transition-all items-center justify-center shrink-0">
+                        <img src="{% static 'img/foto6.png' %}" alt="Socio" title="Socio"
+                            class="h-[100px] object-contain drop-shadow-lg" />
+                    </div>
+                    <div
+                        class="bg-[#050A10]/60 backdrop-blur-3xl rounded-xl border border-white/10 shadow-[0_8px_30px_rgb(0,0,0,0.5)] p-10 flex cursor-pointer hover:border-primary/50 transition-all items-center justify-center shrink-0">
+                        <img src="{% static 'img/foto7.png' %}" alt="Socio" title="Socio"
+                            class="h-[100px] object-contain drop-shadow-lg" />
+                    </div>
+                    <div
+                        class="bg-[#050A10]/60 backdrop-blur-3xl rounded-xl border border-white/10 shadow-[0_8px_30px_rgb(0,0,0,0.5)] p-10 flex cursor-pointer hover:border-primary/50 transition-all items-center justify-center shrink-0">
+                        <img src="{% static 'img/foto8.png' %}" alt="Socio" title="Socio"
+                            class="h-[100px] object-contain drop-shadow-lg" />
+                    </div>
+                    <div
+                        class="bg-[#050A10]/60 backdrop-blur-3xl rounded-xl border border-white/10 shadow-[0_8px_30px_rgb(0,0,0,0.5)] p-10 flex cursor-pointer hover:border-primary/50 transition-all items-center justify-center shrink-0">
+                        <img src="{% static 'img/foto9.png' %}" alt="Socio" title="Socio"
+                            class="h-[100px] object-contain drop-shadow-lg" />
+                    </div>
+                </div>
             </div>
             <div class="w-full md:w-1/2 reveal">
                 <span
-                    class="font-label text-primary font-bold text-xs uppercase tracking-widest block mb-4">Valores</span>
-                <h2 class="font-headline text-4xl font-bold text-on-surface mb-12">Por qué confiar en nosotros</h2>
+                    class="font-label text-primary-container font-bold text-xs uppercase tracking-widest block mb-4">Valores</span>
+                <h2
+                    class="font-headline text-5xl md:text-7xl font-black text-transparent bg-clip-text bg-gradient-to-b from-white to-gray-500 leading-[1.05] tracking-tighter mb-12">
+                    Por Qué Confiar en <br class="hidden xl:block" />
+                    <span class="text-primary-container drop-shadow-[0_0_20px_rgba(0,173,239,0.3)]">
+                        Nosotros
+                    </span>
+                </h2>
                 <div class="space-y-10">
-                    <div class="flex gap-6">
+                    <div class="flex gap-6 group cursor-default">
                         <div
-                            class="shrink-0 w-12 h-12 flex items-center justify-center rounded-full bg-secondary-container text-primary font-bold">
+                            class="shrink-0 w-14 h-14 flex items-center justify-center rounded-full bg-primary/10 text-primary font-black text-xl group-hover:bg-primary group-hover:text-white transition-all duration-500 shadow-sm group-hover:shadow-[0_0_20px_rgba(0,173,239,0.5)] group-hover:scale-110">
                             01</div>
-                        <div>
-                            <h4 class="font-bold text-lg mb-2">Experiencia</h4>
-                            <p class="text-on-surface-variant">Décadas acumuladas liderando campañas exitosas en el
+                        <div class="transition-all duration-300 group-hover:translate-x-3">
+                            <h4
+                                class="font-headline font-bold text-2xl mb-2 text-white group-hover:text-primary-container transition-colors">
+                                Experiencia</h4>
+                            <p class="text-gray-400 text-lg">Décadas acumuladas liderando campañas exitosas en el
                                 sector asegurador.</p>
                         </div>
                     </div>
-                    <div class="flex gap-6">
+                    <div class="flex gap-6 group cursor-default">
                         <div
-                            class="shrink-0 w-12 h-12 flex items-center justify-center rounded-full bg-secondary-container text-primary font-bold">
+                            class="shrink-0 w-14 h-14 flex items-center justify-center rounded-full bg-primary/20 text-primary-container font-black text-xl group-hover:bg-primary-container group-hover:text-[#03070C] transition-all duration-500 shadow-sm group-hover:shadow-[0_0_30px_rgba(0,173,239,0.8)] group-hover:scale-110">
                             02</div>
-                        <div>
-                            <h4 class="font-bold text-lg mb-2">Confianza</h4>
-                            <p class="text-on-surface-variant">Procesos transparentes y auditorías constantes para
+                        <div class="transition-all duration-300 group-hover:translate-x-3">
+                            <h4
+                                class="font-headline font-bold text-2xl mb-2 text-white group-hover:text-primary-container transition-colors">
+                                Confianza</h4>
+                            <p class="text-gray-400 text-lg">Procesos transparentes y auditorías constantes para
                                 garantizar la seguridad de los datos.</p>
                         </div>
                     </div>
-                    <div class="flex gap-6">
+                    <div class="flex gap-6 group cursor-default">
                         <div
-                            class="shrink-0 w-12 h-12 flex items-center justify-center rounded-full bg-secondary-container text-primary font-bold">
+                            class="shrink-0 w-14 h-14 flex items-center justify-center rounded-full bg-primary/20 text-primary-container font-black text-xl group-hover:bg-primary-container group-hover:text-[#03070C] transition-all duration-500 shadow-sm group-hover:shadow-[0_0_30px_rgba(0,173,239,0.8)] group-hover:scale-110">
                             03</div>
-                        <div>
-                            <h4 class="font-bold text-lg mb-2">Resultados medibles</h4>
-                            <p class="text-on-surface-variant">KPIs en tiempo real que demuestran el retorno de
+                        <div class="transition-all duration-300 group-hover:translate-x-3">
+                            <h4
+                                class="font-headline font-bold text-2xl mb-2 text-white group-hover:text-primary-container transition-colors">
+                                Resultados Medibles</h4>
+                            <p class="text-gray-400 text-lg">KPIs en tiempo real que demuestran el retorno de
                                 inversión y la eficiencia operativa.</p>
                         </div>
                     </div>
@@ -156,6 +323,81 @@
         </div>
     </div>
 </section>
+
+<!-- Nuestros Socios Section -->
+<section class="py-24 bg-[#050A10] relative overflow-hidden" id="socios">
+    <!-- Subtle Background Glow -->
+    <div
+        class="absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 w-[60rem] h-[60rem] bg-primary/10 rounded-full blur-[120px] opacity-40 pointer-events-none">
+    </div>
+
+    <div class="max-w-7xl mx-auto px-8 relative z-10">
+        <div class="text-center mb-20 reveal">
+            <span
+                class="font-label text-primary-container font-bold text-xs uppercase tracking-widest block mb-4">Liderazgo</span>
+            <h2 class="font-headline text-4xl md:text-5xl font-bold text-white tracking-tight">Nuestros Socios</h2>
+        </div>
+
+        <div class="grid grid-cols-1 md:grid-cols-3 gap-10">
+            <!-- Socio 1: Vladimir Castro -->
+            <div
+                class="group bg-[#0A1118]/80 backdrop-blur-3xl border border-white/10 p-8 rounded-3xl shadow-2xl hover:border-primary/50 transition-all duration-500 reveal hover:-translate-y-2">
+                <div
+                    class="w-32 h-32 mx-auto bg-gradient-to-br from-white/5 to-white/10 rounded-full mb-6 overflow-hidden relative group-hover:shadow-[0_0_30px_rgba(0,173,239,0.3)] transition-all border border-white/10 flex items-center justify-center">
+                    <!-- Photo Placeholder -->
+                    <span
+                        class="material-symbols-outlined text-5xl text-white opacity-20 group-hover:scale-110 transition-transform duration-700">person</span>
+                </div>
+                <div class="text-center">
+                    <h3 class="font-headline text-2xl font-extrabold text-white mb-2">Vladimir Castro</h3>
+                    <span class="text-primary-container text-xs font-bold uppercase tracking-widest block mb-4">Socio
+                        Director</span>
+                    <p class="text-gray-400 leading-relaxed italic">"Ingeniero experto en telecomunicaciones con foco en
+                        innovación técnica."</p>
+                </div>
+            </div>
+
+            <!-- Socio 2: Antonio Huentecura -->
+            <div class="group bg-[#0A1118]/80 backdrop-blur-3xl border border-white/10 p-8 rounded-3xl shadow-2xl hover:border-primary/50 transition-all duration-500 reveal hover:-translate-y-2"
+                style="transition-delay: 0.1s;">
+                <div
+                    class="w-32 h-32 mx-auto bg-gradient-to-br from-white/5 to-white/10 rounded-full mb-6 overflow-hidden relative group-hover:shadow-[0_0_30px_rgba(0,173,239,0.3)] transition-all border border-white/10 flex items-center justify-center">
+                    <!-- Photo Placeholder -->
+                    <span
+                        class="material-symbols-outlined text-5xl text-white opacity-20 group-hover:scale-110 transition-transform duration-700">person</span>
+                </div>
+                <div class="text-center">
+                    <h3 class="font-headline text-2xl font-extrabold text-white mb-2">Antonio Huentecura</h3>
+                    <span class="text-primary-container text-xs font-bold uppercase tracking-widest block mb-4">Socio
+                        Capitalista</span>
+                    <p class="text-gray-400 leading-relaxed italic">"Inversionista estratégico enfocado en la
+                        escalabilidad y sustentabilidad financiera del negocio."</p>
+                </div>
+            </div>
+
+            <!-- Socio 3: Victor Rubilar -->
+            <div class="group bg-[#0A1118]/80 backdrop-blur-3xl border border-white/10 p-8 rounded-3xl shadow-2xl hover:border-primary/50 transition-all duration-500 reveal hover:-translate-y-2"
+                style="transition-delay: 0.2s;">
+                <div
+                    class="aspect-[3/4] bg-gradient-to-br from-white/5 to-white/10 rounded-2xl mb-8 overflow-hidden relative group-hover:shadow-[0_0_30px_rgba(0,173,239,0.2)] transition-all">
+                    <!-- Photo Placeholder -->
+                    <div
+                        class="absolute inset-0 flex items-center justify-center opacity-20 group-hover:scale-110 transition-transform duration-700">
+                        <span class="material-symbols-outlined text-8xl text-white">person</span>
+                    </div>
+                </div>
+                <div class="text-center">
+                    <h3 class="font-headline text-2xl font-extrabold text-white mb-2">Victor Rubilar</h3>
+                    <span class="text-primary-container text-xs font-bold uppercase tracking-widest block mb-4">Socio
+                        Especialista</span>
+                    <p class="text-gray-400 leading-relaxed italic">"Experto en gestión estratégica y desarrollo de
+                        negocios."</p>
+                </div>
+            </div>
+        </div>
+    </div>
+</section>
+
 
 <!-- Trabaja Con Nosotros (Conversion Section) -->
 
@@ -172,6 +414,183 @@
 </div>
 
 
+<!-- Testimonials Carousel (Dark Theme Infinite) -->
+<style>
+    @keyframes marqueeLeft {
+        0% {
+            transform: translateX(0);
+        }
+
+        100% {
+            transform: translateX(-50%);
+        }
+    }
+
+    .animate-marquee-left {
+        animation: marqueeLeft 30s linear infinite;
+    }
+
+    .animate-marquee-left:hover {
+        animation-play-state: paused;
+    }
+</style>
+<section class="py-24 bg-[#0A1118] overflow-hidden border-t border-white/5">
+    <div class="max-w-7xl mx-auto px-8">
+        <div class="text-center mb-16 reveal">
+            <span
+                class="font-label text-primary-container font-bold text-xs uppercase tracking-widest block mb-4">Nuestra
+                Gente</span>
+            <h2 class="font-headline text-4xl md:text-5xl font-bold text-white tracking-tight">Voces de TrustMarket</h2>
+        </div>
+    </div>
+
+    <!-- Contenedor del Carrusel Infinito -->
+    <div class="w-full overflow-hidden py-4">
+        <div class="flex gap-8 w-max animate-marquee-left px-4">
+
+            <!-- GURPO 1 -->
+            <div
+                class="w-[350px] md:w-[400px] shrink-0 bg-[#050A10]/80 backdrop-blur-3xl p-8 rounded-3xl border border-white/10 shadow-[0_8px_30px_rgb(0,0,0,0.5)] hover:border-primary/50 transition-all duration-500 cursor-pointer">
+                <div class="stars mb-4 text-xl text-primary-container drop-shadow-[0_0_10px_rgba(0,173,239,0.5)]">★★★★★
+                </div>
+                <p class="text-gray-400 italic leading-relaxed mb-6 text-lg">"Empecé sin experiencia y hoy lidero un
+                    equipo de 10 personas. La capacitación en TrustMarket es de otro nivel."</p>
+                <div class="flex items-center gap-4">
+                    <div
+                        class="w-14 h-14 rounded-full bg-gradient-to-br from-primary to-blue-600 flex items-center justify-center text-white font-headline font-bold text-xl shrink-0 shadow-[0_0_15px_rgba(0,173,239,0.4)]">
+                        V</div>
+                    <div>
+                        <h4 class="font-bold text-white text-base">Valeria Rojas</h4>
+                        <p class="text-primary-container text-sm">Agente Senior de Ventas</p>
+                    </div>
+                </div>
+            </div>
+
+            <div
+                class="w-[350px] md:w-[400px] shrink-0 bg-[#050A10]/80 backdrop-blur-3xl p-8 rounded-3xl border border-white/10 shadow-[0_8px_30px_rgb(0,0,0,0.5)] hover:border-primary/50 transition-all duration-500 cursor-pointer">
+                <div class="stars mb-4 text-xl text-primary-container drop-shadow-[0_0_10px_rgba(0,173,239,0.5)]">★★★★★
+                </div>
+                <p class="text-gray-400 italic leading-relaxed mb-6 text-lg">"Lo que más valoro es la transparencia. Las
+                    comisiones son claras y siempre se pagan a tiempo. Hay confianza real."</p>
+                <div class="flex items-center gap-4">
+                    <div
+                        class="w-14 h-14 rounded-full bg-gradient-to-br from-blue-800 to-primary flex items-center justify-center text-white font-headline font-bold text-xl shrink-0 shadow-[0_0_15px_rgba(0,173,239,0.4)]">
+                        M</div>
+                    <div>
+                        <h4 class="font-bold text-white text-base">Mateo Silva</h4>
+                        <p class="text-primary-container text-sm">Soporte Técnico</p>
+                    </div>
+                </div>
+            </div>
+
+            <div
+                class="w-[350px] md:w-[400px] shrink-0 bg-[#050A10]/80 backdrop-blur-3xl p-8 rounded-3xl border border-white/10 shadow-[0_8px_30px_rgb(0,0,0,0.5)] hover:border-primary/50 transition-all duration-500 cursor-pointer">
+                <div class="stars mb-4 text-xl text-primary-container drop-shadow-[0_0_10px_rgba(0,173,239,0.5)]">★★★★★
+                </div>
+                <p class="text-gray-400 italic leading-relaxed mb-6 text-lg">"El ambiente laboral es increíble. No somos
+                    solo números, somos arquitectos de la confianza de nuestros clientes."</p>
+                <div class="flex items-center gap-4">
+                    <div
+                        class="w-14 h-14 rounded-full bg-gradient-to-br from-cyan-800 to-primary flex items-center justify-center text-white font-headline font-bold text-xl shrink-0 shadow-[0_0_15px_rgba(0,173,239,0.4)]">
+                        E</div>
+                    <div>
+                        <h4 class="font-bold text-white text-base">Elena Castillo</h4>
+                        <p class="text-primary-container text-sm">Supervisora Comercial</p>
+                    </div>
+                </div>
+            </div>
+
+            <div
+                class="w-[350px] md:w-[400px] shrink-0 bg-[#050A10]/80 backdrop-blur-3xl p-8 rounded-3xl border border-white/10 shadow-[0_8px_30px_rgb(0,0,0,0.5)] hover:border-primary/50 transition-all duration-500 cursor-pointer">
+                <div class="stars mb-4 text-xl text-primary-container drop-shadow-[0_0_10px_rgba(0,173,239,0.5)]">★★★★★
+                </div>
+                <p class="text-gray-400 italic leading-relaxed mb-6 text-lg">"Tengo la flexibilidad que necesitaba para
+                    mis estudios. El apoyo que entregan para crecer en la empresa me motiva."</p>
+                <div class="flex items-center gap-4">
+                    <div
+                        class="w-14 h-14 rounded-full bg-gradient-to-br from-blue-600 to-cyan-500 flex items-center justify-center text-white font-headline font-bold text-xl shrink-0 shadow-[0_0_15px_rgba(0,173,239,0.4)]">
+                        D</div>
+                    <div>
+                        <h4 class="font-bold text-white text-base">Diego Soto</h4>
+                        <p class="text-primary-container text-sm">Atención al Cliente</p>
+                    </div>
+                </div>
+            </div>
+
+            <!-- GRUPO 2 (Duplicado para loop infinito) -->
+            <div
+                class="w-[350px] md:w-[400px] shrink-0 bg-[#050A10]/80 backdrop-blur-3xl p-8 rounded-3xl border border-white/10 shadow-[0_8px_30px_rgb(0,0,0,0.5)] hover:border-primary/50 transition-all duration-500 cursor-pointer">
+                <div class="stars mb-4 text-xl text-primary-container drop-shadow-[0_0_10px_rgba(0,173,239,0.5)]">★★★★★
+                </div>
+                <p class="text-gray-400 italic leading-relaxed mb-6 text-lg">"Empecé sin experiencia y hoy lidero un
+                    equipo de 10 personas. La capacitación en TrustMarket es de otro nivel."</p>
+                <div class="flex items-center gap-4">
+                    <div
+                        class="w-14 h-14 rounded-full bg-gradient-to-br from-primary to-blue-600 flex items-center justify-center text-white font-headline font-bold text-xl shrink-0 shadow-[0_0_15px_rgba(0,173,239,0.4)]">
+                        V</div>
+                    <div>
+                        <h4 class="font-bold text-white text-base">Valeria Rojas</h4>
+                        <p class="text-primary-container text-sm">Agente Senior de Ventas</p>
+                    </div>
+                </div>
+            </div>
+
+            <div
+                class="w-[350px] md:w-[400px] shrink-0 bg-[#050A10]/80 backdrop-blur-3xl p-8 rounded-3xl border border-white/10 shadow-[0_8px_30px_rgb(0,0,0,0.5)] hover:border-primary/50 transition-all duration-500 cursor-pointer">
+                <div class="stars mb-4 text-xl text-primary-container drop-shadow-[0_0_10px_rgba(0,173,239,0.5)]">★★★★★
+                </div>
+                <p class="text-gray-400 italic leading-relaxed mb-6 text-lg">"Lo que más valoro es la transparencia. Las
+                    comisiones son claras y siempre se pagan a tiempo. Hay confianza real."</p>
+                <div class="flex items-center gap-4">
+                    <div
+                        class="w-14 h-14 rounded-full bg-gradient-to-br from-blue-800 to-primary flex items-center justify-center text-white font-headline font-bold text-xl shrink-0 shadow-[0_0_15px_rgba(0,173,239,0.4)]">
+                        M</div>
+                    <div>
+                        <h4 class="font-bold text-white text-base">Mateo Silva</h4>
+                        <p class="text-primary-container text-sm">Soporte Técnico</p>
+                    </div>
+                </div>
+            </div>
+
+            <div
+                class="w-[350px] md:w-[400px] shrink-0 bg-[#050A10]/80 backdrop-blur-3xl p-8 rounded-3xl border border-white/10 shadow-[0_8px_30px_rgb(0,0,0,0.5)] hover:border-primary/50 transition-all duration-500 cursor-pointer">
+                <div class="stars mb-4 text-xl text-primary-container drop-shadow-[0_0_10px_rgba(0,173,239,0.5)]">★★★★★
+                </div>
+                <p class="text-gray-400 italic leading-relaxed mb-6 text-lg">"El ambiente laboral es increíble. No somos
+                    solo números, somos arquitectos de la confianza de nuestros clientes."</p>
+                <div class="flex items-center gap-4">
+                    <div
+                        class="w-14 h-14 rounded-full bg-gradient-to-br from-cyan-800 to-primary flex items-center justify-center text-white font-headline font-bold text-xl shrink-0 shadow-[0_0_15px_rgba(0,173,239,0.4)]">
+                        E</div>
+                    <div>
+                        <h4 class="font-bold text-white text-base">Elena Castillo</h4>
+                        <p class="text-primary-container text-sm">Supervisora Comercial</p>
+                    </div>
+                </div>
+            </div>
+
+            <div
+                class="w-[350px] md:w-[400px] shrink-0 bg-[#050A10]/80 backdrop-blur-3xl p-8 rounded-3xl border border-white/10 shadow-[0_8px_30px_rgb(0,0,0,0.5)] hover:border-primary/50 transition-all duration-500 cursor-pointer">
+                <div class="stars mb-4 text-xl text-primary-container drop-shadow-[0_0_10px_rgba(0,173,239,0.5)]">★★★★★
+                </div>
+                <p class="text-gray-400 italic leading-relaxed mb-6 text-lg">"Tengo la flexibilidad que necesitaba para
+                    mis estudios. El apoyo que entregan para crecer en la empresa me motiva."</p>
+                <div class="flex items-center gap-4">
+                    <div
+                        class="w-14 h-14 rounded-full bg-gradient-to-br from-blue-600 to-cyan-500 flex items-center justify-center text-white font-headline font-bold text-xl shrink-0 shadow-[0_0_15px_rgba(0,173,239,0.4)]">
+                        D</div>
+                    <div>
+                        <h4 class="font-bold text-white text-base">Diego Soto</h4>
+                        <p class="text-primary-container text-sm">Atención al Cliente</p>
+                    </div>
+                </div>
+            </div>
+
+        </div>
+
+    </div>
+</section>
+
 <!-- Confían en Nosotros -->
 <style>
     @keyframes marqueeScroll {
@@ -184,12 +603,13 @@
         }
     }
 </style>
-<section class="py-20 bg-surface-container-low overflow-hidden">
+<section class="py-20 bg-[#050A10] overflow-hidden border-t border-white/5">
     <div class="max-w-7xl mx-auto px-8">
         <div class="text-center mb-14 reveal">
-            <span class="font-label text-primary font-bold text-xs uppercase tracking-widest block mb-4">Nuestros
+            <span
+                class="font-label text-primary-container font-bold text-xs uppercase tracking-widest block mb-4">Nuestros
                 Aliados</span>
-            <h2 class="font-headline text-4xl font-bold text-on-surface tracking-tight">Confían en Nosotros</h2>
+            <h2 class="font-headline text-4xl font-bold text-white tracking-tight">Confían en Nosotros</h2>
         </div>
     </div>
     <!-- Scroll continuo horizontal -->
@@ -202,6 +622,16 @@
                 style="height: 150px; width: auto; max-width: 350px; object-fit: contain; flex-shrink: 0;" />
             <img src="{% static 'img/foto3.png' %}" alt="RedSalud"
                 style="height: 150px; width: auto; max-width: 350px; object-fit: contain; flex-shrink: 0;" />
+            <img src="{% static 'img/foto5.png' %}" alt="Socio"
+                style="height: 150px; width: auto; max-width: 350px; object-fit: contain; flex-shrink: 0;" />
+            <img src="{% static 'img/foto6.png' %}" alt="Socio"
+                style="height: 150px; width: auto; max-width: 350px; object-fit: contain; flex-shrink: 0;" />
+            <img src="{% static 'img/foto7.png' %}" alt="Socio"
+                style="height: 150px; width: auto; max-width: 350px; object-fit: contain; flex-shrink: 0;" />
+            <img src="{% static 'img/foto8.png' %}" alt="Socio"
+                style="height: 150px; width: auto; max-width: 350px; object-fit: contain; flex-shrink: 0;" />
+            <img src="{% static 'img/foto9.png' %}" alt="Socio"
+                style="height: 150px; width: auto; max-width: 350px; object-fit: contain; flex-shrink: 0;" />
             <!-- Duplicados para loop infinito -->
             <img src="{% static 'img/foto1.png' %}" alt="BancoEstado"
                 style="height: 150px; width: auto; max-width: 350px; object-fit: contain; flex-shrink: 0;" />
@@ -209,17 +639,29 @@
                 style="height: 150px; width: auto; max-width: 350px; object-fit: contain; flex-shrink: 0;" />
             <img src="{% static 'img/foto3.png' %}" alt="RedSalud"
                 style="height: 150px; width: auto; max-width: 350px; object-fit: contain; flex-shrink: 0;" />
+            <img src="{% static 'img/foto5.png' %}" alt="Socio"
+                style="height: 150px; width: auto; max-width: 350px; object-fit: contain; flex-shrink: 0;" />
+            <img src="{% static 'img/foto6.png' %}" alt="Socio"
+                style="height: 150px; width: auto; max-width: 350px; object-fit: contain; flex-shrink: 0;" />
+            <img src="{% static 'img/foto7.png' %}" alt="Socio"
+                style="height: 150px; width: auto; max-width: 350px; object-fit: contain; flex-shrink: 0;" />
+            <img src="{% static 'img/foto8.png' %}" alt="Socio"
+                style="height: 150px; width: auto; max-width: 350px; object-fit: contain; flex-shrink: 0;" />
+            <img src="{% static 'img/foto9.png' %}" alt="Socio"
+                style="height: 150px; width: auto; max-width: 350px; object-fit: contain; flex-shrink: 0;" />
         </div>
     </div>
 </section>
 
 <!-- Contact Section -->
-<section class="py-24 bg-surface-container-lowest" id="contacto">
+<section class="py-24 bg-[#0A1118]" id="contacto">
     <div class="max-w-7xl mx-auto px-8">
         <div class="grid grid-cols-1 md:grid-cols-2 gap-16">
             <div class="reveal">
-                <h2 class="font-headline text-5xl font-extrabold mb-8 tracking-tighter">Hablemos de tu futuro</h2>
-                <p class="text-on-surface-variant text-lg mb-12">Ya sea que busques una oportunidad laboral o un aliado
+                <h2
+                    class="font-headline text-5xl font-extrabold mb-8 tracking-tighter text-transparent bg-clip-text bg-gradient-to-r from-white to-gray-400">
+                    Hablemos de tu futuro</h2>
+                <p class="text-gray-400 text-lg mb-12">Ya sea que busques una oportunidad laboral o un aliado
                     comercial, estamos listos para escucharte.</p>
                 <div class="space-y-8">
                     <a class="flex items-center gap-6 group" href="mailto:hola@trustmarket.com">

@@ -9,9 +9,10 @@ class StitchApplicationAdmin(admin.ModelAdmin):
         "full_name",
         "email",
         "phone",
-        "experience",
+        "position",
+        "sales_experience",
         "cv",
         "created_at",
     )
-    list_filter = ("experience", "created_at")
+    list_filter = ("position", "sales_experience", "created_at")
     search_fields = ("full_name", "email", "phone")
