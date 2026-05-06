@@ -1,6 +1,7 @@
 from django.contrib import messages
 from django.core.mail import send_mail
 from django.shortcuts import redirect, render
+from django.urls import reverse
 from .models import postulaciones
 
 from .forms import ApplicationForm
@@ -33,14 +34,14 @@ def apply_view(request):
                 request,
                 "¡Gracias por postular! Tu información fue recibida correctamente.",
             )
-            return redirect("core:home")
+            return redirect(request.POST.get("next") or reverse("jobs:apply"))
         else:
             # Si el formulario no es válido, redirigir a home con mensaje de error
             messages.error(
                 request,
                 "Hubo un error en tu postulación. Por favor revisa los datos e intenta de nuevo.",
             )
-            return redirect("core:home")
+            return render(request, "jobs/apply.html", {"form": form})
     # GET requests a /jobs/ renderizan el formulario standalone
     form = ApplicationForm()
     return render(request, "jobs/apply.html", {"form": form})
@@ -66,4 +67,4 @@ def notify_recruitment_team(application):
         from_email=None,
         recipient_list=["reclutamiento@trustmarket.cl"],
         fail_silently=True,
-    )
+    )

@@ -1,17 +1,52 @@
 {% extends 'base.html' %}
 {% block title %}Trabaja con Nosotros | TrustMarket{% endblock %}
+{% block floating_work_button %}{% endblock %}
 {% block content %}
 <section class="min-h-screen py-20 md:py-32 bg-[#050A10] relative overflow-hidden">
     <!-- Background Glows -->
     <div class="absolute top-0 right-0 w-[40rem] h-[40rem] bg-primary/10 rounded-full blur-[120px] opacity-40 pointer-events-none"></div>
     <div class="absolute bottom-0 left-0 w-[40rem] h-[40rem] bg-primary/10 rounded-full blur-[120px] opacity-40 pointer-events-none"></div>
 
-    <div class="max-w-4xl mx-auto px-8 relative z-10">
+    <div class="max-w-4xl mx-auto px-4 sm:px-6 md:px-8 relative z-10">
         <div class="text-center mb-10 md:mb-16">
             <span class="font-label text-primary-container font-bold text-xs uppercase tracking-widest block mb-4">Reclutamiento</span>
             <h1 class="font-headline text-3xl md:text-6xl font-black text-white mb-6 tracking-tight">Únete a nuestro Equipo</h1>
             <p class="text-gray-400 text-base md:text-lg max-w-2xl mx-auto">Buscamos talentos comprometidos para transformar la industria del soporte comercial.</p>
         </div>
+
+        <section class="mb-10 md:mb-16 rounded-2xl md:rounded-3xl border border-white/10 bg-white/[0.03] p-5 sm:p-7 md:p-10 shadow-2xl">
+            <div class="text-center mb-8 md:mb-10">
+                <span class="font-label text-primary-container font-bold text-xs uppercase tracking-widest block mb-3">Proceso de Selección</span>
+                <h2 class="font-headline text-2xl md:text-4xl font-black text-white mb-4 tracking-tight">¿Cómo es unirse al equipo?</h2>
+                <p class="text-gray-400 text-sm md:text-base max-w-2xl mx-auto">En solo 4 pasos sencillos puedes estar trabajando con nosotros. Sin complicaciones.</p>
+            </div>
+            <div class="grid grid-cols-1 md:grid-cols-4 gap-4 md:gap-5">
+                <div class="rounded-2xl border border-white/10 bg-white/5 p-5 text-center">
+                    <div class="w-11 h-11 rounded-xl bg-primary text-white flex items-center justify-center font-headline font-extrabold mx-auto mb-4">1</div>
+                    <span class="material-symbols-outlined text-primary-container text-3xl mb-3 block">edit_document</span>
+                    <h3 class="font-headline text-white font-bold mb-2">Postulas online</h3>
+                    <p class="text-gray-400 text-sm">Llenas el formulario con tus datos y adjuntas tu CV en PDF o Word.</p>
+                </div>
+                <div class="rounded-2xl border border-white/10 bg-white/5 p-5 text-center">
+                    <div class="w-11 h-11 rounded-xl bg-primary/80 text-white flex items-center justify-center font-headline font-extrabold mx-auto mb-4">2</div>
+                    <span class="material-symbols-outlined text-primary-container text-3xl mb-3 block">phone_in_talk</span>
+                    <h3 class="font-headline text-white font-bold mb-2">Te contactamos</h3>
+                    <p class="text-gray-400 text-sm">Nuestro equipo te llama en menos de 48 horas.</p>
+                </div>
+                <div class="rounded-2xl border border-white/10 bg-white/5 p-5 text-center">
+                    <div class="w-11 h-11 rounded-xl bg-primary/70 text-white flex items-center justify-center font-headline font-extrabold mx-auto mb-4">3</div>
+                    <span class="material-symbols-outlined text-primary-container text-3xl mb-3 block">groups</span>
+                    <h3 class="font-headline text-white font-bold mb-2">Entrevista breve</h3>
+                    <p class="text-gray-400 text-sm">Una conversación relajada para conocerte mejor. Sin presiones.</p>
+                </div>
+                <div class="rounded-2xl border border-white/10 bg-white/5 p-5 text-center">
+                    <div class="w-11 h-11 rounded-xl bg-primary/60 text-white flex items-center justify-center font-headline font-extrabold mx-auto mb-4">4</div>
+                    <span class="material-symbols-outlined text-primary-container text-3xl mb-3 block">celebration</span>
+                    <h3 class="font-headline text-white font-bold mb-2">¡Empiezas!</h3>
+                    <p class="text-gray-400 text-sm">Capacitación pagada desde el primer día. Bienvenido al equipo.</p>
+                </div>
+            </div>
+        </section>
 
         {% if messages %}
             {% for message in messages %}
@@ -22,9 +57,10 @@
             {% endfor %}
         {% endif %}
 
-        <div class="bg-[#0A1118]/80 backdrop-blur-3xl border border-white/10 p-6 md:p-14 rounded-3xl shadow-2xl">
+        <div class="bg-[#0A1118]/80 backdrop-blur-3xl border border-white/10 p-5 sm:p-6 md:p-14 rounded-2xl md:rounded-3xl shadow-2xl">
             <form method="post" enctype="multipart/form-data" class="space-y-10" id="applyForm">
                 {% csrf_token %}
+                <input type="hidden" name="next" value="{{ request.path }}">
                 
                 <div class="grid grid-cols-1 md:grid-cols-2 gap-x-10 gap-y-6 md:gap-y-8">
                     <!-- Name -->
@@ -85,15 +121,15 @@
 
                 <!-- CV Upload -->
                 <div class="space-y-5 pt-4">
-                    <label class="block text-xs font-bold text-white/70 uppercase tracking-widest">📎 Curriculum Vitae (PDF)</label>
+                    <label class="block text-xs font-bold text-white/70 uppercase tracking-widest">📎 Curriculum Vitae (PDF o Word)</label>
                     <div class="relative group">
-                        <label for="{{ form.cv.id_for_label }}" class="flex flex-col items-center justify-center gap-4 p-12 border-2 border-dashed border-white/20 rounded-2xl bg-white/5 cursor-pointer group-hover:border-primary-container group-hover:bg-primary-container/5 transition-all">
+                        <label for="{{ form.cv.id_for_label }}" class="flex flex-col items-center justify-center gap-4 p-6 sm:p-8 md:p-12 border-2 border-dashed border-white/20 rounded-2xl bg-white/5 cursor-pointer group-hover:border-primary-container group-hover:bg-primary-container/5 transition-all">
                             <span class="material-symbols-outlined text-4xl text-primary-container group-hover:animate-bounce">cloud_upload</span>
                             <div class="text-center">
                                 <p class="text-white font-bold text-lg mb-1" id="fileNamePlaceholder">Pincha aquí para subir archivo</p>
-                                <p class="text-gray-500 text-sm">Máxima resolución permitida en formato PDF</p>
+                                <p class="text-gray-500 text-sm">Formatos permitidos: PDF, DOC o DOCX</p>
                             </div>
-                            <input type="file" name="cv" id="{{ form.cv.id_for_label }}" accept=".pdf" class="hidden" onchange="document.getElementById('fileNamePlaceholder').innerText = this.files[0].name; document.getElementById('fileNamePlaceholder').classList.add('text-primary-container')">
+                            <input type="file" name="cv" id="{{ form.cv.id_for_label }}" accept=".pdf,.doc,.docx,application/pdf,application/msword,application/vnd.openxmlformats-officedocument.wordprocessingml.document" class="hidden" onchange="document.getElementById('fileNamePlaceholder').innerText = this.files[0].name; document.getElementById('fileNamePlaceholder').classList.add('text-primary-container')">
                         </label>
                     </div>
                     {% if form.cv.errors %}<p class="text-red-400 text-xs mt-1">{{ form.cv.errors.0 }}</p>{% endif %}
@@ -106,7 +142,7 @@
                 </div>
 
                 <div class="pt-10">
-                    <button type="submit" class="w-full py-5 rounded-2xl bg-gradient-to-r from-primary to-primary-container text-white font-bold text-xl shadow-[0_10px_35px_rgba(0,173,239,0.3)] hover:shadow-[0_15px_45px_rgba(0,173,239,0.5)] hover:-translate-y-1 transition-all duration-300 flex items-center justify-center gap-3">
+                    <button type="submit" class="w-full py-4 md:py-5 rounded-2xl bg-gradient-to-r from-primary to-primary-container text-white font-bold text-base md:text-xl shadow-[0_10px_35px_rgba(0,173,239,0.3)] hover:shadow-[0_15px_45px_rgba(0,173,239,0.5)] hover:-translate-y-1 transition-all duration-300 flex items-center justify-center gap-3">
                         <span class="material-symbols-outlined">send</span>
                         ENVIAR POSTULACIÓN
                     </button>

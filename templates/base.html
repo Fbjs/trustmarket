@@ -111,29 +111,29 @@
             </a>
             <div class="hidden md:flex items-center space-x-8">
                 <a class="text-[#00ADEF] font-bold border-b-2 border-[#00ADEF] pb-1 font-inter text-sm transition-all duration-300"
-                    href="#inicio">Inicio</a>
+                    href="{% url 'core:home' %}#inicio">Inicio</a>
                 <a class="text-gray-300 hover:text-white transition-colors font-inter text-sm"
-                    href="#servicios">Servicios</a>
+                    href="{% url 'core:home' %}#servicios">Servicios</a>
                 <a class="text-gray-300 hover:text-white transition-colors font-inter text-sm"
-                    href="#contacto">Contacto</a>
+                    href="{% url 'core:companies' %}">Empresas</a>
             </div>
             <!-- Mobile hamburger -->
             <button id="mobileMenuBtn" class="md:hidden text-white focus:outline-none" aria-label="Abrir menú">
                 <span class="material-symbols-outlined text-3xl">menu</span>
             </button>
-            <a href="#contacto"
+            <a href="{% url 'core:companies' %}"
                 class="hidden md:inline-block bg-primary-container text-on-primary-container px-6 py-2.5 rounded-lg font-bold text-sm hover:scale-95 transition-all duration-200 ease-in-out">
                 Contactar
             </a>
         </div>
         <!-- Mobile Menu -->        <div id="mobileMenu" class="md:hidden hidden bg-[#3E4449]/95 backdrop-blur-xl px-6 pb-8 space-y-2 border-t border-white/5 shadow-2xl">
-            <a class="block text-[#00ADEF] font-bold text-base py-4 border-b border-white/5" href="#inicio" onclick="closeMobileMenu()">Inicio</a>
-            <a class="block text-gray-300 hover:text-white text-base py-4 border-b border-white/5" href="#servicios"
+            <a class="block text-[#00ADEF] font-bold text-base py-4 border-b border-white/5" href="{% url 'core:home' %}#inicio" onclick="closeMobileMenu()">Inicio</a>
+            <a class="block text-gray-300 hover:text-white text-base py-4 border-b border-white/5" href="{% url 'core:home' %}#servicios"
                 onclick="closeMobileMenu()">Servicios</a>
-            <a class="block text-gray-300 hover:text-white text-base py-4 border-b border-white/5" href="#contacto"
-                onclick="closeMobileMenu()">Contacto</a>
+            <a class="block text-gray-300 hover:text-white text-base py-4 border-b border-white/5" href="{% url 'core:companies' %}"
+                onclick="closeMobileMenu()">Empresas</a>
             <div class="pt-4">
-                <a href="#contacto"
+                <a href="{% url 'core:companies' %}"
                     class="block w-full bg-primary-container text-on-primary-container px-6 py-4 rounded-xl font-bold text-base text-center shadow-lg"
                     onclick="closeMobileMenu()">Contactar</a>
             </div>
@@ -162,9 +162,9 @@
                         Empresa</h5>
                     <ul class="space-y-4">
                         <li><a class="text-gray-500 hover:text-primary-container text-sm transition-colors uppercase tracking-widest"
-                                href="#inicio">Inicio</a></li>
+                                href="{% url 'core:home' %}#inicio">Inicio</a></li>
                         <li><a class="text-gray-500 hover:text-primary-container text-sm transition-colors uppercase tracking-widest"
-                                href="#servicios">Servicios</a></li>
+                                href="{% url 'core:home' %}#servicios">Servicios</a></li>
 
 
                     </ul>
@@ -197,19 +197,21 @@
                 </div>
             </div>
             <div class="pt-8 border-t border-white/5 text-center md:text-left">
-                <p class="text-gray-500 text-xs uppercase tracking-widest">© 2024 TrustMarket. Architected Trust.</p>
+                <p class="text-gray-500 text-xs uppercase tracking-widest">© 2026 TrustMarket. Architected Trust.</p>
             </div>
         </div>
     </footer>
 
     <!-- Floating "Postula aquí" button -->
+    {% block floating_work_button %}
     <div class="floating-work-btn-wrap">
-        <button type="button" class="floating-work-btn" onclick="togglePanel()"
+        <a href="{% url 'jobs:apply' %}" class="floating-work-btn"
             aria-label="Abrir formulario Trabaja con nosotros">
             <span class="floating-work-btn-icon" aria-hidden="true">💼</span>
             <span>Trabaja con nosotros</span>
-        </button>
+        </a>
     </div>
+    {% endblock %}
 
     <!-- Side Panel: Formulario Completo -->
     <div id="sidePanel" class="side-panel">
@@ -261,11 +263,8 @@
                 <div class="form-group">
                     <p class="field-title">🗓️ Disponibilidad <span class="required">*</span></p>
                     <div class="checkbox-grid-panel">
-                        <label><input type="checkbox" name="availability_options" value="manana"> Mañana</label>
-                        <label><input type="checkbox" name="availability_options" value="tarde"> Tarde</label>
-                        <label><input type="checkbox" name="availability_options" value="noche"> Noche</label>
-                        <label><input type="checkbox" name="availability_options" value="fines_semana"> Fines de
-                            semana</label>
+                        <label><input type="checkbox" name="availability_options" value="fulltime"> FullTime</label>
+                        <label><input type="checkbox" name="availability_options" value="freelancer"> Freelancer</label>
                     </div>
                 </div>
                 <button type="button" class="btn-primary btn-full" onclick="openFullscreenFromPanel()">Continuar
@@ -360,26 +359,18 @@
                             <div style="display:flex;flex-wrap:wrap;gap:12px;">
                                 <label
                                     style="display:flex;align-items:center;gap:8px;padding:12px 18px;border:1.5px solid rgba(255,255,255,0.1);border-radius:12px;background:rgba(255,255,255,0.05);color:white;font-size:0.95rem;cursor:pointer;transition:all 0.3s;"><input
-                                        type="checkbox" name="availability_options" value="manana"
-                                        style="accent-color:#00adef;width:18px;height:18px;"> Mañana</label>
+                                        type="checkbox" name="availability_options" value="fulltime"
+                                        style="accent-color:#00adef;width:18px;height:18px;"> FullTime</label>
                                 <label
                                     style="display:flex;align-items:center;gap:8px;padding:12px 18px;border:1.5px solid rgba(255,255,255,0.1);border-radius:12px;background:rgba(255,255,255,0.05);color:white;font-size:0.95rem;cursor:pointer;transition:all 0.3s;"><input
-                                        type="checkbox" name="availability_options" value="tarde"
-                                        style="accent-color:#00adef;width:18px;height:18px;"> Tarde</label>
-                                <label
-                                    style="display:flex;align-items:center;gap:8px;padding:12px 18px;border:1.5px solid rgba(255,255,255,0.1);border-radius:12px;background:rgba(255,255,255,0.05);color:white;font-size:0.95rem;cursor:pointer;transition:all 0.3s;"><input
-                                        type="checkbox" name="availability_options" value="noche"
-                                        style="accent-color:#00adef;width:18px;height:18px;"> Noche</label>
-                                <label
-                                    style="display:flex;align-items:center;gap:8px;padding:12px 18px;border:1.5px solid rgba(255,255,255,0.1);border-radius:12px;background:rgba(255,255,255,0.05);color:white;font-size:0.95rem;cursor:pointer;transition:all 0.3s;"><input
-                                        type="checkbox" name="availability_options" value="fines_semana"
-                                        style="accent-color:#00adef;width:18px;height:18px;"> Fines de semana</label>
+                                        type="checkbox" name="availability_options" value="freelancer"
+                                        style="accent-color:#00adef;width:18px;height:18px;"> Freelancer</label>
                             </div>
                         </div>
                         <div style="display:flex;flex-direction:column;grid-column:1/-1;">
                             <label
                                 style="font-size:0.8rem;font-weight:700;margin-bottom:8px;color:rgba(255,255,255,0.9);text-transform:uppercase;letter-spacing:0.05em;">📎
-                                CV (PDF) <span style="color:#ffae00;">*</span></label>
+                                CV (PDF o Word) <span style="color:#ffae00;">*</span></label>
                             <label
                                 style="display:flex;flex-direction:column;align-items:center;justify-content:center;gap:10px;padding:24px;border:2px dashed rgba(255,255,255,0.2);border-radius:16px;background:rgba(255,255,255,0.02);cursor:pointer;transition:all 0.3s;"
                                 for="cv_upload_fs"
@@ -393,7 +384,7 @@
                                     <span style="font-size:0.8rem;color:rgba(255,255,255,0.6);">No se ha seleccionado
                                         ningún archivo</span>
                                 </div>
-                                <input type="file" name="cv" id="cv_upload_fs" accept=".pdf" required
+                                <input type="file" name="cv" id="cv_upload_fs" accept=".pdf,.doc,.docx,application/pdf,application/msword,application/vnd.openxmlformats-officedocument.wordprocessingml.document" required
                                     style="display:none;"
                                     onchange="document.getElementById('cv_label_text').innerText = this.files[0].name; this.parentElement.querySelector('span:last-child').innerText = 'Archivo seleccionado';">
                             </label>

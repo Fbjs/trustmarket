@@ -27,7 +27,7 @@ class Application(models.Model):
         "Experiencia en ventas", max_length=20, choices=EXPERIENCE_CHOICES, default="sin_experiencia"
     )
     availability = models.TextField("Disponibilidad", blank=True)
-    cv = models.FileField("Adjuntar CV (PDF)", upload_to="cvs/", null=True, blank=True)
+    cv = models.FileField("Adjuntar CV (PDF o Word)", upload_to="cvs/", null=True, blank=True)
     additional_comments = models.TextField("Comentarios adicionales", blank=True)
     created_at = models.DateTimeField("Fecha de postulación", auto_now_add=True)
 
@@ -69,7 +69,7 @@ class StitchApplication(models.Model):
         "Experiencia", max_length=20, choices=Application.EXPERIENCE_CHOICES, default="sin_experiencia"
     )
     availability = models.TextField("Disponibilidad", blank=True)
-    cv = models.FileField("Adjuntar CV (PDF)", upload_to="cvs/")
+    cv = models.FileField("Adjuntar CV (PDF o Word)", upload_to="cvs/")
     additional_comments = models.TextField("Comentarios adicionales", blank=True)
     created_at = models.DateTimeField("Fecha de postulación", auto_now_add=True)
 
@@ -80,3 +80,37 @@ class StitchApplication(models.Model):
 
     def __str__(self) -> str:
         return f"{self.full_name} - {self.created_at:%d/%m/%Y}"
+
+
+class CompanyLead(models.Model):
+    COMPANY_SIZE_CHOICES = [
+        ("1_10", "1-10 colaboradores"),
+        ("11_50", "11-50 colaboradores"),
+        ("51_200", "51-200 colaboradores"),
+        ("200_mas", "200+ colaboradores"),
+    ]
+
+    SERVICE_CHOICES = [
+        ("ventas_seguros", "Venta de seguros de salud"),
+        ("atencion_cliente", "Atencion al cliente"),
+        ("soporte_comercial", "Soporte comercial"),
+        ("outsourcing", "Outsourcing de equipos"),
+        ("otro", "Otro"),
+    ]
+
+    company_name = models.CharField("Empresa", max_length=180)
+    contact_name = models.CharField("Nombre de contacto", max_length=160)
+    email = models.EmailField("Correo corporativo")
+    phone = models.CharField("Telefono / WhatsApp", max_length=30)
+    company_size = models.CharField("Tamano de empresa", max_length=20, choices=COMPANY_SIZE_CHOICES)
+    service_interest = models.CharField("Servicio de interes", max_length=40, choices=SERVICE_CHOICES)
+    message = models.TextField("Necesidad o mensaje", blank=True)
+    created_at = models.DateTimeField("Fecha de contacto", auto_now_add=True)
+
+    class Meta:
+        ordering = ["-created_at"]
+        verbose_name = "Contacto empresa"
+        verbose_name_plural = "Contactos empresas"
+
+    def __str__(self) -> str:
+        return f"{self.company_name} - {self.contact_name}"

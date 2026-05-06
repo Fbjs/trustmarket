@@ -1,7 +1,9 @@
-from django.views.generic import TemplateView, FormView
-from django.urls import reverse_lazy
 from django.contrib import messages
-from jobs.forms import StitchApplicationForm
+from django.core.mail import send_mail
+from django.urls import reverse_lazy
+from django.views.generic import FormView, TemplateView
+
+from jobs.forms import CompanyLeadForm, StitchApplicationForm
 from jobs.models import postulaciones
 from jobs.views import notify_recruitment_team
 
@@ -53,7 +55,7 @@ class HomeView(FormView):
         if error_details:
             mensaje += f" Revisa: {error_details}"
         else:
-            mensaje += " Verifica que el CV sea un archivo PDF válido e intenta de nuevo."
+            mensaje += " Verifica que el CV sea un archivo PDF o Word válido e intenta de nuevo."
         messages.error(self.request, mensaje)
         return super().form_invalid(form)
 
@@ -65,4 +67,31 @@ class AboutView(TemplateView):
 
 class ContactView(TemplateView):
     template_name = "core/contact.html"
-
+
+
+class CompanyLandingView(FormView):
+    template_name = "core/company_landing.html"
+    form_class = CompanyLeadForm
+    success_url = reverse_lazy("core:companies")
+
+    def form_valid(self, form):
+        lead = form.save()
+        send_mail(
+            subject=f"Nuevo contacto empresa: {lead.company_name}",
+            message=(
+                "Se recibio una nueva solicitud de empresa en TrustMarket.\n\n"
+                f"Empresa: {lead.company_name}\n"
+                f"Contacto: {lead.contact_name}\n"
+                f"Correo: {lead.email}\n"
+                f"Telefono: {lead.phone}\n"
+                f"Tamano: {lead.get_company_size_display()}\n"
+                f"Servicio: {lead.get_service_interest_display()}\n"
+                f"Mensaje: {lead.message}\n"
+            ),
+            from_email=None,
+            recipient_list=["contacto@trustmarket.cl"],
+            fail_silently=True,
+        )
+        messages.success(self.request, "Gracias. Recibimos los datos de tu empresa y te contactaremos pronto.")
+        return super().form_valid(form)
+

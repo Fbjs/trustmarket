@@ -1,0 +1,110 @@
+{% extends 'base.html' %}
+{% block title %}Empresas | TrustMarket{% endblock %}
+{% block floating_work_button %}{% endblock %}
+{% block content %}
+<section class="min-h-screen bg-[#050A10] text-white pt-28 pb-16 md:pt-36 md:pb-24 relative overflow-hidden">
+    <div class="absolute inset-0 pointer-events-none">
+        <div class="absolute top-0 right-0 w-[34rem] h-[34rem] bg-primary-container/10 rounded-full blur-[120px]"></div>
+        <div class="absolute bottom-0 left-0 w-[30rem] h-[30rem] bg-primary/15 rounded-full blur-[120px]"></div>
+        <div class="absolute inset-0 opacity-[0.05]"
+            style="background-image:linear-gradient(rgba(255,255,255,0.7) 1px,transparent 1px),linear-gradient(90deg,rgba(255,255,255,0.7) 1px,transparent 1px);background-size:56px 56px;">
+        </div>
+    </div>
+
+    <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 relative z-10">
+        <div class="grid grid-cols-1 lg:grid-cols-[0.9fr_1.1fr] gap-10 lg:gap-16 items-start">
+            <div class="lg:sticky lg:top-28">
+                <span class="font-label text-primary-container font-bold text-xs uppercase tracking-widest block mb-5">Empresas</span>
+                <h1 class="font-headline text-4xl sm:text-5xl md:text-6xl font-black tracking-tight leading-tight mb-6">
+                    Agenda una conversacion comercial
+                </h1>
+                <p class="text-white/70 text-base md:text-lg leading-relaxed mb-8">
+                    Cuentanos sobre tu operacion y nuestro equipo te contactara para evaluar soluciones de ventas,
+                    atencion al cliente o soporte comercial.
+                </p>
+                <div class="grid grid-cols-1 sm:grid-cols-2 gap-4">
+                    <div class="border border-white/10 bg-white/5 rounded-xl p-5">
+                        <span class="material-symbols-outlined text-primary-container mb-3 block">support_agent</span>
+                        <h2 class="font-headline font-bold text-lg mb-2">Equipos expertos</h2>
+                        <p class="text-white/55 text-sm leading-relaxed">Operacion comercial y contact center con foco en conversion y calidad.</p>
+                    </div>
+                    <div class="border border-white/10 bg-white/5 rounded-xl p-5">
+                        <span class="material-symbols-outlined text-primary-container mb-3 block">query_stats</span>
+                        <h2 class="font-headline font-bold text-lg mb-2">Gestion medible</h2>
+                        <p class="text-white/55 text-sm leading-relaxed">Levantamos tus necesidades para proponer un modelo claro y escalable.</p>
+                    </div>
+                </div>
+            </div>
+
+            <div class="bg-white/8 backdrop-blur-3xl border border-white/10 rounded-2xl md:rounded-3xl p-5 sm:p-7 md:p-10 shadow-2xl">
+                <div class="mb-8">
+                    <h2 class="font-headline text-2xl md:text-3xl font-extrabold mb-2">Datos de contacto</h2>
+                    <p class="text-white/55 text-sm md:text-base">Completa el formulario y te responderemos a la brevedad.</p>
+                </div>
+
+                {% if messages %}
+                    {% for message in messages %}
+                        <div class="mb-6 p-4 rounded-xl {% if message.tags == 'error' %}bg-red-500/10 border-red-500/20 text-red-200{% else %}bg-green-500/10 border-green-500/20 text-green-200{% endif %} border flex items-center gap-3">
+                            <span class="material-symbols-outlined">{% if message.tags == 'error' %}error{% else %}check_circle{% endif %}</span>
+                            <span class="font-medium">{{ message }}</span>
+                        </div>
+                    {% endfor %}
+                {% endif %}
+
+                <form method="post" class="space-y-6 company-lead-form">
+                    {% csrf_token %}
+                    <div class="grid grid-cols-1 md:grid-cols-2 gap-5">
+                        <div>
+                            <label class="block text-xs font-bold text-white/70 uppercase tracking-widest mb-2">Empresa</label>
+                            {{ form.company_name }}
+                            {% if form.company_name.errors %}<p class="text-red-300 text-xs mt-2">{{ form.company_name.errors.0 }}</p>{% endif %}
+                        </div>
+                        <div>
+                            <label class="block text-xs font-bold text-white/70 uppercase tracking-widest mb-2">Contacto</label>
+                            {{ form.contact_name }}
+                            {% if form.contact_name.errors %}<p class="text-red-300 text-xs mt-2">{{ form.contact_name.errors.0 }}</p>{% endif %}
+                        </div>
+                        <div>
+                            <label class="block text-xs font-bold text-white/70 uppercase tracking-widest mb-2">Correo</label>
+                            {{ form.email }}
+                            {% if form.email.errors %}<p class="text-red-300 text-xs mt-2">{{ form.email.errors.0 }}</p>{% endif %}
+                        </div>
+                        <div>
+                            <label class="block text-xs font-bold text-white/70 uppercase tracking-widest mb-2">Telefono</label>
+                            {{ form.phone }}
+                            {% if form.phone.errors %}<p class="text-red-300 text-xs mt-2">{{ form.phone.errors.0 }}</p>{% endif %}
+                        </div>
+                        <div>
+                            <label class="block text-xs font-bold text-white/70 uppercase tracking-widest mb-2">Tamano de empresa</label>
+                            {{ form.company_size }}
+                            {% if form.company_size.errors %}<p class="text-red-300 text-xs mt-2">{{ form.company_size.errors.0 }}</p>{% endif %}
+                        </div>
+                        <div>
+                            <label class="block text-xs font-bold text-white/70 uppercase tracking-widest mb-2">Servicio de interes</label>
+                            {{ form.service_interest }}
+                            {% if form.service_interest.errors %}<p class="text-red-300 text-xs mt-2">{{ form.service_interest.errors.0 }}</p>{% endif %}
+                        </div>
+                    </div>
+                    <div>
+                        <label class="block text-xs font-bold text-white/70 uppercase tracking-widest mb-2">Mensaje</label>
+                        {{ form.message }}
+                        {% if form.message.errors %}<p class="text-red-300 text-xs mt-2">{{ form.message.errors.0 }}</p>{% endif %}
+                    </div>
+                    <button type="submit"
+                        class="w-full inline-flex items-center justify-center gap-3 rounded-2xl bg-gradient-to-r from-primary to-primary-container px-6 py-4 md:py-5 font-headline font-bold text-base md:text-lg text-white shadow-[0_10px_35px_rgba(0,173,239,0.28)] hover:-translate-y-1 hover:shadow-[0_15px_45px_rgba(0,173,239,0.42)] transition-all">
+                        <span class="material-symbols-outlined">send</span>
+                        ENVIAR DATOS
+                    </button>
+                </form>
+            </div>
+        </div>
+    </div>
+</section>
+
+<style>
+    .company-lead-form select option {
+        color: #111827;
+        background: #ffffff;
+    }
+</style>
+{% endblock %}
