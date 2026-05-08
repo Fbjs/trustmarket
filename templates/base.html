@@ -110,12 +110,16 @@
                     fetchpriority="high" loading="eager">
             </a>
             <div class="hidden md:flex items-center space-x-8">
-                <a class="text-[#00ADEF] font-bold border-b-2 border-[#00ADEF] pb-1 font-inter text-sm transition-all duration-300"
-                    href="{% url 'core:home' %}#inicio">Inicio</a>
+                <a class="{% if request.resolver_match.url_name == 'home' %}text-[#00ADEF] font-bold border-b-2 border-[#00ADEF] pb-1{% else %}text-gray-300 hover:text-white{% endif %} transition-all duration-300 font-inter text-sm"
+                    href="{% url 'core:home' %}">Inicio</a>
                 <a class="text-gray-300 hover:text-white transition-colors font-inter text-sm"
                     href="{% url 'core:home' %}#servicios">Servicios</a>
                 <a class="text-gray-300 hover:text-white transition-colors font-inter text-sm"
+                    href="{% url 'core:home' %}#como-funciona">Únete</a>
+                <a class="{% if request.resolver_match.url_name == 'companies' %}text-[#00ADEF] font-bold border-b-2 border-[#00ADEF] pb-1{% else %}text-gray-300 hover:text-white{% endif %} transition-all duration-300 font-inter text-sm"
                     href="{% url 'core:companies' %}">Empresas</a>
+                <a class="{% if request.resolver_match.url_name == 'partners' %}text-[#00ADEF] font-bold border-b-2 border-[#00ADEF] pb-1{% else %}text-gray-300 hover:text-white{% endif %} transition-all duration-300 font-inter text-sm"
+                    href="{% url 'core:partners' %}">Partners</a>
             </div>
             <!-- Mobile hamburger -->
             <button id="mobileMenuBtn" class="md:hidden text-white focus:outline-none" aria-label="Abrir menú">
@@ -127,11 +131,15 @@
             </a>
         </div>
         <!-- Mobile Menu -->        <div id="mobileMenu" class="md:hidden hidden bg-[#3E4449]/95 backdrop-blur-xl px-6 pb-8 space-y-2 border-t border-white/5 shadow-2xl">
-            <a class="block text-[#00ADEF] font-bold text-base py-4 border-b border-white/5" href="{% url 'core:home' %}#inicio" onclick="closeMobileMenu()">Inicio</a>
+            <a class="block {% if request.resolver_match.url_name == 'home' %}text-[#00ADEF] font-bold{% else %}text-gray-300{% endif %} text-base py-4 border-b border-white/5" href="{% url 'core:home' %}" onclick="closeMobileMenu()">Inicio</a>
             <a class="block text-gray-300 hover:text-white text-base py-4 border-b border-white/5" href="{% url 'core:home' %}#servicios"
                 onclick="closeMobileMenu()">Servicios</a>
-            <a class="block text-gray-300 hover:text-white text-base py-4 border-b border-white/5" href="{% url 'core:companies' %}"
+            <a class="block text-gray-300 hover:text-white text-base py-4 border-b border-white/5" href="{% url 'core:home' %}#como-funciona"
+                onclick="closeMobileMenu()">Únete</a>
+            <a class="block {% if request.resolver_match.url_name == 'companies' %}text-[#00ADEF] font-bold{% else %}text-gray-300{% endif %} text-base py-4 border-b border-white/5" href="{% url 'core:companies' %}"
                 onclick="closeMobileMenu()">Empresas</a>
+            <a class="block {% if request.resolver_match.url_name == 'partners' %}text-[#00ADEF] font-bold{% else %}text-gray-300{% endif %} text-base py-4 border-b border-white/5" href="{% url 'core:partners' %}"
+                onclick="closeMobileMenu()">Partners</a>
             <div class="pt-4">
                 <a href="{% url 'core:companies' %}"
                     class="block w-full bg-primary-container text-on-primary-container px-6 py-4 rounded-xl font-bold text-base text-center shadow-lg"

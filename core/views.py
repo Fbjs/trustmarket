@@ -95,3 +95,6 @@ class CompanyLandingView(FormView):
         messages.success(self.request, "Gracias. Recibimos los datos de tu empresa y te contactaremos pronto.")
         return super().form_valid(form)
 
+
+class PartnersView(TemplateView):
+    template_name = "core/partners.html"

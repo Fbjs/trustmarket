@@ -4,7 +4,9 @@
 <head>
   <meta charset="utf-8" />
   <meta content="width=device-width, initial-scale=1.0" name="viewport" />
-  <title>TrustMarket | Architected Trust</title>
+  <title>TrustMarket | Architected Trust - Contact Center Chile, Televentas y Cobranzas</title>
+  <meta name="description" content="TrustMarket: Expertos en contact center Chile, televentas y cobranzas, outsourcing de atención al cliente, CRM y automatización. Generamos resultados medibles.">
+  <meta name="keywords" content="contact center Chile, televentas y cobranzas, outsourcing atención cliente, CRM y automatización, gestión comercial, recuperación de cartera">
   {% load static %}
   <script src="https://cdn.tailwindcss.com?plugins=forms,container-queries"></script>
   <link
@@ -269,11 +271,11 @@
         <a class="nav-link text-white/60 hover:text-white font-body text-sm font-medium transition-colors"
           href="#servicios">Servicios</a>
         <a class="nav-link text-white/60 hover:text-white font-body text-sm font-medium transition-colors"
-          href="#como-funciona">¿Cómo funciona?</a>
-        <a class="nav-link text-white/60 hover:text-white font-body text-sm font-medium transition-colors"
-          href="{% url 'jobs:apply' %}">Únete</a>
+          href="#como-funciona">Únete</a>
         <a class="nav-link text-white/60 hover:text-white font-body text-sm font-medium transition-colors"
           href="{% url 'core:companies' %}">Empresas</a>
+        <a class="nav-link text-white/60 hover:text-white font-body text-sm font-medium transition-colors"
+          href="{% url 'core:partners' %}">Partners</a>
       </div>
       <!-- BOTON CONTACTAR ARREGLADO -->
       <a href="{% url 'core:companies' %}"
@@ -287,9 +289,9 @@
       <div class="flex flex-col px-6 py-6 gap-2">
         <a class="text-white/80 hover:text-white text-base font-medium py-3 border-b border-white/5" href="#inicio">Inicio</a>
         <a class="text-white/60 hover:text-white text-base font-medium py-3 border-b border-white/5" href="#servicios">Servicios</a>
-        <a class="text-white/60 hover:text-white text-base font-medium py-3 border-b border-white/5" href="#como-funciona">¿Cómo funciona?</a>
-        <a class="text-white/60 hover:text-white text-base font-medium py-3 border-b border-white/5" href="{% url 'jobs:apply' %}">Únete</a>
+        <a class="text-white/60 hover:text-white text-base font-medium py-3 border-b border-white/5" href="#como-funciona">Únete</a>
         <a class="text-white/60 hover:text-white text-base font-medium py-3 border-b border-white/5" href="{% url 'core:companies' %}">Empresas</a>
+        <a class="text-white/60 hover:text-white text-base font-medium py-3 border-b border-white/5" href="{% url 'core:partners' %}">Partners</a>
         <a href="{% url 'core:companies' %}"
           class="btn-sheen bg-primary-container text-on-primary-container px-5 py-3.5 rounded-xl font-bold text-base text-center mt-4 shadow-lg">Contactar</a>
       </div>
@@ -397,82 +399,319 @@
             <div class="text-white/50 text-sm mt-1">Satisfacción del equipo</div>
           </div>
           <div class="fade-up" style="transition-delay:0.3s">
-            <div class="font-headline text-4xl font-extrabold text-primary-container counter" data-target="5000">0</div>
+        <div class="font-headline text-4xl font-extrabold text-primary-container counter" data-target="5000">0</div>
             <div class="text-white/50 text-sm mt-1">Clientes atendidos</div>
           </div>
         </div>
       </div>
+    <!-- SERVICIOS POR INDUSTRIA (ACORDEÓN PREMIUM) -->
+    <section class="py-24 bg-white relative overflow-hidden" id="servicios">
+      <div class="max-w-7xl mx-auto px-6 lg:px-8 relative z-10">
+        <!-- TRIGGER BANNER (MASTER ACCORDION) -->
+        <div class="fade-up">
+          <button id="master-services-trigger" class="w-full group relative overflow-hidden rounded-[3rem] p-1 bg-gradient-to-r from-primary via-blue-600 to-primary transition-all duration-500 hover:shadow-2xl hover:shadow-primary/40">
+            <div class="bg-white rounded-[2.9rem] px-8 py-12 md:py-16 text-center transition-all group-hover:bg-opacity-90">
+              <span class="font-body text-primary font-bold text-xs uppercase tracking-widest block mb-4">Nuestros Servicios</span>
+              <h2 class="font-headline text-3xl md:text-5xl font-bold text-on-surface tracking-tight mb-6">
+                Descubre nuestra experiencia por <span class="text-primary">Industria</span>
+              </h2>
+              <div class="flex items-center justify-center gap-3">
+                <span class="text-slate-500 font-semibold">Haz clic para explorar nuestras soluciones</span>
+                <div class="w-10 h-10 rounded-full bg-primary/10 text-primary flex items-center justify-center group-hover:bg-primary group-hover:text-white transition-all transform group-hover:rotate-180">
+                  <span class="material-symbols-outlined">expand_more</span>
+                </div>
+              </div>
+            </div>
+          </button>
+        </div>
+
+        <!-- COLLAPSIBLE CONTENT -->
+        <div id="master-services-content" class="max-h-0 opacity-0 overflow-hidden transition-all duration-700 ease-in-out mt-12">
+          <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
+            <!-- SEGUROS -->
+            <div class="industry-card bg-slate-50 rounded-[2.5rem] border border-slate-100 overflow-hidden transition-all duration-300">
+              <button class="sub-accordion-header w-full p-8 text-left group">
+                <div class="flex items-center gap-5 mb-4">
+                  <div class="w-14 h-14 rounded-2xl bg-white shadow-sm flex items-center justify-center text-primary transition-all group-hover:bg-primary group-hover:text-white">
+                    <span class="material-symbols-outlined !text-3xl">shield</span>
+                  </div>
+                  <h3 class="font-headline font-bold text-xl text-slate-800">Seguros</h3>
+                </div>
+                <p class="text-slate-500 text-sm mb-4">Líderes en televentas y gestión de primas para el sector asegurador.</p>
+                <span class="text-primary font-bold text-xs uppercase tracking-wider flex items-center gap-2">
+                  Ver detalles <span class="material-symbols-outlined !text-sm">add</span>
+                </span>
+              </button>
+              <div class="sub-accordion-content max-h-0 overflow-hidden transition-all duration-300 bg-white">
+                <div class="p-8 border-t border-slate-100">
+                  <ul class="space-y-3">
+                    <li class="flex items-center gap-3 text-sm text-slate-600">
+                      <span class="material-symbols-outlined text-primary !text-lg">check_circle</span> Venta de Seguros de Vida y Hogar
+                    </li>
+                    <li class="flex items-center gap-3 text-sm text-slate-600">
+                      <span class="material-symbols-outlined text-primary !text-lg">check_circle</span> Cobranza y recaudación de primas
+                    </li>
+                    <li class="flex items-center gap-3 text-sm text-slate-600">
+                      <span class="material-symbols-outlined text-primary !text-lg">check_circle</span> Atención de siniestros
+                    </li>
+                  </ul>
+                </div>
+              </div>
+            </div>
+
+            <!-- BANCA -->
+            <div class="industry-card bg-slate-50 rounded-[2.5rem] border border-slate-100 overflow-hidden transition-all duration-300">
+              <button class="sub-accordion-header w-full p-8 text-left group">
+                <div class="flex items-center gap-5 mb-4">
+                  <div class="w-14 h-14 rounded-2xl bg-white shadow-sm flex items-center justify-center text-primary transition-all group-hover:bg-primary group-hover:text-white">
+                    <span class="material-symbols-outlined !text-3xl">account_balance</span>
+                  </div>
+                  <h3 class="font-headline font-bold text-xl text-slate-800">Banca</h3>
+                </div>
+                <p class="text-slate-500 text-sm mb-4">Seguridad y eficiencia en gestión financiera y recuperación.</p>
+                <span class="text-primary font-bold text-xs uppercase tracking-wider flex items-center gap-2">
+                  Ver detalles <span class="material-symbols-outlined !text-sm">add</span>
+                </span>
+              </button>
+              <div class="sub-accordion-content max-h-0 overflow-hidden transition-all duration-300 bg-white">
+                <div class="p-8 border-t border-slate-100">
+                  <ul class="space-y-3">
+                    <li class="flex items-center gap-3 text-sm text-slate-600">
+                      <span class="material-symbols-outlined text-primary !text-lg">check_circle</span> Recuperación de cartera activa
+                    </li>
+                    <li class="flex items-center gap-3 text-sm text-slate-600">
+                      <span class="material-symbols-outlined text-primary !text-lg">check_circle</span> Venta de productos bancarios
+                    </li>
+                    <li class="flex items-center gap-3 text-sm text-slate-600">
+                      <span class="material-symbols-outlined text-primary !text-lg">check_circle</span> Soporte banca empresas
+                    </li>
+                  </ul>
+                </div>
+              </div>
+            </div>
+
+            <!-- TELECOM -->
+            <div class="industry-card bg-slate-50 rounded-[2.5rem] border border-slate-100 overflow-hidden transition-all duration-300">
+              <button class="sub-accordion-header w-full p-8 text-left group">
+                <div class="flex items-center gap-5 mb-4">
+                  <div class="w-14 h-14 rounded-2xl bg-white shadow-sm flex items-center justify-center text-primary transition-all group-hover:bg-primary group-hover:text-white">
+                    <span class="material-symbols-outlined !text-3xl">settings_input_antenna</span>
+                  </div>
+                  <h3 class="font-headline font-bold text-xl text-slate-800">Telecom</h3>
+                </div>
+                <p class="text-slate-500 text-sm mb-4">Gestión omnicanal para ventas, soporte y retención técnica.</p>
+                <span class="text-primary font-bold text-xs uppercase tracking-wider flex items-center gap-2">
+                  Ver detalles <span class="material-symbols-outlined !text-sm">add</span>
+                </span>
+              </button>
+              <div class="sub-accordion-content max-h-0 overflow-hidden transition-all duration-300 bg-white">
+                <div class="p-8 border-t border-slate-100">
+                  <ul class="space-y-3">
+                    <li class="flex items-center gap-3 text-sm text-slate-600">
+                      <span class="material-symbols-outlined text-primary !text-lg">check_circle</span> Portabilidad y Up-selling
+                    </li>
+                    <li class="flex items-center gap-3 text-sm text-slate-600">
+                      <span class="material-symbols-outlined text-primary !text-lg">check_circle</span> Mesa de ayuda técnica
+                    </li>
+                    <li class="flex items-center gap-3 text-sm text-slate-600">
+                      <span class="material-symbols-outlined text-primary !text-lg">check_circle</span> Agendamiento técnico
+                    </li>
+                  </ul>
+                </div>
+              </div>
+            </div>
+
+            <!-- RETAIL -->
+            <div class="industry-card bg-slate-50 rounded-[2.5rem] border border-slate-100 overflow-hidden transition-all duration-300">
+              <button class="sub-accordion-header w-full p-8 text-left group">
+                <div class="flex items-center gap-5 mb-4">
+                  <div class="w-14 h-14 rounded-2xl bg-white shadow-sm flex items-center justify-center text-primary transition-all group-hover:bg-primary group-hover:text-white">
+                    <span class="material-symbols-outlined !text-3xl">shopping_bag</span>
+                  </div>
+                  <h3 class="font-headline font-bold text-xl text-slate-800">Retail</h3>
+                </div>
+                <p class="text-slate-500 text-sm mb-4">Atención al cliente y soporte e-commerce de alto volumen.</p>
+                <span class="text-primary font-bold text-xs uppercase tracking-wider flex items-center gap-2">
+                  Ver detalles <span class="material-symbols-outlined !text-sm">add</span>
+                </span>
+              </button>
+              <div class="sub-accordion-content max-h-0 overflow-hidden transition-all duration-300 bg-white">
+                <div class="p-8 border-t border-slate-100">
+                  <ul class="space-y-3">
+                    <li class="flex items-center gap-3 text-sm text-slate-600">
+                      <span class="material-symbols-outlined text-primary !text-lg">check_circle</span> Servicio post-venta y reclamos
+                    </li>
+                    <li class="flex items-center gap-3 text-sm text-slate-600">
+                      <span class="material-symbols-outlined text-primary !text-lg">check_circle</span> Seguimiento de pedidos
+                    </li>
+                    <li class="flex items-center gap-3 text-sm text-slate-600">
+                      <span class="material-symbols-outlined text-primary !text-lg">check_circle</span> Fidelización de clientes
+                    </li>
+                  </ul>
+                </div>
+              </div>
+            </div>
+
+            <!-- COBRANZAS -->
+            <div class="industry-card bg-slate-50 rounded-[2.5rem] border border-slate-100 overflow-hidden transition-all duration-300">
+              <button class="sub-accordion-header w-full p-8 text-left group">
+                <div class="flex items-center gap-5 mb-4">
+                  <div class="w-14 h-14 rounded-2xl bg-white shadow-sm flex items-center justify-center text-primary transition-all group-hover:bg-primary group-hover:text-white">
+                    <span class="material-symbols-outlined !text-3xl">payments</span>
+                  </div>
+                  <h3 class="font-headline font-bold text-xl text-slate-800">Cobranzas</h3>
+                </div>
+                <p class="text-slate-500 text-sm mb-4">Estrategias inteligentes para la recuperación de activos.</p>
+                <span class="text-primary font-bold text-xs uppercase tracking-wider flex items-center gap-2">
+                  Ver detalles <span class="material-symbols-outlined !text-sm">add</span>
+                </span>
+              </button>
+              <div class="sub-accordion-content max-h-0 overflow-hidden transition-all duration-300 bg-white">
+                <div class="p-8 border-t border-slate-100">
+                  <ul class="space-y-3">
+                    <li class="flex items-center gap-3 text-sm text-slate-600">
+                      <span class="material-symbols-outlined text-primary !text-lg">check_circle</span> Cobranza temprana y castigada
+                    </li>
+                    <li class="flex items-center gap-3 text-sm text-slate-600">
+                      <span class="material-symbols-outlined text-primary !text-lg">check_circle</span> Negociación de convenios
+                    </li>
+                    <li class="flex items-center gap-3 text-sm text-slate-600">
+                      <span class="material-symbols-outlined text-primary !text-lg">check_circle</span> Localización y regularización
+                    </li>
+                  </ul>
+                </div>
+              </div>
+            </div>
+
+            <!-- SERVICIOS -->
+            <div class="industry-card bg-slate-50 rounded-[2.5rem] border border-slate-100 overflow-hidden transition-all duration-300">
+              <button class="sub-accordion-header w-full p-8 text-left group">
+                <div class="flex items-center gap-5 mb-4">
+                  <div class="w-14 h-14 rounded-2xl bg-white shadow-sm flex items-center justify-center text-primary transition-all group-hover:bg-primary group-hover:text-white">
+                    <span class="material-symbols-outlined !text-3xl">handshake</span>
+                  </div>
+                  <h3 class="font-headline font-bold text-xl text-slate-800">Servicios</h3>
+                </div>
+                <p class="text-slate-500 text-sm mb-4">Outsourcing BPO personalizado para cualquier vertical de negocio.</p>
+                <span class="text-primary font-bold text-xs uppercase tracking-wider flex items-center gap-2">
+                  Ver detalles <span class="material-symbols-outlined !text-sm">add</span>
+                </span>
+              </button>
+              <div class="sub-accordion-content max-h-0 overflow-hidden transition-all duration-300 bg-white">
+                <div class="p-8 border-t border-slate-100">
+                  <ul class="space-y-3">
+                    <li class="flex items-center gap-3 text-sm text-slate-600">
+                      <span class="material-symbols-outlined text-primary !text-lg">check_circle</span> Mesa de ayuda personalizada
+                    </li>
+                    <li class="flex items-center gap-3 text-sm text-slate-600">
+                      <span class="material-symbols-outlined text-primary !text-lg">check_circle</span> Agendamiento de horas y citas
+                    </li>
+                    <li class="flex items-center gap-3 text-sm text-slate-600">
+                      <span class="material-symbols-outlined text-primary !text-lg">check_circle</span> Encuestas y estudios de mercado
+                    </li>
+                  </ul>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <script>
+        const masterTrigger = document.getElementById('master-services-trigger');
+        const masterContent = document.getElementById('master-services-content');
+
+        masterTrigger.addEventListener('click', () => {
+          if (masterContent.style.maxHeight && masterContent.style.maxHeight !== '0px') {
+            masterContent.style.maxHeight = '0px';
+            masterContent.style.opacity = '0';
+          } else {
+            masterContent.style.maxHeight = '2000px';
+            masterContent.style.opacity = '1';
+          }
+        });
+
+        document.querySelectorAll('.sub-accordion-header').forEach(header => {
+          header.addEventListener('click', () => {
+            const content = header.nextElementSibling;
+            const icon = header.querySelector('span:last-child span');
+            
+            if (content.style.maxHeight && content.style.maxHeight !== '0px') {
+              content.style.maxHeight = '0px';
+              icon.textContent = 'add';
+            } else {
+              content.style.maxHeight = content.scrollHeight + "px";
+              icon.textContent = 'remove';
+            }
+          });
+        });
+      </script>
     </section>
 
-    <!-- SERVICES -->
-    <section class="py-16 md:py-24 bg-white relative overflow-hidden" id="servicios">
-      <div class="max-w-7xl mx-auto px-6 lg:px-8 relative z-10">
-        <div class="text-center mb-20 fade-up">
-          <span class="font-body text-primary font-bold text-xs uppercase tracking-widest block mb-4">Lo que
-            hacemos</span>
-          <h2 class="font-headline text-4xl md:text-5xl font-bold text-on-surface tracking-tight">Nuestros
-            Servicios<br />Especializados</h2>
-        </div>
-        <div class="grid grid-cols-1 gap-6 max-w-4xl mx-auto">
-          <div
-            class="card-lift bg-white p-10 rounded-2xl shadow-sm border border-outline-variant/20 group fade-up">
-            <div class="flex flex-col md:flex-row gap-8 items-start">
-              <div
-                class="shrink-0 bg-primary/5 p-5 rounded-2xl text-primary group-hover:bg-primary group-hover:text-white transition-all duration-300">
-                <span class="material-symbols-outlined text-4xl"
-                  style="font-variation-settings:'FILL' 1;">health_and_safety</span>
+    <!-- PROPUESTA DE VALOR -->
+    <section class="py-24 bg-[#0d1b2a] relative overflow-hidden">
+      <!-- Blobs decorativos -->
+      <div class="absolute top-0 right-0 w-96 h-96 bg-primary/20 blur-[120px] rounded-full pointer-events-none"></div>
+      <div class="absolute bottom-0 left-0 w-96 h-96 bg-primary-container/10 blur-[120px] rounded-full pointer-events-none"></div>
+      
+      <div class="max-w-7xl mx-auto px-6 relative z-10">
+        <div class="grid lg:grid-cols-2 gap-16 items-center">
+          <div class="fade-up">
+            <span class="text-primary-container font-bold text-xs uppercase tracking-[0.2em] block mb-6">Propuesta de Valor</span>
+            <h2 class="text-4xl md:text-5xl lg:text-6xl font-extrabold text-white leading-tight mb-8">¿Por qué Trust Market?</h2>
+            <p class="text-white/80 text-lg md:text-xl leading-relaxed mb-10">
+              No somos solo un call center. Somos un <span class="text-primary-container font-bold">partner estratégico</span> que integra ventas, cobranzas, atención y tecnología para hacer crecer tu negocio con control y resultados medibles.
+            </p>
+            
+            <div class="inline-flex flex-col gap-6 p-8 bg-white/5 backdrop-blur-sm rounded-3xl border border-white/10">
+              <div class="flex items-start gap-4">
+                <div class="w-8 h-8 rounded-full bg-primary-container/20 text-primary-container flex items-center justify-center shrink-0 mt-1">
+                  <span class="material-symbols-outlined !text-lg">hub</span>
+                </div>
+                <p class="text-white text-lg font-medium leading-tight italic">"Integramos contact center, tecnología y estrategia para generar resultados reales y medibles."</p>
               </div>
-              <div>
-                <h3 class="font-headline text-2xl font-bold mb-3">Venta de seguros de salud</h3>
-                <p class="text-on-surface-variant leading-relaxed">Expertos en la colocación de pólizas de salud con un
-                  enfoque consultivo que prioriza el bienestar del cliente y la rentabilidad del socio.</p>
-              </div>
             </div>
           </div>
-          <div class="card-lift bg-white p-10 rounded-2xl shadow-sm border border-outline-variant/20 group fade-up"
-            style="transition-delay:0.1s">
-            <div
-              class="bg-primary/5 p-4 rounded-xl text-primary group-hover:bg-primary group-hover:text-white transition-all duration-300 w-fit mb-6">
-              <span class="material-symbols-outlined text-4xl"
-                style="font-variation-settings:'FILL' 1;">support_agent</span>
-            </div>
-            <h3 class="font-headline text-2xl font-bold mb-3">Atención al cliente</h3>
-            <p class="text-on-surface-variant">Resolución de dudas y soporte multicanal con los más altos est?ndares de
-              calidad NPS.</p>
-          </div>
-          <div class="card-lift bg-white p-10 rounded-2xl shadow-sm border border-outline-variant/20 group fade-up"
-            style="transition-delay:0.15s">
-            <div
-              class="bg-primary/5 p-4 rounded-xl text-primary group-hover:bg-primary group-hover:text-white transition-all duration-300 w-fit mb-6">
-              <span class="material-symbols-outlined text-4xl"
-                style="font-variation-settings:'FILL' 1;">query_stats</span>
-            </div>
-            <h3 class="font-headline text-2xl font-bold mb-3">Soporte comercial</h3>
-            <p class="text-on-surface-variant">Inteligencia de ventas y gestión de leads para maximizar el embudo de
-              conversión.</p>
-          </div>
-          <div
-            class="card-lift bg-gradient-to-br from-primary to-[#004c6c] p-10 rounded-2xl shadow-sm overflow-hidden relative fade-up"
-            style="transition-delay:0.2s">
-            <div class="relative z-10">
-              <h3 class="font-headline text-2xl font-bold text-white mb-3">Outsourcing call center</h3>
-              <p class="text-white/70 max-w-md">Infraestructura tecnológica y humana de primer nivel. Delegue su
-                operación de contacto en expertos que cuidan su marca como propia.</p>
-            </div>
-            <span
-              class="material-symbols-outlined absolute -right-4 -bottom-4 text-[11rem] text-white/5 -rotate-12">hub</span>
-          </div>
-          <div class="card-lift bg-white p-10 rounded-2xl shadow-sm border border-outline-variant/20 group fade-up"
-            style="transition-delay:0.25s">
-            <div class="flex flex-col md:flex-row gap-8 items-start">
-              <div
-                class="shrink-0 bg-primary/5 p-5 rounded-2xl text-primary group-hover:bg-primary group-hover:text-white transition-all duration-300">
-                <span class="material-symbols-outlined text-4xl"
-                  style="font-variation-settings:'FILL' 1;">payments</span>
-              </div>
-              <div>
-                <h3 class="font-headline text-2xl font-bold mb-3">Cobranzas</h3>
-                <p class="text-on-surface-variant leading-relaxed">Gestion de recuperacion y seguimiento de pagos con comunicacion clara, ordenada y orientada a resultados.</p>
+          
+          <div class="fade-up" style="transition-delay: 200ms;">
+            <div class="bg-white/5 backdrop-blur-md border border-white/10 rounded-[2.5rem] p-8 md:p-12">
+              <h3 class="text-2xl font-bold text-white mb-8 border-b border-white/10 pb-6">Transformamos tu operación en una <span class="text-primary-container">ventaja competitiva</span>:</h3>
+              
+              <div class="space-y-6">
+                <div class="flex items-start gap-4 group">
+                  <div class="w-6 h-6 rounded-full bg-green-500/20 text-green-400 flex items-center justify-center shrink-0 mt-1 group-hover:bg-green-500 group-hover:text-white transition-all">
+                    <span class="material-symbols-outlined !text-sm">check</span>
+                  </div>
+                  <p class="text-white/80 text-base md:text-lg">Aumentamos tus ventas con gestión comercial efectiva</p>
+                </div>
+
+                <div class="flex items-start gap-4 group">
+                  <div class="w-6 h-6 rounded-full bg-green-500/20 text-green-400 flex items-center justify-center shrink-0 mt-1 group-hover:bg-green-500 group-hover:text-white transition-all">
+                    <span class="material-symbols-outlined !text-sm">check</span>
+                  </div>
+                  <p class="text-white/80 text-base md:text-lg">Mejoramos la recuperación de cartera con estrategias de cobranza inteligentes</p>
+                </div>
+
+                <div class="flex items-start gap-4 group">
+                  <div class="w-6 h-6 rounded-full bg-green-500/20 text-green-400 flex items-center justify-center shrink-0 mt-1 group-hover:bg-green-500 group-hover:text-white transition-all">
+                    <span class="material-symbols-outlined !text-sm">check</span>
+                  </div>
+                  <p class="text-white/80 text-base md:text-lg">Elevamos la experiencia de tus clientes en cada punto de contacto</p>
+                </div>
+
+                <div class="flex items-start gap-4 group">
+                  <div class="w-6 h-6 rounded-full bg-green-500/20 text-green-400 flex items-center justify-center shrink-0 mt-1 group-hover:bg-green-500 group-hover:text-white transition-all">
+                    <span class="material-symbols-outlined !text-sm">check</span>
+                  </div>
+                  <p class="text-white/80 text-base md:text-lg">Optimizamos tus procesos con automatización y eficiencia operativa</p>
+                </div>
+
+                <div class="flex items-start gap-4 group">
+                  <div class="w-6 h-6 rounded-full bg-green-500/20 text-green-400 flex items-center justify-center shrink-0 mt-1 group-hover:bg-green-500 group-hover:text-white transition-all">
+                    <span class="material-symbols-outlined !text-sm">check</span>
+                  </div>
+                  <p class="text-white/80 text-base md:text-lg">Te damos visibilidad total del negocio con información en tiempo real</p>
+                </div>
               </div>
             </div>
           </div>
@@ -542,6 +781,27 @@
         </div>
       </div>
     </section>
+
+    <!-- CTA BANNER -->
+    <section class="py-12 bg-white">
+      <div class="max-w-7xl mx-auto px-6 lg:px-8">
+        <div class="bg-primary/5 rounded-[2.5rem] p-8 md:p-12 border border-primary/10 flex flex-col md:flex-row items-center justify-between gap-8">
+          <div class="max-w-2xl">
+            <h3 class="text-2xl md:text-3xl font-bold text-slate-800 mb-4">¿Hacemos algo grande juntos?</h3>
+            <p class="text-slate-600 text-base md:text-lg">Ya sea que busques potenciar tu empresa o dar un salto en tu carrera, estamos listos para acompañarte en el camino.</p>
+          </div>
+          <div class="flex flex-col sm:flex-row gap-4 shrink-0 w-full md:w-auto">
+            <a href="{% url 'core:companies' %}" class="btn-sheen whitespace-nowrap bg-primary text-white px-8 py-4 rounded-2xl font-bold text-lg hover:shadow-2xl transition-all text-center">
+              Soy Empresa
+            </a>
+            <a href="{% url 'jobs:apply' %}" class="whitespace-nowrap bg-white text-primary border-2 border-primary px-8 py-4 rounded-2xl font-bold text-lg hover:bg-primary/5 transition-all text-center">
+              Busco Trabajo
+            </a>
+          </div>
+        </div>
+      </div>
+    </section>
+
 
     <!-- WHY TRUSTMARKET -->
     <section class="py-16 md:py-24 bg-white relative overflow-hidden">
@@ -807,7 +1067,13 @@
           <!-- GURPO 1 -->
           <div
             class="w-[280px] sm:w-[350px] md:w-[400px] shrink-0 card-lift bg-surface-container-low p-6 md:p-8 rounded-2xl border border-outline-variant/10 shadow-sm cursor-pointer">
-            <div class="stars mb-4 text-lg text-tertiary-container">?????</div>
+            <div class="stars mb-4 text-lg flex gap-0.5">
+              <span class="material-symbols-outlined text-[#f59e0b] !text-lg" style="font-variation-settings:'FILL' 1;">star</span>
+              <span class="material-symbols-outlined text-[#f59e0b] !text-lg" style="font-variation-settings:'FILL' 1;">star</span>
+              <span class="material-symbols-outlined text-[#f59e0b] !text-lg" style="font-variation-settings:'FILL' 1;">star</span>
+              <span class="material-symbols-outlined text-[#f59e0b] !text-lg" style="font-variation-settings:'FILL' 1;">star</span>
+              <span class="material-symbols-outlined text-[#f59e0b] !text-lg" style="font-variation-settings:'FILL' 1;">star</span>
+            </div>
             <p class="text-on-surface-variant italic leading-relaxed mb-6 text-sm">"Empecé sin experiencia y hoy lidero
               un equipo de 10 personas. La capacitación en TrustMarket es de otro nivel."</p>
             <div class="flex items-center gap-3">
@@ -823,7 +1089,13 @@
 
           <div
             class="w-[280px] sm:w-[350px] md:w-[400px] shrink-0 card-lift bg-surface-container-low p-6 md:p-8 rounded-2xl border border-outline-variant/10 shadow-sm cursor-pointer">
-            <div class="stars mb-4 text-lg text-tertiary-container">?????</div>
+            <div class="stars mb-4 text-lg flex gap-0.5">
+              <span class="material-symbols-outlined text-[#f59e0b] !text-lg" style="font-variation-settings:'FILL' 1;">star</span>
+              <span class="material-symbols-outlined text-[#f59e0b] !text-lg" style="font-variation-settings:'FILL' 1;">star</span>
+              <span class="material-symbols-outlined text-[#f59e0b] !text-lg" style="font-variation-settings:'FILL' 1;">star</span>
+              <span class="material-symbols-outlined text-[#f59e0b] !text-lg" style="font-variation-settings:'FILL' 1;">star</span>
+              <span class="material-symbols-outlined text-[#f59e0b] !text-lg" style="font-variation-settings:'FILL' 1;">star</span>
+            </div>
             <p class="text-on-surface-variant italic leading-relaxed mb-6 text-sm">"Lo que más valoro es la
               transparencia. Las comisiones son claras y siempre se pagan a tiempo. Hay confianza real."</p>
             <div class="flex items-center gap-3">
@@ -839,7 +1111,13 @@
 
           <div
             class="w-[280px] sm:w-[350px] md:w-[400px] shrink-0 card-lift bg-surface-container-low p-6 md:p-8 rounded-2xl border border-outline-variant/10 shadow-sm cursor-pointer">
-            <div class="stars mb-4 text-lg text-tertiary-container">?????</div>
+            <div class="stars mb-4 text-lg flex gap-0.5">
+              <span class="material-symbols-outlined text-[#f59e0b] !text-lg" style="font-variation-settings:'FILL' 1;">star</span>
+              <span class="material-symbols-outlined text-[#f59e0b] !text-lg" style="font-variation-settings:'FILL' 1;">star</span>
+              <span class="material-symbols-outlined text-[#f59e0b] !text-lg" style="font-variation-settings:'FILL' 1;">star</span>
+              <span class="material-symbols-outlined text-[#f59e0b] !text-lg" style="font-variation-settings:'FILL' 1;">star</span>
+              <span class="material-symbols-outlined text-[#f59e0b] !text-lg" style="font-variation-settings:'FILL' 1;">star</span>
+            </div>
             <p class="text-on-surface-variant italic leading-relaxed mb-6 text-sm">"El ambiente laboral es increíble. No
               somos solo números, somos arquitectos de la confianza de nuestros clientes."</p>
             <div class="flex items-center gap-3">
@@ -855,7 +1133,13 @@
 
           <div
             class="w-[280px] sm:w-[350px] md:w-[400px] shrink-0 card-lift bg-surface-container-low p-6 md:p-8 rounded-2xl border border-outline-variant/10 shadow-sm cursor-pointer">
-            <div class="stars mb-4 text-lg text-tertiary-container">?????</div>
+            <div class="stars mb-4 text-lg flex gap-0.5">
+              <span class="material-symbols-outlined text-[#f59e0b] !text-lg" style="font-variation-settings:'FILL' 1;">star</span>
+              <span class="material-symbols-outlined text-[#f59e0b] !text-lg" style="font-variation-settings:'FILL' 1;">star</span>
+              <span class="material-symbols-outlined text-[#f59e0b] !text-lg" style="font-variation-settings:'FILL' 1;">star</span>
+              <span class="material-symbols-outlined text-[#f59e0b] !text-lg" style="font-variation-settings:'FILL' 1;">star</span>
+              <span class="material-symbols-outlined text-[#f59e0b] !text-lg" style="font-variation-settings:'FILL' 1;">star</span>
+            </div>
             <p class="text-on-surface-variant italic leading-relaxed mb-6 text-sm">"Tengo la flexibilidad que necesitaba
               para mis estudios. El apoyo que entregan para crecer en la empresa me motiva a diario."</p>
             <div class="flex items-center gap-3">
@@ -872,7 +1156,13 @@
           <!-- GURPO 2 (Duplicado para loop infinito) -->
           <div
             class="w-[280px] sm:w-[350px] md:w-[400px] shrink-0 card-lift bg-surface-container-low p-6 md:p-8 rounded-2xl border border-outline-variant/10 shadow-sm cursor-pointer">
-            <div class="stars mb-4 text-lg text-tertiary-container">?????</div>
+            <div class="stars mb-4 text-lg flex gap-0.5">
+              <span class="material-symbols-outlined text-[#f59e0b] !text-lg" style="font-variation-settings:'FILL' 1;">star</span>
+              <span class="material-symbols-outlined text-[#f59e0b] !text-lg" style="font-variation-settings:'FILL' 1;">star</span>
+              <span class="material-symbols-outlined text-[#f59e0b] !text-lg" style="font-variation-settings:'FILL' 1;">star</span>
+              <span class="material-symbols-outlined text-[#f59e0b] !text-lg" style="font-variation-settings:'FILL' 1;">star</span>
+              <span class="material-symbols-outlined text-[#f59e0b] !text-lg" style="font-variation-settings:'FILL' 1;">star</span>
+            </div>
             <p class="text-on-surface-variant italic leading-relaxed mb-6 text-sm">"Empecé sin experiencia y hoy lidero
               un equipo de 10 personas. La capacitación en TrustMarket es de otro nivel."</p>
             <div class="flex items-center gap-3">
@@ -888,7 +1178,13 @@
 
           <div
             class="w-[280px] sm:w-[350px] md:w-[400px] shrink-0 card-lift bg-surface-container-low p-6 md:p-8 rounded-2xl border border-outline-variant/10 shadow-sm cursor-pointer">
-            <div class="stars mb-4 text-lg text-tertiary-container">?????</div>
+            <div class="stars mb-4 text-lg flex gap-0.5">
+              <span class="material-symbols-outlined text-[#f59e0b] !text-lg" style="font-variation-settings:'FILL' 1;">star</span>
+              <span class="material-symbols-outlined text-[#f59e0b] !text-lg" style="font-variation-settings:'FILL' 1;">star</span>
+              <span class="material-symbols-outlined text-[#f59e0b] !text-lg" style="font-variation-settings:'FILL' 1;">star</span>
+              <span class="material-symbols-outlined text-[#f59e0b] !text-lg" style="font-variation-settings:'FILL' 1;">star</span>
+              <span class="material-symbols-outlined text-[#f59e0b] !text-lg" style="font-variation-settings:'FILL' 1;">star</span>
+            </div>
             <p class="text-on-surface-variant italic leading-relaxed mb-6 text-sm">"Lo que más valoro es la
               transparencia. Las comisiones son claras y siempre se pagan a tiempo. Hay confianza real."</p>
             <div class="flex items-center gap-3">
@@ -904,7 +1200,13 @@
 
           <div
             class="w-[280px] sm:w-[350px] md:w-[400px] shrink-0 card-lift bg-surface-container-low p-6 md:p-8 rounded-2xl border border-outline-variant/10 shadow-sm cursor-pointer">
-            <div class="stars mb-4 text-lg text-tertiary-container">?????</div>
+            <div class="stars mb-4 text-lg flex gap-0.5">
+              <span class="material-symbols-outlined text-[#f59e0b] !text-lg" style="font-variation-settings:'FILL' 1;">star</span>
+              <span class="material-symbols-outlined text-[#f59e0b] !text-lg" style="font-variation-settings:'FILL' 1;">star</span>
+              <span class="material-symbols-outlined text-[#f59e0b] !text-lg" style="font-variation-settings:'FILL' 1;">star</span>
+              <span class="material-symbols-outlined text-[#f59e0b] !text-lg" style="font-variation-settings:'FILL' 1;">star</span>
+              <span class="material-symbols-outlined text-[#f59e0b] !text-lg" style="font-variation-settings:'FILL' 1;">star</span>
+            </div>
             <p class="text-on-surface-variant italic leading-relaxed mb-6 text-sm">"El ambiente laboral es increíble. No
               somos solo números, somos arquitectos de la confianza de nuestros clientes."</p>
             <div class="flex items-center gap-3">
@@ -920,7 +1222,13 @@
 
           <div
             class="w-[350px] md:w-[400px] shrink-0 card-lift bg-surface-container-low p-8 rounded-2xl border border-outline-variant/10 shadow-sm cursor-pointer">
-            <div class="stars mb-4 text-lg text-tertiary-container">?????</div>
+            <div class="stars mb-4 text-lg flex gap-0.5">
+              <span class="material-symbols-outlined text-[#f59e0b] !text-lg" style="font-variation-settings:'FILL' 1;">star</span>
+              <span class="material-symbols-outlined text-[#f59e0b] !text-lg" style="font-variation-settings:'FILL' 1;">star</span>
+              <span class="material-symbols-outlined text-[#f59e0b] !text-lg" style="font-variation-settings:'FILL' 1;">star</span>
+              <span class="material-symbols-outlined text-[#f59e0b] !text-lg" style="font-variation-settings:'FILL' 1;">star</span>
+              <span class="material-symbols-outlined text-[#f59e0b] !text-lg" style="font-variation-settings:'FILL' 1;">star</span>
+            </div>
             <p class="text-on-surface-variant italic leading-relaxed mb-6 text-sm">"Tengo la flexibilidad que necesitaba
               para mis estudios. El apoyo que entregan para crecer en la empresa me motiva a diario."</p>
             <div class="flex items-center gap-3">
@@ -1019,12 +1327,13 @@
         <div class="col-span-1">
           <div class="font-headline text-2xl font-extrabold tracking-tight mb-4">Trust<span
               class="text-primary-container">Market</span></div>
-          <p class="text-gray-500 text-sm leading-relaxed">Transformando la industria del call center a través de la
-            arquitectura de confianza y la excelencia operativa.</p>
+          <p class="text-gray-500 text-sm leading-relaxed">Transformando la industria del call center a través de la arquitectura de confianza y la excelencia operativa.</p>
         </div>
         <div>
           <h5 class="text-xs uppercase tracking-widest text-primary-container font-bold mb-6">Empresa</h5>
           <ul class="space-y-4">
+            <li><a class="nav-link text-slate-600 hover:text-primary font-bold text-sm transition-colors"
+                href="{% url 'core:partners' %}">Partners</a></li>
             <li><a class="text-gray-500 hover:text-primary-container text-sm transition-colors"
                 href="#inicio">Inicio</a></li>
             <li><a class="text-gray-500 hover:text-primary-container text-sm transition-colors"
