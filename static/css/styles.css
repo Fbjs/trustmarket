@@ -234,6 +234,13 @@
   z-index: 2500;
 }
 
+.floating-wa-btn-wrap {
+  position: fixed;
+  left: 1.25rem;
+  top: 6rem;
+  z-index: 2500;
+}
+
 .floating-work-btn {
   display: inline-flex;
   align-items: center;
@@ -320,6 +327,11 @@ html {
   .floating-work-btn-wrap {
     right: 0.8rem;
     bottom: 0.8rem;
+  }
+
+  .floating-wa-btn-wrap {
+    left: 0.8rem;
+    top: 5rem;
   }
 
   .floating-work-btn {

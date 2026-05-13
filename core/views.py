@@ -89,7 +89,7 @@ class CompanyLandingView(FormView):
                 f"Mensaje: {lead.message}\n"
             ),
             from_email=None,
-            recipient_list=["contacto@trustmarket.cl"],
+            recipient_list=["operaciones.trustmarket@gmail.com"],
             fail_silently=True,
         )
         messages.success(self.request, "Gracias. Recibimos los datos de tu empresa y te contactaremos pronto.")

@@ -65,6 +65,6 @@ def notify_recruitment_team(application):
         subject=f"Nueva postulación: [{application.get_position_display()}] {application.full_name}",
         message=message_body,
         from_email=None,
-        recipient_list=["reclutamiento@trustmarket.cl"],
+        recipient_list=["operaciones.trustmarket@gmail.com"],
         fail_silently=True,
     )
