@@ -31,14 +31,16 @@ SECRET_KEY = 'django-insecure-)9pko^a^0zx9)2c$kj0mkn4iu+y$mhbg7zmmfp+5o6y^hvh^j@
 # SECURITY WARNING: don't run with debug turned on in production!
 DEBUG = True
 
-ALLOWED_HOSTS = []
-
-
-# Application definition
+ALLOWED_HOSTS = [
+        'postulacion.trustmarket.cl',
+        'www.postulacion.trustmarket.cl',
+        'localhost',
+        '127.0.0.1',
+        '177.221.141.72',
+]
 
 INSTALLED_APPS = [
     'django.contrib.admin',
-    'django.contrib.sitemaps',
     'core',
     'jobs',
     'django.contrib.auth',
@@ -50,6 +52,7 @@ INSTALLED_APPS = [
 
 MIDDLEWARE = [
     'django.middleware.security.SecurityMiddleware',
+    'whitenoise.middleware.WhiteNoiseMiddleware',
     'django.contrib.sessions.middleware.SessionMiddleware',
     'django.middleware.common.CommonMiddleware',
     'django.middleware.csrf.CsrfViewMiddleware',
@@ -93,6 +96,7 @@ if USE_MYSQL:
             'HOST': os.getenv('DB_HOST'),
             'PORT': os.getenv('DB_PORT'),
         }
+
     }
 else:
     DATABASES = {
@@ -136,9 +140,11 @@ USE_TZ = True
 
 # Static files (CSS, JavaScript, Images)
 # https://docs.djangoproject.com/en/6.0/howto/static-files/
+STATICFILES_DIRS = [ BASE_DIR / "static",
+]
 
 STATIC_URL = 'static/'
-STATICFILES_DIRS = [BASE_DIR / 'static']
+STATIC_ROOT = '/var/www/html/trustmarket/static_root/'
 
 # Archivos subidos por usuarios (CVs, etc.)
 MEDIA_URL = '/media/'
@@ -146,3 +152,9 @@ MEDIA_ROOT = BASE_DIR / 'media'
 
 EMAIL_BACKEND = 'django.core.mail.backends.console.EmailBackend'
 DEFAULT_FROM_EMAIL = 'no-reply@trustmarket.cl'
+
+CSRF_TRUSTED_ORIGINS = [
+    'http://postulacion.trustmarket.cl',
+    'https://postulacion.trustmarket.cl',
+]
+
