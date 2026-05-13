@@ -41,6 +41,7 @@ ALLOWED_HOSTS = [
 
 INSTALLED_APPS = [
     'django.contrib.admin',
+    'django.contrib.sitemaps',
     'core',
     'jobs',
     'django.contrib.auth',
