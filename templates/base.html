@@ -5,7 +5,9 @@
 <head>
     <meta charset="utf-8" />
     <meta content="width=device-width, initial-scale=1.0" name="viewport" />
-    <title>{% block title %}TrustMarket | Architected Trust{% endblock %}</title>
+    <title>{% block title %}TrustMarket{% endblock %}</title>
+    <meta name="description" content="{% block meta_description %}TrustMarket, especialistas en gestion comercial, venta telefonica y servicios de call center para seguros de salud.{% endblock %}">
+    <link rel="canonical" href="{{ request.build_absolute_uri }}">
     <script src="https://cdn.tailwindcss.com?plugins=forms,container-queries"></script>
     <link
         href="https://fonts.googleapis.com/css2?family=Outfit:wght@400;700;800;900&family=Inter:wght@300;400;500;600&display=swap"
@@ -106,7 +108,7 @@
     <nav class="fixed top-0 w-full z-50 bg-[#3E4449]/80 backdrop-blur-xl shadow-xl shadow-black/5">
         <div class="flex justify-between items-center max-w-7xl mx-auto px-4 sm:px-6 md:px-8 h-16 md:h-20">
             <a href="{% url 'core:home' %}" class="flex items-center gap-3">
-                <img src="{% static 'img/logo.png' %}" alt="TrustMarket Logo" style="height: 42px; width: auto;"
+                <img src="{% static 'img/logo.png' %}" alt="Logo de TrustMarket" style="height: 42px; width: auto;"
                     fetchpriority="high" loading="eager">
             </a>
             <div class="hidden md:flex items-center space-x-8">
@@ -159,7 +161,7 @@
             <div class="grid grid-cols-1 md:grid-cols-4 gap-12 mb-12">
                 <div class="col-span-1 md:col-span-1">
                     <div class="flex items-center gap-3 mb-6">
-                        <img src="{% static 'img/logo.png' %}" alt="TrustMarket" style="height: 36px; width: auto;">
+                        <img src="{% static 'img/logo.png' %}" alt="Logo de TrustMarket" style="height: 36px; width: auto;">
 
                     </div>
                     <p class="text-gray-500 text-sm leading-relaxed">Transformando la industria del call center a través
