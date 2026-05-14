@@ -1,3 +1,4 @@
+from django.conf import settings
 from django.contrib.sitemaps import Sitemap
 from django.urls import reverse
 
@@ -5,6 +6,7 @@ from django.urls import reverse
 class StaticViewSitemap(Sitemap):
     changefreq = "weekly"
     priority = 0.8
+    protocol = settings.SITEMAP_PROTOCOL
 
     def items(self):
         return [
@@ -19,3 +21,6 @@ class StaticViewSitemap(Sitemap):
 
     def location(self, item):
         return reverse(item)
+
+    def get_domain(self, site=None):
+        return settings.SITEMAP_DOMAIN

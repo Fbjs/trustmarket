@@ -159,3 +159,6 @@ CSRF_TRUSTED_ORIGINS = [
     'https://postulacion.trustmarket.cl',
 ]
 
+SITEMAP_DOMAIN = 'postulacion.trustmarket.cl'
+SITEMAP_PROTOCOL = 'https'
+
