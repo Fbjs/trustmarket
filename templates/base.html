@@ -3,6 +3,13 @@
 <html class="scroll-smooth" lang="es">
 
 <head>
+    <!-- Google Tag Manager -->
+    <script>(function(w,d,s,l,i){w[l]=w[l]||[];w[l].push({'gtm.start':
+    new Date().getTime(),event:'gtm.js'});var f=d.getElementsByTagName(s)[0],
+    j=d.createElement(s),dl=l!='dataLayer'?'&l='+l:'';j.async=true;j.src=
+    'https://www.googletagmanager.com/gtm.js?id='+i+dl;f.parentNode.insertBefore(j,f);
+    })(window,document,'script','dataLayer','GTM-WGZRNN84');</script>
+    <!-- End Google Tag Manager -->
     <meta charset="utf-8" />
     <meta content="width=device-width, initial-scale=1.0" name="viewport" />
     <title>{% block title %}TrustMarket{% endblock %}</title>
@@ -103,6 +110,10 @@
 </head>
 
 <body class="bg-background text-on-background font-body antialiased">
+    <!-- Google Tag Manager (noscript) -->
+    <noscript><iframe src="https://www.googletagmanager.com/ns.html?id=GTM-WGZRNN84"
+    height="0" width="0" style="display:none;visibility:hidden"></iframe></noscript>
+    <!-- End Google Tag Manager (noscript) -->
 
     <!-- TopNavBar -->
     <nav class="fixed top-0 w-full z-50 bg-[#3E4449]/80 backdrop-blur-xl shadow-xl shadow-black/5">
@@ -511,6 +522,12 @@
                             // Even if it redirects, we show success if response is ok
                             modalContent.style.display = 'none';
                             successMsg.style.display = 'block';
+
+                            // GTM: Enviar evento de conversión
+                            window.dataLayer = window.dataLayer || [];
+                            window.dataLayer.push({
+                                'event': 'formulario_postulacion_enviado'
+                            });
 
                             // Clear localStorage
                             ['full_name', 'phone', 'email', 'age', 'position', 'sales_experience', 'additional_comments'].forEach(f => {
