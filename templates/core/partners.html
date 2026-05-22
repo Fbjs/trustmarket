@@ -7,6 +7,14 @@
     <title>Partners Tecnologicos | TrustMarket</title>
     <meta name="description" content="Conoce los partners tecnologicos de TrustMarket que apoyan soluciones de call center, gestion comercial y atencion de clientes.">
     <link rel="canonical" href="{{ request.build_absolute_uri }}">
+
+    <!-- Open Graph / Social Media Meta Tags -->
+    <meta property="og:title" content="Partners Tecnologicos | TrustMarket" />
+    <meta property="og:description" content="Conoce los partners tecnologicos de TrustMarket que apoyan soluciones de call center, gestion comercial y atencion de clientes." />
+    <meta property="og:image" content="https://postulacion.trustmarket.cl{% static 'img/logo.png' %}" />
+    <meta property="og:url" content="{{ request.build_absolute_uri }}" />
+    <meta property="og:type" content="website" />
+
     <script src="https://cdn.tailwindcss.com?plugins=forms,container-queries"></script>
     <script>
         tailwind.config = {
@@ -42,6 +50,16 @@
             background: linear-gradient(135deg, #00adef 0%, #ffffff 100%);
             -webkit-background-clip: text;
             -webkit-text-fill-color: transparent;
+        }
+
+        /* WhatsApp Button */
+        .floating-wa-btn-wrap { position: fixed; right: 1.25rem; top: 6rem; z-index: 2500; }
+        .floating-work-btn { display: inline-flex; align-items: center; gap: 0.65rem; border: none; border-radius: 999px; background: #25d366; color: #fff; font-weight: 700; padding: 0.85rem 1.15rem 0.85rem 0.85rem; box-shadow: 0 10px 25px rgba(0, 0, 0, 0.25); cursor: pointer; transition: all 0.3s; font-size: 0.95rem; text-decoration: none;}
+        .floating-work-btn:hover { filter: brightness(1.05); transform: scale(1.03); }
+        .floating-work-btn-icon { display: inline-flex; align-items: center; justify-content: center; width: 2rem; height: 2rem; border-radius: 50%; background: rgba(255, 255, 255, 0.22); font-size: 1rem; }
+        @media (max-width: 640px) {
+            .floating-wa-btn-wrap { right: 0.8rem; top: 5rem; }
+            .floating-work-btn { font-size: 0.92rem; padding: 0.75rem 0.95rem 0.75rem 0.75rem; }
         }
     </style>
 </head>
@@ -208,5 +226,8 @@
             <p class="text-slate-400 text-sm font-medium">© 2026 TrustMarket · Arquitectura de Confianza</p>
         </div>
     </footer>
+
+    <!-- Floating WhatsApp Widget -->
+    {% include 'core/whatsapp_widget.html' %}
 </body>
 </html>

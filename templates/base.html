@@ -15,6 +15,14 @@
     <title>{% block title %}TrustMarket{% endblock %}</title>
     <meta name="description" content="{% block meta_description %}TrustMarket, especialistas en gestion comercial, venta telefonica y servicios de call center para seguros de salud.{% endblock %}">
     <link rel="canonical" href="{{ request.build_absolute_uri }}">
+
+    <!-- Open Graph / Social Media Meta Tags -->
+    <meta property="og:title" content="{% block og_title %}TrustMarket | Arquitectura de Confianza{% endblock %}" />
+    <meta property="og:description" content="{% block og_description %}Transformando la industria del call center a través de la arquitectura de confianza y la excelencia operativa.{% endblock %}" />
+    <meta property="og:image" content="https://postulacion.trustmarket.cl{% static 'img/logo.png' %}" />
+    <meta property="og:url" content="{{ request.build_absolute_uri }}" />
+    <meta property="og:type" content="website" />
+
     <script src="https://cdn.tailwindcss.com?plugins=forms,container-queries"></script>
     <link
         href="https://fonts.googleapis.com/css2?family=Outfit:wght@400;700;800;900&family=Inter:wght@300;400;500;600&display=swap"
@@ -627,14 +635,8 @@
     </script>
 
     {% block extra_js %}{% endblock %}
-    <!-- Floating WhatsApp Button -->
-    <div class="floating-wa-btn-wrap">
-        <a href="https://wa.me/56991418827" target="_blank" class="floating-work-btn"
-            aria-label="Contáctanos por WhatsApp">
-            <span class="floating-work-btn-icon" aria-hidden="true">💬</span>
-            <span>WhatsApp</span>
-        </a>
-    </div>
+    <!-- Floating WhatsApp Widget -->
+    {% include 'core/whatsapp_widget.html' %}
 </body>
 
 </html>

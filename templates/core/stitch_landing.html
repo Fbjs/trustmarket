@@ -1,3 +1,4 @@
+{% load static %}
 <!DOCTYPE html>
 <html class="scroll-smooth" lang="es">
 
@@ -7,8 +8,15 @@
   <title>TrustMarket | Call Center especializado en seguros de salud</title>
   <meta name="description" content="TrustMarket es un call center especializado en gestion comercial, captacion de clientes, venta telefonica y procesos comerciales para seguros de salud.">
   <link rel="canonical" href="{{ request.build_absolute_uri }}">
+
+  <!-- Open Graph / Social Media Meta Tags -->
+  <meta property="og:title" content="TrustMarket | Call Center especializado en seguros de salud" />
+  <meta property="og:description" content="TrustMarket es un call center especializado en gestion comercial, captacion de clientes, venta telefonica y procesos comerciales para seguros de salud." />
+  <meta property="og:image" content="https://postulacion.trustmarket.cl{% static 'img/logo.png' %}" />
+  <meta property="og:url" content="{{ request.build_absolute_uri }}" />
+  <meta property="og:type" content="website" />
+
   <meta name="keywords" content="contact center Chile, televentas y cobranzas, outsourcing atención cliente, CRM y automatización, gestión comercial, recuperación de cartera">
-  {% load static %}
   <script src="https://cdn.tailwindcss.com?plugins=forms,container-queries"></script>
   <link
     href="https://fonts.googleapis.com/css2?family=Outfit:wght@400;700;800;900&family=DM+Sans:wght@300;400;500;600&display=swap"
@@ -240,7 +248,16 @@
       .card-lift {
         border-radius: 0.75rem;
       }
+
+      .floating-wa-btn-wrap { right: 0.8rem; top: 5rem; }
+      .floating-work-btn { font-size: 0.92rem; padding: 0.75rem 0.95rem 0.75rem 0.75rem; }
     }
+
+    /* WhatsApp Floating Button */
+    .floating-wa-btn-wrap { position: fixed; right: 1.25rem; top: 6rem; z-index: 2500; }
+    .floating-work-btn { display: inline-flex; align-items: center; gap: 0.65rem; border: none; border-radius: 999px; background: #25d366; color: #fff; font-weight: 700; padding: 0.85rem 1.15rem 0.85rem 0.85rem; box-shadow: 0 10px 25px rgba(0, 0, 0, 0.25); cursor: pointer; transition: all 0.3s; font-size: 0.95rem; text-decoration: none;}
+    .floating-work-btn:hover { filter: brightness(1.05); transform: scale(1.03); }
+    .floating-work-btn-icon { display: inline-flex; align-items: center; justify-content: center; width: 2rem; height: 2rem; border-radius: 50%; background: rgba(255, 255, 255, 0.22); font-size: 1rem; }
   </style>
 </head>
 
@@ -1361,6 +1378,8 @@
 
   </script>
 
+  <!-- Floating WhatsApp Widget -->
+  {% include 'core/whatsapp_widget.html' %}
 </body>
 
 </html>
