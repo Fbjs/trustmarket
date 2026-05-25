@@ -1,8 +1,9 @@
 from django.contrib import messages
 from django.core.mail import send_mail
-from django.shortcuts import redirect, render
+from django.shortcuts import redirect, render, get_object_or_404
 from django.urls import reverse
-from .models import postulaciones
+from django.http import FileResponse
+from .models import postulaciones, StitchApplication
 
 from .forms import ApplicationForm
 
@@ -68,3 +69,17 @@ def notify_recruitment_team(application):
         recipient_list=["operaciones.trustmarket@gmail.com"],
         fail_silently=True,
     )
+
+
+def download_cv(request, application_id):
+    """
+    Vista para descargar el CV de una postulación
+    """
+    application = get_object_or_404(StitchApplication, id=application_id)
+    
+    if application.cv:
+        response = FileResponse(application.cv.open('rb'))
+        response['Content-Disposition'] = f'attachment; filename="{application.full_name}_CV"'
+        return response
+    
+    return redirect("jobs:apply")
