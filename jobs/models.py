@@ -57,30 +57,6 @@ class postulaciones(models.Model):
         managed = False  # NO toca la estructura de la tabla manual
         db_table = 'postulaciones' # Nombre exacto en MySQL
 
-class StitchApplication(models.Model):
-    full_name = models.CharField("Nombre completo", max_length=160)
-    email = models.EmailField("Correo electrónico")
-    phone = models.CharField("Teléfono", max_length=30)
-    age = models.PositiveSmallIntegerField("Edad", default=18)
-    position = models.CharField(
-        "Puesto", max_length=50, choices=Application.POSITION_CHOICES, default="ejecutivo_ventas"
-    )
-    sales_experience = models.CharField(
-        "Experiencia", max_length=20, choices=Application.EXPERIENCE_CHOICES, default="sin_experiencia"
-    )
-    availability = models.TextField("Disponibilidad", blank=True)
-    cv = models.FileField("Adjuntar CV (PDF o Word)", upload_to="cvs/")
-    additional_comments = models.TextField("Comentarios adicionales", blank=True)
-    created_at = models.DateTimeField("Fecha de postulación", auto_now_add=True)
-
-    class Meta:
-        ordering = ["-created_at"]
-        verbose_name = "Postulación"
-        verbose_name_plural = "Postulaciones"
-
-    def __str__(self) -> str:
-        return f"{self.full_name} - {self.created_at:%d/%m/%Y}"
-
 
 class CompanyLead(models.Model):
     COMPANY_SIZE_CHOICES = [

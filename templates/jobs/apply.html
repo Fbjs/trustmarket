@@ -115,11 +115,11 @@
                 <!-- Availability -->
                 <div class="space-y-5 pt-4">
                     <label class="block text-xs font-bold text-white/70 uppercase tracking-widest">📅 Disponibilidad Horaria</label>
-                    <div class="flex flex-wrap gap-4">
+                    <div class="flex flex-wrap gap-4" id="availability-container">
                         {% for choice in form.availability_options %}
-                            <label class="flex items-center gap-3 px-5 py-3 rounded-xl border border-white/10 bg-white/5 cursor-pointer hover:border-primary/50 hover:bg-primary/5 transition-all group">
-                                <input type="checkbox" name="availability_options" value="{{ choice.data.value }}" class="w-5 h-5 accent-primary-container rounded border-white/20 bg-transparent" {% if choice.data.selected %}checked{% endif %}>
-                                <span class="text-white/80 group-hover:text-white transition-colors">{{ choice.choice_label }}</span>
+                            <label class="availability-label flex items-center gap-3 px-5 py-3 rounded-xl border border-white/10 bg-white/5 cursor-pointer hover:border-[#00adef]/50 hover:bg-[#00adef]/5 transition-all duration-200">
+                                <input type="checkbox" name="availability_options" value="{{ choice.data.value }}" class="availability-check" {% if choice.data.selected %}checked{% endif %}>
+                                <span class="text-white/80 transition-colors">{{ choice.choice_label }}</span>
                             </label>
                         {% endfor %}
                     </div>
@@ -172,13 +172,61 @@
         border-radius: 12px !important;
         padding: 14px 18px !important;
     }
-    #applyForm input:focus, #applyForm select:focus, #applyForm textarea:focus {
+    #applyForm input:focus:not(.availability-check), #applyForm select:focus, #applyForm textarea:focus {
         border-color: #00adef !important;
         background: rgba(255, 255, 255, 0.08) !important;
         box-shadow: 0 0 15px rgba(0, 173, 239, 0.2) !important;
     }
     #applyForm select option {
         background: #0A1118;
+    }
+
+    /* Custom checkbox for availability (dark mode) */
+    .availability-check {
+        -webkit-appearance: none !important;
+        -moz-appearance: none !important;
+        appearance: none !important;
+        width: 22px !important;
+        height: 22px !important;
+        min-width: 22px !important;
+        max-width: 22px !important;
+        min-height: 22px !important;
+        max-height: 22px !important;
+        border: 2px solid rgba(255, 255, 255, 0.4) !important;
+        border-radius: 6px !important;
+        background-color: transparent !important;
+        background-repeat: no-repeat !important;
+        background-position: center !important;
+        background-size: 14px 14px !important;
+        cursor: pointer;
+        transition: background-color 0.15s ease, border-color 0.15s ease, box-shadow 0.15s ease;
+        padding: 0 !important;
+        margin: 0 !important;
+        flex-shrink: 0;
+        display: inline-block !important;
+        vertical-align: middle;
+    }
+
+    .availability-check:checked {
+        background-color: #00adef !important;
+        border-color: #00adef !important;
+        background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 24 24' fill='none' stroke='white' stroke-width='3.5' stroke-linecap='round' stroke-linejoin='round'%3E%3Cpolyline points='4 12 10 18 20 6'/%3E%3C/svg%3E") !important;
+        box-shadow: 0 0 12px rgba(0, 173, 239, 0.4) !important;
+    }
+
+    .availability-check:focus {
+        outline: none !important;
+        box-shadow: 0 0 0 3px rgba(0, 173, 239, 0.3) !important;
+    }
+
+    /* Highlight label when checked */
+    .availability-label:has(.availability-check:checked) {
+        border-color: #00adef !important;
+        background: rgba(0, 173, 239, 0.12) !important;
+    }
+
+    .availability-label:has(.availability-check:checked) span {
+        color: white !important;
     }
 </style>
 

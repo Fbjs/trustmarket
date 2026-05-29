@@ -6,7 +6,7 @@ from openpyxl.styles import Font, PatternFill
 from openpyxl.utils import get_column_letter
 from datetime import datetime
 
-from .models import CompanyLead, StitchApplication
+from .models import Application, CompanyLead
 
 
 def export_to_excel(modeladmin, request, queryset):
@@ -74,20 +74,7 @@ def export_to_excel(modeladmin, request, queryset):
 export_to_excel.short_description = "Descargar registros en Excel"
 
 
-@admin.register(StitchApplication)
-class StitchApplicationAdmin(admin.ModelAdmin):
-    list_display = (
-        "full_name",
-        "email",
-        "phone",
-        "position",
-        "sales_experience",
-        "cv",
-        "created_at",
-    )
-    list_filter = ("position", "sales_experience", "created_at")
-    search_fields = ("full_name", "email", "phone")
-    actions = [export_to_excel]
+
 
 
 @admin.register(CompanyLead)
@@ -103,3 +90,20 @@ class CompanyLeadAdmin(admin.ModelAdmin):
     list_filter = ("service_interest", "company_size", "created_at")
     search_fields = ("company_name", "contact_name", "email", "phone")
     actions = [export_to_excel]
+
+
+@admin.register(Application)
+class ApplicationAdmin(admin.ModelAdmin):
+    list_display = (
+        "full_name",
+        "email",
+        "phone",
+        "position",
+        "sales_experience",
+        "cv",
+        "created_at",
+    )
+    list_filter = ("position", "sales_experience", "created_at")
+    search_fields = ("full_name", "email", "phone")
+    actions = [export_to_excel]
+

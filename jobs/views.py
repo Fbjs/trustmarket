@@ -3,7 +3,7 @@ from django.core.mail import send_mail
 from django.shortcuts import redirect, render, get_object_or_404
 from django.urls import reverse
 from django.http import FileResponse
-from .models import postulaciones, StitchApplication
+from .models import Application, postulaciones
 
 from .forms import ApplicationForm
 
@@ -75,7 +75,7 @@ def download_cv(request, application_id):
     """
     Vista para descargar el CV de una postulación
     """
-    application = get_object_or_404(StitchApplication, id=application_id)
+    application = get_object_or_404(Application, id=application_id)
     
     if application.cv:
         response = FileResponse(application.cv.open('rb'))
