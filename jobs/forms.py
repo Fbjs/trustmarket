@@ -42,7 +42,7 @@ class ApplicationForm(forms.ModelForm):
         ]
         widgets = {
             "full_name": forms.TextInput(attrs={"placeholder": "Tu nombre..."}),
-            "phone": forms.TelInput(attrs={"placeholder": "+56 9 1234 5678"}),
+            "phone": forms.TextInput(attrs={"type": "tel", "placeholder": "+56 9 1234 5678"}),
             "email": forms.EmailInput(attrs={"placeholder": "tu@email.com"}),
             "age": forms.NumberInput(attrs={"min": 18, "max": 70, "placeholder": "25"}),
             "position": forms.Select(attrs={"class": "field-select"}),
@@ -117,7 +117,7 @@ class CompanyLeadForm(forms.ModelForm):
             "company_name": forms.TextInput(attrs={"placeholder": "Nombre de la empresa"}),
             "contact_name": forms.TextInput(attrs={"placeholder": "Nombre y apellido"}),
             "email": forms.EmailInput(attrs={"placeholder": "contacto@empresa.com"}),
-            "phone": forms.TelInput(attrs={"placeholder": "+56 9 1234 5678"}),
+            "phone": forms.TextInput(attrs={"type": "tel", "placeholder": "+56 9 1234 5678"}),
             "company_size": forms.Select(),
             "service_interest": forms.Select(),
             "message": forms.Textarea(attrs={"rows": 5, "placeholder": "Cuentanos que necesitas resolver o mejorar"}),
