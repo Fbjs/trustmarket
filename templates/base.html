@@ -4,21 +4,26 @@
 
 <head>
     <!-- Google Tag Manager -->
-    <script>(function(w,d,s,l,i){w[l]=w[l]||[];w[l].push({'gtm.start':
-    new Date().getTime(),event:'gtm.js'});var f=d.getElementsByTagName(s)[0],
-    j=d.createElement(s),dl=l!='dataLayer'?'&l='+l:'';j.async=true;j.src=
-    'https://www.googletagmanager.com/gtm.js?id='+i+dl;f.parentNode.insertBefore(j,f);
-    })(window,document,'script','dataLayer','GTM-WGZRNN84');</script>
+    <script>(function (w, d, s, l, i) {
+            w[l] = w[l] || []; w[l].push({
+                'gtm.start':
+                    new Date().getTime(), event: 'gtm.js'
+            }); var f = d.getElementsByTagName(s)[0],
+                j = d.createElement(s), dl = l != 'dataLayer' ? '&l=' + l : ''; j.async = true; j.src =
+                    'https://www.googletagmanager.com/gtm.js?id=' + i + dl; f.parentNode.insertBefore(j, f);
+        })(window, document, 'script', 'dataLayer', 'GTM-WGZRNN84');</script>
     <!-- End Google Tag Manager -->
     <meta charset="utf-8" />
     <meta content="width=device-width, initial-scale=1.0" name="viewport" />
     <title>{% block title %}TrustMarket{% endblock %}</title>
-    <meta name="description" content="{% block meta_description %}TrustMarket, especialistas en gestion comercial, venta telefonica y servicios de call center para seguros de salud.{% endblock %}">
+    <meta name="description"
+        content="{% block meta_description %}TrustMarket, especialistas en gestion comercial, venta telefonica y servicios de call center para seguros de salud.{% endblock %}">
     <link rel="canonical" href="{{ request.build_absolute_uri }}">
 
     <!-- Open Graph / Social Media Meta Tags -->
     <meta property="og:title" content="{% block og_title %}TrustMarket | Arquitectura de Confianza{% endblock %}" />
-    <meta property="og:description" content="{% block og_description %}Transformando la industria del call center a través de la arquitectura de confianza y la excelencia operativa.{% endblock %}" />
+    <meta property="og:description"
+        content="{% block og_description %}Transformando la industria del call center a través de la arquitectura de confianza y la excelencia operativa.{% endblock %}" />
     <meta property="og:image" content="https://postulacion.trustmarket.cl{% static 'img/logo.png' %}" />
     <meta property="og:url" content="{{ request.build_absolute_uri }}" />
     <meta property="og:type" content="website" />
@@ -30,6 +35,9 @@
     <link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&display=swap"
         rel="stylesheet" />
     <link rel="preload" as="image" href="{% static 'img/logo.png' %}">
+    <link rel="icon" type="image/png" href="{% static 'img/favicon.png' %}">
+    <link rel="shortcut icon" type="image/png" href="{% static 'img/favicon.png' %}">
+    <link rel="apple-touch-icon" href="{% static 'img/favicon.png' %}">
     <link rel="stylesheet" href="{% static 'css/styles.css' %}">
     <script>
         tailwind.config = {
@@ -119,8 +127,8 @@
 
 <body class="bg-background text-on-background font-body antialiased">
     <!-- Google Tag Manager (noscript) -->
-    <noscript><iframe src="https://www.googletagmanager.com/ns.html?id=GTM-WGZRNN84"
-    height="0" width="0" style="display:none;visibility:hidden"></iframe></noscript>
+    <noscript><iframe src="https://www.googletagmanager.com/ns.html?id=GTM-WGZRNN84" height="0" width="0"
+            style="display:none;visibility:hidden"></iframe></noscript>
     <!-- End Google Tag Manager (noscript) -->
 
     <!-- TopNavBar -->
@@ -151,16 +159,19 @@
                 Contactar
             </a>
         </div>
-        <!-- Mobile Menu -->        <div id="mobileMenu" class="md:hidden hidden bg-[#3E4449]/95 backdrop-blur-xl px-6 pb-8 space-y-2 border-t border-white/5 shadow-2xl">
-            <a class="block {% if request.resolver_match.url_name == 'home' %}text-[#00ADEF] font-bold{% else %}text-gray-300{% endif %} text-base py-4 border-b border-white/5" href="{% url 'core:home' %}" onclick="closeMobileMenu()">Inicio</a>
-            <a class="block text-gray-300 hover:text-white text-base py-4 border-b border-white/5" href="{% url 'core:home' %}#servicios"
-                onclick="closeMobileMenu()">Servicios</a>
-            <a class="block text-gray-300 hover:text-white text-base py-4 border-b border-white/5" href="{% url 'core:home' %}#como-funciona"
-                onclick="closeMobileMenu()">Únete</a>
-            <a class="block {% if request.resolver_match.url_name == 'companies' %}text-[#00ADEF] font-bold{% else %}text-gray-300{% endif %} text-base py-4 border-b border-white/5" href="{% url 'core:companies' %}"
-                onclick="closeMobileMenu()">Empresas</a>
-            <a class="block {% if request.resolver_match.url_name == 'partners' %}text-[#00ADEF] font-bold{% else %}text-gray-300{% endif %} text-base py-4 border-b border-white/5" href="{% url 'core:partners' %}"
-                onclick="closeMobileMenu()">Partners</a>
+        <!-- Mobile Menu -->
+        <div id="mobileMenu"
+            class="md:hidden hidden bg-[#3E4449]/95 backdrop-blur-xl px-6 pb-8 space-y-2 border-t border-white/5 shadow-2xl">
+            <a class="block {% if request.resolver_match.url_name == 'home' %}text-[#00ADEF] font-bold{% else %}text-gray-300{% endif %} text-base py-4 border-b border-white/5"
+                href="{% url 'core:home' %}" onclick="closeMobileMenu()">Inicio</a>
+            <a class="block text-gray-300 hover:text-white text-base py-4 border-b border-white/5"
+                href="{% url 'core:home' %}#servicios" onclick="closeMobileMenu()">Servicios</a>
+            <a class="block text-gray-300 hover:text-white text-base py-4 border-b border-white/5"
+                href="{% url 'core:home' %}#como-funciona" onclick="closeMobileMenu()">Únete</a>
+            <a class="block {% if request.resolver_match.url_name == 'companies' %}text-[#00ADEF] font-bold{% else %}text-gray-300{% endif %} text-base py-4 border-b border-white/5"
+                href="{% url 'core:companies' %}" onclick="closeMobileMenu()">Empresas</a>
+            <a class="block {% if request.resolver_match.url_name == 'partners' %}text-[#00ADEF] font-bold{% else %}text-gray-300{% endif %} text-base py-4 border-b border-white/5"
+                href="{% url 'core:partners' %}" onclick="closeMobileMenu()">Partners</a>
             <div class="pt-4">
                 <a href="{% url 'core:companies' %}"
                     class="block w-full bg-primary-container text-on-primary-container px-6 py-4 rounded-xl font-bold text-base text-center shadow-lg"
@@ -175,58 +186,71 @@
     </main>
 
     <!-- Footer -->
-    <footer class="bg-[#121416] py-12 md:py-16 text-white border-t border-white/5">
-        <div class="max-w-7xl mx-auto px-6 md:px-8">
+    <footer class="bg-[#0d1b2a] py-16 text-white border-t border-white/5">
+        <div class="max-w-7xl mx-auto px-6 lg:px-8">
             <div class="grid grid-cols-1 md:grid-cols-4 gap-12 mb-12">
-                <div class="col-span-1 md:col-span-1">
-                    <div class="flex items-center gap-3 mb-6">
-                        <img src="{% static 'img/logo.png' %}" alt="Logo de TrustMarket" style="height: 36px; width: auto;">
-
-                    </div>
+                <div class="col-span-1">
+                    <div class="font-headline text-2xl font-extrabold tracking-tight mb-4">Trust<span
+                            class="text-primary-container">Market</span></div>
                     <p class="text-gray-500 text-sm leading-relaxed">Transformando la industria del call center a través
                         de la arquitectura de confianza y la excelencia operativa.</p>
                 </div>
                 <div>
-                    <h5 class="font-inter text-xs uppercase tracking-widest text-primary-container font-bold mb-6">
-                        Empresa</h5>
+                    <h5 class="text-xs uppercase tracking-widest text-primary-container font-bold mb-6">Empresa</h5>
                     <ul class="space-y-4">
-                        <li><a class="text-gray-500 hover:text-primary-container text-sm transition-colors uppercase tracking-widest"
+                        <li><a class="text-gray-500 hover:text-primary-container text-sm transition-colors"
+                                href="{% url 'core:partners' %}">Partners</a></li>
+                        <li><a class="text-gray-500 hover:text-primary-container text-sm transition-colors"
                                 href="{% url 'core:home' %}#inicio">Inicio</a></li>
-                        <li><a class="text-gray-500 hover:text-primary-container text-sm transition-colors uppercase tracking-widest"
+                        <li><a class="text-gray-500 hover:text-primary-container text-sm transition-colors"
                                 href="{% url 'core:home' %}#servicios">Servicios</a></li>
-
-
+                        <li><a class="text-gray-500 hover:text-primary-container text-sm transition-colors"
+                                href="{% url 'core:home' %}#como-funciona">¿Cómo funciona?</a></li>
+                        <li><a class="text-gray-500 hover:text-primary-container text-sm transition-colors"
+                                href="{% url 'jobs:apply' %}">Trabaja con nosotros</a></li>
                     </ul>
                 </div>
                 <div>
-                    <h5 class="font-inter text-xs uppercase tracking-widest text-primary-container font-bold mb-6">Legal
-                    </h5>
+                    <h5 class="text-xs uppercase tracking-widest text-primary-container font-bold mb-6">Legal</h5>
                     <ul class="space-y-4">
-                        <li><a class="text-gray-500 hover:text-primary-container text-sm transition-colors uppercase tracking-widest"
+                        <li><a class="text-gray-500 hover:text-primary-container text-sm transition-colors"
                                 href="#">Privacidad</a></li>
-                        <li><a class="text-gray-500 hover:text-primary-container text-sm transition-colors uppercase tracking-widest"
+                        <li><a class="text-gray-500 hover:text-primary-container text-sm transition-colors"
                                 href="#">Términos</a></li>
-                        <li><a class="text-gray-500 hover:text-primary-container text-sm transition-colors uppercase tracking-widest"
+                        <li><a class="text-gray-500 hover:text-primary-container text-sm transition-colors"
                                 href="#">Soporte</a></li>
                     </ul>
                 </div>
                 <div>
-                    <h5 class="font-inter text-xs uppercase tracking-widest text-primary-container font-bold mb-6">Redes
-                    </h5>
-                    <div class="flex gap-4">
-                        <a class="w-10 h-10 flex items-center justify-center rounded-lg bg-white/5 hover:bg-primary-container transition-all"
-                            href="#">
-                            <span class="material-symbols-outlined text-sm">link</span>
+                    <h5 class="text-xs uppercase tracking-widest text-primary-container font-bold mb-6">Redes</h5>
+                    <div class="flex gap-3 mb-6">
+                        <a class="w-10 h-10 flex items-center justify-center rounded-xl bg-white/5 hover:bg-primary-container transition-all text-gray-400 hover:text-white"
+                            href="https://cl.linkedin.com/company/trustmarket" target="_blank" aria-label="LinkedIn">
+                            <svg class="w-4 h-4 fill-current" viewBox="0 0 24 24">
+                                <path
+                                    d="M20.447 20.452h-3.554v-5.569c0-1.328-.027-3.037-1.852-3.037-1.853 0-2.136 1.445-2.136 2.939v5.667H9.351V9h3.414v1.561h.046c.477-.9 1.637-1.85 3.37-1.85 3.601 0 4.267 2.37 4.267 5.455v6.286zM5.337 7.433a2.062 2.062 0 01-2.063-2.065 2.064 2.064 0 112.063 2.065zm1.782 13.019H3.555V9h3.564v11.452zM22.225 0H1.771C.792 0 0 .774 0 1.729v20.542C0 23.227.792 24 1.771 24h20.451C23.2 24 24 23.227 24 22.271V1.729C24 .774 23.2 0 22.222 0h.003z" />
+                            </svg>
                         </a>
-                        <a class="w-10 h-10 flex items-center justify-center rounded-lg bg-white/5 hover:bg-primary-container transition-all"
-                            href="#">
-                            <span class="material-symbols-outlined text-sm">photo_camera</span>
+                        <a class="w-10 h-10 flex items-center justify-center rounded-xl bg-white/5 hover:bg-primary-container transition-all text-gray-400 hover:text-white"
+                            href="https://www.instagram.com/trustmarket.cl/?hl=es-la" target="_blank"
+                            aria-label="Instagram">
+                            <svg class="w-4 h-4 fill-current" viewBox="0 0 24 24">
+                                <path
+                                    d="M12 2.163c3.204 0 3.584.012 4.85.07 3.252.148 4.771 1.691 4.919 4.919.058 1.265.069 1.645.069 4.849 0 3.205-.012 3.584-.069 4.849-.149 3.225-1.664 4.771-4.919 4.919-1.266.058-1.644.07-4.85.07-3.204 0-3.584-.012-4.849-.07-3.26-.149-4.771-1.699-4.919-4.92-.058-1.265-.07-1.644-.07-4.849 0-3.204.013-3.583.07-4.849.149-3.227 1.664-4.771 4.919-4.919 1.266-.057 1.645-.069 4.849-.069zM12 0C8.741 0 8.333.014 7.053.072 2.695.272.273 2.69.073 7.052.014 8.333 0 8.741 0 12c0 3.259.014 3.668.072 4.948.2 4.358 2.618 6.78 6.98 6.98C8.333 23.986 8.741 24 12 24c3.259 0 3.668-.014 4.948-.072 4.354-.2 6.782-2.618 6.979-6.98.059-1.28.073-1.689.073-4.948 0-3.259-.014-3.667-.072-4.947-.196-4.354-2.617-6.78-6.979-6.98C15.668.014 15.259 0 12 0zm0 5.838a6.162 6.162 0 100 12.324 6.162 6.162 0 000-12.324zM12 16a4 4 0 110-8 4 4 0 010 8zm6.406-11.845a1.44 1.44 0 100 2.881 1.44 1.44 0 000-2.881z" />
+                            </svg>
                         </a>
                     </div>
+                    <div class="text-xs text-gray-500 uppercase tracking-widest mb-2">Respuesta rápida</div>
+                    <a href="https://wa.me/56991418827" target="_blank"
+                        class="inline-flex items-center gap-2 text-[#25D366] text-sm font-medium hover:underline">
+                        <span class="w-2 h-2 rounded-full bg-[#25D366]"
+                            style="animation: pulse-ring 2.5s ease-out infinite;"></span>
+                        WhatsApp activo
+                    </a>
                 </div>
             </div>
-            <div class="pt-8 border-t border-white/5 text-center md:text-left">
-                <p class="text-gray-500 text-xs uppercase tracking-widest">© 2026 TrustMarket. Architected Trust.</p>
+            <div class="pt-8 border-t border-white/5 flex flex-col md:flex-row justify-between items-center gap-4">
+                <p class="text-gray-600 text-xs uppercase tracking-widest">© 2026 TrustMarket. Architected Trust.</p>
             </div>
         </div>
     </footer>
@@ -234,8 +258,7 @@
     <!-- Floating "Postula aquí" button -->
     {% block floating_work_button %}
     <div class="floating-work-btn-wrap">
-        <a href="{% url 'jobs:apply' %}" class="floating-work-btn"
-            aria-label="Abrir formulario Trabaja con nosotros">
+        <a href="{% url 'jobs:apply' %}" class="floating-work-btn" aria-label="Abrir formulario Trabaja con nosotros">
             <span class="floating-work-btn-icon" aria-hidden="true">💼</span>
             <span>Trabaja con nosotros</span>
         </a>
@@ -259,7 +282,7 @@
                 </div>
                 <div class="form-group">
                     <label>📱 Teléfono (WhatsApp) <span class="required">*</span></label>
-                    <input type="tel" name="phone" id="panel_phone" placeholder="+56 9..." required>
+                    <input type="tel" name="phone" id="panel_phone" placeholder="+56 9 1234 5678" required>
                 </div>
                 <div class="form-group">
                     <label>✉️ Email <span class="required">*</span></label>
@@ -306,14 +329,14 @@
 
     <!-- Fullscreen Modal: Formulario completo -->
     <div id="fullscreenModal"
-        style="position:fixed;inset:0;z-index:9999;background:rgba(0,20,35,0.94);backdrop-filter:blur(16px);-webkit-backdrop-filter:blur(16px);display:flex;align-items:center;justify-content:center;opacity:0;visibility:hidden;transition:opacity 0.4s,visibility 0.4s;overflow-y:auto;">
+        style="position:fixed;inset:0;z-index:9999;background:rgba(0,20,35,0.94);backdrop-filter:blur(16px);-webkit-backdrop-filter:blur(16px);display:flex;align-items:flex-start;justify-content:center;opacity:0;visibility:hidden;transition:opacity 0.4s,visibility 0.4s;overflow-y:auto;padding:20px 0;">
         <button onclick="closeFullscreenForm()"
             style="position:fixed;top:24px;right:24px;z-index:10001;background:rgba(255,255,255,0.1);border:1px solid rgba(255,255,255,0.15);border-radius:50%;width:48px;height:48px;display:flex;align-items:center;justify-content:center;cursor:pointer;color:white;transition:all 0.25s;"
             onmouseover="this.style.background='rgba(255,255,255,0.2)'"
             onmouseout="this.style.background='rgba(255,255,255,0.1)'">
             <span class="material-symbols-outlined" style="font-size:28px;">close</span>
         </button>
-        <div style="width:100%;max-width:680px;padding:40px 20px;">
+        <div style="width:100%;max-width:680px;padding:40px 20px;margin:auto;">
             <div id="fs_modal_content">
                 <div style="text-align:center;margin-bottom:36px;">
                     <h2 class="font-headline" style="font-size:2.2rem;font-weight:800;color:white;margin-bottom:10px;">
@@ -323,8 +346,7 @@
                 </div>
                 <form action="{% url 'jobs:apply' %}" method="post" id="fullscreenForm" enctype="multipart/form-data">
                     {% csrf_token %}
-                    <div style="display:grid;grid-template-columns:1fr 1fr;gap:24px;margin-bottom:28px;"
-                        class="form-grid-2">
+                    <div class="grid grid-cols-1 md:grid-cols-2 gap-6 mb-7 form-grid-2">
                         <div style="display:flex;flex-direction:column;">
                             <label
                                 style="font-size:0.8rem;font-weight:700;margin-bottom:8px;color:rgba(255,255,255,0.9);text-transform:uppercase;letter-spacing:0.05em;">👤
@@ -336,7 +358,7 @@
                             <label
                                 style="font-size:0.8rem;font-weight:700;margin-bottom:8px;color:rgba(255,255,255,0.9);text-transform:uppercase;letter-spacing:0.05em;">☎️
                                 TELÉFONO <span style="color:#ffae00;">*</span></label>
-                            <input type="tel" name="phone" id="fs_phone" placeholder="+56 9..." required
+                            <input type="tel" name="phone" id="fs_phone" placeholder="+56 9 1234 5678" required
                                 style="width:100%;padding:14px 16px;border:1.5px solid rgba(255,255,255,0.1);border-radius:10px;background:rgba(255,255,255,0.05);color:#fff;font-size:1rem;outline:none;font-family:Inter,sans-serif;transition:border-color 0.3s;">
                         </div>
                         <div style="display:flex;flex-direction:column;">
@@ -385,13 +407,15 @@
                             <label
                                 style="font-size:0.8rem;font-weight:700;margin-bottom:12px;color:rgba(255,255,255,0.9);text-transform:uppercase;letter-spacing:0.05em;">📅
                                 DISPONIBILIDAD <span style="color:#ffae00;">*</span></label>
-                            <div class="checkbox-grid-panel checkbox-grid-dark" style="display:flex;flex-wrap:wrap;gap:12px;">
+                            <div class="checkbox-grid-panel checkbox-grid-dark"
+                                style="display:flex;flex-wrap:wrap;gap:12px;">
                                 <label
                                     style="display:flex;align-items:center;gap:10px;padding:12px 18px;border:1.5px solid rgba(255,255,255,0.2);border-radius:12px;background:rgba(255,255,255,0.05);color:white;font-size:0.95rem;cursor:pointer;transition:all 0.25s;"><input
                                         type="checkbox" name="availability_options" value="fulltime"> FullTime</label>
                                 <label
                                     style="display:flex;align-items:center;gap:10px;padding:12px 18px;border:1.5px solid rgba(255,255,255,0.2);border-radius:12px;background:rgba(255,255,255,0.05);color:white;font-size:0.95rem;cursor:pointer;transition:all 0.25s;"><input
-                                        type="checkbox" name="availability_options" value="freelancer"> Freelancer</label>
+                                        type="checkbox" name="availability_options" value="freelancer">
+                                    Freelancer</label>
                             </div>
                         </div>
                         <div style="display:flex;flex-direction:column;grid-column:1/-1;">
@@ -411,8 +435,9 @@
                                     <span style="font-size:0.8rem;color:rgba(255,255,255,0.6);">No se ha seleccionado
                                         ningún archivo</span>
                                 </div>
-                                <input type="file" name="cv" id="cv_upload_fs" accept=".pdf,.doc,.docx,application/pdf,application/msword,application/vnd.openxmlformats-officedocument.wordprocessingml.document" required
-                                    style="display:none;"
+                                <input type="file" name="cv" id="cv_upload_fs"
+                                    accept=".pdf,.doc,.docx,application/pdf,application/msword,application/vnd.openxmlformats-officedocument.wordprocessingml.document"
+                                    required style="display:none;"
                                     onchange="document.getElementById('cv_label_text').innerText = this.files[0].name; this.parentElement.querySelector('span:last-child').innerText = 'Archivo seleccionado';">
                             </label>
                         </div>
@@ -422,7 +447,7 @@
                                 COMENTARIOS ADICIONALES</label>
                             <textarea name="additional_comments" id="fs_comments"
                                 placeholder="Dinos algo más sobre ti..."
-                                style="width:100%;padding:14px 16px;border:1.5px solid rgba(255,255,255,0.1);border-radius:10px;background:rgba(255,255,255,0.05);color:#fff;font-size:1rem;outline:none;font-family:Inter,sans-serif;height:120px;resize:none;transition:border-color 0.3s;"></textarea>
+                                style="width:100%;box-sizing:border-box;padding:14px 16px;border:1.5px solid rgba(255,255,255,0.1);border-radius:10px;background:rgba(255,255,255,0.05);color:#fff;font-size:1rem;outline:none;font-family:Inter,sans-serif;height:120px;resize:none;transition:border-color 0.3s;"></textarea>
                         </div>
                     </div>
                     <button type="submit"
@@ -472,6 +497,23 @@
 
         // Fullscreen modal: open from panel with pre-filled data
         function openFullscreenFromPanel() {
+            // Check basic validation of the side panel form
+            const form = document.getElementById('sideForm');
+            if (form && !form.checkValidity()) {
+                form.reportValidity();
+                return;
+            }
+
+            // Check Chilean phone validation specifically if phone is provided
+            const phoneVal = document.getElementById('panel_phone').value;
+            const cleaned = phoneVal.replace(/[\s\-\(\)\.]/g, '');
+            const phoneRegex = /^(\+?56)?([2-9]\d{8})$/;
+            if (phoneVal && !phoneRegex.test(cleaned)) {
+                alert('El número de teléfono no es válido para Chile. Debe tener 9 dígitos (ej: 9 1234 5678 o +56 9 1234 5678).');
+                document.getElementById('panel_phone').focus();
+                return;
+            }
+
             // Copy values from side panel to fullscreen form
             document.getElementById('fs_full_name').value = document.getElementById('panel_full_name').value;
             document.getElementById('fs_phone').value = document.getElementById('panel_phone').value;
@@ -513,6 +555,17 @@
                 fsForm.addEventListener('submit', function (e) {
                     e.preventDefault();
 
+                    const phoneInput = document.getElementById('fs_phone');
+                    if (phoneInput) {
+                        const cleaned = phoneInput.value.replace(/[\s\-\(\)\.]/g, '');
+                        const phoneRegex = /^(\+?56)?([2-9]\d{8})$/;
+                        if (!phoneRegex.test(cleaned)) {
+                            alert('El número de teléfono no es válido para Chile. Debe tener 9 dígitos (ej: 9 1234 5678 o +56 9 1234 5678).');
+                            phoneInput.focus();
+                            return;
+                        }
+                    }
+
                     const formData = new FormData(this);
                     const modalContent = document.getElementById('fs_modal_content');
                     const successMsg = document.getElementById('fs_success_msg');
@@ -525,9 +578,28 @@
                         }
                     })
                         .then(response => {
-                            // Even if it redirects, we show success if response is ok
-                            modalContent.style.display = 'none';
-                            successMsg.style.display = 'block';
+                            if (!response.ok) {
+                                return response.json().then(data => {
+                                    let errMsg = 'Hubo un error al enviar tu postulación. Por favor revisa los datos e intenta de nuevo.';
+                                    if (data && data.errors) {
+                                        const firstField = Object.keys(data.errors)[0];
+                                        const firstError = data.errors[firstField][0];
+                                        errMsg = `${firstField === 'phone' ? 'Teléfono' : firstField}: ${firstError}`;
+                                    }
+                                    throw new Error(errMsg);
+                                });
+                            }
+                            return response.json();
+                        })
+                        .then(data => {
+                            // Close the fullscreen modal
+                            closeFullscreenForm();
+
+                            // Show the premium success popup
+                            showSuccessPopup(
+                                '¡Postulación Enviada!',
+                                'Gracias por postular. Tu información fue recibida correctamente. Te contactaremos pronto.'
+                            );
 
                             // GTM: Enviar evento de conversión
                             window.dataLayer = window.dataLayer || [];
@@ -540,20 +612,14 @@
                                 localStorage.removeItem('form_' + f);
                             });
 
-                            // Auto-close after 3.5 seconds
-                            setTimeout(() => {
-                                closeFullscreenForm();
-                                // Reset for next time
-                                setTimeout(() => {
-                                    modalContent.style.display = 'block';
-                                    successMsg.style.display = 'none';
-                                    fsForm.reset();
-                                }, 500);
-                            }, 3500);
+                            // Reset form for next time
+                            fsForm.reset();
+                            const cvLabel = document.getElementById('cv_label_text');
+                            if (cvLabel) cvLabel.innerText = 'Elegir archivo';
                         })
                         .catch(error => {
                             console.error('Error:', error);
-                            alert('Hubo un error al enviar tu postulación. Por favor intenta de nuevo.');
+                            alert(error.message || 'Hubo un error al enviar tu postulación. Por favor intenta de nuevo.');
                         });
                 });
             }
@@ -628,6 +694,110 @@
                         localStorage.removeItem('form_' + f);
                     });
                 });
+            }
+        });
+    </script>
+
+    <!-- ============ SUCCESS POPUP MODAL ============ -->
+    <div id="successPopupOverlay" class="success-popup-overlay" onclick="if(event.target===this)closeSuccessPopup()">
+        <div class="success-popup-card">
+            <div class="success-popup-icon">
+                <span class="material-symbols-outlined">check</span>
+            </div>
+            <h3 class="success-popup-title" id="successPopupTitle">¡Solicitud Enviada!</h3>
+            <p class="success-popup-message" id="successPopupMessage">Tu información fue recibida correctamente. Te
+                contactaremos pronto.</p>
+            <button class="success-popup-btn" onclick="closeSuccessPopup()">
+                <span class="material-symbols-outlined" style="font-size:20px;">done_all</span>
+                Entendido
+            </button>
+            <div class="success-popup-progress" id="successPopupProgress"></div>
+        </div>
+    </div>
+
+    <script>
+        // ---- Success Popup System ----
+        let successPopupTimer = null;
+
+        function showSuccessPopup(title, message) {
+            const overlay = document.getElementById('successPopupOverlay');
+            const titleEl = document.getElementById('successPopupTitle');
+            const msgEl = document.getElementById('successPopupMessage');
+            const progressEl = document.getElementById('successPopupProgress');
+
+            if (title) titleEl.textContent = title;
+            if (message) msgEl.textContent = message;
+
+            // Reset and restart progress bar animation
+            progressEl.style.animation = 'none';
+            progressEl.offsetHeight; // Force reflow
+            progressEl.style.animation = 'popupProgress 5s linear forwards';
+
+            // Add confetti particles
+            addConfettiParticles(overlay.querySelector('.success-popup-card'));
+
+            // Show popup
+            overlay.classList.add('active');
+            document.body.style.overflow = 'hidden';
+
+            // Auto-dismiss after 5 seconds
+            clearTimeout(successPopupTimer);
+            successPopupTimer = setTimeout(() => {
+                closeSuccessPopup();
+            }, 5000);
+        }
+
+        function closeSuccessPopup() {
+            const overlay = document.getElementById('successPopupOverlay');
+            overlay.classList.remove('active');
+            document.body.style.overflow = '';
+            clearTimeout(successPopupTimer);
+
+            // Clean up particles
+            setTimeout(() => {
+                const particles = overlay.querySelectorAll('.success-popup-particle');
+                particles.forEach(p => p.remove());
+            }, 400);
+        }
+
+        function addConfettiParticles(card) {
+            // Remove old particles
+            card.querySelectorAll('.success-popup-particle').forEach(p => p.remove());
+
+            const colors = ['#00adef', '#2ecc71', '#ffae00', '#e78d18', '#83cfff', '#ffffff'];
+            for (let i = 0; i < 12; i++) {
+                const particle = document.createElement('div');
+                particle.className = 'success-popup-particle';
+                particle.style.background = colors[i % colors.length];
+                particle.style.left = (20 + Math.random() * 60) + '%';
+                particle.style.top = (30 + Math.random() * 40) + '%';
+                particle.style.animationDelay = (Math.random() * 0.8) + 's';
+                particle.style.animationDuration = (1.5 + Math.random() * 1) + 's';
+                card.appendChild(particle);
+            }
+        }
+
+        // Auto-trigger popup from Django messages on page load
+        document.addEventListener('DOMContentLoaded', function () {
+            {% if messages %}
+            {% for message in messages %}
+            {% if message.tags != 'error' %}
+            showSuccessPopup(
+                '¡Solicitud Enviada!',
+                '{{ message|escapejs }}'
+            );
+            {% endif %}
+            {% endfor %}
+            {% endif %}
+        });
+
+        // Close popup on Escape key
+        document.addEventListener('keydown', function (e) {
+            if (e.key === 'Escape') {
+                const overlay = document.getElementById('successPopupOverlay');
+                if (overlay.classList.contains('active')) {
+                    closeSuccessPopup();
+                }
             }
         });
     </script>

@@ -1,4 +1,35 @@
+import re
+from django.core.exceptions import ValidationError
+from django.utils.translation import gettext_lazy as _
 from django.db import models
+
+
+def validate_chilean_phone(value):
+    if not value:
+        return
+    cleaned = re.sub(r'[\s\-\(\)\.]', '', value)
+    pattern = re.compile(r'^(\+?56)?([2-9]\d{8})$')
+    if not pattern.match(cleaned):
+        raise ValidationError(
+            _("El número de teléfono no es válido para Chile. Debe tener 9 dígitos (ej: 9 1234 5678 o +56 9 1234 5678).")
+        )
+
+
+def normalize_chilean_phone(value):
+    if not value:
+        return value
+    cleaned = re.sub(r'[\s\-\(\)\.]', '', value)
+    pattern = re.compile(r'^(\+?56)?([2-9]\d{8})$')
+    match = pattern.match(cleaned)
+    if match:
+        national_number = match.group(2)
+        if national_number.startswith('9'):
+            return f"+56 9 {national_number[1:5]} {national_number[5:]}"
+        elif national_number.startswith('2'):
+            return f"+56 2 {national_number[1:5]} {national_number[5:]}"
+        else:
+            return f"+56 {national_number[0:2]} {national_number[2:5]} {national_number[5:]}"
+    return value
 
 
 class Application(models.Model):
@@ -17,7 +48,7 @@ class Application(models.Model):
     ]
 
     full_name = models.CharField("Nombre completo", max_length=160)
-    phone = models.CharField("Teléfono / WhatsApp", max_length=30)
+    phone = models.CharField("Teléfono / WhatsApp", max_length=30, validators=[validate_chilean_phone])
     email = models.EmailField("Correo electrónico")
     age = models.PositiveSmallIntegerField("Edad")
     position = models.CharField(
@@ -38,6 +69,11 @@ class Application(models.Model):
 
     def __str__(self) -> str:
         return f"{self.full_name} - {self.created_at:%d/%m/%Y}"
+
+    def save(self, *args, **kwargs):
+        if self.phone:
+            self.phone = normalize_chilean_phone(self.phone)
+        super().save(*args, **kwargs)
 
 
 class postulaciones(models.Model):
@@ -77,7 +113,7 @@ class CompanyLead(models.Model):
     company_name = models.CharField("Empresa", max_length=180)
     contact_name = models.CharField("Nombre de contacto", max_length=160)
     email = models.EmailField("Correo corporativo")
-    phone = models.CharField("Telefono / WhatsApp", max_length=30)
+    phone = models.CharField("Telefono / WhatsApp", max_length=30, validators=[validate_chilean_phone])
     company_size = models.CharField("Tamano de empresa", max_length=20, choices=COMPANY_SIZE_CHOICES)
     service_interest = models.CharField("Servicio de interes", max_length=40, choices=SERVICE_CHOICES)
     message = models.TextField("Necesidad o mensaje", blank=True)
@@ -90,3 +126,8 @@ class CompanyLead(models.Model):
 
     def __str__(self) -> str:
         return f"{self.company_name} - {self.contact_name}"
+
+    def save(self, *args, **kwargs):
+        if self.phone:
+            self.phone = normalize_chilean_phone(self.phone)
+        super().save(*args, **kwargs)

@@ -42,7 +42,7 @@ class ApplicationForm(forms.ModelForm):
         ]
         widgets = {
             "full_name": forms.TextInput(attrs={"placeholder": "Tu nombre..."}),
-            "phone": forms.TextInput(attrs={"placeholder": "+56 9..."}),
+            "phone": forms.TelInput(attrs={"placeholder": "+56 9 1234 5678"}),
             "email": forms.EmailInput(attrs={"placeholder": "tu@email.com"}),
             "age": forms.NumberInput(attrs={"min": 18, "max": 70, "placeholder": "25"}),
             "position": forms.Select(attrs={"class": "field-select"}),
@@ -58,6 +58,17 @@ class ApplicationForm(forms.ModelForm):
             if name != "availability_options":
                 existing = field.widget.attrs.get("class", "")
                 field.widget.attrs["class"] = f"field-input {existing}".strip()
+
+    def clean_phone(self):
+        phone = self.cleaned_data.get("phone", "")
+        import re
+        cleaned = re.sub(r"[\s\-\(\)\.]", "", phone)
+        phone_regex = re.compile(r"^(\+?56)?([2-9]\d{8})$")
+        if not phone_regex.match(cleaned):
+            raise forms.ValidationError(
+                "El número de teléfono no es válido para Chile. Debe tener 9 dígitos (ej: 9 1234 5678 o +56 9 1234 5678)."
+            )
+        return phone
 
     def clean_age(self):
         age = self.cleaned_data["age"]
@@ -106,7 +117,7 @@ class CompanyLeadForm(forms.ModelForm):
             "company_name": forms.TextInput(attrs={"placeholder": "Nombre de la empresa"}),
             "contact_name": forms.TextInput(attrs={"placeholder": "Nombre y apellido"}),
             "email": forms.EmailInput(attrs={"placeholder": "contacto@empresa.com"}),
-            "phone": forms.TextInput(attrs={"placeholder": "+56 9 1234 5678"}),
+            "phone": forms.TelInput(attrs={"placeholder": "+56 9 1234 5678"}),
             "company_size": forms.Select(),
             "service_interest": forms.Select(),
             "message": forms.Textarea(attrs={"rows": 5, "placeholder": "Cuentanos que necesitas resolver o mejorar"}),

@@ -171,6 +171,8 @@
         color: white !important;
         border-radius: 12px !important;
         padding: 14px 18px !important;
+        width: 100% !important;
+        box-sizing: border-box !important;
     }
     #applyForm input:focus:not(.availability-check), #applyForm select:focus, #applyForm textarea:focus {
         border-color: #00adef !important;
@@ -233,16 +235,42 @@
 <script>
   document.querySelectorAll('.field-input').forEach((input) => {
     const validate = () => {
+      let isValid = true;
       if (!input.value.trim()) {
+        isValid = false;
+      } else if (input.type === 'tel' || input.name === 'phone') {
+        const cleaned = input.value.replace(/[\s\-\(\)\.]/g, '');
+        const phoneRegex = /^(\+?56)?([2-9]\d{8})$/;
+        isValid = phoneRegex.test(cleaned);
+      }
+
+      if (!isValid) {
         input.classList.remove('valid');
         input.classList.add('invalid');
       } else {
         input.classList.remove('invalid');
         input.classList.add('valid');
       }
+      return isValid;
     };
     input.addEventListener('blur', validate);
     input.addEventListener('input', validate);
   });
+
+  const applyForm = document.getElementById('applyForm');
+  if (applyForm) {
+    applyForm.addEventListener('submit', function (e) {
+      const phoneInput = document.querySelector('#applyForm input[name="phone"]');
+      if (phoneInput) {
+        const cleaned = phoneInput.value.replace(/[\s\-\(\)\.]/g, '');
+        const phoneRegex = /^(\+?56)?([2-9]\d{8})$/;
+        if (!phoneRegex.test(cleaned)) {
+          e.preventDefault();
+          alert('El número de teléfono no es válido para Chile. Debe tener 9 dígitos (ej: 9 1234 5678 o +56 9 1234 5678).');
+          phoneInput.focus();
+        }
+      }
+    });
+  }
 </script>
 {% endblock %}

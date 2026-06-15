@@ -32,6 +32,13 @@
   transform: translateY(0);
 }
 
+/* --- Pulse ring animation (WhatsApp indicator) --- */
+@keyframes pulse-ring {
+  0% { box-shadow: 0 0 0 0 rgba(37, 211, 102, 0.4); }
+  70% { box-shadow: 0 0 0 8px rgba(37, 211, 102, 0); }
+  100% { box-shadow: 0 0 0 0 rgba(37, 211, 102, 0); }
+}
+
 /* ============================================================
    SIDE PANEL — Diseño original
    ============================================================ */
@@ -356,5 +363,209 @@ html {
     width: 240px;
     height: 120px;
     padding: 20px;
+  }
+}
+
+/* ============================================================
+   SUCCESS POPUP — Premium animated notification
+   ============================================================ */
+.success-popup-overlay {
+  position: fixed;
+  inset: 0;
+  z-index: 99999;
+  background: rgba(0, 10, 20, 0.65);
+  backdrop-filter: blur(8px);
+  -webkit-backdrop-filter: blur(8px);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  opacity: 0;
+  visibility: hidden;
+  transition: opacity 0.4s ease, visibility 0.4s ease;
+  padding: 20px;
+}
+
+.success-popup-overlay.active {
+  opacity: 1;
+  visibility: visible;
+}
+
+.success-popup-card {
+  background: linear-gradient(165deg, rgba(255,255,255,0.12) 0%, rgba(255,255,255,0.04) 100%);
+  border: 1px solid rgba(255, 255, 255, 0.15);
+  backdrop-filter: blur(40px);
+  -webkit-backdrop-filter: blur(40px);
+  border-radius: 28px;
+  padding: 48px 40px 40px;
+  max-width: 440px;
+  width: 100%;
+  text-align: center;
+  position: relative;
+  overflow: hidden;
+  transform: scale(0.8) translateY(30px);
+  transition: transform 0.5s cubic-bezier(0.34, 1.56, 0.64, 1);
+  box-shadow:
+    0 25px 60px rgba(0, 0, 0, 0.4),
+    0 0 80px rgba(0, 173, 239, 0.08),
+    inset 0 1px 0 rgba(255, 255, 255, 0.1);
+}
+
+.success-popup-overlay.active .success-popup-card {
+  transform: scale(1) translateY(0);
+}
+
+/* Animated glow behind the card */
+.success-popup-card::before {
+  content: '';
+  position: absolute;
+  top: -50%;
+  left: -50%;
+  width: 200%;
+  height: 200%;
+  background: conic-gradient(
+    from 0deg,
+    transparent 0%,
+    rgba(0, 173, 239, 0.08) 25%,
+    transparent 50%,
+    rgba(46, 204, 113, 0.08) 75%,
+    transparent 100%
+  );
+  animation: popupGlowRotate 6s linear infinite;
+  z-index: -1;
+}
+
+@keyframes popupGlowRotate {
+  100% { transform: rotate(360deg); }
+}
+
+/* Checkmark circle */
+.success-popup-icon {
+  width: 88px;
+  height: 88px;
+  margin: 0 auto 28px;
+  border-radius: 50%;
+  background: linear-gradient(135deg, #00adef 0%, #2ecc71 100%);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  position: relative;
+  animation: popupIconPulse 2s ease-in-out infinite;
+  box-shadow: 0 8px 32px rgba(0, 173, 239, 0.35);
+}
+
+.success-popup-icon::after {
+  content: '';
+  position: absolute;
+  inset: -6px;
+  border-radius: 50%;
+  border: 2px solid rgba(0, 173, 239, 0.25);
+  animation: popupRingExpand 2s ease-in-out infinite;
+}
+
+@keyframes popupIconPulse {
+  0%, 100% { transform: scale(1); }
+  50% { transform: scale(1.05); }
+}
+
+@keyframes popupRingExpand {
+  0%, 100% { transform: scale(1); opacity: 1; }
+  50% { transform: scale(1.15); opacity: 0; }
+}
+
+.success-popup-icon .material-symbols-outlined {
+  font-size: 44px;
+  color: white;
+  font-variation-settings: 'FILL' 1, 'wght' 600;
+}
+
+.success-popup-title {
+  font-family: 'Outfit', sans-serif;
+  font-weight: 800;
+  font-size: 1.65rem;
+  color: white;
+  margin-bottom: 12px;
+  letter-spacing: -0.01em;
+}
+
+.success-popup-message {
+  font-family: 'Inter', sans-serif;
+  font-size: 1rem;
+  color: rgba(255, 255, 255, 0.65);
+  line-height: 1.6;
+  margin-bottom: 32px;
+}
+
+.success-popup-btn {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  gap: 8px;
+  padding: 14px 36px;
+  border: none;
+  border-radius: 14px;
+  background: linear-gradient(135deg, #005c82, #00adef);
+  color: white;
+  font-family: 'Outfit', sans-serif;
+  font-weight: 700;
+  font-size: 1rem;
+  cursor: pointer;
+  transition: all 0.3s ease;
+  box-shadow: 0 8px 24px rgba(0, 173, 239, 0.3);
+}
+
+.success-popup-btn:hover {
+  transform: translateY(-2px);
+  box-shadow: 0 12px 32px rgba(0, 173, 239, 0.45);
+}
+
+/* Progress bar at bottom */
+.success-popup-progress {
+  position: absolute;
+  bottom: 0;
+  left: 0;
+  height: 4px;
+  background: linear-gradient(90deg, #00adef, #2ecc71);
+  border-radius: 0 0 28px 28px;
+  animation: popupProgress 5s linear forwards;
+}
+
+@keyframes popupProgress {
+  from { width: 100%; }
+  to { width: 0%; }
+}
+
+/* Floating confetti particles */
+.success-popup-particle {
+  position: absolute;
+  width: 6px;
+  height: 6px;
+  border-radius: 50%;
+  opacity: 0;
+  animation: popupParticleFloat 2s ease-out forwards;
+}
+
+@keyframes popupParticleFloat {
+  0% { opacity: 1; transform: translateY(0) scale(1); }
+  100% { opacity: 0; transform: translateY(-80px) scale(0); }
+}
+
+@media (max-width: 480px) {
+  .success-popup-card {
+    padding: 36px 24px 28px;
+    border-radius: 22px;
+  }
+  .success-popup-icon {
+    width: 72px;
+    height: 72px;
+    margin-bottom: 22px;
+  }
+  .success-popup-icon .material-symbols-outlined {
+    font-size: 36px;
+  }
+  .success-popup-title {
+    font-size: 1.35rem;
+  }
+  .success-popup-message {
+    font-size: 0.9rem;
   }
 }

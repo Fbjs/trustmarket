@@ -52,7 +52,7 @@
                     {% endfor %}
                 {% endif %}
 
-                <form method="post" class="space-y-6 company-lead-form">
+                <form method="post" class="space-y-6 company-lead-form" id="companyLeadForm">
                     {% csrf_token %}
                     <div class="grid grid-cols-1 md:grid-cols-2 gap-5">
                         <div>
@@ -108,4 +108,66 @@
         background: #ffffff;
     }
 </style>
+
+{% endblock %}
+
+{% block extra_js %}
+<script>
+    document.addEventListener('DOMContentLoaded', function() {
+        const companyForm = document.getElementById('companyLeadForm');
+        if (companyForm) {
+            companyForm.addEventListener('submit', function(e) {
+                e.preventDefault();
+                const formData = new FormData(this);
+
+                fetch(this.action || window.location.href, {
+                    method: 'POST',
+                    body: formData,
+                    headers: {
+                        'X-Requested-With': 'XMLHttpRequest',
+                    }
+                })
+                .then(response => {
+                    const contentType = response.headers.get('content-type') || '';
+                    if (!response.ok) {
+                        // Try to parse JSON error response
+                        if (contentType.includes('application/json')) {
+                            return response.json().then(data => {
+                                let errMsg = 'Error al enviar el formulario. Por favor revisa los datos e intenta de nuevo.';
+                                if (data && data.errors) {
+                                    const firstField = Object.keys(data.errors)[0];
+                                    errMsg = data.errors[firstField][0];
+                                }
+                                throw new Error(errMsg);
+                            });
+                        }
+                        throw new Error('Error al enviar el formulario. Por favor revisa los datos e intenta de nuevo.');
+                    }
+                    // If JSON response, parse it; otherwise treat as success (redirect followed)
+                    if (contentType.includes('application/json')) {
+                        return response.json();
+                    }
+                    return { success: true };
+                })
+                .then(data => {
+                    showSuccessPopup(
+                        '¡Solicitud Enviada!',
+                        'Gracias. Recibimos los datos de tu empresa y te contactaremos pronto.'
+                    );
+
+                    window.dataLayer = window.dataLayer || [];
+                    window.dataLayer.push({
+                        'event': 'formulario_empresa_enviado'
+                    });
+
+                    companyForm.reset();
+                })
+                .catch(error => {
+                    console.error('Error:', error);
+                    alert(error.message || 'Hubo un error al enviar tu solicitud. Por favor intenta de nuevo.');
+                });
+            });
+        }
+    });
+</script>
 {% endblock %}

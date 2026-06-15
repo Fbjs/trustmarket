@@ -3,7 +3,7 @@ from django.urls import include, path
 from django.conf import settings
 from django.conf.urls.static import static
 from django.contrib.sitemaps.views import sitemap
-from django.views.generic import TemplateView 
+from django.views.generic import TemplateView, RedirectView 
 from .sitemaps import StaticViewSitemap
 from .views import robots_txt
 
@@ -13,6 +13,8 @@ sitemaps = {
 
 urlpatterns = [
     path("admin/", admin.site.urls),
+    path("favicon.ico", RedirectView.as_view(url="/static/img/favicon.png", permanent=True)),
+    path("user-notificaciones/", RedirectView.as_view(url="/", permanent=False)),
     path("robots.txt", robots_txt, name="robots_txt"),
     path("sitemap.xml", sitemap, {"sitemaps": sitemaps}, name="django.contrib.sitemaps.views.sitemap"),
     path("", include("core.urls")),

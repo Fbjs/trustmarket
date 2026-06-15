@@ -1,5 +1,6 @@
 from django.contrib import messages
 from django.core.mail import send_mail
+from django.http import JsonResponse
 from django.urls import reverse_lazy
 from django.views.generic import FormView, TemplateView
 
@@ -41,8 +42,16 @@ class CompanyLandingView(FormView):
             recipient_list=["operaciones.trustmarket@gmail.com"],
             fail_silently=True,
         )
+        if self.request.headers.get('x-requested-with') == 'XMLHttpRequest':
+            return JsonResponse({"success": True, "message": "Gracias. Recibimos los datos de tu empresa y te contactaremos pronto."})
         messages.success(self.request, "Gracias. Recibimos los datos de tu empresa y te contactaremos pronto.")
         return super().form_valid(form)
+
+    def form_invalid(self, form):
+        if self.request.headers.get('x-requested-with') == 'XMLHttpRequest':
+            errors_dict = {field: [str(e) for e in errors] for field, errors in form.errors.items()}
+            return JsonResponse({"success": False, "errors": errors_dict}, status=400)
+        return super().form_invalid(form)
 
 
 class PartnersView(TemplateView):

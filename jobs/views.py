@@ -2,7 +2,7 @@ from django.contrib import messages
 from django.core.mail import send_mail
 from django.shortcuts import redirect, render, get_object_or_404
 from django.urls import reverse
-from django.http import FileResponse
+from django.http import FileResponse, JsonResponse
 from .models import Application, postulaciones
 
 from .forms import ApplicationForm
@@ -31,12 +31,17 @@ def apply_view(request):
                 print(f"Error guardando en la tabla manual postulaciones: {e}")
 
             notify_recruitment_team(application)
+            if request.headers.get('x-requested-with') == 'XMLHttpRequest':
+                return JsonResponse({"success": True})
             messages.success(
                 request,
                 "¡Gracias por postular! Tu información fue recibida correctamente.",
             )
             return redirect(request.POST.get("next") or reverse("jobs:apply"))
         else:
+            if request.headers.get('x-requested-with') == 'XMLHttpRequest':
+                errors_dict = {field: [str(error) for error in errors] for field, errors in form.errors.items()}
+                return JsonResponse({"success": False, "errors": errors_dict}, status=400)
             # Si el formulario no es válido, redirigir a home con mensaje de error
             messages.error(
                 request,
