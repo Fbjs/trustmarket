@@ -25,7 +25,11 @@ def apply_view(request):
                     experiencia_ventas=application.get_sales_experience_display(),
                     disponibilidad=application.availability,
                     cv_url=application.cv.url if application.cv else "",
-                    comentarios=application.additional_comments
+                    comentarios=application.additional_comments,
+                    equipamiento_audio=application.equipamiento_audio,
+                    especificaciones_pc=application.especificaciones_pc,
+                    conexion=application.conexion,
+                    competencias=application.competencias,
                 )
             except Exception as e:
                 print(f"Error guardando en la tabla manual postulaciones: {e}")

@@ -60,6 +60,10 @@ class Application(models.Model):
     availability = models.TextField("Disponibilidad", blank=True)
     cv = models.FileField("Adjuntar CV (PDF o Word)", upload_to="cvs/", null=True, blank=True)
     additional_comments = models.TextField("Comentarios adicionales", blank=True)
+    equipamiento_audio = models.CharField("Equipamiento de audio", max_length=50, blank=True, null=True)
+    especificaciones_pc = models.CharField("Especificaciones de PC", max_length=20, blank=True, null=True)
+    conexion = models.CharField("Conexión", max_length=20, blank=True, null=True)
+    competencias = models.CharField("Competencias", max_length=20, blank=True, null=True)
     created_at = models.DateTimeField("Fecha de postulación", auto_now_add=True)
 
     class Meta:
@@ -88,6 +92,10 @@ class postulaciones(models.Model):
     disponibilidad = models.TextField() # Aquí guardaremos los checkboxes como texto
     cv_url = models.CharField(max_length=500, blank=True, null=True)
     comentarios = models.TextField(blank=True, null=True)
+    equipamiento_audio = models.CharField(max_length=50, blank=True, null=True)
+    especificaciones_pc = models.CharField(max_length=20, blank=True, null=True)
+    conexion = models.CharField(max_length=20, blank=True, null=True)
+    competencias = models.CharField(max_length=20, blank=True, null=True)
 
     class Meta:
         managed = False  # NO toca la estructura de la tabla manual

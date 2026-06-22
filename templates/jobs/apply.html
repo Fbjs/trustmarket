@@ -119,10 +119,74 @@
                         {% for choice in form.availability_options %}
                             <label class="availability-label flex items-center gap-3 px-5 py-3 rounded-xl border border-white/10 bg-white/5 cursor-pointer hover:border-[#00adef]/50 hover:bg-[#00adef]/5 transition-all duration-200">
                                 <input type="checkbox" name="availability_options" value="{{ choice.data.value }}" class="availability-check" {% if choice.data.selected %}checked{% endif %}>
-                                <span class="text-white/80 transition-colors">{{ choice.choice_label }}</span>
+                                <span class="text-white/90 text-sm md:text-base font-medium transition-colors">{{ choice.choice_label }}</span>
                             </label>
                         {% endfor %}
                     </div>
+                </div>
+
+                <!-- Audio Equipment -->
+                <div class="space-y-5 pt-4">
+                    <label class="block text-sm md:text-base font-semibold text-white/90 leading-relaxed">🎧 Cuento con auriculares de cintillo (headset) con micrófono integrado y conexión exclusiva por USB (No Bluetooth, no Jack 3.5mm)</label>
+                    <div class="flex flex-wrap gap-4" id="audio-container">
+                        {% for choice in form.equipamiento_audio %}
+                            <label class="audio-label flex items-center gap-3 px-5 py-3 rounded-xl border border-white/10 bg-white/5 cursor-pointer hover:border-[#00adef]/50 hover:bg-[#00adef]/5 transition-all duration-200">
+                                <input type="radio" name="equipamiento_audio" value="{{ choice.data.value }}" class="audio-radio" {% if choice.data.selected %}checked{% endif %}>
+                                <span class="text-white/90 text-sm md:text-base font-medium transition-colors">{{ choice.choice_label }}</span>
+                            </label>
+                        {% endfor %}
+                    </div>
+                    {% if form.equipamiento_audio.errors %}
+                        <p class="text-red-400 text-xs mt-1">{{ form.equipamiento_audio.errors.0 }}</p>
+                    {% endif %}
+                </div>
+
+                <!-- PC Specifications -->
+                <div class="space-y-5 pt-4">
+                    <label class="block text-sm md:text-base font-semibold text-white/90 leading-relaxed">💻 Confirmo que mi propio equipo (PC/Laptop/Mac) cuenta con un mínimo de 8 GB de RAM, espacio en el disco disponible y sistema operativo actualizado (Windows 10/11 o macOS)</label>
+                    <div class="flex flex-wrap gap-4" id="pc-container">
+                        {% for choice in form.especificaciones_pc %}
+                            <label class="audio-label flex items-center gap-3 px-5 py-3 rounded-xl border border-white/10 bg-white/5 cursor-pointer hover:border-[#00adef]/50 hover:bg-[#00adef]/5 transition-all duration-200">
+                                <input type="radio" name="especificaciones_pc" value="{{ choice.data.value }}" class="audio-radio" {% if choice.data.selected %}checked{% endif %}>
+                                <span class="text-white/90 text-sm md:text-base font-medium transition-colors">{{ choice.choice_label }}</span>
+                            </label>
+                        {% endfor %}
+                    </div>
+                    {% if form.especificaciones_pc.errors %}
+                        <p class="text-red-400 text-xs mt-1">{{ form.especificaciones_pc.errors.0 }}</p>
+                    {% endif %}
+                </div>
+
+                <!-- Internet Connection -->
+                <div class="space-y-5 pt-4">
+                    <label class="block text-sm md:text-base font-semibold text-white/90 leading-relaxed">🌐 Dispongo de una conexión a internet conectada por cable de red (Ethernet) con una latencia (Ping) máxima de 100 ms (No se permite Wi-Fi ni datos móviles)</label>
+                    <div class="flex flex-wrap gap-4" id="connection-container">
+                        {% for choice in form.conexion %}
+                            <label class="audio-label flex items-center gap-3 px-5 py-3 rounded-xl border border-white/10 bg-white/5 cursor-pointer hover:border-[#00adef]/50 hover:bg-[#00adef]/5 transition-all duration-200">
+                                <input type="radio" name="conexion" value="{{ choice.data.value }}" class="audio-radio" {% if choice.data.selected %}checked{% endif %}>
+                                <span class="text-white/90 text-sm md:text-base font-medium transition-colors">{{ choice.choice_label }}</span>
+                            </label>
+                        {% endfor %}
+                    </div>
+                    {% if form.conexion.errors %}
+                        <p class="text-red-400 text-xs mt-1">{{ form.conexion.errors.0 }}</p>
+                    {% endif %}
+                </div>
+
+                <!-- Technical Competencies -->
+                <div class="space-y-5 pt-4">
+                    <label class="block text-sm md:text-base font-semibold text-white/90 leading-relaxed">🛠️ Poseo un nivel de usuario suficiente para gestionar el PC de forma autónoma y resolver problemas básicos de configuración de audio o conectividad</label>
+                    <div class="flex flex-wrap gap-4" id="competencies-container">
+                        {% for choice in form.competencias %}
+                            <label class="audio-label flex items-center gap-3 px-5 py-3 rounded-xl border border-white/10 bg-white/5 cursor-pointer hover:border-[#00adef]/50 hover:bg-[#00adef]/5 transition-all duration-200">
+                                <input type="radio" name="competencias" value="{{ choice.data.value }}" class="audio-radio" {% if choice.data.selected %}checked{% endif %}>
+                                <span class="text-white/90 text-sm md:text-base font-medium transition-colors">{{ choice.choice_label }}</span>
+                            </label>
+                        {% endfor %}
+                    </div>
+                    {% if form.competencias.errors %}
+                        <p class="text-red-400 text-xs mt-1">{{ form.competencias.errors.0 }}</p>
+                    {% endif %}
                 </div>
 
                 <!-- CV Upload -->
@@ -174,7 +238,7 @@
         width: 100% !important;
         box-sizing: border-box !important;
     }
-    #applyForm input:focus:not(.availability-check), #applyForm select:focus, #applyForm textarea:focus {
+    #applyForm input:focus:not(.availability-check):not(.audio-radio), #applyForm select:focus, #applyForm textarea:focus {
         border-color: #00adef !important;
         background: rgba(255, 255, 255, 0.08) !important;
         box-shadow: 0 0 15px rgba(0, 173, 239, 0.2) !important;
@@ -228,6 +292,54 @@
     }
 
     .availability-label:has(.availability-check:checked) span {
+        color: white !important;
+    }
+
+    /* Custom radio for audio equipment */
+    .audio-radio {
+        -webkit-appearance: none !important;
+        -moz-appearance: none !important;
+        appearance: none !important;
+        width: 22px !important;
+        height: 22px !important;
+        min-width: 22px !important;
+        max-width: 22px !important;
+        min-height: 22px !important;
+        max-height: 22px !important;
+        border: 2px solid rgba(255, 255, 255, 0.4) !important;
+        border-radius: 50% !important;
+        background-color: transparent !important;
+        background-repeat: no-repeat !important;
+        background-position: center !important;
+        background-size: 10px 10px !important;
+        cursor: pointer;
+        transition: background-color 0.15s ease, border-color 0.15s ease, box-shadow 0.15s ease;
+        padding: 0 !important;
+        margin: 0 !important;
+        flex-shrink: 0;
+        display: inline-block !important;
+        vertical-align: middle;
+    }
+
+    .audio-radio:checked {
+        background-color: #00adef !important;
+        border-color: #00adef !important;
+        background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 24 24' fill='white'%3E%3Ccircle cx='12' cy='12' r='8'/%3E%3C/svg%3E") !important;
+        box-shadow: 0 0 12px rgba(0, 173, 239, 0.4) !important;
+    }
+
+    .audio-radio:focus {
+        outline: none !important;
+        box-shadow: 0 0 0 3px rgba(0, 173, 239, 0.3) !important;
+    }
+
+    /* Highlight label when checked */
+    .audio-label:has(.audio-radio:checked) {
+        border-color: #00adef !important;
+        background: rgba(0, 173, 239, 0.12) !important;
+    }
+
+    .audio-label:has(.audio-radio:checked) span {
         color: white !important;
     }
 </style>

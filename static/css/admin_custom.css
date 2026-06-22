@@ -1,0 +1,13 @@
+/* Custom CSS for Django Admin to improve horizontal scrolling on wide tables */
+#changelist-form .results {
+    max-height: calc(100vh - 230px);
+    overflow-y: auto;
+    overflow-x: auto;
+}
+
+/* Ensure sticky headers look perfect when scrolling */
+#changelist-form .results table thead th {
+    position: sticky;
+    top: 0;
+    z-index: 10;
+}

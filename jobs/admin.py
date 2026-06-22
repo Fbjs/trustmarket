@@ -91,6 +91,11 @@ class CompanyLeadAdmin(admin.ModelAdmin):
     search_fields = ("company_name", "contact_name", "email", "phone")
     actions = [export_to_excel]
 
+    class Media:
+        css = {
+            "all": ("css/admin_custom.css",)
+        }
+
 
 @admin.register(Application)
 class ApplicationAdmin(admin.ModelAdmin):
@@ -100,10 +105,27 @@ class ApplicationAdmin(admin.ModelAdmin):
         "phone",
         "position",
         "sales_experience",
+        "equipamiento_audio",
+        "especificaciones_pc",
+        "conexion",
+        "competencias",
         "cv",
         "created_at",
     )
-    list_filter = ("position", "sales_experience", "created_at")
+    list_filter = (
+        "position",
+        "sales_experience",
+        "equipamiento_audio",
+        "especificaciones_pc",
+        "conexion",
+        "competencias",
+        "created_at",
+    )
     search_fields = ("full_name", "email", "phone")
     actions = [export_to_excel]
+
+    class Media:
+        css = {
+            "all": ("css/admin_custom.css",)
+        }
 

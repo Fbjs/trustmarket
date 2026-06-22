@@ -22,10 +22,43 @@ class ApplicationForm(forms.ModelForm):
         ("freelancer", "Freelancer"),
     ]
 
+    YES_NO_CHOICES = [
+        ("Si", "Sí"),
+        ("No", "No"),
+    ]
+
     availability_options = forms.MultipleChoiceField(
         label="Disponibilidad",
         choices=AVAILABILITY_CHOICES,
         widget=forms.CheckboxSelectMultiple,
+    )
+
+    equipamiento_audio = forms.ChoiceField(
+        label="Cuento con auriculares de cintillo (headset) con micrófono integrado y conexión exclusiva por USB (No Bluetooth, no Jack 3.5mm)",
+        choices=YES_NO_CHOICES,
+        widget=forms.RadioSelect,
+        required=True,
+    )
+
+    especificaciones_pc = forms.ChoiceField(
+        label="Confirmo que mi propio equipo (PC/Laptop/Mac) cuenta con un mínimo de 8 GB de RAM, espacio en el disco disponible y sistema operativo actualizado (Windows 10/11 o macOS).",
+        choices=YES_NO_CHOICES,
+        widget=forms.RadioSelect,
+        required=True,
+    )
+
+    conexion = forms.ChoiceField(
+        label="Dispongo de una conexión a internet conectada por cable de red (Ethernet) con una latencia (Ping) máxima de 100 ms (No se permite Wi-Fi ni datos móviles).",
+        choices=YES_NO_CHOICES,
+        widget=forms.RadioSelect,
+        required=True,
+    )
+
+    competencias = forms.ChoiceField(
+        label="Poseo un nivel de usuario suficiente para gestionar el PC de forma autónoma y resolver problemas básicos de configuración de audio o conectividad.",
+        choices=YES_NO_CHOICES,
+        widget=forms.RadioSelect,
+        required=True,
     )
 
     class Meta:
@@ -37,6 +70,10 @@ class ApplicationForm(forms.ModelForm):
             "age",
             "position",
             "sales_experience",
+            "equipamiento_audio",
+            "especificaciones_pc",
+            "conexion",
+            "competencias",
             "cv",
             "additional_comments",
         ]
@@ -55,7 +92,7 @@ class ApplicationForm(forms.ModelForm):
         super().__init__(*args, **kwargs)
         for name, field in self.fields.items():
             field.required = True if name != "additional_comments" else False
-            if name != "availability_options":
+            if name not in ["availability_options", "equipamiento_audio", "especificaciones_pc", "conexion", "competencias"]:
                 existing = field.widget.attrs.get("class", "")
                 field.widget.attrs["class"] = f"field-input {existing}".strip()
 
