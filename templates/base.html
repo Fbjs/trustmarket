@@ -641,7 +641,7 @@
         });
 
         function loadSavedData() {
-            const fields = ['full_name', 'phone', 'email', 'age', 'position', 'sales_experience', 'additional_comments'];
+            const fields = ['full_name', 'phone', 'email', 'age', 'sales_experience', 'additional_comments'];
             fields.forEach(fieldName => {
                 const savedValue = localStorage.getItem('form_' + fieldName);
                 if (savedValue) {
@@ -678,6 +678,7 @@
         window.addEventListener("scroll", updateActiveNav);
 
         document.addEventListener("DOMContentLoaded", function () {
+            localStorage.removeItem('form_position');
             loadSavedData();
             setTimeout(reveal, 200);
 
@@ -685,7 +686,7 @@
             if (form) {
                 form.addEventListener('submit', function () {
                     // Clear localStorage on submit
-                    ['full_name', 'phone', 'email', 'age', 'position', 'sales_experience', 'additional_comments'].forEach(f => {
+                    ['full_name', 'phone', 'email', 'age', 'sales_experience', 'additional_comments'].forEach(f => {
                         localStorage.removeItem('form_' + f);
                     });
                 });
