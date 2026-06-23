@@ -105,6 +105,7 @@ class ApplicationAdmin(admin.ModelAdmin):
         "phone",
         "position",
         "sales_experience",
+        "availability",
         "equipamiento_audio",
         "especificaciones_pc",
         "conexion",
@@ -115,6 +116,7 @@ class ApplicationAdmin(admin.ModelAdmin):
     list_filter = (
         "position",
         "sales_experience",
+        "availability",
         "equipamiento_audio",
         "especificaciones_pc",
         "conexion",
