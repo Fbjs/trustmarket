@@ -41,7 +41,8 @@ class Application(models.Model):
     ]
 
     POSITION_CHOICES = [
-        ("ejecutivo_ventas", "Ejecutivo de Ventas Seguros"),
+        ("ejecutivo_ventas", "Ejecutivo de Ventas"),
+        ("ejecutivo_encuestas", "Ejecutivo de Encuestas"),
         ("atencion_cliente", "Atención al Cliente"),
         ("soporte_comercial", "Soporte Comercial"),
         ("supervisor", "Supervisor de Ventas"),

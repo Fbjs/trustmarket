@@ -296,10 +296,8 @@
                     <label>💼 Puesto al que postula <span class="required">*</span></label>
                     <select name="position" id="panel_position" required>
                         <option value="">Selecciona un puesto...</option>
-                        <option value="ejecutivo_ventas">Ejecutivo de Ventas Seguros</option>
-                        <option value="atencion_cliente">Atención al Cliente</option>
-                        <option value="soporte_comercial">Soporte Comercial</option>
-                        <option value="supervisor">Supervisor de Ventas</option>
+                        <option value="ejecutivo_ventas">Ejecutivo de Ventas</option>
+                        <option value="ejecutivo_encuestas">Ejecutivo de Encuestas</option>
                     </select>
                 </div>
                 <div class="form-group">
@@ -382,12 +380,9 @@
                             <select name="position" id="fs_position" required
                                 style="width:100%;padding:14px 16px;border:1.5px solid rgba(255,255,255,0.1);border-radius:10px;background:rgba(255,255,255,0.05);color:#fff;font-size:1rem;outline:none;font-family:Inter,sans-serif;transition:border-color 0.3s;">
                                 <option value="" style="background:#001e2e;">Selecciona un puesto...</option>
-                                <option value="ejecutivo_ventas" style="background:#001e2e;">Ejecutivo de Ventas Seguros
+                                <option value="ejecutivo_ventas" style="background:#001e2e;">Ejecutivo de Ventas
                                 </option>
-                                <option value="atencion_cliente" style="background:#001e2e;">Atención al Cliente
-                                </option>
-                                <option value="soporte_comercial" style="background:#001e2e;">Soporte Comercial</option>
-                                <option value="supervisor" style="background:#001e2e;">Supervisor de Ventas</option>
+                                <option value="ejecutivo_encuestas" style="background:#001e2e;">Ejecutivo de Encuestas</option>
                             </select>
                         </div>
                         <div style="display:flex;flex-direction:column;">
@@ -799,6 +794,126 @@
                     closeSuccessPopup();
                 }
             }
+        });
+    </script>
+
+    <!-- ============ JOB SELECTION MODAL ============ -->
+    <div id="jobSelectionModal" style="position:fixed;inset:0;z-index:99999;background:rgba(0,10,20,0.75);backdrop-filter:blur(12px);-webkit-backdrop-filter:blur(12px);display:flex;align-items:center;justify-content:center;opacity:0;visibility:hidden;transition:opacity 0.4s,visibility 0.4s;padding:20px;">
+        <div style="background:linear-gradient(165deg, rgba(255,255,255,0.12) 0%, rgba(255,255,255,0.04) 100%);border:1px solid rgba(255, 255, 255, 0.15);border-radius:28px;padding:40px 30px;max-width:540px;width:100%;text-align:center;position:relative;box-shadow:0 25px 60px rgba(0,0,0,0.4);transform:scale(0.85);transition:transform 0.4s cubic-bezier(0.34, 1.56, 0.64, 1);">
+            <!-- Close button -->
+            <button type="button" onclick="closeJobSelectionModal()" style="position:absolute;top:20px;right:20px;background:none;border:none;cursor:pointer;color:rgba(255,255,255,0.6);transition:color 0.25s;" onmouseover="this.style.color='#fff'" onmouseout="this.style.color='rgba(255,255,255,0.6)'">
+                <span class="material-symbols-outlined" style="font-size:24px;">close</span>
+            </button>
+            
+            <h3 class="font-headline" style="font-size:1.8rem;font-weight:800;color:white;margin-bottom:10px;letter-spacing:-0.01em;">¿A qué puesto deseas postular?</h3>
+            <p style="color:rgba(255,255,255,0.65);font-size:1rem;line-height:1.5;margin-bottom:30px;font-family:Inter,sans-serif;">Selecciona una de nuestras vacantes disponibles para continuar con tu postulación.</p>
+            
+            <div style="display:flex;flex-direction:column;gap:16px;">
+                <!-- Card 1: Ejecutivo de Ventas -->
+                <button type="button" onclick="selectJobAndProceed('ejecutivo_ventas')" style="display:flex;align-items:center;gap:20px;padding:20px;border-radius:18px;border:1.5px solid rgba(255,255,255,0.1);background:rgba(255,255,255,0.03);text-align:left;cursor:pointer;transition:all 0.3s;width:100%;" onmouseover="this.style.borderColor='#00adef';this.style.background='rgba(0,173,239,0.08)';this.style.transform='translateY(-2px)'" onmouseout="this.style.borderColor='rgba(255,255,255,0.1)';this.style.background='rgba(255,255,255,0.03)';this.style.transform='translateY(0)'">
+                    <div style="width:52px;height:52px;border-radius:14px;background:rgba(0,173,239,0.15);color:#00adef;display:flex;align-items:center;justify-content:center;flex-shrink:0;">
+                        <span class="material-symbols-outlined" style="font-size:28px;">shield</span>
+                    </div>
+                    <div>
+                        <h4 class="font-headline" style="font-weight:700;font-size:1.15rem;color:white;margin-bottom:4px;">Ejecutivo de Ventas</h4>
+                        <p style="color:rgba(255,255,255,0.5);font-size:0.85rem;margin:0;font-family:Inter,sans-serif;">Gestión comercial y venta de productos o servicios.</p>
+                    </div>
+                </button>
+                
+                <!-- Card 2: Ejecutivo de Encuestas -->
+                <button type="button" onclick="selectJobAndProceed('ejecutivo_encuestas')" style="display:flex;align-items:center;gap:20px;padding:20px;border-radius:18px;border:1.5px solid rgba(255,255,255,0.1);background:rgba(255,255,255,0.03);text-align:left;cursor:pointer;transition:all 0.3s;width:100%;" onmouseover="this.style.borderColor='#00adef';this.style.background='rgba(0,173,239,0.08)';this.style.transform='translateY(-2px)'" onmouseout="this.style.borderColor='rgba(255,255,255,0.1)';this.style.background='rgba(255,255,255,0.03)';this.style.transform='translateY(0)'">
+                    <div style="width:52px;height:52px;border-radius:14px;background:rgba(0,173,239,0.15);color:#00adef;display:flex;align-items:center;justify-content:center;flex-shrink:0;">
+                        <span class="material-symbols-outlined" style="font-size:28px;">poll</span>
+                    </div>
+                    <div>
+                        <h4 class="font-headline" style="font-weight:700;font-size:1.15rem;color:white;margin-bottom:4px;">Ejecutivo de Encuestas</h4>
+                        <p style="color:rgba(255,255,255,0.5);font-size:0.85rem;margin:0;font-family:Inter,sans-serif;">Aplicación de encuestas telefónicas y registro de datos.</p>
+                    </div>
+                </button>
+            </div>
+        </div>
+    </div>
+
+    <script>
+        let currentJobSelectionTarget = 'link';
+
+        function openJobSelectionModal(targetType) {
+            currentJobSelectionTarget = targetType || 'link';
+            const modal = document.getElementById('jobSelectionModal');
+            if (modal) {
+                modal.style.opacity = '1';
+                modal.style.visibility = 'visible';
+                modal.firstElementChild.style.transform = 'scale(1)';
+                document.body.style.overflow = 'hidden';
+            }
+        }
+
+        function closeJobSelectionModal() {
+            const modal = document.getElementById('jobSelectionModal');
+            if (modal) {
+                modal.style.opacity = '0';
+                modal.style.visibility = 'hidden';
+                modal.firstElementChild.style.transform = 'scale(0.85)';
+                document.body.style.overflow = '';
+            }
+        }
+
+        function lockSelectField(selectElement, value) {
+            if (!selectElement) return;
+            selectElement.value = value;
+            
+            // Apply visual and pointer locks
+            selectElement.style.pointerEvents = 'none';
+            selectElement.style.background = 'rgba(255, 255, 255, 0.05)';
+            selectElement.style.opacity = '0.7';
+            
+            // Prevent interaction
+            selectElement.addEventListener('focus', function() {
+                selectElement.blur();
+            });
+            
+            selectElement.addEventListener('change', function() {
+                selectElement.value = value;
+            });
+        }
+
+        function selectJobAndProceed(puesto) {
+            closeJobSelectionModal();
+            if (currentJobSelectionTarget === 'panel') {
+                togglePanel();
+                const sideSelect = document.getElementById('panel_position');
+                if (sideSelect) {
+                    lockSelectField(sideSelect, puesto);
+                }
+                const fsSelect = document.getElementById('fs_position');
+                if (fsSelect) {
+                    lockSelectField(fsSelect, puesto);
+                }
+            } else if (currentJobSelectionTarget === 'page_direct') {
+                const selectElement = document.querySelector('select[name="position"]');
+                if (selectElement) {
+                    lockSelectField(selectElement, puesto);
+                }
+            } else {
+                const applyUrl = "{% url 'jobs:apply' %}";
+                window.location.href = applyUrl + "?puesto=" + puesto;
+            }
+        }
+
+        // Global interceptor for all apply buttons and links
+        document.addEventListener('DOMContentLoaded', function() {
+            const applyUrl = "{% url 'jobs:apply' %}";
+            
+            document.addEventListener('click', function(e) {
+                const anchor = e.target.closest('a');
+                if (anchor) {
+                    const href = anchor.getAttribute('href');
+                    if (href && (href === applyUrl || href === applyUrl + '/' || href.endsWith('/jobs/') || href.endsWith('/jobs'))) {
+                        e.preventDefault();
+                        openJobSelectionModal('link');
+                    }
+                }
+            });
         });
     </script>
 

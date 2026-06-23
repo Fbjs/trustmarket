@@ -66,7 +66,7 @@
         <div class="bg-[#0A1118]/80 backdrop-blur-3xl border border-white/10 p-5 sm:p-6 md:p-14 rounded-2xl md:rounded-3xl shadow-2xl">
             <form method="post" enctype="multipart/form-data" class="space-y-10" id="applyForm">
                 {% csrf_token %}
-                <input type="hidden" name="next" value="{{ request.path }}">
+                <input type="hidden" name="next" value="{{ request.get_full_path }}">
                 
                 <div class="grid grid-cols-1 md:grid-cols-2 gap-x-10 gap-y-6 md:gap-y-8">
                     <!-- Name -->
@@ -384,5 +384,25 @@
       }
     });
   }
+
+  // Handle URL query parameter and lock the select field
+  document.addEventListener('DOMContentLoaded', function() {
+    const urlParams = new URLSearchParams(window.location.search);
+    const puesto = urlParams.get('puesto');
+    const selectElement = document.querySelector('#applyForm select[name="position"]');
+    
+    const hasMessages = {% if messages %}true{% else %}false{% endif %};
+    const formHasErrors = {% if form.errors %}true{% else %}false{% endif %};
+    
+    if (puesto && (puesto === 'ejecutivo_ventas' || puesto === 'ejecutivo_encuestas')) {
+        lockSelectField(selectElement, puesto);
+    } else if (selectElement && selectElement.value && selectElement.value !== "") {
+        lockSelectField(selectElement, selectElement.value);
+    } else if (hasMessages || formHasErrors) {
+        // Do not auto-open job selection modal on success message or validation errors
+    } else {
+        openJobSelectionModal('page_direct');
+    }
+  });
 </script>
 {% endblock %}
