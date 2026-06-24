@@ -13,32 +13,42 @@
 }
 
 /* Change list container to stack vertically instead of side-by-side */
+#changelist,
 #changelist .changelist-form-container {
-    flex-direction: column;
-    align-items: stretch;
+    display: flex !important;
+    flex-direction: column !important;
+    align-items: stretch !important;
+}
+
+/* Override absolute positioning or padding for filters in older/different Django versions */
+#changelist.filtered {
+    padding-right: 0 !important;
 }
 
 /* Allow the results table div to take full width when filters are present */
+#changelist .changelist-form-container > div,
 #changelist .changelist-form-container:has(#changelist-filter) > div {
-    max-width: 100%;
-    width: 100%;
+    max-width: 100% !important;
+    width: 100% !important;
 }
 
 /* Re-position the filters section to the top and stack them vertically */
 #changelist-filter {
-    flex: none;
-    order: -1; /* Move to top, before the results list */
-    width: 100%;
-    margin: 0 0 20px 0;
-    padding: 15px;
-    box-sizing: border-box;
-    display: flex;
-    flex-direction: column; /* Stack filters vertically */
-    gap: 12px;
-    background: var(--darkened-bg);
-    border: 1px solid var(--hairline-color);
-    border-radius: 6px;
-    align-items: flex-start;
+    position: relative !important;
+    flex: none !important;
+    order: -1 !important; /* Move to top, before the results list */
+    width: 100% !important;
+    max-width: 100% !important;
+    margin: 0 0 20px 0 !important;
+    padding: 15px !important;
+    box-sizing: border-box !important;
+    display: flex !important;
+    flex-direction: column !important; /* Stack filters vertically */
+    gap: 12px !important;
+    background: var(--darkened-bg) !important;
+    border: 1px solid var(--hairline-color) !important;
+    border-radius: 6px !important;
+    align-items: flex-start !important;
 }
 
 /* Hide default header inside filters */
