@@ -82,9 +82,19 @@ class DateRangeFilter(admin.SimpleListFilter):
     template = 'admin/date_range_filter.html'
 
     def __init__(self, request, params, model, model_admin):
-        self.range_val = params.pop('created_at_range', [None])[-1]
-        self.gte_val = params.pop('created_at__gte', [None])[-1]
-        self.lte_val = params.pop('created_at__lte', [None])[-1]
+        self.request = request
+        
+        # Helper to pop values safely (handling strings, QueryDict, lists)
+        def get_val(key):
+            val = params.pop(key, None)
+            if isinstance(val, list):
+                return val[-1] if val else None
+            return val
+
+        self.range_val = get_val('created_at_range')
+        self.gte_val = get_val('created_at__gte')
+        self.lte_val = get_val('created_at__lte')
+        
         super().__init__(request, params, model, model_admin)
         if self.range_val:
             self.used_parameters['created_at_range'] = self.range_val
