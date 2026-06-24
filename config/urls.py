@@ -11,6 +11,8 @@ sitemaps = {
     "static": StaticViewSitemap,
 }
 
+admin.site.enable_nav_sidebar = False
+
 urlpatterns = [
     path("admin/", admin.site.urls),
     path("favicon.ico", RedirectView.as_view(url="/static/img/favicon.png", permanent=True)),

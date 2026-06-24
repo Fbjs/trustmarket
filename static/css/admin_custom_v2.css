@@ -220,7 +220,10 @@
 }
 
 /* Hide the redundant conventional save button at the bottom of the change list */
-#changelist-form .submit-row {
+#changelist-form .submit-row,
+#changelist-form .changelist-footer input[type="submit"],
+#changelist-form .changelist-footer button,
+#changelist-form .changelist-footer .button {
     display: none !important;
 }
 

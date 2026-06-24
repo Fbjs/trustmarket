@@ -1,0 +1,11 @@
+{% extends "admin/change_form.html" %}
+{% load i18n admin_urls %}
+
+{% block object-tools-items %}
+  <li>
+    <a href="{% url opts|admin_urlname:'changelist' %}" class="historylink" style="background: var(--body-bg) !important; border: 1px solid var(--border-color) !important; color: var(--body-fg) !important; padding: 8px 15px; display: inline-block; font-weight: bold; border-radius: 4px; text-decoration: none;">
+      ← Volver al Listado
+    </a>
+  </li>
+  {{ block.super }}
+{% endblock %}

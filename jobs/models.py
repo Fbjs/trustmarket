@@ -59,13 +59,32 @@ class Application(models.Model):
         "Experiencia en ventas", max_length=20, choices=EXPERIENCE_CHOICES, default="sin_experiencia"
     )
     availability = models.TextField("Disponibilidad", blank=True)
-    cv = models.FileField("Adjuntar CV (PDF o Word)", upload_to="cvs/", null=True, blank=True)
+    cv = models.FileField("CV", upload_to="cvs/", null=True, blank=True)
     additional_comments = models.TextField("Comentarios adicionales", blank=True)
     equipamiento_audio = models.CharField("Equipamiento de audio", max_length=50, blank=True, null=True)
     especificaciones_pc = models.CharField("Especificaciones de PC", max_length=20, blank=True, null=True)
     conexion = models.CharField("Conexión", max_length=20, blank=True, null=True)
     competencias = models.CharField("Competencias", max_length=20, blank=True, null=True)
+    ESTADO_CHOICES = [
+        ("Postulando", "Postulando"),
+        ("Califica", "Califica"),
+        ("No califica", "No califica"),
+        ("Contactado", "Contactado"),
+        ("Volver a llamar", "Volver a llamar"),
+        ("Seguna etapa", "Seguna etapa"),
+        ("Contratado", "Contratado"),
+        ("Desvinculado", "Desvinculado"),
+        ("Abandono", "Abandono"),
+    ]
+
+    estado = models.CharField(
+        "Estado", max_length=40, choices=ESTADO_CHOICES, default="Postulando"
+    )
+    observaciones = models.CharField(
+        "Observaciones", max_length=200, blank=True, default=""
+    )
     created_at = models.DateTimeField("Fecha de postulación", auto_now_add=True)
+
 
     class Meta:
         ordering = ["-created_at"]

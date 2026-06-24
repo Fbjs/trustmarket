@@ -1,0 +1,71 @@
+{% load i18n %}
+<details data-filter-title="{{ title }}" open style="border: none; box-shadow: none; background: transparent; margin: 0; padding: 0;">
+  <summary style="display: none;"></summary>
+  <div style="padding: 0;">
+    <form id="date-filter-form" method="GET" action="" style="display: flex; flex-wrap: wrap; gap: 15px 25px; align-items: center;">
+      {# Preserve other query parameters #}
+      {% for k, v in spec.request.GET.items %}
+        {% if k != 'created_at_range' and k != 'created_at__gte' and k != 'created_at__lte' %}
+          <input type="hidden" name="{{ k }}" value="{{ v }}" />
+        {% endif %}
+      {% endfor %}
+      
+      <div style="display: flex; align-items: center; gap: 8px;">
+        <span style="font-size: 0.85rem; font-weight: bold; color: var(--body-fg); text-transform: uppercase; letter-spacing: 0.5px; white-space: nowrap; width: 320px; flex-shrink: 0; display: inline-block;">
+          {{ title }}:
+        </span>
+        
+        <select id="id_created_at_range" name="created_at_range" onchange="toggleCustomDates(this.value)" style="padding: 6px 10px; border: 1px solid var(--border-color); border-radius: 4px; background: var(--body-bg); color: var(--body-fg); font-family: inherit; font-size: 0.85rem; cursor: pointer;">
+          <option value="" {% if not spec.range_val %}selected{% endif %}>Cualquier fecha</option>
+          <option value="today" {% if spec.range_val == 'today' %}selected{% endif %}>Hoy</option>
+          <option value="yesterday" {% if spec.range_val == 'yesterday' %}selected{% endif %}>Ayer</option>
+          <option value="7_days" {% if spec.range_val == '7_days' %}selected{% endif %}>Últimos 7 días</option>
+          <option value="30_days" {% if spec.range_val == '30_days' %}selected{% endif %}>Últimos 30 días</option>
+          <option value="this_month" {% if spec.range_val == 'this_month' %}selected{% endif %}>Este mes</option>
+          <option value="this_year" {% if spec.range_val == 'this_year' %}selected{% endif %}>Este año</option>
+          <option value="custom" {% if spec.range_val == 'custom' %}selected{% endif %}>Rango personalizado...</option>
+        </select>
+      </div>
+      
+      <div id="custom-date-container" style="display: {% if spec.range_val == 'custom' %}flex{% else %}none{% endif %}; align-items: center; gap: 15px;">
+        <div style="display: flex; align-items: center; gap: 8px;">
+          <label for="id_created_at__gte" style="font-size: 0.85rem; font-weight: 600; color: var(--body-quiet-color);">Desde:</label>
+          <input type="date" id="id_created_at__gte" name="created_at__gte" value="{{ spec.gte_val|default:'' }}" style="padding: 6px 10px; border: 1px solid var(--border-color); border-radius: 4px; background: var(--body-bg); color: var(--body-fg); font-family: inherit; font-size: 0.85rem;" />
+        </div>
+        
+        <div style="display: flex; align-items: center; gap: 8px;">
+          <label for="id_created_at__lte" style="font-size: 0.85rem; font-weight: 600; color: var(--body-quiet-color);">Hasta:</label>
+          <input type="date" id="id_created_at__lte" name="created_at__lte" value="{{ spec.lte_val|default:'' }}" style="padding: 6px 10px; border: 1px solid var(--border-color); border-radius: 4px; background: var(--body-bg); color: var(--body-fg); font-family: inherit; font-size: 0.85rem;" />
+        </div>
+      </div>
+      
+      <div style="display: flex; gap: 10px;">
+        <input type="submit" value="Filtrar" class="button" style="padding: 6px 15px; cursor: pointer; font-weight: 600; background: var(--button-bg, #4172c4); color: var(--button-fg, #fff); border: none; border-radius: 4px; font-size: 0.85rem; transition: background 0.15s;" />
+        {% if spec.range_val %}
+          <button type="button" onclick="clearDateFilter();" class="button" style="padding: 6px 15px; cursor: pointer; background: var(--body-bg); border: 1px solid var(--border-color); border-radius: 4px; color: var(--body-fg); font-size: 0.85rem;">Limpiar</button>
+        {% endif %}
+      </div>
+    </form>
+  </div>
+</details>
+
+<script>
+  function toggleCustomDates(value) {
+    var container = document.getElementById('custom-date-container');
+    if (value === 'custom') {
+      container.style.display = 'flex';
+    } else {
+      container.style.display = 'none';
+      document.getElementById('id_created_at__gte').value = '';
+      document.getElementById('id_created_at__lte').value = '';
+      document.getElementById('date-filter-form').submit();
+    }
+  }
+  
+  function clearDateFilter() {
+    document.getElementById('id_created_at_range').value = '';
+    document.getElementById('id_created_at__gte').value = '';
+    document.getElementById('id_created_at__lte').value = '';
+    document.getElementById('date-filter-form').submit();
+  }
+</script>

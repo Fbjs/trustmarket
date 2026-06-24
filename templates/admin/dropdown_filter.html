@@ -1,0 +1,16 @@
+{% load i18n %}
+<details data-filter-title="{{ title }}" open style="border: none; box-shadow: none; background: transparent; margin: 0; padding: 0;">
+  <summary style="display: none;"></summary>
+  <div style="display: flex; align-items: center; gap: 8px;">
+    <span style="font-size: 0.85rem; font-weight: bold; color: var(--body-fg); text-transform: uppercase; letter-spacing: 0.5px; white-space: nowrap; width: 320px; flex-shrink: 0; display: inline-block;">
+      {{ title }}:
+    </span>
+    <select onchange="window.location.href=this.value" style="padding: 6px 10px; border: 1px solid var(--border-color); border-radius: 4px; background: var(--body-bg); color: var(--body-fg); font-family: inherit; font-size: 0.85rem; cursor: pointer;">
+      {% for choice in choices %}
+        <option value="{{ choice.query_string|iriencode }}" {% if choice.selected %}selected{% endif %}>
+          {{ choice.display }}
+        </option>
+      {% endfor %}
+    </select>
+  </div>
+</details>

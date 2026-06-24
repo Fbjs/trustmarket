@@ -77,6 +77,116 @@ export_to_excel.short_description = "Descargar registros en Excel"
 
 
 
+class DateRangeFilter(admin.SimpleListFilter):
+    parameter_name = 'created_at_range'
+    template = 'admin/date_range_filter.html'
+
+    def __init__(self, request, params, model, model_admin):
+        self.range_val = params.pop('created_at_range', [None])[-1]
+        self.gte_val = params.pop('created_at__gte', [None])[-1]
+        self.lte_val = params.pop('created_at__lte', [None])[-1]
+        super().__init__(request, params, model, model_admin)
+        if self.range_val:
+            self.used_parameters['created_at_range'] = self.range_val
+        if self.gte_val:
+            self.used_parameters['created_at__gte'] = self.gte_val
+        if self.lte_val:
+            self.used_parameters['created_at__lte'] = self.lte_val
+
+    def lookups(self, request, model_admin):
+        return ()
+
+    def has_output(self):
+        return True
+
+    def queryset(self, request, queryset):
+        from django.utils import timezone
+        import datetime
+        
+        today = timezone.localdate()
+        
+        if self.range_val == 'today':
+            queryset = queryset.filter(created_at__date=today)
+        elif self.range_val == 'yesterday':
+            yesterday = today - datetime.timedelta(days=1)
+            queryset = queryset.filter(created_at__date=yesterday)
+        elif self.range_val == '7_days':
+            seven_days_ago = today - datetime.timedelta(days=7)
+            queryset = queryset.filter(created_at__date__gte=seven_days_ago, created_at__date__lte=today)
+        elif self.range_val == '30_days':
+            thirty_days_ago = today - datetime.timedelta(days=30)
+            queryset = queryset.filter(created_at__date__gte=thirty_days_ago, created_at__date__lte=today)
+        elif self.range_val == 'this_month':
+            queryset = queryset.filter(created_at__year=today.year, created_at__month=today.month)
+        elif self.range_val == 'this_year':
+            queryset = queryset.filter(created_at__year=today.year)
+        elif self.range_val == 'custom':
+            if self.gte_val:
+                queryset = queryset.filter(created_at__date__gte=self.gte_val)
+            if self.lte_val:
+                queryset = queryset.filter(created_at__date__lte=self.lte_val)
+        return queryset
+
+    def choices(self, changelist):
+        return []
+
+
+
+class PostulacionDateRangeFilter(DateRangeFilter):
+    title = 'Fecha de postulación'
+
+
+class ContactoDateRangeFilter(DateRangeFilter):
+    title = 'Fecha de contacto'
+
+
+class EstadoListFilter(admin.SimpleListFilter):
+    title = 'Estado'
+    parameter_name = 'estado'
+    template = 'admin/dropdown_filter.html'
+
+    def lookups(self, request, model_admin):
+        return [
+            ("Postulando", "Postulando"),
+            ("Califica", "Califica"),
+            ("No califica", "No califica"),
+            ("Contactado", "Contactado"),
+            ("Volver a llamar", "Volver a llamar"),
+            ("Seguna etapa", "Seguna etapa"),
+            ("Contratado", "Contratado"),
+            ("Desvinculado", "Desvinculado"),
+            ("Abandono", "Abandono"),
+        ]
+
+    def queryset(self, request, queryset):
+        if self.value():
+            return queryset.filter(estado=self.value())
+        return queryset
+
+
+class PuestoListFilter(admin.SimpleListFilter):
+    title = 'Puesto al que postula'
+    parameter_name = 'puesto'
+    template = 'admin/dropdown_filter.html'
+
+    def lookups(self, request, model_admin):
+        return [
+            ('ejecutivo_encuestas', 'Ejecutivo de Encuestas'),
+            ('ejecutivo_ventas', 'Ejecutivo de Ventas de Seguros'),
+            ('otros', 'Otros'),
+        ]
+
+    def queryset(self, request, queryset):
+        val = self.value()
+        if val == 'ejecutivo_encuestas':
+            return queryset.filter(position='ejecutivo_encuestas')
+        elif val == 'ejecutivo_ventas':
+            return queryset.filter(position='ejecutivo_ventas')
+        elif val == 'otros':
+            return queryset.exclude(position__in=['ejecutivo_encuestas', 'ejecutivo_ventas'])
+        return queryset
+
+
 @admin.register(CompanyLead)
 class CompanyLeadAdmin(admin.ModelAdmin):
     list_display = (
@@ -87,14 +197,16 @@ class CompanyLeadAdmin(admin.ModelAdmin):
         "service_interest",
         "created_at",
     )
-    list_filter = ("service_interest", "company_size", "created_at")
+    list_filter = (ContactoDateRangeFilter,)
     search_fields = ("company_name", "contact_name", "email", "phone")
     actions = [export_to_excel]
+    list_per_page = 1000000
 
     class Media:
         css = {
-            "all": ("css/admin_custom.css",)
+            "all": ("css/admin_custom_v2.css",)
         }
+        js = ("js/admin_custom_v2.js",)
 
 
 @admin.register(Application)
@@ -103,6 +215,8 @@ class ApplicationAdmin(admin.ModelAdmin):
         "full_name",
         "email",
         "phone",
+        "estado",
+        "observaciones",
         "position",
         "sales_experience",
         "availability",
@@ -113,21 +227,53 @@ class ApplicationAdmin(admin.ModelAdmin):
         "cv",
         "created_at",
     )
-    list_filter = (
-        "position",
-        "sales_experience",
-        "availability",
-        "equipamiento_audio",
-        "especificaciones_pc",
-        "conexion",
-        "competencias",
-        "created_at",
+    list_editable = (
+        "estado",
+        "observaciones",
     )
+    list_filter = (PostulacionDateRangeFilter, EstadoListFilter, PuestoListFilter)
     search_fields = ("full_name", "email", "phone")
     actions = [export_to_excel]
+    list_per_page = 1000000
+
+    def get_urls(self):
+        from django.urls import path
+        urls = super().get_urls()
+        custom_urls = [
+            path('ajax-save/', self.admin_site.admin_view(self.ajax_save_view), name='application_ajax_save'),
+        ]
+        return custom_urls + urls
+
+    def ajax_save_view(self, request):
+        from django.http import JsonResponse
+        import json
+        
+        if request.method == 'POST':
+            try:
+                data = json.loads(request.body)
+                app_id = data.get('id')
+                estado = data.get('estado')
+                observaciones = data.get('observaciones')
+                
+                app = self.model.objects.get(id=app_id)
+                if estado is not None:
+                    app.estado = estado
+                if observaciones is not None:
+                    app.observaciones = observaciones
+                app.save()
+                return JsonResponse({'status': 'success'})
+            except Exception as e:
+                return JsonResponse({'status': 'error', 'message': str(e)}, status=400)
+        return JsonResponse({'status': 'error', 'message': 'Method not allowed'}, status=405)
+
+    def formfield_for_dbfield(self, db_field, request, **kwargs):
+        from django.forms import Textarea
+        if db_field.name == 'observaciones':
+            kwargs['widget'] = Textarea(attrs={'rows': 1, 'style': 'width: 300px; font-size: 0.75rem; resize: vertical;'})
+        return super().formfield_for_dbfield(db_field, request, **kwargs)
 
     class Media:
         css = {
-            "all": ("css/admin_custom.css",)
+            "all": ("css/admin_custom_v2.css",)
         }
-
+        js = ("js/admin_custom_v2.js",)
