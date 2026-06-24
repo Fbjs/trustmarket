@@ -287,3 +287,8 @@ class ApplicationAdmin(admin.ModelAdmin):
             "all": ("css/admin_custom_v2.css",)
         }
         js = ("js/admin_custom_v2.js",)
+
+
+admin.site.site_header = "Administrador de Postulaciones Trustmarket"
+admin.site.site_title = "Administrador de Postulaciones Trustmarket"
+admin.site.index_title = "Administrador de Postulaciones Trustmarket"
