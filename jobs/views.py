@@ -8,6 +8,10 @@ from .models import Application, postulaciones
 from .forms import ApplicationForm
 
 
+from django.views.decorators.cache import never_cache
+
+
+@never_cache
 def apply_view(request):
     if request.method == "POST":
         form = ApplicationForm(request.POST, request.FILES)
@@ -46,14 +50,41 @@ def apply_view(request):
             if request.headers.get('x-requested-with') == 'XMLHttpRequest':
                 errors_dict = {field: [str(error) for error in errors] for field, errors in form.errors.items()}
                 return JsonResponse({"success": False, "errors": errors_dict}, status=400)
-            # Si el formulario no es válido, redirigir a home con mensaje de error
-            messages.error(
-                request,
-                "Hubo un error en tu postulación. Por favor revisa los datos e intenta de nuevo.",
-            )
-            return render(request, "jobs/apply.html", {"form": form})
+            
+            # Serialize form data to standard types for session storage
+            form_data_dict = {k: request.POST.getlist(k) for k in request.POST}
+            errors_dict = {field: [str(error) for error in errors] for field, errors in form.errors.items()}
+            
+            request.session['apply_form_data'] = form_data_dict
+            request.session['apply_form_errors'] = errors_dict
+            
+            messages.error(request, "Hay un error en los campos. Por favor revisa y corrige los campos marcados en rojo.")
+            
+            # Enforce GET redirect to prevent form resubmission prompts (PRG pattern)
+            redirect_url = reverse("jobs:apply")
+            query_string = request.META.get('QUERY_STRING', '')
+            if query_string:
+                redirect_url += f"?{query_string}"
+            return redirect(redirect_url)
+            
     # GET requests a /jobs/ renderizan el formulario standalone
-    form = ApplicationForm()
+    form_data = request.session.pop('apply_form_data', None)
+    form_errors = request.session.pop('apply_form_errors', None)
+    
+    if form_data:
+        from django.http import QueryDict
+        # Reconstruct QueryDict to preserve multi-value lists correctly in form cleaning
+        qd = QueryDict(mutable=True)
+        for k, v in form_data.items():
+            qd.setlist(k, v)
+        form = ApplicationForm(qd)
+        if form_errors:
+            for field, errors in form_errors.items():
+                for error in errors:
+                    form.add_error(field, error)
+    else:
+        form = ApplicationForm()
+        
     return render(request, "jobs/apply.html", {"form": form})
 
 

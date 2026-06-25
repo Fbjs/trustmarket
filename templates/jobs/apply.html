@@ -54,14 +54,7 @@
             </div>
         </section>
 
-        {% if messages %}
-            {% for message in messages %}
-                <div class="mb-8 p-5 rounded-2xl {% if message.tags == 'error' %}bg-red-500/10 border-red-500/20 text-red-200{% else %}bg-green-500/10 border-green-500/20 text-green-200{% endif %} border backdrop-blur-xl flex items-center gap-3">
-                    <span class="material-symbols-outlined">{% if message.tags == 'error' %}error{% else %}check_circle{% endif %}</span>
-                    <span class="font-medium">{{ message }}</span>
-                </div>
-            {% endfor %}
-        {% endif %}
+
 
         <div class="bg-[#0A1118]/80 backdrop-blur-3xl border border-white/10 p-5 sm:p-6 md:p-14 rounded-2xl md:rounded-3xl shadow-2xl">
             <form method="post" enctype="multipart/form-data" class="space-y-10" id="applyForm">
@@ -193,7 +186,7 @@
                 <div class="space-y-5 pt-4">
                     <label class="block text-xs font-bold text-white/70 uppercase tracking-widest">📎 Curriculum Vitae (PDF o Word)</label>
                     <div class="relative group">
-                        <label for="{{ form.cv.id_for_label }}" class="flex flex-col items-center justify-center gap-4 p-6 sm:p-8 md:p-12 border-2 border-dashed border-white/20 rounded-2xl bg-white/5 cursor-pointer group-hover:border-primary-container group-hover:bg-primary-container/5 transition-all">
+                        <label id="cv-label-container" for="{{ form.cv.id_for_label }}" class="flex flex-col items-center justify-center gap-4 p-6 sm:p-8 md:p-12 border-2 border-dashed border-white/20 rounded-2xl bg-white/5 cursor-pointer group-hover:border-primary-container group-hover:bg-primary-container/5 transition-all">
                             <span class="material-symbols-outlined text-4xl text-primary-container group-hover:animate-bounce">cloud_upload</span>
                             <div class="text-center">
                                 <p class="text-white font-bold text-lg mb-1" id="fileNamePlaceholder">Pincha aquí para subir archivo</p>
@@ -378,7 +371,7 @@
         const phoneRegex = /^(\+?56)?([2-9]\d{8})$/;
         if (!phoneRegex.test(cleaned)) {
           e.preventDefault();
-          alert('El número de teléfono no es válido para Chile. Debe tener 9 dígitos (ej: 9 1234 5678 o +56 9 1234 5678).');
+          showErrorPopup('Teléfono Inválido', 'El número de teléfono no es válido para Chile. Debe tener 9 dígitos (ej: 9 1234 5678 o +56 9 1234 5678).');
           phoneInput.focus();
         }
       }
@@ -387,6 +380,42 @@
 
   // Handle URL query parameter and lock the select field
   document.addEventListener('DOMContentLoaded', function() {
+    {% if form.errors %}
+      const fieldsWithErrors = [
+        {% for field in form %}
+          {% if field.errors %}
+            "{{ field.name }}",
+          {% endif %}
+        {% endfor %}
+      ];
+      
+      fieldsWithErrors.forEach(fieldName => {
+        const element = document.querySelector(`#applyForm [name="${fieldName}"]`);
+        if (element) {
+          element.classList.add('is-invalid');
+        }
+        
+        const container = document.getElementById(`${fieldName}-container`);
+        if (container) {
+          container.querySelectorAll('label').forEach(lbl => lbl.classList.add('is-invalid-label'));
+        }
+        
+        if (fieldName === 'availability_options') {
+            const container = document.getElementById('availability-container');
+            if (container) {
+                container.querySelectorAll('label').forEach(lbl => lbl.classList.add('is-invalid-label'));
+            }
+        }
+        
+        if (fieldName === 'cv') {
+            const cvLabel = document.getElementById('cv-label-container');
+            if (cvLabel) {
+                cvLabel.classList.add('is-invalid');
+            }
+        }
+      });
+    {% endif %}
+
     const urlParams = new URLSearchParams(window.location.search);
     const puesto = urlParams.get('puesto');
     const selectElement = document.querySelector('#applyForm select[name="position"]');

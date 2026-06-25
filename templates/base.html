@@ -38,7 +38,7 @@
     <link rel="icon" type="image/png" href="{% static 'img/favicon.png' %}">
     <link rel="shortcut icon" type="image/png" href="{% static 'img/favicon.png' %}">
     <link rel="apple-touch-icon" href="{% static 'img/favicon.png' %}">
-    <link rel="stylesheet" href="{% static 'css/styles.css' %}">
+    <link rel="stylesheet" href="{% static 'css/styles.css' %}?v={% now 'U' %}">
     <script>
         tailwind.config = {
             darkMode: "class",
@@ -504,7 +504,7 @@
             const cleaned = phoneVal.replace(/[\s\-\(\)\.]/g, '');
             const phoneRegex = /^(\+?56)?([2-9]\d{8})$/;
             if (phoneVal && !phoneRegex.test(cleaned)) {
-                alert('El número de teléfono no es válido para Chile. Debe tener 9 dígitos (ej: 9 1234 5678 o +56 9 1234 5678).');
+                showErrorPopup('Teléfono Inválido', 'El número de teléfono no es válido para Chile. Debe tener 9 dígitos (ej: 9 1234 5678 o +56 9 1234 5678).');
                 document.getElementById('panel_phone').focus();
                 return;
             }
@@ -555,7 +555,7 @@
                         const cleaned = phoneInput.value.replace(/[\s\-\(\)\.]/g, '');
                         const phoneRegex = /^(\+?56)?([2-9]\d{8})$/;
                         if (!phoneRegex.test(cleaned)) {
-                            alert('El número de teléfono no es válido para Chile. Debe tener 9 dígitos (ej: 9 1234 5678 o +56 9 1234 5678).');
+                            showErrorPopup('Teléfono Inválido', 'El número de teléfono no es válido para Chile. Debe tener 9 dígitos (ej: 9 1234 5678 o +56 9 1234 5678).');
                             phoneInput.focus();
                             return;
                         }
@@ -573,15 +573,18 @@
                         }
                     })
                         .then(response => {
+                            // Clear previous errors
+                            fsForm.querySelectorAll('.is-invalid, .is-invalid-label').forEach(el => {
+                                el.classList.remove('is-invalid');
+                                el.classList.remove('is-invalid-label');
+                            });
+
                             if (!response.ok) {
                                 return response.json().then(data => {
-                                    let errMsg = 'Hubo un error al enviar tu postulación. Por favor revisa los datos e intenta de nuevo.';
                                     if (data && data.errors) {
-                                        const firstField = Object.keys(data.errors)[0];
-                                        const firstError = data.errors[firstField][0];
-                                        errMsg = `${firstField === 'phone' ? 'Teléfono' : firstField}: ${firstError}`;
+                                        highlightFormErrors(fsForm, data.errors);
                                     }
-                                    throw new Error(errMsg);
+                                    throw new Error('Hay un error en los campos. Por favor revisa los campos en rojo.');
                                 });
                             }
                             return response.json();
@@ -614,7 +617,7 @@
                         })
                         .catch(error => {
                             console.error('Error:', error);
-                            alert(error.message || 'Hubo un error al enviar tu postulación. Por favor intenta de nuevo.');
+                            showErrorPopup('Error al postular', error.message || 'Hubo un error al enviar tu postulación. Por favor intenta de nuevo.');
                         });
                 });
             }
@@ -711,6 +714,22 @@
         </div>
     </div>
 
+    <!-- ============ ERROR POPUP MODAL ============ -->
+    <div id="errorPopupOverlay" class="error-popup-overlay" onclick="if(event.target===this)closeErrorPopup()">
+        <div class="error-popup-card">
+            <div class="error-popup-icon">
+                <span class="material-symbols-outlined">close</span>
+            </div>
+            <h3 class="error-popup-title" id="errorPopupTitle">¡Hubo un Error!</h3>
+            <div class="error-popup-message" id="errorPopupMessage">No se pudo procesar la solicitud. Por favor intenta de nuevo.</div>
+            <button class="error-popup-btn" onclick="closeErrorPopup()">
+                <span class="material-symbols-outlined" style="font-size:20px;">close</span>
+                Entendido
+            </button>
+            <div class="error-popup-progress" id="errorPopupProgress"></div>
+        </div>
+    </div>
+
     <script>
         // ---- Success Popup System ----
         let successPopupTimer = null;
@@ -773,11 +792,98 @@
             }
         }
 
+        // ---- Highlight Form Errors System ----
+        function highlightFormErrors(formElement, errors) {
+            // Clear previous errors
+            formElement.querySelectorAll('.is-invalid, .is-invalid-label').forEach(el => {
+                el.classList.remove('is-invalid');
+                el.classList.remove('is-invalid-label');
+            });
+
+            if (!errors) return;
+
+            Object.keys(errors).forEach(fieldName => {
+                // Highlight input/select/textarea
+                const input = formElement.querySelector(`[name="${fieldName}"]`);
+                if (input) {
+                    input.classList.add('is-invalid');
+                }
+
+                // Highlight custom labels if checkboxes/radios
+                if (fieldName === 'availability_options') {
+                    formElement.querySelectorAll('[name="availability_options"]').forEach(cb => {
+                        const lbl = cb.closest('label');
+                        if (lbl) lbl.classList.add('is-invalid-label');
+                    });
+                }
+                
+                if (fieldName === 'equipamiento_audio' || fieldName === 'especificaciones_pc' || fieldName === 'conexion' || fieldName === 'competencias') {
+                    formElement.querySelectorAll(`[name="${fieldName}"]`).forEach(radio => {
+                        const lbl = radio.closest('label');
+                        if (lbl) lbl.classList.add('is-invalid-label');
+                    });
+                }
+
+                // Highlight CV upload label
+                if (fieldName === 'cv') {
+                    const cvLabel = formElement.querySelector('label[for="cv_upload_fs"]') || formElement.querySelector('#cv-label-container');
+                    if (cvLabel) cvLabel.classList.add('is-invalid');
+                }
+            });
+        }
+
+        // ---- Error Popup System ----
+        let errorPopupTimer = null;
+
+        function showErrorPopup(title, message) {
+            const overlay = document.getElementById('errorPopupOverlay');
+            const titleEl = document.getElementById('errorPopupTitle');
+            const msgEl = document.getElementById('errorPopupMessage');
+            const progressEl = document.getElementById('errorPopupProgress');
+
+            if (title) titleEl.textContent = title;
+            if (message) {
+                // If message contains HTML formatting, render it as innerHTML
+                if (message.includes('<') && message.includes('>')) {
+                    msgEl.innerHTML = message;
+                } else {
+                    msgEl.textContent = message;
+                }
+            }
+
+            // Reset and restart progress bar animation
+            progressEl.style.animation = 'none';
+            progressEl.offsetHeight; // Force reflow
+            progressEl.style.animation = 'popupProgress 5s linear forwards';
+
+            // Show popup
+            overlay.classList.add('active');
+            document.body.style.overflow = 'hidden';
+
+            // Auto-dismiss after 5 seconds
+            clearTimeout(errorPopupTimer);
+            errorPopupTimer = setTimeout(() => {
+                closeErrorPopup();
+            }, 5000);
+        }
+
+        function closeErrorPopup() {
+            const overlay = document.getElementById('errorPopupOverlay');
+            overlay.classList.remove('active');
+            document.body.style.overflow = '';
+            clearTimeout(errorPopupTimer);
+        }
+
         // Auto-trigger popup from Django messages on page load
         document.addEventListener('DOMContentLoaded', function () {
             {% if messages %}
             {% for message in messages %}
-            {% if message.tags != 'error' %}
+            {% if 'error' in message.tags or 'danger' in message.tags %}
+            showErrorPopup(
+                '¡Hubo un Error!',
+                '{{ message|escapejs }}'
+            );
+            {% else %}
             showSuccessPopup(
                 '¡Solicitud Enviada!',
                 '{{ message|escapejs }}'
@@ -790,9 +896,13 @@
         // Close popup on Escape key
         document.addEventListener('keydown', function (e) {
             if (e.key === 'Escape') {
-                const overlay = document.getElementById('successPopupOverlay');
-                if (overlay.classList.contains('active')) {
+                const successOverlay = document.getElementById('successPopupOverlay');
+                if (successOverlay && successOverlay.classList.contains('active')) {
                     closeSuccessPopup();
+                }
+                const errorOverlay = document.getElementById('errorPopupOverlay');
+                if (errorOverlay && errorOverlay.classList.contains('active')) {
+                    closeErrorPopup();
                 }
             }
         });
