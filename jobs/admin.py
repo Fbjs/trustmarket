@@ -214,9 +214,9 @@ class CompanyLeadAdmin(admin.ModelAdmin):
 
     class Media:
         css = {
-            "all": ("css/admin_custom_v2.css",)
+            "all": ("css/admin_custom_v2.css?v=2",)
         }
-        js = ("js/admin_custom_v2.js",)
+        js = ("js/admin_custom_v2.js?v=2",)
 
 
 @admin.register(Application)
@@ -284,9 +284,9 @@ class ApplicationAdmin(admin.ModelAdmin):
 
     class Media:
         css = {
-            "all": ("css/admin_custom_v2.css",)
+            "all": ("css/admin_custom_v2.css?v=2",)
         }
-        js = ("js/admin_custom_v2.js",)
+        js = ("js/admin_custom_v2.js?v=2",)
 
 
 admin.site.site_header = "Administrador de Postulaciones Trustmarket"

@@ -233,7 +233,9 @@
 #changelist-form .submit-row,
 #changelist-form .changelist-footer input[type="submit"],
 #changelist-form .changelist-footer button,
-#changelist-form .changelist-footer .button {
+#changelist-form .changelist-footer .button,
+#changelist-form input[name="_save"],
+#changelist-form input[value="Guardar"] {
     display: none !important;
 }
 
