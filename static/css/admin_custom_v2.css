@@ -13,11 +13,13 @@
 }
 
 /* Change list container to stack vertically instead of side-by-side */
+#changelist.filtered,
 #changelist,
 #changelist .changelist-form-container {
     display: flex !important;
     flex-direction: column !important;
     align-items: stretch !important;
+    grid-template-columns: 1fr !important;
 }
 
 /* Override absolute positioning or padding for filters in older/different Django versions */

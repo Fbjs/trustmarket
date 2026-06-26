@@ -212,11 +212,14 @@ class CompanyLeadAdmin(admin.ModelAdmin):
     actions = [export_to_excel]
     list_per_page = 1000000
 
-    class Media:
-        css = {
-            "all": ("css/admin_custom_v2.css?v=2",)
-        }
-        js = ("js/admin_custom_v2.js?v=2",)
+    @property
+    def media(self):
+        from django import forms
+        from django.templatetags.static import static
+        return forms.Media(
+            css={"all": (static("css/admin_custom_v2.css") + "?v=3",)},
+            js=(static("js/admin_custom_v2.js") + "?v=3",)
+        )
 
 
 @admin.register(Application)
@@ -282,11 +285,14 @@ class ApplicationAdmin(admin.ModelAdmin):
             kwargs['widget'] = Textarea(attrs={'rows': 1, 'style': 'width: 300px; font-size: 0.75rem; resize: vertical;'})
         return super().formfield_for_dbfield(db_field, request, **kwargs)
 
-    class Media:
-        css = {
-            "all": ("css/admin_custom_v2.css?v=2",)
-        }
-        js = ("js/admin_custom_v2.js?v=2",)
+    @property
+    def media(self):
+        from django import forms
+        from django.templatetags.static import static
+        return forms.Media(
+            css={"all": (static("css/admin_custom_v2.css") + "?v=3",)},
+            js=(static("js/admin_custom_v2.js") + "?v=3",)
+        )
 
 
 admin.site.site_header = "Administrador de Postulaciones Trustmarket"
