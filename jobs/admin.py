@@ -216,7 +216,7 @@ class CompanyLeadAdmin(admin.ModelAdmin):
     def media(self):
         from django import forms
         from django.templatetags.static import static
-        return forms.Media(
+        return super().media + forms.Media(
             css={"all": (static("css/admin_custom_v2.css") + "?v=3",)},
             js=(static("js/admin_custom_v2.js") + "?v=3",)
         )
@@ -289,7 +289,7 @@ class ApplicationAdmin(admin.ModelAdmin):
     def media(self):
         from django import forms
         from django.templatetags.static import static
-        return forms.Media(
+        return super().media + forms.Media(
             css={"all": (static("css/admin_custom_v2.css") + "?v=3",)},
             js=(static("js/admin_custom_v2.js") + "?v=3",)
         )
