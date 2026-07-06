@@ -118,8 +118,13 @@ def download_cv(request, application_id):
     application = get_object_or_404(Application, id=application_id)
     
     if application.cv:
-        response = FileResponse(application.cv.open('rb'))
-        response['Content-Disposition'] = f'attachment; filename="{application.full_name}_CV"'
-        return response
+        import os
+        ext = os.path.splitext(application.cv.name)[1]
+        filename = f"{application.full_name}_CV{ext}"
+        return FileResponse(
+            application.cv.open('rb'),
+            as_attachment=True,
+            filename=filename
+        )
     
     return redirect("jobs:apply")
