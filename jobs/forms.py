@@ -48,7 +48,7 @@ class ApplicationForm(forms.ModelForm):
     )
 
     conexion = forms.ChoiceField(
-        label="Dispongo de una conexión a internet conectada por cable de red (Ethernet) con una latencia (Ping) máxima de 100 ms (No se permite Wi-Fi ni datos móviles).",
+        label="Poseo conexión a internet por Wi-Fi o cable LAN",
         choices=YES_NO_CHOICES,
         widget=forms.RadioSelect,
         required=True,

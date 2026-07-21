@@ -162,3 +162,7 @@ CSRF_TRUSTED_ORIGINS = [
 SITEMAP_DOMAIN = 'postulacion.trustmarket.cl'
 SITEMAP_PROTOCOL = 'https'
 
+# Evitar error TooManyFieldsSent al procesar list_editable con muchos registros en el Admin
+DATA_UPLOAD_MAX_NUMBER_FIELDS = 20000
+
+
