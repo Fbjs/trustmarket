@@ -272,7 +272,7 @@
       class="pointer-events-auto bg-[#001e2e]/95 backdrop-blur-md text-white px-4 md:px-6 py-2.5 md:py-3 rounded-full shadow-2xl flex items-center gap-2 md:gap-3 border border-white/10">
       <span class="w-2 h-2 md:w-2.5 md:h-2.5 rounded-full bg-green-400 pulse-badge inline-block shrink-0"></span>
       <span class="hiring-banner-text font-headline font-bold text-xs md:text-sm">¡Estamos contratando!</span>
-      <a href="{% url 'jobs:apply' %}"
+      <a href="{% url 'jobs:apply' %}?puesto=ejecutivo_ventas"
         class="hiring-banner-link bg-primary-container text-on-primary-container text-[10px] md:text-xs font-bold px-3 md:px-4 py-1 md:py-1.5 rounded-full hover:opacity-90 transition-opacity ml-1">Ver
         vacantes</a>
     </div>
@@ -366,7 +366,7 @@
           </p>
           <div class="flex flex-col sm:flex-row gap-4">
             <!-- BOTON POSTULA AHORA ARREGLADO -->
-            <a href="{% url 'jobs:apply' %}"
+            <a href="{% url 'jobs:apply' %}?puesto=ejecutivo_ventas"
               class="btn-sheen inline-flex items-center justify-center gap-2 bg-primary-container text-on-primary-container px-10 py-4 rounded-xl font-headline font-bold text-lg hover:shadow-2xl hover:shadow-primary-container/40 transition-all duration-300">
               <span class="material-symbols-outlined text-xl"
                 style="font-variation-settings:'FILL' 1;">rocket_launch</span>
@@ -769,7 +769,7 @@
           </div>
         </div>
         <div class="text-center mt-14 fade-up">
-          <a href="{% url 'jobs:apply' %}"
+          <a href="{% url 'jobs:apply' %}?puesto=ejecutivo_ventas"
             class="btn-sheen inline-flex items-center gap-2 bg-primary text-white px-10 py-4 rounded-xl font-headline font-bold text-lg hover:shadow-xl hover:shadow-primary/30 transition-all duration-300">
             Quiero postular <span class="material-symbols-outlined">arrow_forward</span>
           </a>
@@ -789,7 +789,7 @@
             <a href="{% url 'core:companies' %}" class="btn-sheen whitespace-nowrap bg-primary text-white px-8 py-4 rounded-2xl font-bold text-lg hover:shadow-2xl transition-all text-center">
               Soy Empresa
             </a>
-            <a href="{% url 'jobs:apply' %}" class="whitespace-nowrap bg-white text-primary border-2 border-primary px-8 py-4 rounded-2xl font-bold text-lg hover:bg-primary/5 transition-all text-center">
+            <a href="{% url 'jobs:apply' %}?puesto=ejecutivo_ventas" class="whitespace-nowrap bg-white text-primary border-2 border-primary px-8 py-4 rounded-2xl font-bold text-lg hover:bg-primary/5 transition-all text-center">
               Busco Trabajo
             </a>
           </div>
@@ -1243,7 +1243,7 @@
                 <h3 class="font-headline text-3xl font-bold mb-4">¿Listo para empezar?</h3>
                 <p class="text-white/70 mb-8 leading-relaxed">No esperes más. El mejor momento para dar el siguiente
                   paso en tu carrera es ahora.</p>
-                <a href="{% url 'jobs:apply' %}"
+                <a href="{% url 'jobs:apply' %}?puesto=ejecutivo_ventas"
                   class="btn-sheen inline-flex items-center gap-2 bg-primary-container text-on-primary-container px-8 py-4 rounded-xl font-headline font-bold text-lg hover:shadow-xl transition-all duration-300 w-full justify-center">
                   Postula ahora <span class="material-symbols-outlined">arrow_forward</span>
                 </a>
@@ -1277,7 +1277,7 @@
             <li><a class="text-gray-500 hover:text-primary-container text-sm transition-colors"
                 href="#como-funciona">¿Cómo funciona?</a></li>
             <li><a class="text-gray-500 hover:text-primary-container text-sm transition-colors"
-                href="{% url 'jobs:apply' %}">Trabaja con nosotros</a></li>
+                href="{% url 'jobs:apply' %}?puesto=ejecutivo_ventas">Trabaja con nosotros</a></li>
           </ul>
         </div>
         <div>
@@ -1378,86 +1378,7 @@
 
   </script>
 
-  <!-- ============ JOB SELECTION MODAL ============ -->
-  <div id="jobSelectionModal" style="position:fixed;inset:0;z-index:99999;background:rgba(0,10,20,0.75);backdrop-filter:blur(12px);-webkit-backdrop-filter:blur(12px);display:flex;align-items:center;justify-content:center;opacity:0;visibility:hidden;transition:opacity 0.4s,visibility 0.4s;padding:20px;">
-      <div style="background:linear-gradient(165deg, rgba(255,255,255,0.12) 0%, rgba(255,255,255,0.04) 100%);border:1px solid rgba(255, 255, 255, 0.15);border-radius:28px;padding:40px 30px;max-width:540px;width:100%;text-align:center;position:relative;box-shadow:0 25px 60px rgba(0,0,0,0.4);transform:scale(0.85);transition:transform 0.4s cubic-bezier(0.34, 1.56, 0.64, 1);">
-          <!-- Close button -->
-          <button type="button" onclick="closeJobSelectionModal()" style="position:absolute;top:20px;right:20px;background:none;border:none;cursor:pointer;color:rgba(255,255,255,0.6);transition:color 0.25s;" onmouseover="this.style.color='#fff'" onmouseout="this.style.color='rgba(255,255,255,0.6)'">
-              <span class="material-symbols-outlined" style="font-size:24px;">close</span>
-          </button>
-          
-          <h3 class="font-headline" style="font-size:1.8rem;font-weight:800;color:white;margin-bottom:10px;letter-spacing:-0.01em;">¿A qué puesto deseas postular?</h3>
-          <p style="color:rgba(255,255,255,0.65);font-size:1rem;line-height:1.5;margin-bottom:30px;font-family:Inter,sans-serif;">Selecciona una de nuestras vacantes disponibles para continuar con tu postulación.</p>
-          
-          <div style="display:flex;flex-direction:column;gap:16px;">
-              <!-- Card 1: Ejecutivo de Ventas -->
-              <button type="button" onclick="selectJobAndProceed('ejecutivo_ventas')" style="display:flex;align-items:center;gap:20px;padding:20px;border-radius:18px;border:1.5px solid rgba(255,255,255,0.1);background:rgba(255,255,255,0.03);text-align:left;cursor:pointer;transition:all 0.3s;width:100%;" onmouseover="this.style.borderColor='#00adef';this.style.background='rgba(0,173,239,0.08)';this.style.transform='translateY(-2px)'" onmouseout="this.style.borderColor='rgba(255,255,255,0.1)';this.style.background='rgba(255,255,255,0.03)';this.style.transform='translateY(0)'">
-                  <div style="width:52px;height:52px;border-radius:14px;background:rgba(0,173,239,0.15);color:#00adef;display:flex;align-items:center;justify-content:center;flex-shrink:0;">
-                      <span class="material-symbols-outlined" style="font-size:28px;">shield</span>
-                  </div>
-                  <div>
-                      <h4 class="font-headline" style="font-weight:700;font-size:1.15rem;color:white;margin-bottom:4px;">Ejecutivo de Ventas</h4>
-                      <p style="color:rgba(255,255,255,0.5);font-size:0.85rem;margin:0;font-family:Inter,sans-serif;">Gestión comercial y venta de productos o servicios.</p>
-                  </div>
-              </button>
-              
-              <!-- Card 2: Ejecutivo de Encuestas -->
-              <button type="button" onclick="selectJobAndProceed('ejecutivo_encuestas')" style="display:flex;align-items:center;gap:20px;padding:20px;border-radius:18px;border:1.5px solid rgba(255,255,255,0.1);background:rgba(255,255,255,0.03);text-align:left;cursor:pointer;transition:all 0.3s;width:100%;" onmouseover="this.style.borderColor='#00adef';this.style.background='rgba(0,173,239,0.08)';this.style.transform='translateY(-2px)'" onmouseout="this.style.borderColor='rgba(255,255,255,0.1)';this.style.background='rgba(255,255,255,0.03)';this.style.transform='translateY(0)'">
-                  <div style="width:52px;height:52px;border-radius:14px;background:rgba(0,173,239,0.15);color:#00adef;display:flex;align-items:center;justify-content:center;flex-shrink:0;">
-                      <span class="material-symbols-outlined" style="font-size:28px;">poll</span>
-                  </div>
-                  <div>
-                      <h4 class="font-headline" style="font-weight:700;font-size:1.15rem;color:white;margin-bottom:4px;">Ejecutivo de Encuestas</h4>
-                      <p style="color:rgba(255,255,255,0.5);font-size:0.85rem;margin:0;font-family:Inter,sans-serif;">Aplicación de encuestas telefónicas y registro de datos.</p>
-                  </div>
-              </button>
-          </div>
-      </div>
-  </div>
 
-  <script>
-      function openJobSelectionModal() {
-          const modal = document.getElementById('jobSelectionModal');
-          if (modal) {
-              modal.style.opacity = '1';
-              modal.style.visibility = 'visible';
-              modal.firstElementChild.style.transform = 'scale(1)';
-              document.body.style.overflow = 'hidden';
-          }
-      }
-
-      function closeJobSelectionModal() {
-          const modal = document.getElementById('jobSelectionModal');
-          if (modal) {
-              modal.style.opacity = '0';
-              modal.style.visibility = 'hidden';
-              modal.firstElementChild.style.transform = 'scale(0.85)';
-              document.body.style.overflow = '';
-          }
-      }
-
-      function selectJobAndProceed(puesto) {
-          closeJobSelectionModal();
-          const applyUrl = "{% url 'jobs:apply' %}";
-          window.location.href = applyUrl + "?puesto=" + puesto;
-      }
-
-      // Global interceptor for all apply buttons and links
-      document.addEventListener('DOMContentLoaded', function() {
-          const applyUrl = "{% url 'jobs:apply' %}";
-          
-          document.addEventListener('click', function(e) {
-              const anchor = e.target.closest('a');
-              if (anchor) {
-                  const href = anchor.getAttribute('href');
-                  if (href && (href === applyUrl || href === applyUrl + '/' || href.endsWith('/jobs/') || href.endsWith('/jobs'))) {
-                      e.preventDefault();
-                      openJobSelectionModal();
-                  }
-              }
-          });
-      });
-  </script>
 
   <!-- Floating WhatsApp Widget -->
   {% include 'core/whatsapp_widget.html' %}

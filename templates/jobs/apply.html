@@ -417,20 +417,14 @@
     {% endif %}
 
     const urlParams = new URLSearchParams(window.location.search);
-    const puesto = urlParams.get('puesto');
+    const puesto = urlParams.get('puesto') || 'ejecutivo_ventas';
     const selectElement = document.querySelector('#applyForm select[name="position"]');
     
-    const hasMessages = {% if messages %}true{% else %}false{% endif %};
-    const formHasErrors = {% if form.errors %}true{% else %}false{% endif %};
-    
-    if (puesto && (puesto === 'ejecutivo_ventas' || puesto === 'ejecutivo_encuestas')) {
-        lockSelectField(selectElement, puesto);
-    } else if (selectElement && selectElement.value && selectElement.value !== "") {
-        lockSelectField(selectElement, selectElement.value);
-    } else if (hasMessages || formHasErrors) {
-        // Do not auto-open job selection modal on success message or validation errors
-    } else {
-        openJobSelectionModal('page_direct');
+    if (selectElement) {
+        selectElement.value = 'ejecutivo_ventas';
+        if (typeof lockSelectField === 'function') {
+            lockSelectField(selectElement, 'ejecutivo_ventas');
+        }
     }
   });
 </script>

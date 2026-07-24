@@ -157,6 +157,8 @@ DEFAULT_FROM_EMAIL = 'no-reply@trustmarket.cl'
 CSRF_TRUSTED_ORIGINS = [
     'http://postulacion.trustmarket.cl',
     'https://postulacion.trustmarket.cl',
+    'http://127.0.0.1:8000',
+    'http://localhost:8000',
 ]
 
 SITEMAP_DOMAIN = 'postulacion.trustmarket.cl'

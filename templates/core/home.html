@@ -40,14 +40,14 @@
             </p>
             <div class="flex flex-col sm:flex-row gap-6">
                 <!-- Premium Glowing Button -->
-                <button type="button" onclick="openJobSelectionModal('panel')"
+                <a href="{% url 'jobs:apply' %}?puesto=ejecutivo_ventas"
                     class="group relative overflow-hidden bg-primary-container text-on-primary-container px-10 py-4 rounded-lg font-bold text-lg shadow-[0_0_40px_-5px_rgba(0,173,239,0.5)] hover:shadow-[0_0_60px_-5px_rgba(0,173,239,0.8)] transition-all duration-500 text-center hover:-translate-y-1">
                     <div
                         class="absolute inset-0 -translate-x-full bg-gradient-to-r from-transparent via-white/50 to-transparent group-hover:animate-sheen">
                     </div>
                     <span class="relative z-10 flex items-center justify-center gap-2">Postula ahora <span
                             class="material-symbols-outlined transition-transform duration-300 group-hover:translate-x-1">arrow_forward</span></span>
-                </button>
+                </a>
                 <a href="#servicios"
                     class="group border border-white/20 text-white px-10 py-4 rounded-lg font-bold text-lg hover:bg-white/10 hover:border-white/40 transition-all duration-300 backdrop-blur-md text-center hover:-translate-y-1">
                     Conoce más
